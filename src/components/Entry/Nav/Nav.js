@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './Nav';
+import classes from './Nav.scss';
 
 const Nav = () => {
     return(

@@ -45,12 +45,19 @@ module.exports = {
                         }
                     },
                     { 
-                        loader: 'sass-loader'
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            data: '@import "variables";',
+                            includePaths: [
+                                path.resolve(__dirname, "./src")
+                            ]
+                        }
                     }
                 ]
             },
             {
-                test: /\.(png|svg|jp?eg|gif)$/,
+                test: /\.(png|svg|jpe?g|gif)$/,
                 use: [
                   'file-loader'
                 ]

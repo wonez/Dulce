@@ -1,0 +1,11 @@
+.Entry{
+    height: 100vh;
+    width: 100%;
+    background: $color-primary-dark;
+    &__Banner{
+        color: white;
+        &__img{
+            height: 10rem;
+        }
+    }
+}
