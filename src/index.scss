@@ -1,12 +1,26 @@
-body{
+$color-primary-light: #FD7A3F;
+$color-primary-dark: orangered; //maroon
+
+$color-secondary-light: gold;
+$color-secondary-dark: goldenrod;
+
+$color-tertiary: yellowgreen;
+
+$color-dark: #63b8ff;
+$color-darker: #836fff;
+
+$color-gray-lighter: #eee;
+$color-gray-light: #ddd;
+$color-gray-dark: #777;
+
+$color-white: #fff;
+
+*{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 html{
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 64px;
-    letter-spacing: 2rem;
-    line-height: 1;
-    text-align: center;
-    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 65.25%; //1rem 10px
 }
