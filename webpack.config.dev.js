@@ -58,11 +58,15 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|svg|jpe?g|gif)$/,
+                test: /\.(png|jpe?g|gif|ttf|otf|eot|woff)$/,
                 use: [
                   'file-loader'
                 ]
-           }
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-sprite-loader',
+            }
         ]
     },
     plugins: [

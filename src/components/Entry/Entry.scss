@@ -1,11 +1,75 @@
 .Entry{
     height: 100vh;
     width: 100%;
-    background: $color-primary-dark;
-    &__Banner{
-        color: white;
-        &__img{
-            height: 10rem;
+    overflow: hidden;
+    position: relative;
+
+    &__Nav{
+        position: absolute;
+    }
+
+    &__Search{
+        position: absolute;
+        border-radius: 1rem;
+        top: 25%;
+        left: 50%;
+        width: 60vw;
+        transform: translateX(-50%);
+        z-index: 1;
+        text-align: center;
+        
+        &__InputBox{
+            position: relative;
         }
+
+        &__Icon{
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            fill: $color-gray-dark;
+            transition: .3s all;
+        }
+
+        &__Input{
+            width: 90%;
+            outline: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 2rem;
+            border-radius: 10rem;
+            transition: .3s all;
+            color: $color-gray-dark;
+            box-shadow: 0rem 1rem 3rem rgba(0,0,0, .3);
+            &:focus{
+                width: 100%;
+            }
+        }
+        &__Input:focus + &__Icon{
+            right: 5%;
+        }
+    }
+    
+    &__Background{
+        display: flex;
+        height: 100vh;
+
+        &__Gradient{
+            flex: 1 45%;
+            padding-left: 5rem;
+            background: linear-gradient(to bottom left, rgba($color-dark, .75), rgba($color-darker, .75)), url('../../assets/woman-cake.jpg');
+            background-size: cover;
+            background-position: top;
+            transform: scale(1.5);
+        }
+
+        &__Img{
+            flex: 1 55%;
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+            background:  linear-gradient(rgba($color-tertiary, .75), rgba($color-tertiary, .75)), url('../../assets/baner-cake.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    
     }
 }
