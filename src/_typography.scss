@@ -1,12 +1,17 @@
 .HeadingMain{
     color: white;
     letter-spacing: .3rem;
-    // font-weight: lighter;
     text-transform: uppercase;
     font-size: 6rem;
     line-height: 1.2;
-}
+    transition: 1s all;
 
+    &:hover{
+        transform: scale(.9);
+        color: $color-gray-lighter;
+        cursor: default;
+    }
+}
 
 .margin-top-sm{
     margin-top: 2rem;

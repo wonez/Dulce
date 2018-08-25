@@ -1,15 +1,40 @@
 import React from 'react';
 
+import Logo from './Logo/Logo';
 import classes from './Nav.scss';
 
 const Nav = () => {
     return(
-        <ul className={classes.Nav}>
-            <li>most popular</li>
-            <li>laern more</li>
-            <li>sign up</li>
-            <li>log in</li>
-        </ul>
+        <div className={classes.Nav}>
+            <Logo />
+            <ul className={classes.Nav__Items}>
+                <li className={classes.Nav__Item}>
+                    <a href="#" className={classes.Nav__Link}>
+                        Show categories
+                    </a>
+                </li>
+                <li className={classes.Nav__Item}>
+                    <a href="#" className={classes.Nav__Link}>
+                        Most popular
+                    </a>
+                </li>
+                <li className={classes.Nav__Item}>
+                    <a href="#" className={classes.Nav__Link}>
+                        Learn more
+                    </a>
+                </li>
+                <li className={classes.Nav__Item}>
+                    <a href="#" className={classes.Nav__Link}>
+                        Sign up
+                    </a>
+                </li>
+                <li className={classes.Nav__Item}>
+                    <a href="#" className={classes.Nav__Link}>
+                        Sign in
+                    </a>
+                </li>
+            </ul>
+        </div>
     )
 }
 

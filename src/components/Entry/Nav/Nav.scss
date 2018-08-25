@@ -1,3 +1,31 @@
 .Nav{
-    list-style: none;
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+
+    &__Items{
+        margin-left: auto;
+        list-style: none;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__Link{
+        color: $color-white;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        padding: 0 1.2em;
+        padding-bottom: 1rem;
+        margin-right: 2rem;
+        border-bottom: 1px solid $color-darker;
+        transition: .3s all;
+        display: block;
+
+        &:hover{
+            color: $color-darker;
+            border-color: $color-white;
+            transform: scale(1.15);
+        }
+    }
 }

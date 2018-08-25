@@ -1,0 +1,20 @@
+.Logo{
+
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 1s all;
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.15);
+    }
+
+    height: 80%;
+    margin-left: 2rem;
+
+    svg{
+        height: 100%;
+        fill: $color-white;
+    }
+}

@@ -8,11 +8,11 @@ import IconButton from '../../UI/IconButton/IconButton';
 
 const Entry = () => {
     return(
-        <div className={classes.Entry}>
+        <section className={classes.Entry}>
             <div className={classes.Entry__Nav}>
                 <Nav />
             </div>
-            <div className={classes.Entry__Search}>
+            <main className={classes.Entry__Search}>
                 <h1 className={[typography.HeadingMain, typography['margin-bottom-md']].join(' ')}>
                     New recepies added every day
                 </h1>
@@ -24,14 +24,17 @@ const Entry = () => {
                         </IconButton>
                     </div>
                 </div>
-            </div>
+                <a className={[classes.Entry__ShowAll, typography['margin-top-sm']].join(' ')} href="#">
+                    Show all categories
+                </a>
+            </main>
             <div className={classes.Entry__Background}>
                 <div className={classes.Entry__Background__Gradient}>
                 </div>
                 <div className={classes.Entry__Background__Img}>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
 

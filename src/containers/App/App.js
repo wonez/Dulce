@@ -9,8 +9,8 @@ class App extends Component {
 		return (
 			<Aux>
 				<Entry />
-				{/* <LearnMore />
 				<MostPopular />
+				{/* <LearnMore />
 				<Footer /> */}
 			</Aux>
 		);
