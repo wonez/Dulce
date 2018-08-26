@@ -1,0 +1,19 @@
+.CardButton{
+    outline: none;
+    border: none;
+    color: white;
+    background: linear-gradient(to bottom left, $color-dark, $color-darker);
+    border-radius: 2rem;
+    padding: 1.5rem 3rem;
+    transition: .5s all;
+    box-shadow: 0 1rem 2rem rgba(0,0,0, .3);
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+
+    &:active{
+        transform: scale(1.1) translateY(.3rem);
+    }
+}

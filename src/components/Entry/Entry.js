@@ -3,15 +3,15 @@ import React from 'react';
 import Nav from './Nav/Nav';
 import classes from './Entry.scss';
 import typography from '../../_typography.scss';
-import IconMagnifyingGlass from '../../UI/Icons/IconMagnifyingGlass';
+import { IconMagnifyingGlass } from '../../UI/Icons/Icons';
 import IconButton from '../../UI/IconButton/IconButton';
 
 const Entry = () => {
     return(
         <section className={classes.Entry}>
-            <div className={classes.Entry__Nav}>
+            <nav className={classes.Entry__Nav}>
                 <Nav />
-            </div>
+            </nav>
             <main className={classes.Entry__Search}>
                 <h1 className={[typography.HeadingMain, typography['margin-bottom-md']].join(' ')}>
                     New recepies added every day

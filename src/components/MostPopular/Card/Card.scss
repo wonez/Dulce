@@ -1,0 +1,55 @@
+.Card{
+    overflow: hidden;
+    background: $color-white;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .3);
+
+    &__Img{
+        background: red;
+        height: 20rem;
+        //TODO
+    }
+
+    &:nth-child(2){
+        transform: scale(1.1);
+    }
+
+    &__Info{
+        padding: 1.4rem;
+    }
+    &__Heading{
+        background: linear-gradient(to bottom right, $color-dark, $color-darker);
+        font-size: 2.6rem;
+        color: transparent;
+        background-clip: text;
+        font-weight: bold;
+    }
+    &__Summary{
+        display: flex;
+
+        svg{
+            height: 2rem;
+            width: 2rem;
+            fill: $color-secondary-light;
+        }
+
+        &__Icon{
+            display: flex;
+            font-size: 1.4rem;
+            color: $color-gray-dark;
+            align-items: center;
+
+            &:first-child{
+                margin-right: 2rem;
+            }
+
+            &:last-child{
+                margin-left: auto;
+                svg{
+                    fill: red;
+                }
+            }
+        }
+
+    }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Logo from './Logo/Logo';
+import Logo from '../../../UI/Logo/Logo';
 import classes from './Nav.scss';
 
 const Nav = () => {
@@ -14,7 +14,7 @@ const Nav = () => {
                     </a>
                 </li>
                 <li className={classes.Nav__Item}>
-                    <a href="#" className={classes.Nav__Link}>
+                    <a href="#most-popular" className={classes.Nav__Link}>
                         Most popular
                     </a>
                 </li>

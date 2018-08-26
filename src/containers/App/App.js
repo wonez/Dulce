@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Entry from '../../components/Entry/Entry';
+import MostPopular from '../../components/MostPopular/MostPopular';
 
 import Aux from '../../hoc/Aux';
 

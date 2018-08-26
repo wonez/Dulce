@@ -1,0 +1,10 @@
+.MostPopular{
+    padding: 10rem 7rem;
+    padding-top: 7rem;
+    width: 100%;    
+    background: linear-gradient(to bottom left, $color-dark, $color-darker);
+    &__Cards{
+        display: flex;
+        justify-content: space-between;
+    }
+}

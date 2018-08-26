@@ -4,5 +4,9 @@
     background: none;
     &:hover{
         cursor: pointer;
-    }   
+    }
+    svg{
+        height: 2rem;
+        width: 2rem;
+    }
 }

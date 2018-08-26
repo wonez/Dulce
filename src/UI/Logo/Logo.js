@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconCake from '../../../../UI/Icons/IconCake';
+import { IconCake } from '../Icons/Icons';
 
 import classes from './Logo.scss';
 
