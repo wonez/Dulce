@@ -11,7 +11,10 @@ const Card = (props) => {
     const {card} = props;
     return(
         <figure className={classes.Card}>
-            <img className={classes.Card__Img} src={card.img} />
+            <div className={classes.Card__Img} style={{ 
+                backgroundImage: `url(${card.img})`,
+                backgroundSize: 'cover'
+            }} src={card.img}> </div>
             <div className={classes.Card__Info}>
                 <h4 className={[classes.Card__Heading, typography['margin-bottom-sm']].join(' ')} >{card.heading}</h4>
                 <div className={classes.Card__Summary}>

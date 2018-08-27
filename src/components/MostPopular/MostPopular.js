@@ -9,21 +9,21 @@ const MostPopular = () => {
 
     const cards = [
         {
-            img: 'https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716_1280.jpg',
+            img: 'src/assets/mp-img-1.jpg',
             heading: 'Raspberry Pancakes',
             time: 25,
             difficulty: 'Beginner',
             hearts: 131
         },
         {
-            img: 'https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_1280.jpg',
+            img: 'src/assets/mp-img-2.jpg',
             heading: 'Tiramisu',
             time: 45,
             difficulty: 'Hard',
             hearts: 176
         },
         {
-            img: 'https://cdn.pixabay.com/photo/2014/05/23/23/17/dessert-352475_1280.jpg',
+            img: 'src/assets/mp-img-3.jpg',
             heading: 'Strawberry Cupcakes',
             difficulty: 'Intermediate',
             time: 30,

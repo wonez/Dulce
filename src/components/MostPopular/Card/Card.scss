@@ -5,9 +5,21 @@
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, .3);
 
     &__Img{
-        background: red;
+        position: relative;
         height: 20rem;
-        //TODO
+        width: 30rem;
+        overflow: hidden;
+        &:after{
+            content: '';
+            display: block;
+            width: 30rem;
+            height: 15rem;
+            background: $color-white;
+            position: absolute;
+            bottom: -12rem;
+            left: 0;
+            border-radius: 50%;
+        }
     }
 
     &:nth-child(2){
