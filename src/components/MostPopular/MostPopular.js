@@ -33,7 +33,7 @@ const MostPopular = () => {
 
     return(
         <section id="most-popular" className={classes.MostPopular}>
-            <h2 className={[typography['margin-bottom-lg'], typography['HeadingSecondary'], typography['text-center']].join(' ')} > 
+            <h2 className={[typography['margin-bottom-md'], typography['HeadingSecondary'], typography['text-center']].join(' ')} > 
                 Most Popular
             </h2>
             <div className={classes.MostPopular__Cards}>

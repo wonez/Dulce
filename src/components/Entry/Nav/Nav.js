@@ -19,7 +19,7 @@ const Nav = () => {
                     </a>
                 </li>
                 <li className={classes.Nav__Item}>
-                    <a href="#" className={classes.Nav__Link}>
+                    <a href="#learn-more" className={classes.Nav__Link}>
                         Learn more
                     </a>
                 </li>

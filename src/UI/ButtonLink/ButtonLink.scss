@@ -1,0 +1,16 @@
+.ButtonLink{
+    outline: none;
+    border: none;
+    color: $color-tertiary;
+    font-size: 1.6rem;
+    border-bottom: 1px solid currentColor;
+    padding: 1rem .5rem;
+    border-radius: .2rem;
+    transition: .3s all;
+
+    &:hover{
+        cursor: pointer;
+        background: $color-tertiary;
+        color: $color-white;
+    }
+}

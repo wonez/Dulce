@@ -11,7 +11,7 @@ const Card = (props) => {
     const {card} = props;
     return(
         <figure className={classes.Card}>
-            <div className={classes.Card__Img} style={{ 
+            <div className={classes.Card__Img} style={{
                 backgroundImage: `url(${card.img})`,
                 backgroundSize: 'cover'
             }} src={card.img}> </div>
