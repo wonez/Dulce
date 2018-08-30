@@ -1,9 +1,10 @@
 import React from 'react';
 
 import classes from './LearnMore.scss';
-import typography from '../../_typography.scss';
+import typography from '../../../_typography.scss';
 
-import ButtonLink from '../../UI/ButtonLink/ButtonLink';
+
+import ButtonLink from '../../../UI/ButtonLink/ButtonLink';
 
 const LearnMore = () => {
    return(

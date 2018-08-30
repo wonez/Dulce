@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import Entry from '../../components/Entry/Entry';
-import MostPopular from '../../components/MostPopular/MostPopular';
-import LearnMore from '../../components/LearnMore/LearnMore';
-import Footer from '../../components/Footer/Footer';
+import Landing from '../Landing/Landing';
+import Signin from '../Signin/Signin';
 
 import Aux from '../../hoc/Aux';
 
 class App extends Component {
 	render() {
 		return (
-			<Aux>
-				<Entry />
-				<MostPopular />
-				<LearnMore />
-				<Footer />
-			</Aux>
+			<BrowserRouter>
+				<Switch>
+					<Route path='/' exact component={Landing}/>
+					<Route path="/signin" component={Signin}/>
+					<Route render={()=> (<h1>404</h1>)} />
+				</Switch>
+			</BrowserRouter>
 		);
 	}
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './MostPopular.scss';
-import typography from '../../_typography.scss'
+import typography from '../../../_typography.scss'
 
 import Card from './Card/Card';
 

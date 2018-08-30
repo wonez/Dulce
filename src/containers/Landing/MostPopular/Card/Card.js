@@ -1,11 +1,11 @@
 import React from 'react';
 
-import CardButton from '../../../UI/CardButton/CardButton';
+import CardButton from '../../../../UI/CardButton/CardButton';
 
 import classes from './Card.scss';
-import typography from '../../../_typography.scss';
+import typography from '../../../../_typography.scss';
 
-import { IconClock, IconLevel, IconHeart } from '../../../UI/Icons/Icons';
+import { IconClock, IconLevel, IconHeart } from '../../../../UI/Icons/Icons';
 
 const Card = (props) => {
     const {card} = props;

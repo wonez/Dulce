@@ -2,9 +2,9 @@ import React from 'react';
 
 import Nav from './Nav/Nav';
 import classes from './Entry.scss';
-import typography from '../../_typography.scss';
-import { IconMagnifyingGlass } from '../../UI/Icons/Icons';
-import IconButton from '../../UI/IconButton/IconButton';
+import typography from '../../../_typography.scss';
+import { IconMagnifyingGlass } from '../../../UI/Icons/Icons';
+import IconButton from '../../../UI/IconButton/IconButton';
 
 const Entry = () => {
     return(
