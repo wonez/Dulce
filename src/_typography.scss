@@ -25,6 +25,16 @@
     text-transform: uppercase;
 }
 
+.HeadingDark{
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    background: linear-gradient(to top left, 
+        $color-dark, $color-darker
+    );
+    color: transparent;
+    background-clip: text;
+}
+
 .text-center{
     text-align: center;
 }

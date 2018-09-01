@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Landing from '../Landing/Landing';
 import Signin from '../Signin/Signin';
-
-import Aux from '../../hoc/Aux';
 
 class App extends Component {
 	render() {

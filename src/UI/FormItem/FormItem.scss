@@ -1,0 +1,41 @@
+.FormItem{
+
+    margin: 3rem 0;
+    position: relative;
+
+    &__Input{
+        outline: none;
+        padding: 1rem;
+        font-size: 1.4rem;
+        outline: none;
+        border: none;
+        border-radius: .1rem;
+        color: $color-gray-darker;
+        min-width: 30vw;
+        border-bottom: .1rem solid $color-tertiary;
+        box-shadow: 0 .1rem 1rem rgba(0,0,0, .2);
+        &::placeholder{
+            color: $color-gray-dark
+        }
+        &:invalid{
+            border-color: $color-primary-light;
+        }
+    }
+
+    &__Label{
+        position: absolute;
+        display: block;
+        left: 1.5rem;
+        font-size: 1.4rem;
+        color: $color-gray-dark;
+        transition: .3s all;
+        top: 4.2rem;
+        height: initial;
+    }
+
+    &__Input:placeholder-shown + &__Label{
+        top: 2.5rem;
+        height: 0;
+        z-index: -1;
+    }
+}

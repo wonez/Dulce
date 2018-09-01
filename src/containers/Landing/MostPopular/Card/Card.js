@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CardButton from '../../../../UI/CardButton/CardButton';
+import MainButton from '../../../../UI/MainButton/MainButton';
 
 import classes from './Card.scss';
 import typography from '../../../../_typography.scss';
@@ -29,7 +29,7 @@ const Card = (props) => {
                     </p>
                 </div>
                 <div className={[typography['margin-bottom-sm'], typography['margin-top-sm'], typography['text-center']].join(' ')}>
-                    <CardButton>Read more</CardButton>
+                    <MainButton>Read more</MainButton>
                 </div>
             </div>
         </figure>

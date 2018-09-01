@@ -3,18 +3,13 @@ import React from 'react';
 import Logo from '../../../../UI/Logo/Logo';
 import classes from './Nav.scss';
 
-import Link from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
     return(
         <div className={classes.Nav}>
             <Logo />
             <ul className={classes.Nav__Items}>
-                {/* <li className={classes.Nav__Item}>
-                    <Link to='/signin' className={classes.Nav__Link}>
-                        Show categories
-                    </Link>
-                </li> */}
                 <li className={classes.Nav__Item}>
                     <a href="#most-popular" className={classes.Nav__Link}>
                         Most popular
@@ -26,14 +21,14 @@ const Nav = () => {
                     </a>
                 </li>
                 <li className={classes.Nav__Item}>
-                    <a href="#" className={classes.Nav__Link}>
+                    <Link to='/signup' className={classes.Nav__Link}>
                         Sign up
-                    </a>
+                    </Link>
                 </li>
                 <li className={classes.Nav__Item}>
-                    <a href="#" className={classes.Nav__Link}>
+                    <Link to='/signin' className={classes.Nav__Link}>
                         Sign in
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </div>

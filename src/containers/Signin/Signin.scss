@@ -1,0 +1,66 @@
+.Signin{
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(
+        to bottom right, 
+        rgba($color-dark, .7),
+        rgba($color-darker, .7)
+    ), url('../../assets/signing-bg.jpg');
+    display: flex;
+    background-size: cover;
+    justify-content: space-around;
+    align-items: center;
+
+    &__Options{
+        display: flex;
+        position: absolute;
+        background: $color-white;
+        width: 100%;
+        top: 0;
+        left: 0;
+        &__Btn{
+            padding: 1.5rem 0;
+            font-size: 1.6rem;
+            background: transparent;
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            color: $color-gray-dark;
+            border-bottom: 1px solid;
+            transition: .3s all;
+            &:hover{
+                cursor: pointer;
+                background: $color-gray-lighter;
+                border-color: $color-white;
+            }
+        }
+    }
+
+    &__Form{
+        position: relative;
+        overflow: hidden;
+        height: 50rem;
+        padding: 3rem;
+        padding-top: 7rem;
+        text-align: center;
+        background: linear-gradient(to top left, 
+            $color-gray-lighter,
+            $color-white
+        );
+        border-radius: 1rem;
+        box-shadow: 0rem 1rem 3rem rgba(0,0,0,.3);
+    }
+
+    &__Text{
+        display: inline-block;
+        color: $color-white;
+        text-transform: uppercase;
+        text-align: right;
+        font-size: 4.5rem;
+        width: 50rem;
+        padding: 100rem 3rem;
+        border-radius: 1rem;
+        line-height: 1.5;
+        background: rgba($color-primary-dark, .1);
+    }
+}
