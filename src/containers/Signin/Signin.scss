@@ -1,20 +1,59 @@
 .Signin{
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
     background: linear-gradient(
         to bottom right, 
-        rgba($color-dark, .7),
-        rgba($color-darker, .7)
+        rgba($color-primary-dark, .7),
+        rgba($color-tertiary, .7)
     ), url('../../assets/signing-bg.jpg');
     display: flex;
+    flex-direction: column;
     background-size: cover;
-    justify-content: space-around;
     align-items: center;
+
+    &__Toolbar{
+        background: $color-white;
+        justify-self: flex-start;
+        align-self: stretch;
+        padding: 1rem 0;
+        font-size: 2rem;
+        box-shadow: 0 .5rem 3rem rgba(0,0,0,.3);
+        color: $color-gray-dark;
+        fill: $color-primary-light;
+        span{
+            display: block;
+            font-size: 2em;
+            margin: .3rem 0 0 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1rem;
+        }
+    }
+
+    &__Form{
+        min-height: 50rem;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        margin: 7rem 0;
+        text-align: center;
+        background: $color-white;
+        border-radius: 1rem;
+        box-shadow: 0rem 1rem 3rem rgba(0,0,0,.3);
+        form{
+            height: 100%;
+            padding: 3rem;
+            padding-top: 5rem;
+            display: flex;
+            flex-direction: column;
+        }
+    }
 
     &__Options{
         display: flex;
-        position: absolute;
-        background: $color-white;
+        background: linear-gradient(
+            to bottom right,
+            $color-primary-light,
+            $color-primary-dark
+        );
         width: 100%;
         top: 0;
         left: 0;
@@ -25,42 +64,20 @@
             flex-grow: 1;
             border: none;
             outline: none;
-            color: $color-gray-dark;
-            border-bottom: 1px solid;
+            color: $color-white;            
             transition: .3s all;
             &:hover{
                 cursor: pointer;
-                background: $color-gray-lighter;
-                border-color: $color-white;
+                box-shadow: 0 .3rem 1rem rgba(0,0,0,.3);
+            }
+            &__Active{
+                color: $color-gray-dark;
+                background: $color-white;
+                &:hover{
+                    box-shadow: none;
+                    cursor: default;
+                }
             }
         }
-    }
-
-    &__Form{
-        position: relative;
-        overflow: hidden;
-        height: 50rem;
-        padding: 3rem;
-        padding-top: 7rem;
-        text-align: center;
-        background: linear-gradient(to top left, 
-            $color-gray-lighter,
-            $color-white
-        );
-        border-radius: 1rem;
-        box-shadow: 0rem 1rem 3rem rgba(0,0,0,.3);
-    }
-
-    &__Text{
-        display: inline-block;
-        color: $color-white;
-        text-transform: uppercase;
-        text-align: right;
-        font-size: 4.5rem;
-        width: 50rem;
-        padding: 100rem 3rem;
-        border-radius: 1rem;
-        line-height: 1.5;
-        background: rgba($color-primary-dark, .1);
     }
 }

@@ -4,9 +4,9 @@ import classes from './IconButton.scss';
 
 const IconButton = (props) => {
     return(
-        <button className={classes.IconButton}>
+        <a className={classes.IconButton}>
             {props.children}
-        </button>
+        </a>
     )
 }
 

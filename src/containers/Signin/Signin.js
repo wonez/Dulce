@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import classes from './Signin.scss';
 import typography from '../../_typography.scss';
 
-import MainButton from '../../UI/MainButton/MainButton';
+import { IconCake } from '../../UI/Icons/Icons';
+import IconButton from '../../UI/IconButton/IconButton';
 import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
 
@@ -60,23 +61,39 @@ class Signin extends Component {
                                 required
                                 />
 
-                    <FlatLink type='submit' kind='light' to='oo'>Sign in</FlatLink>
+                    <FlatLink type='submit' kind='light' to='oo'>Sign up</FlatLink>
+                    <hr style={{margin: '2.5rem 0'}}/>
+                <FlatLink kind='dark' to='fb'>Continue Using Facebook</FlatLink>
+                <FlatLink kind='primary' to='ggl'>Continue Using Google+</FlatLink>
                 </form>
             )
         }
 
+        const signinClasses = [classes.Signin__Options__Btn];
+        const signupClasses = [classes.Signin__Options__Btn];
+
+        if(this.state.signin){
+            signinClasses.push(classes.Signin__Options__Btn__Active);
+        }else{
+            signupClasses.push(classes.Signin__Options__Btn__Active);
+        }
+
         return(
             <div className={classes.Signin}>
+                <div className={classes.Signin__Toolbar}>
+                    <IconButton>
+                        <IconCake /> <span>Dulce</span>
+                    </IconButton>
+                </div>
+
                 <div className={classes.Signin__Form}>
                     <div className={classes.Signin__Options}>
-                        <button className={classes.Signin__Options__Btn} onClick={()=>{this.setState({signin: true})}}>Sign in</button>
-                        <button className={classes.Signin__Options__Btn} onClick={()=>{this.setState({signin: false})}}>Sign up</button>
+                        <button className={signinClasses.join(' ')} 
+                            onClick={()=>{this.setState({signin: true})}}>Sign in</button>
+                        <button className={signupClasses.join(' ')} onClick={()=>{this.setState({signin: false})}}>Sign up</button>
                     </div>
                     {form}
                 </div>
-                {/* <h2 className={classes.Signin__Text}>
-                    More than 10K sweet recepies are waiting to be tasted and explored.
-                </h2> */}
             </div>
         )
     }

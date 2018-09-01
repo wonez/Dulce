@@ -2,11 +2,17 @@
     outline: none;
     border: none;
     background: none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-decoration: none;
+
     &:hover{
         cursor: pointer;
     }
+
     svg{
-        height: 2rem;
-        width: 2rem;
+        height: 2em;
+        width: 2em;
     }
 }
