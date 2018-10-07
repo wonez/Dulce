@@ -1,0 +1,9 @@
+.Profile{
+    background: $color-gray-lighter;
+    min-height: 100vh;
+    &__Data{
+        margin: 5rem;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+}

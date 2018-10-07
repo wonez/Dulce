@@ -18,12 +18,12 @@
         padding: 0 1.2em;
         padding-bottom: 1rem;
         margin-right: 2rem;
-        border-bottom: 1px solid $color-darker;
+        border-bottom: 1px solid $color-primary-dark;
         transition: .3s all;
         display: block;
 
         &:hover{
-            color: $color-darker;
+            color: $color-primary-dark;
             border-color: $color-white;
             transform: scale(1.15);
         }

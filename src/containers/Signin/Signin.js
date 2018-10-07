@@ -33,7 +33,7 @@ class Signin extends Component {
                             required
                             />
 
-                <FlatLink type='submit' kind='light' to='oo'>Sign in</FlatLink>
+                <FlatLink type='submit' kind='light' to='profile'>Sign in</FlatLink>
                 <hr style={{margin: '2.5rem 0'}}/>
                 <FlatLink kind='dark' to='fb'>Continue Using Facebook</FlatLink>
                 <FlatLink kind='primary' to='ggl'>Continue Using Google+</FlatLink>

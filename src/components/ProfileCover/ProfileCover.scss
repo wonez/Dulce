@@ -1,0 +1,37 @@
+.ProfileCover{
+    min-height: 60vh;
+    background: url('../../assets//cover.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    &__Data{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        margin-bottom: 3rem;
+        &__Img{
+            height: 15rem;
+            width: 15rem;
+            margin-left: 5rem;
+            background: url('../../assets//profile.jpg');
+            background-position: center;
+            background-size: cover;
+            border-radius: 1rem;
+            border: 1rem solid white;
+        }
+        &__Follow{
+            color: $color-white;
+            margin-right: 5rem;
+            padding: 1rem 5rem;
+            box-shadow: 0 1rem 2rem rgba(0,0,0,.5);
+            border-radius: .5rem;
+            background: linear-gradient(to bottom right, $color-primary-light, $color-primary-dark);
+            font-size: 2rem;
+        }
+    }
+}

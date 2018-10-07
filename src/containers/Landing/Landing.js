@@ -10,9 +10,9 @@ import Aux from '../../hoc/Aux';
 const Landing = () => (
     <Aux>
         <Entry />
-        <MostPopular />
+        {/* <MostPopular />
         <LearnMore />
-        <Footer />
+        <Footer /> */}
     </Aux>
 );
 

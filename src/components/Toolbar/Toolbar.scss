@@ -1,0 +1,54 @@
+.Toolbar{
+    background: #2C2E3C;
+    padding: 2rem 5rem;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+
+    .Search{
+        &__InputBox{
+            position: relative;
+            margin-right: auto;
+            text-align: center;
+            width: 50%;
+        }
+        &__Icon{
+            fill: $color-primary-dark;
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            transition: .3s all;
+        }
+        &__Input{
+            width: 100%;
+            outline: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 2rem;
+            border-radius: 10rem;
+            transition: .3s all;
+            background: #515468;
+            color: $color-primary-dark;
+            box-shadow: 0rem .6rem 3.5rem rgba(0,0,0, .3);
+            caret-color: currentColor;
+            &::placeholder{
+                color: white;
+            }
+        }
+    }
+
+    .Buttons{
+        display: flex;
+        fill: white;
+        a{
+            margin: 0 2rem;
+            transition: .3s all;
+            &:hover{
+                fill: $color-primary-dark;
+            }
+        }
+    }
+}

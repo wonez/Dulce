@@ -1,0 +1,25 @@
+.ProfileNavigation{
+    padding: 2rem 1rem;
+    font-size: 2rem;
+    background: white;
+    display: flex;
+    justify-content: center;
+    &__Name{
+        color: $color-gray-light;
+        margin-left: 5rem;
+        // margin-right: auto;
+    }
+    &__BtnContainer{
+        display: flex;
+    }
+    &__Btn{
+        color: $color-gray-darker;
+        padding: 1rem 2rem;
+        display: block;
+        transition: all .3s;
+        &:hover{
+            color: $color-primary-dark;
+            cursor: pointer;
+        }
+    }
+}

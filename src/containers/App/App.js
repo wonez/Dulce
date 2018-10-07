@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Landing from '../Landing/Landing';
 import Signin from '../Signin/Signin';
+import Profile from '../Profile/Profile';
 
 class App extends Component {
 	render() {
@@ -11,6 +12,7 @@ class App extends Component {
 				<Switch>
 					<Route path='/' exact component={Landing}/>
 					<Route path="/signin" component={Signin}/>
+					<Route path="/profile" component={Profile}/>
 					<Route render={()=> (<h1>404</h1>)} />
 				</Switch>
 			</BrowserRouter>
