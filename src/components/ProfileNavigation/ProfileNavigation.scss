@@ -4,22 +4,27 @@
     background: white;
     display: flex;
     justify-content: center;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+
     &__Name{
         color: $color-gray-light;
         margin-left: 5rem;
-        // margin-right: auto;
-    }
-    &__BtnContainer{
-        display: flex;
+        margin-right: auto;
     }
     &__Btn{
         color: $color-gray-darker;
         padding: 1rem 2rem;
+        border-bottom: 1px solid transparent;
         display: block;
         transition: all .3s;
         &:hover{
-            color: $color-primary-dark;
+            border-color: $color-primary-dark;
             cursor: pointer;
         }
+    }
+
+    &__active{
+        color: $color-primary-dark;
     }
 }

@@ -8,6 +8,7 @@ const ProfileCover = () => {
                 <div className={classes.ProfileCover__Data__Img}>
                     {/* slika */}
                 </div>
+                <h2 className={classes.ProfileCover__Data__Name}>Don Joe</h2>
                 <div className={classes.ProfileCover__Data__Follow}>
                     Follow
                 </div>

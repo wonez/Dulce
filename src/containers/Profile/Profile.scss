@@ -1,9 +1,15 @@
 .Profile{
     background: $color-gray-lighter;
     min-height: 100vh;
+    height: 100%;
     &__Data{
         margin: 5rem;
+    }
+    &__Content{
+        margin: 2rem 0;
+        padding: 2rem;
         border-radius: 1rem;
-        overflow: hidden;
+        min-height: 50vh;
+        background: white;  
     }
 }

@@ -8,16 +8,47 @@ import classes from './Profile.scss';
 
 class Profile extends Component{
 
+    state = {
+        active: 'timeline'
+    }
+
+    activeHandler = (active) => {
+        this.setState({
+            active: active
+        })
+    }
+
     render(){
+
+        let content = null;
+        
+        if(this.state.active === 'timeline'){
+            content = (
+                <div>
+                    timeline
+                </div>
+            )
+        } else if(this.state.active === 'following'){
+            content = (
+                <div>
+                    following
+                </div>
+            )
+        } else if (this.state.active === 'about'){
+            content = (
+                <div>
+                    about
+                </div>
+            )
+        }
+
         return(
             <div className={classes.Profile}>
                 <Toolbar />
                 <div className={classes.Profile__Data}>
                     <ProfileCover />
-                    <ProfileNavigation />
-                    <div>
-                        content
-                    </div>
+                    <ProfileNavigation active={this.state.active} handler={this.activeHandler} />
+                    {content}
                 </div>
             </div>
         )

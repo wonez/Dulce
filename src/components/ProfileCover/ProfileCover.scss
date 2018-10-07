@@ -7,6 +7,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 
     &__Data{
         display: flex;
@@ -23,6 +25,10 @@
             background-size: cover;
             border-radius: 1rem;
             border: 1rem solid white;
+        }
+        &__Name{
+            color: white;
+            font-size: 5rem;
         }
         &__Follow{
             color: $color-white;

@@ -1,5 +1,5 @@
 .Toolbar{
-    background: #2C2E3C;
+    background: $color-primary-light;
     padding: 2rem 5rem;
     color: white;
     font-weight: bold;
@@ -16,7 +16,7 @@
             width: 50%;
         }
         &__Icon{
-            fill: $color-primary-dark;
+            fill: $color-primary-light;
             position: absolute;
             top: 10%;
             right: 5%;
@@ -27,16 +27,11 @@
             outline: none;
             border: none;
             padding: 1rem 2rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
             border-radius: 10rem;
             transition: .3s all;
-            background: #515468;
-            color: $color-primary-dark;
-            box-shadow: 0rem .6rem 3.5rem rgba(0,0,0, .3);
-            caret-color: currentColor;
-            &::placeholder{
-                color: white;
-            }
+            color: $color-gray-dark;
+            caret-color: $color-primary-dark;
         }
     }
 
@@ -45,9 +40,9 @@
         fill: white;
         a{
             margin: 0 2rem;
-            transition: .3s all;
+            transition: .3s all;    
             &:hover{
-                fill: $color-primary-dark;
+                fill: $color-gray-light;
             }
         }
     }
