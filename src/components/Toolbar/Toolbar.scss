@@ -1,17 +1,31 @@
 .Toolbar{
-    background: $color-primary-light;
-    padding: 2rem 5rem;
+    background: linear-gradient(to bottom right, $color-primary-dark, $color-primary-light);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.5rem 5rem;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 1.5rem;
     display: flex;
-    justify-content: center;
+    fill: white;    
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+
+    a{
+        margin: 0 2rem;
+        transition: .3s all;    
+        &:hover{
+            fill: $color-tertiary;
+        }
+    }
 
     .Search{
         &__InputBox{
             position: relative;
-            margin-right: auto;
             text-align: center;
             width: 50%;
         }
@@ -19,7 +33,7 @@
             fill: $color-primary-light;
             position: absolute;
             top: 10%;
-            right: 5%;
+            right: 0;
             transition: .3s all;
         }
         &__Input{
@@ -30,20 +44,11 @@
             font-size: 1.5rem;
             border-radius: 10rem;
             transition: .3s all;
-            color: $color-gray-dark;
-            caret-color: $color-primary-dark;
+            caret-color: $color-tertiary;
         }
     }
 
     .Buttons{
         display: flex;
-        fill: white;
-        a{
-            margin: 0 2rem;
-            transition: .3s all;    
-            &:hover{
-                fill: $color-gray-light;
-            }
-        }
     }
 }

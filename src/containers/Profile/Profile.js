@@ -4,6 +4,8 @@ import ProfileCover from '../../components/ProfileCover/ProfileCover';
 import ProfileNavigation from '../../components/ProfileNavigation/ProfileNavigation'
 import Toolbar from '../../components/Toolbar/Toolbar'
 
+import Timeline from '../Timeline/Timeline';
+
 import classes from './Profile.scss';
 
 class Profile extends Component{
@@ -24,9 +26,7 @@ class Profile extends Component{
         
         if(this.state.active === 'timeline'){
             content = (
-                <div>
-                    timeline
-                </div>
+                <Timeline />
             )
         } else if(this.state.active === 'following'){
             content = (

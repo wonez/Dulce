@@ -2,8 +2,12 @@
     background: $color-gray-lighter;
     min-height: 100vh;
     height: 100%;
+    display: flex;
+    justify-content: center;
     &__Data{
+        padding-top: 5rem;
         margin: 5rem;
+        width: 1050px;
     }
     &__Content{
         margin: 2rem 0;

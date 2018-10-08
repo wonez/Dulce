@@ -1,6 +1,8 @@
 .ProfileCover{
-    min-height: 60vh;
-    background: url('../../assets//cover.jpg');
+    // min-height: 60vh;
+    height: 40rem;
+    background: linear-gradient(to bottom, transparent, rgba(black, .6)), 
+                url('../../assets//cover.jpg');
     background-position: center;
     background-size: cover;
     position: relative;
@@ -19,11 +21,11 @@
         &__Img{
             height: 15rem;
             width: 15rem;
-            margin-left: 5rem;
             background: url('../../assets//profile.jpg');
             background-position: center;
             background-size: cover;
-            border-radius: 1rem;
+            margin-left: 3rem;
+            border-radius:   50%;
             border: 1rem solid white;
         }
         &__Name{
@@ -32,7 +34,7 @@
         }
         &__Follow{
             color: $color-white;
-            margin-right: 5rem;
+            margin-right: 3rem;
             padding: 1rem 5rem;
             box-shadow: 0 1rem 2rem rgba(0,0,0,.5);
             border-radius: .5rem;
