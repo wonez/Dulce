@@ -5,13 +5,14 @@ import ProfileNavigation from '../../components/ProfileNavigation/ProfileNavigat
 import Toolbar from '../../components/Toolbar/Toolbar'
 
 import Timeline from '../Timeline/Timeline';
+import Following from '../Following/Following';
 
 import classes from './Profile.scss';
 
 class Profile extends Component{
 
     state = {
-        active: 'timeline'
+        active: 'following'
     }
 
     activeHandler = (active) => {
@@ -30,9 +31,7 @@ class Profile extends Component{
             )
         } else if(this.state.active === 'following'){
             content = (
-                <div>
-                    following
-                </div>
+                <Following />
             )
         } else if (this.state.active === 'about'){
             content = (

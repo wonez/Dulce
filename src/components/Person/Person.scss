@@ -1,0 +1,41 @@
+.AuthorBox{
+    display: flex;
+    padding: 1rem 2rem;
+    align-items: center;
+
+    // border: 1px solid $color-gray-light;
+    border-left: 1px solid $color-gray-light;
+    // border-radius: 1000rem;
+    transition: 1s all;
+    &:hover{
+        background: $color-gray-lighter;
+    }
+    &:nth-child(3n ){
+        border: none;
+    }
+}
+
+.Data{
+    padding-left: 1rem;
+    &__Name{
+        color: $color-primary-dark; 
+        font-size: 2rem;
+        padding-bottom: .5rem;
+        &:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+    &__Followers{
+        color: $color-gray-dark;
+        font-size: 1.5rem;
+    }
+}
+
+.Avatar{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+}

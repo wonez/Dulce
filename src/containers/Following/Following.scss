@@ -1,0 +1,15 @@
+.Following{
+    background: white;
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    &__Heading{
+        font-size: 3rem;
+        color: $color-gray-darker;
+        padding: 0 0 2rem 2rem;
+    }
+    &__Container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 3rem 0;
+    }
+}
