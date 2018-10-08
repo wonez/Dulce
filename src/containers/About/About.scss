@@ -1,0 +1,35 @@
+.About{
+    background: white;
+    width: 800px;
+    margin: 0 auto;
+    border-radius: 1rem;
+    display: flex;
+    overflow: hidden;
+
+    &__Image{
+        flex: 1;
+        flex-basis: 400px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__Container{
+        padding: 3rem;
+    }
+
+    &__AboutMe{
+        line-height: 1.3;
+        font-size: 1.8rem;
+    }
+    hr{
+        margin: 3rem 0;
+    }
+    &__Item{
+        padding: 1rem 0;
+        display: flex;
+        font-size: 2rem;
+        h4{
+            width: 20%;
+        }
+    }
+}

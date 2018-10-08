@@ -6,13 +6,17 @@ import Toolbar from '../../components/Toolbar/Toolbar'
 
 import Timeline from '../Timeline/Timeline';
 import Following from '../Following/Following';
+import About from '../About/About';
 
 import classes from './Profile.scss';
 
 class Profile extends Component{
 
     state = {
-        active: 'following'
+        active: 'about',
+        profile: {
+            name: 'John Doe'
+        }
     }
 
     activeHandler = (active) => {
@@ -35,9 +39,7 @@ class Profile extends Component{
             )
         } else if (this.state.active === 'about'){
             content = (
-                <div>
-                    about
-                </div>
+                <About />
             )
         }
 
@@ -45,7 +47,7 @@ class Profile extends Component{
             <div className={classes.Profile}>
                 <Toolbar />
                 <div className={classes.Profile__Data}>
-                    <ProfileCover />
+                    <ProfileCover profile={this.state.profile}/>
                     <ProfileNavigation active={this.state.active} handler={this.activeHandler} />
                     {content}
                 </div>
