@@ -13,7 +13,7 @@ import classes from './Profile.scss';
 class Profile extends Component{
 
     state = {
-        active: 'about',
+        active: 'timeline',
         profile: {
             name: 'John Doe'
         }
