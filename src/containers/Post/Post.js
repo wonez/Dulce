@@ -24,7 +24,23 @@ class Post extends Component {
             heading: 'Raspberry Pancakes',
             time: 25,
             difficulty: 'Beginner',
-            hearts: 131
+            hearts: 131,
+            ingredients: [
+                '3 cups all-purpose flour',
+                '3 tablespoons white sugar',
+                '3 teaspoons baking powder',
+                '1 1/2 teaspoons baking soda',
+                '3/4 teaspoon salt',
+                '3 cups buttermilk',
+                '1/2 cup milk',
+                '3 eggs',
+                '1/3 cup butter, melted'
+            ],
+            directions: [
+                'In a large bowl, combine flour, sugar, baking powder, baking soda, and salt. In a separate bowl, beat together buttermilk, milk, eggs and melted butter. Keep the two mixtures separate until you are ready to cook.',
+                "Heat a lightly oiled griddle or frying pan over medium high heat. You can flick water across the surface and if it beads up and sizzles, it's ready!",
+                "Pour the wet mixture into the dry mixture, using a wooden spoon or fork to blend. Stir until it's just blended together. Do not over stir! Pour or scoop the batter onto the griddle, using approximately 1/2 cup for each pancake. Brown on both sides and serve hot."
+            ]
         }
     }
 
@@ -52,10 +68,36 @@ class Post extends Component {
                             </div>
                             <p className={classes.Post__Date}>{date}</p>
                         </div>
-                        {/* 
-                        description
-                        div
-                            ingredients
+                        <p className={classes.Post__Description}>
+                            {this.state.item.description}
+                        </p>
+                        {/* <hr className={classes.Post__Hr} /> */}
+                        <div className={classes.Post__Preparation}>
+                            <div className={classes.Post__Preparation__Ingredients}>
+                                <h3 className={classes.Post__Preparation__Heading}>Ingredients</h3>
+                                <ul className={classes.Post__Preparation__IngList}>
+                                    {this.state.item.ingredients.map( ing => {
+                                        return <li  className={classes.Post__Preparation__IngItem} 
+                                                    key={ing}>
+                                                        <span className={classes.Post__Preparation__ItemTag}>&gt;</span>
+                                                        {ing}
+                                                </li>
+                                    })}
+                                </ul>
+                            </div>
+                            <div className={classes.Post__Preparation__Directions}>
+                                <h3 className={classes.Post__Preparation__Heading}>Directions</h3>                                
+                                <ul className={classes.Post__Preparation__DirList}>
+                                    {this.state.item.directions.map( (dir, i) => {
+                                        return <li  className={classes.Post__Preparation__DescItem}
+                                                    key={dir}>
+                                                        <span className={classes.Post__Preparation__ItemTag}>{i+1}</span>
+                                                        {dir}</li>
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
+                        {/* ingredients
                             steps */}
                     </div>
                 </div>
