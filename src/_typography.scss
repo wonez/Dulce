@@ -8,7 +8,7 @@
 
     &:hover{
         transform: scale(.9);
-        color: $color-gray-lighter;
+        // color: $color-gray-lighter;
         cursor: default;
     }
 }
@@ -19,11 +19,11 @@
     letter-spacing: .2rem;
 }
 
-.HeadingTertiary{
-    color: $color-tertiary;
-    font-size: 2.2rem;
-    text-transform: uppercase;
-}
+// .HeadingTertiary{
+//     color: $color-tertiary;
+//     font-size: 2.2rem;
+//     text-transform: uppercase;
+// }
 
 .HeadingDark{
     font-size: 2.2rem;

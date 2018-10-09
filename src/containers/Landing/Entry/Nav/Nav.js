@@ -10,7 +10,7 @@ const Nav = () => {
         <div className={classes.Nav}>
             <Logo />
             <ul className={classes.Nav__Items}>
-                <li className={classes.Nav__Item}>
+                {/* <li className={classes.Nav__Item}>
                     <a href="#most-popular" className={classes.Nav__Link}>
                         Most popular
                     </a>
@@ -19,7 +19,7 @@ const Nav = () => {
                     <a href="#learn-more" className={classes.Nav__Link}>
                         Learn more
                     </a>
-                </li>
+                </li> */}
                 <li className={classes.Nav__Item}>
                     <Link to='/signup' className={classes.Nav__Link}>
                         Sign up

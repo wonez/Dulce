@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router' 
 
 import Card from '../../components/Card/Card';
 
@@ -10,7 +11,7 @@ class Timeline extends Component {
         items: [
             {
                 author: {
-                    name: 'Don Joe',
+                    name: 'John Doe',
                     imgPath: 'src/assets/profile.jpg'
                 },
                 date: new Date(1538983770888),
@@ -23,7 +24,7 @@ class Timeline extends Component {
             },
             {
                 author: {
-                    name: 'Don Joe',
+                    name: 'John Doe',
                     imgPath: 'src/assets/profile.jpg'
                 },
                 date: new Date(1538983770888),
@@ -37,16 +38,28 @@ class Timeline extends Component {
         ]
     }
 
+    singlePostHandler = (heading) => {
+        const post = this.state.items.find( post => {
+            return post.heading === heading
+        })
+        this.props.history.push({
+            pathname: '/post',
+            state: {
+                item: post
+            }
+        });
+    }
+
 
     render(){
         return(
             <div className={classes.Timeline}>
                 {this.state.items.map(item => (
-                    <Card data={item} key={item.heading}/>
+                    <Card  singlePost={this.singlePostHandler} data={item} key={item.heading}/>
                 ))}
             </div>
         )
     }
 }
 
-export default Timeline;
+export default withRouter(Timeline);

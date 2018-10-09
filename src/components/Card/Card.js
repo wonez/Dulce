@@ -4,7 +4,7 @@ import classes from './Card.scss'
 
 import { IconClock, IconLevel, IconHeart } from '../../UI/Icons/Icons'
 
-const Card = ({data}) => {
+const Card = ({data, singlePost}) => {
 
     const date = data.date.toLocaleString('en-US', {year: 'numeric', month: 'short', day: 'numeric'});
 
@@ -27,7 +27,7 @@ const Card = ({data}) => {
                 style={{backgroundImage: `url(${data.imgPath})`}}>
                 {/* slika */}
             </div>
-            <h2 className={classes.Card__Heading}>{data.heading} &rarr;</h2>
+            <h2 onClick={() => singlePost(data.heading)} className={classes.Card__Heading}>{data.heading} &rarr;</h2>
             <div className={classes.Card__Info}>
                 <p className={classes.Card__Info__Icon}>
                     <IconClock/> &nbsp; {data.time} min

@@ -11,21 +11,23 @@
        box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.2);
    }
 }
-
-.dark{
-    background: linear-gradient(to top left,
-         $color-dark,
-         $color-darker
-    )
-}
 .primary{
      background: linear-gradient(to top left,
          $color-primary-light,
          $color-primary-dark
      )
 }
+.secondary{
+     background: linear-gradient(to top left,
+         $color-secondary-light,
+         $color-secondary-dark
+     )
+}
 .light{
-    color: $color-gray-dark;
-    background: $color-white;
-    border: 1px solid;
+    color: $color-gray-darker;
+    margin: 0 auto;
+    &:hover{
+        transform: scale(1.2);
+        box-shadow: none;
+    }
 }

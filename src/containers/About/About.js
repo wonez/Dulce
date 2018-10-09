@@ -11,6 +11,7 @@ class About extends Component {
             gender: 'M',
             from: 'Wien, Austria',
             imgPath: 'src/assets/profile.jpg',
+            followers: 623
         }
     }
 
@@ -32,6 +33,10 @@ class About extends Component {
                     <div className={classes.About__Item}>
                         <h4>Joined</h4>
                         <p>{joined}</p>
+                    </div>
+                    <div className={classes.About__Item}>
+                        <h4>Followers</h4>
+                        <p>{this.state.profile.followers}</p>
                     </div>
                     <div className={classes.About__Item}>
                         <h4>Gender</h4>

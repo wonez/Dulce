@@ -2,9 +2,9 @@
     min-height: 100vh;
     background: linear-gradient(
         to bottom right, 
-        rgba($color-primary-dark, .2),
-        rgba($color-primary-light, .2)
-    ), url('../../assets/signing-bg.jpg');
+        rgba($color-primary-dark, .5),
+        rgba($color-secondary-dark, .5)
+    );
     display: flex;
     flex-direction: column;
     background-size: cover;
@@ -14,17 +14,18 @@
         background: $color-white;
         justify-self: flex-start;
         align-self: stretch;
-        padding: 1rem 0;
+        padding: 1rem 0 1.5rem 0;
         font-size: 2rem;
-        box-shadow: 0 .5rem 3rem rgba(0,0,0,.3);
         color: $color-gray-dark;
-        fill: $color-primary-light;
+        fill: currentColor;
+        fill: $color-gray-darker;
         span{
             display: block;
             font-size: 2em;
             margin: .3rem 0 0 2rem;
             text-transform: uppercase;
             letter-spacing: 1rem;
+            line-height: .8;
         }
     }
 

@@ -33,10 +33,10 @@ class Signin extends Component {
                             required
                             />
 
-                <FlatLink type='submit' kind='light' to='profile'>Sign in</FlatLink>
+                <FlatLink type='submit' kind='light' to='profile'>Sign in &rarr;</FlatLink>
                 <hr style={{margin: '2.5rem 0'}}/>
-                <FlatLink kind='dark' to='fb'>Continue Using Facebook</FlatLink>
-                <FlatLink kind='primary' to='ggl'>Continue Using Google+</FlatLink>
+                <FlatLink kind='primary' to='fb'>Continue Using Facebook</FlatLink>
+                <FlatLink kind='secondary' to='ggl'>Continue Using Google+</FlatLink>
             </form>
         )
 
@@ -61,10 +61,10 @@ class Signin extends Component {
                                 required
                                 />
 
-                    <FlatLink type='submit' kind='light' to='oo'>Sign up</FlatLink>
+                <FlatLink type='submit' kind='light' to='oo'>Sign up &rarr;</FlatLink>
                     <hr style={{margin: '2.5rem 0'}}/>
-                <FlatLink kind='dark' to='fb'>Continue Using Facebook</FlatLink>
-                <FlatLink kind='primary' to='ggl'>Continue Using Google+</FlatLink>
+                <FlatLink kind='primary' to='fb'>Continue Using Facebook</FlatLink>
+                <FlatLink kind='secondary' to='ggl'>Continue Using Google+</FlatLink>
                 </form>
             )
         }

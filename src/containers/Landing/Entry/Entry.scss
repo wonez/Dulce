@@ -82,7 +82,7 @@
         &__Img{
             flex: 1 55%;
             clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
-            background:  linear-gradient(rgba($color-tertiary, .75), rgba($color-tertiary, .75)), url('../../../assets/baner-cake.jpg');
+            background:  linear-gradient(rgba($color-gray-light, .75), rgba($color-gray-light, .75)), url('../../../assets/baner-cake.jpg');
             background-size: cover;
             background-position: center;
         }
