@@ -60,31 +60,4 @@
             cursor: pointer;
         }
     }
-    &__Info{
-        padding: 0 2rem;
-        display: flex;
-        svg{
-            height: 3rem;
-            width: 3rem;
-            fill: $color-secondary-light;
-        }
-
-        &__Icon{
-            display: flex;
-            font-size: 1.6rem;
-            color: $color-gray-dark;
-            align-items: center;
-            &:first-child{
-                margin-right: 2rem;
-            }
-
-            &:last-child{
-                margin-left: auto;
-                svg{
-                    fill: red;
-                }
-            }
-        }
-
-    }
 }

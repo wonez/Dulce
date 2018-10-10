@@ -2,7 +2,8 @@ import React from 'react'
 
 import classes from './Card.scss'
 
-import { IconClock, IconLevel, IconHeart } from '../../UI/Icons/Icons'
+import Summary from '../Summary/Summary';
+// import { IconClock, IconLevel, IconHeart } from '../../UI/Icons/Icons'
 
 const Card = ({data, singlePost}) => {
 
@@ -28,16 +29,10 @@ const Card = ({data, singlePost}) => {
                 {/* slika */}
             </div>
             <h2 onClick={() => singlePost(data.heading)} className={classes.Card__Heading}>{data.heading} &rarr;</h2>
-            <div className={classes.Card__Info}>
-                <p className={classes.Card__Info__Icon}>
-                    <IconClock/> &nbsp; {data.time} min
-                </p>
-                <p className={classes.Card__Info__Icon}>
-                    <IconLevel /> &nbsp; {data.difficulty}
-                </p>
-                <p className={classes.Card__Info__Icon}> 
-                        {data.hearts} &nbsp; <IconHeart />
-                </p>
+            <div style={{padding: '0 2rem'}}>
+                <Summary    time={data.time} 
+                            difficulty={data.difficulty}
+                            hearts={data.hearts} />
             </div>
         </div>
     )

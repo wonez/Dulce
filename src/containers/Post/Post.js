@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import classes from './Post.scss'
 
 import Toolbar from '../../components/Toolbar/Toolbar'
+import Summarry from '../../components/Summary/Summary'
 
 class Post extends Component {
 
@@ -71,7 +72,6 @@ class Post extends Component {
                         <p className={classes.Post__Description}>
                             {this.state.item.description}
                         </p>
-                        {/* <hr className={classes.Post__Hr} /> */}
                         <div className={classes.Post__Preparation}>
                             <div className={classes.Post__Preparation__Ingredients}>
                                 <h3 className={classes.Post__Preparation__Heading}>Ingredients</h3>
@@ -91,15 +91,17 @@ class Post extends Component {
                                     {this.state.item.directions.map( (dir, i) => {
                                         return <li  className={classes.Post__Preparation__DescItem}
                                                     key={dir}>
-                                                        <span className={classes.Post__Preparation__ItemTag}>{i+1}</span>
+                                                        <span className={classes.Post__Preparation__ItemTag}>{i+1}.</span>
                                                         {dir}</li>
                                     })}
                                 </ul>
                             </div>
                         </div>
-                        {/* ingredients
-                            steps */}
+                        <Summarry   time={this.state.item.time} 
+                                    difficulty={this.state.item.difficulty} 
+                                    hearts={this.state.item.hearts} />
                     </div>
+                    {/* comments */}
                 </div>
             </div>
         )

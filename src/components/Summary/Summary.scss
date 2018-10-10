@@ -1,0 +1,36 @@
+.Summary{
+    // padding: 0 2rem;
+    width: 100%;
+    display: flex;
+
+    &__Icon{
+        display: flex;
+        font-size: 1.6rem;
+        color: $color-gray-dark;
+        align-items: center;
+        &:last-child{
+            margin-left: 2rem;
+        }
+
+        &:first-child{
+            margin-right: auto;
+            svg{
+                fill: red;
+                transition: .3s all;
+                &:hover{
+                    transform: scale(1.3);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    svg{
+        height: 3rem;
+        width: 3rem;
+        fill: $color-primary-dark;
+        &:hover{
+            fill: $color-secondary-dark;
+        }
+    }
+}
