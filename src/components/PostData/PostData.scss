@@ -1,0 +1,126 @@
+.Data{
+    padding: 3rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 .2rem 1rem rgba(0,0,0,.3);
+
+    &__Heading{
+        text-transform: uppercase;
+        max-width: 50%;
+        text-align: center;
+        font-size: 3rem;
+        letter-spacing: 1rem;
+        color: $color-primary-dark;        
+        padding-bottom: 3rem;
+        transition: .3s all;
+        &:hover{
+            color: $color-secondary-dark;
+            transform: scale(1.1);
+            cursor: default;
+        }
+    }
+    &__Image{
+        height: 400px;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+        border-radius: 2rem;
+    }
+
+    &__AuthorContainer{
+        width: 100%;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__Author{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        &__Avatar{
+            height: 5rem;
+            width: 5rem;
+            border-radius: 50%;
+            background-position: center;
+            background-size: cover;
+        }
+        &__Name{
+            color: $color-primary-dark;
+            font-size: 2rem;
+            padding-left: 2rem;
+            &:hover{
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__Date{
+        color: $color-gray-dark;
+        font-size: 1.5rem;
+        padding: 2rem 0 1rem 0;
+    }
+
+    &__Description{
+        font-size: 1.7rem;
+    }
+
+    &__Preparation{
+        display: flex;
+        width: 100%;
+        padding: 3rem 0;
+        &__Ingredients{
+            border-right: 1px solid $color-gray-light;
+            flex: 1;
+            padding-right: 3rem;
+        }
+        &__IngList{
+            margin: 0;
+            padding: 1rem 0;
+            color: $color-gray-dark;
+            font-size: 1.5rem;
+            list-style-type: none;  
+        }
+        &__IngItem{
+            padding: 1rem 0;
+            display: flex;
+        }
+        &__ItemTag{
+            padding-right: 1rem;
+            color: $color-primary-dark;
+            &:hover{
+                color: $color-secondary-dark; 
+                cursor: default;
+            }
+        }
+        &__Heading{
+            font-size: 2rem;
+            padding: 2rem 0;
+        }
+        &__Directions{
+            flex: 1;
+            padding-left: 3rem;
+        }
+        &__DirList{
+            list-style-type: none;
+            margin: 0;
+            padding: 1rem 0;    
+            color: $color-gray-darker;
+            font-size: 1.5rem;
+        }
+        &__DescItem{
+            padding: 1rem 0;
+            display: flex;
+            span{
+                font-size: 2.5rem;
+            }
+        }
+    }
+}

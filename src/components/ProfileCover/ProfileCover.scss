@@ -31,15 +31,9 @@
         &__Name{
             color: white;
             font-size: 5rem;
-        }
-        &__Follow{
-            color: $color-white;
-            margin-right: 3rem;
-            padding: 1rem 5rem;
-            box-shadow: 0 1rem 2rem rgba(0,0,0,.5);
-            border-radius: .5rem;
-            background: linear-gradient(to bottom right, $color-primary-light, $color-primary-dark);
-            font-size: 2rem;
+            &:hover{
+                cursor: default;
+            }
         }
     }
 }

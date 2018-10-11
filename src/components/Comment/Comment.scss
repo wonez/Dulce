@@ -1,0 +1,47 @@
+.Comment{
+    display: flex;
+    padding: 2rem 1rem;
+    &:not(:last-child){
+        border-bottom: 1px solid $color-gray-light;
+    }
+    &:first-child{
+        // padding-top: 4rem;
+        border-top: 1px dashed $color-gray-light;
+    }
+}
+.AvatarBox{
+    // padding: 2rem;
+    .Avatar{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+    }
+}
+.InfoBox{
+    width: 100%;
+    padding-left: 1.5rem;
+    &__Info{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+        &__Date{
+            font-size: 1.3rem;
+            color: $color-gray-dark;
+        }
+        &__Name{
+            font-size: 2rem;
+            text-decoration: none;
+            color: $color-primary-dark;
+            font-weight: bold;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+    &__Content{
+        font-size: 1.6rem;
+    }
+}

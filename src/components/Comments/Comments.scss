@@ -1,0 +1,39 @@
+.NewComment{
+    padding: 3rem;
+    background: white;
+    width: 90%;
+    border-radius: 1rem;
+}
+
+.Comments{
+    padding: 3rem;
+    width: 80%;
+    padding-top: 0;
+    flex: 1;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background: white;
+}
+
+.NewComment{
+    &__CommentBox{
+        display: flex;
+    }
+    &__InputArea{
+        margin-left: 2rem;
+        outline: none;
+        font-size: 1.7rem;
+        padding: 1.5rem;
+        border: 1px solid $color-gray-light;
+        border-radius: 1rem;
+        width: 100%;
+        resize: none;
+        height: 15rem;
+        caret-color: $color-secondary-dark;
+    }
+    &__BtnBox{
+        display: flex;
+        padding-top: 2rem;
+        justify-content: flex-end;
+    }
+}
