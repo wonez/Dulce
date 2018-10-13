@@ -3,7 +3,6 @@ import React from 'react'
 import classes from './Card.scss'
 
 import Summary from '../Summary/Summary';
-// import { IconClock, IconLevel, IconHeart } from '../../UI/Icons/Icons'
 
 const Card = ({data, singlePost}) => {
 
