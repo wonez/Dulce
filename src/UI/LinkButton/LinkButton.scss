@@ -1,16 +1,16 @@
 .LinkButton{
     outline: none;
     border: none;
-    color: $color-tertiary;
-    font-size: 1.6rem;
+    color: $color-primary-dark;
+    font-size: 2.2rem;
     border-bottom: 1px solid currentColor;
-    padding: 1rem .5rem;
+    padding: 1rem 1rem;
     border-radius: .2rem;
     transition: .3s all;
 
     &:hover{
         cursor: pointer;
-        background: $color-tertiary;
+        background: $color-primary-dark;
         color: $color-white;
     }
 }

@@ -14,20 +14,20 @@ const Nav = () => {
                     <a href="#most-popular" className={classes.Nav__Link}>
                         Most popular
                     </a>
+                </li> */}
+                <li className={classes.Nav__Item}>
+                    <a href="/allcategories" className={classes.Nav__Link}>
+                        Categories
+                    </a>
                 </li>
                 <li className={classes.Nav__Item}>
                     <a href="#learn-more" className={classes.Nav__Link}>
                         Learn more
                     </a>
-                </li> */}
-                <li className={classes.Nav__Item}>
-                    <Link to='/signup' className={classes.Nav__Link}>
-                        Sign up
-                    </Link>
                 </li>
                 <li className={classes.Nav__Item}>
                     <Link to='/signin' className={classes.Nav__Link}>
-                        Sign in
+                        Join now
                     </Link>
                 </li>
             </ul>

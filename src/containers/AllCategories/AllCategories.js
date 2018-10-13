@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { withRouter } from 'react-router-dom';
+
 import Aux from '../../hoc/Aux'
 import Toolbar from '../../components/Toolbar/Toolbar';
 
@@ -19,6 +21,10 @@ class AllCategories extends Component{
         ]
     }
 
+    categoryHandler = () => {
+        this.props.history.push('/singleCategory')
+    }
+
     render(){
         return(
             <Aux>
@@ -27,7 +33,9 @@ class AllCategories extends Component{
                     <div className={classes.Container}>
                         <h1 className={classes.Heading}>Categories</h1>
                         {this.state.categories.map(category => {
-                            return <a className={classes.Category} key={category}>{category}</a>
+                            return <a   onClick={this.categoryHandler}
+                                        className={classes.Category} 
+                                        key={category}>{category}</a>
                         })}
                     </div>
                 </div>
@@ -36,4 +44,4 @@ class AllCategories extends Component{
     }
 }
 
-export default AllCategories;
+export default withRouter(AllCategories);

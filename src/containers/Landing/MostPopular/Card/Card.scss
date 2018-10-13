@@ -2,7 +2,8 @@
     overflow: hidden;
     background: $color-white;
     border-radius: 1rem;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .3);
+    margin: 2rem;
+    border: 1px solid $color-gray-light;
 
     &__Img{
         position: relative;
@@ -20,10 +21,6 @@
             top: 16rem;
             border-radius: 50%;
         }
-    }
-
-    &:nth-child(2){
-        transform: scale(1.1);
     }
 
     &__Info{

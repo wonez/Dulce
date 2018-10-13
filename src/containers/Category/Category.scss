@@ -1,0 +1,22 @@
+.Category{
+    padding: 15rem 0 10rem 0;
+    display: flex;
+    justify-content: center;
+    &__Container{
+        background: white;
+        padding: 5rem 5rem;
+        border-radius: 1rem;
+        text-align: center;
+    }
+    &__Heading{
+        color: $color-primary-dark;
+        font-size: 4rem;
+        padding-bottom: 2rem;
+        transition: .3s all;
+    }
+    &__Items{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-row-gap: 3rem;
+    }
+}

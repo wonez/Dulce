@@ -7,6 +7,7 @@ import Profile from '../Profile/Profile';
 import Post from '../Post/Post'
 import NewsFeed from '../NewsFeed/NewsFeed'
 import AllCategories from '../AllCategories/AllCategories'
+import Category from '../Category/Category'
 
 class App extends Component {
 	render() {
@@ -19,6 +20,7 @@ class App extends Component {
 					<Route path="/post" component={Post}/>
 					<Route path="/newsfeed" component={NewsFeed}/>
 					<Route path="/allcategories" component={AllCategories}/>
+					<Route path="/singleCategory" component={Category}/>
 					<Route render={()=> (<h1>404</h1>)} />
 				</Switch>
 			</BrowserRouter>
