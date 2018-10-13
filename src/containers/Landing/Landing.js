@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
+
+import { withRouter } from 'react-router-dom'
 
 import Entry from './Entry/Entry';
-import MostPopular from './MostPopular/MostPopular';
-import LearnMore from './LearnMore/LearnMore';
-import Footer from './Footer/Footer';
-
 import Aux from '../../hoc/Aux';
 
-const Landing = () => (
-    <Aux>
-        <Entry />
-        {/* <MostPopular />
-        <LearnMore />
-        <Footer /> */}
-    </Aux>
-);
+class Landing extends Component {
+    
+    handleCategories = () => {
+        this.props.history.push('/allcategories')
+    }
 
-export default Landing;
+    render(){
+        return(
+            <Aux>
+                <Entry handleCategories={this.handleCategories}/>
+            </Aux>
+        )
+    }
+};
+
+export default withRouter(Landing);

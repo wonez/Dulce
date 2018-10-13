@@ -6,7 +6,7 @@ import typography from '../../../_typography.scss';
 import { IconMagnifyingGlass } from '../../../UI/Icons/Icons';
 import IconButton from '../../../UI/IconButton/IconButton';
 
-const Entry = () => {
+const Entry = (props) => {
     return(
         <section className={classes.Entry}>
             <nav className={classes.Entry__Nav}>
@@ -24,7 +24,8 @@ const Entry = () => {
                         </IconButton>
                     </div>
                 </div>
-                <a className={[classes.Entry__ShowAll, typography['margin-top-sm']].join(' ')} href="#">
+                <a  className={[classes.Entry__ShowAll, typography['margin-top-sm']].join(' ')}
+                    onClick={props.handleCategories} >
                     Show all categories
                 </a>
             </main>

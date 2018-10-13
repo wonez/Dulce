@@ -1,0 +1,33 @@
+.AllCategories{
+    padding-top: 15rem;
+    display: flex;
+    justify-content: center;
+}
+
+.Container{
+    background: white;
+    border-radius: 1rem;
+    padding: 3rem 10rem;
+    text-align: center; 
+}
+
+.Heading{
+    font-size: 3.5rem;
+    padding-bottom: 2.5rem;
+    color: $color-primary-dark; 
+    text-align: center;
+    &:hover{
+        cursor: default;
+    }
+}
+
+.Category{
+    font-size: 2.5rem;
+    padding: 1rem 0;
+    display: block;
+    color: $color-primary-dark;
+    &:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
