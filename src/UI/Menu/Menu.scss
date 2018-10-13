@@ -1,0 +1,54 @@
+.Btn{
+    width: 2em;
+    height: 2em;
+    .MenuBg{
+        background: transparent;
+        top: -100rem;
+        left: 0rem;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+    }
+    .Menu{
+        padding: 1rem 1.5rem;
+        width: 12rem;
+        color: transparent;
+        background: white;
+        border-radius: 1rem;
+        position: absolute;
+        transform: translate(100rem, 30%);
+        transition: .3s all;
+        .Menu__Btn{
+            color: inherit;
+            display: block;
+            text-decoration: none;
+            text-transform: capitalize;
+            font-weight: bold;
+            margin: 0;
+            padding: .5rem .3rem;
+            &:hover{
+                text-decoration: underline
+            }
+        }
+    }
+}
+
+.Label{
+    position: relative;
+    &:hover{
+        fill: $color-secondary-light;
+        cursor: pointer;
+    }
+}
+.Input:checked + .MenuBg{
+    top: 0;
+}
+.Input:checked ~ .Menu{
+    color: $color-primary-dark;
+    height: auto;    
+    transform: translate(-70%, 33%) scale(1);
+    border: 1px solid $color-primary-dark;
+}
+.Input{
+    display: none;
+}

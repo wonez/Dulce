@@ -4,7 +4,9 @@ import { withRouter } from 'react-router'
 import classes from './Toolbar.scss';
 
 import IconButton from '../../UI/IconButton/IconButton'
-import { IconMagnifyingGlass, IconPlus, IconUser, IconCake } from '../../UI/Icons/Icons'
+import Menu from '../../UI/Menu/Menu'
+
+import { IconMagnifyingGlass, IconPlus, IconCake } from '../../UI/Icons/Icons'
 
 class Toolbar extends Component {
 
@@ -19,7 +21,7 @@ class Toolbar extends Component {
                     <IconCake />
                 </IconButton>
                 <div className={classes.Search__InputBox}>
-                    <input className={classes.Search__Input} type="text" placeholder="Search for Recipe or User"></input>
+                    <input className={classes.Search__Input} type="text" placeholder="Search for a Recipe or a User"></input>
                     <div className={classes.Search__Icon}>
                         <IconButton>
                             <IconMagnifyingGlass />
@@ -30,9 +32,7 @@ class Toolbar extends Component {
                     <IconButton>
                         <IconPlus />
                     </IconButton>
-                    <IconButton>
-                        <IconUser />
-                    </IconButton>
+                    <Menu />
                 </div>
             </div>
         )

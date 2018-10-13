@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 
 import classes from './Signin.scss';
 import typography from '../../_typography.scss';
@@ -17,6 +18,10 @@ class Signin extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('submited');
+    }
+
+    goHome = () => {
+        this.props.history.push('/')
     }
 
     render(){
@@ -81,9 +86,11 @@ class Signin extends Component {
         return(
             <div className={classes.Signin}>
                 <div className={classes.Signin__Toolbar}>
-                    <IconButton>
-                        <IconCake /> <span>Dulce</span>
-                    </IconButton>
+                    <div style={{display: 'inline-block'}}>
+                        <IconButton click={this.goHome}>
+                            <IconCake /> <span>Dulce</span>
+                        </IconButton>
+                    </div>
                 </div>
 
                 <div className={classes.Signin__Form}>
@@ -99,4 +106,4 @@ class Signin extends Component {
     }
 }
 
-export default Signin;
+export default withRouter(Signin);

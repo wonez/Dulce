@@ -11,7 +11,7 @@
         border: none;
         border-radius: .1rem;
         color: $color-gray-darker;
-        min-width: 30vw;
+        width: 400px;
         border-bottom: .1rem solid $color-tertiary;
         box-shadow: 0 .1rem 1rem rgba(0,0,0, .2);
         &::placeholder{

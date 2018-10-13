@@ -12,6 +12,7 @@
 
     &__Toolbar{
         background: $color-white;
+        text-align: center;
         justify-self: flex-start;
         align-self: stretch;
         padding: 1rem 0 1.5rem 0;
@@ -52,8 +53,8 @@
         display: flex;
         background: linear-gradient(
             to bottom right,
-            $color-primary-light,
-            $color-primary-dark
+            $color-secondary-light,
+            $color-secondary-dark
         ) fixed;
         width: 100%;
         top: 0;
