@@ -28,7 +28,14 @@ class Search extends React.Component{
                 time: 21,
                 difficulty: 'Beginner',
                 hearts: 231
-            }
+            },
+            {
+                img: 'src/assets/mp-img-1.jpg',
+                heading: 'Raspberry Pancakes',
+                time: 252,
+                difficulty: 'Beginner',
+                hearts: 1311
+            },
         ],
         people: [
             {
@@ -49,6 +56,24 @@ class Search extends React.Component{
                 imgPath: 'src/assets/profile.jpg',
                 id: 3
             },
+            {
+                name: 'Ben Franklin',
+                followers: 1589,
+                imgPath: 'src/assets/profile.jpg',
+                id: 4,
+            },
+            {
+                name: 'JJ Thompson',
+                followers: 2314,
+                imgPath: 'src/assets/profile.jpg',
+                id: 5,
+            },
+            {
+                name: 'Bjarne Stroustrup',
+                followers: 512,
+                imgPath: 'src/assets/profile.jpg',
+                id: 6
+            },
         ]
     }
 
@@ -68,7 +93,7 @@ class Search extends React.Component{
                                 return <CardSmall card={item} key={item.time} />
                             })}
                         </div>
-                        {/* <a className={classes.Search__LoadMore}>Load More</a> */}
+                        <a className={classes.Search__LoadMore}>Load More</a>
                     </div>
                     <div className={classes.Search__Container}>
                         <h2 className={classes.Search__Heading}>People</h2>
@@ -78,7 +103,7 @@ class Search extends React.Component{
                                 return <Person data={person} key={person.id} />
                             })}
                         </div>
-                        {/* <a className={classes.Search__LoadMore}>Load More</a> */}
+                        <a className={classes.Search__LoadMore}>Load More</a>
                     </div>
                 </div>
             </Aux>

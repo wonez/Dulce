@@ -19,6 +19,10 @@ class Toolbar extends Component {
         this.props.history.push('/search')
     }
 
+    handleCreate = (e) => {
+        this.props.history.push('/create')
+    }
+
     render(){
         return (
             <div className={classes.Toolbar}>
@@ -36,7 +40,7 @@ class Toolbar extends Component {
                     </form>
                 </div>
                 <div className={classes.Buttons}>
-                    <IconButton>
+                    <IconButton click={this.handleCreate}>
                         <IconPlus />
                     </IconButton>
                     <Menu />

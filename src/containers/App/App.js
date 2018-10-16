@@ -9,6 +9,7 @@ import NewsFeed from '../NewsFeed/NewsFeed'
 import AllCategories from '../AllCategories/AllCategories'
 import Category from '../Category/Category'
 import Search from '../Search/Search'
+import Create from '../Create/Create'
 
 class App extends Component {
 	render() {
@@ -23,6 +24,7 @@ class App extends Component {
 					<Route path="/search" component={Search}/>
 					<Route path="/allcategories" component={AllCategories}/>
 					<Route path="/singleCategory" component={Category}/>
+					<Route path="/create" component={Create}/>
 					<Route render={()=> (<h1>404</h1>)} />
 				</Switch>
 			</BrowserRouter>
