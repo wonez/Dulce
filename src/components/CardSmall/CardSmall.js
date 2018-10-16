@@ -1,13 +1,13 @@
 import React from 'react';
 
-import MainButton from '../../../../UI/MainButton/MainButton';
+import MainButton from '../../UI/MainButton/MainButton'
 
-import classes from './Card.scss';
-import typography from '../../../../_typography.scss';
+import classes from './CardSmall.scss';
+import typography from '../../_typography.scss'
 
-import { IconClock, IconLevel, IconHeart } from '../../../../UI/Icons/Icons';
+import { IconClock, IconLevel, IconHeart } from '../../UI/Icons/Icons';
 
-const Card = (props) => {
+const CardSmall = (props) => {
     const {card} = props;
     return(
         <figure className={classes.Card}>
@@ -36,4 +36,4 @@ const Card = (props) => {
     );
 }
 
-export default Card;
+export default CardSmall;

@@ -1,0 +1,55 @@
+.Info{
+    padding: 10rem 0 3rem 0;
+    background: white;
+    text-align: center;
+    color: $color-gray-dark;
+    h1{
+        font-weight: lighter;
+        span{
+            font-weight: bold;
+        }
+    }
+}
+.Search{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &__Container{
+        padding: 3rem 2rem;
+        margin: 5rem;
+        // text-align: center;
+        min-width: 1111px;
+        &:first-child{
+            margin-bottom: 0;
+        }
+        background: white;
+        border-radius: 1rem;
+        small{
+            font-size: 1.5rem;
+            color: $color-gray-dark;
+        }
+    }
+    &__Heading{
+        color: $color-primary-dark;
+        font-size: 3rem;
+    }
+    &__Items{
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-row-gap: 3rem;
+    }
+    &__LoadMore{
+        font-size: 2rem;
+        padding: 1rem 0;
+        display: inline-block;
+        color: $color-primary-dark;
+        text-decoration: underline;
+        font-weight: bold;
+        transition: .3s all;
+        &:hover{
+            cursor: pointer;
+            color: $color-secondary-dark;
+        }
+    }
+}

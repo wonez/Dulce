@@ -14,6 +14,11 @@ class Toolbar extends Component {
         this.props.history.push('/');
     }
 
+    handleSearch = (e) => {
+        e.preventDefault();
+        this.props.history.push('/search')
+    }
+
     render(){
         return (
             <div className={classes.Toolbar}>
@@ -21,12 +26,14 @@ class Toolbar extends Component {
                     <IconCake />
                 </IconButton>
                 <div className={classes.Search__InputBox}>
-                    <input className={classes.Search__Input} type="text" placeholder="Search for a Recipe or a User"></input>
-                    <div className={classes.Search__Icon}>
-                        <IconButton>
-                            <IconMagnifyingGlass />
-                        </IconButton>
-                    </div>
+                    <form onSubmit={this.handleSearch}>
+                        <input className={classes.Search__Input} type="text" placeholder="Search for a Recipe or a User"></input>
+                        <div className={classes.Search__Icon}>
+                            <IconButton click={this.handleSearch}>
+                                <IconMagnifyingGlass />
+                            </IconButton>
+                        </div>
+                    </form>
                 </div>
                 <div className={classes.Buttons}>
                     <IconButton>

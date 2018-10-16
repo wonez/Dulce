@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import classes from './Category.scss'
 
 import Aux from '../../hoc/Aux'
-import Card from '../../containers/Landing/MostPopular/Card/Card'
+import CardSmall from '../../components/CardSmall/CardSmall'
 import Toolbar from '../../components/Toolbar/Toolbar';
 
 class Category extends Component {
@@ -65,7 +65,7 @@ class Category extends Component {
                         <h1 className={classes.Category__Heading}>Chocolate</h1>
                         <div className={classes.Category__Items}>
                             {this.state.items.map(item => {
-                                return <Card card={item} key={item.time} />
+                                return <CardSmall card={item} key={item.time} />
                             })}
                         </div>
                     </div>

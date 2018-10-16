@@ -8,6 +8,7 @@ import Post from '../Post/Post'
 import NewsFeed from '../NewsFeed/NewsFeed'
 import AllCategories from '../AllCategories/AllCategories'
 import Category from '../Category/Category'
+import Search from '../Search/Search'
 
 class App extends Component {
 	render() {
@@ -19,6 +20,7 @@ class App extends Component {
 					<Route path="/profile" component={Profile}/>
 					<Route path="/post" component={Post}/>
 					<Route path="/newsfeed" component={NewsFeed}/>
+					<Route path="/search" component={Search}/>
 					<Route path="/allcategories" component={AllCategories}/>
 					<Route path="/singleCategory" component={Category}/>
 					<Route render={()=> (<h1>404</h1>)} />
