@@ -17,5 +17,15 @@
         color: $color-primary-dark;
         margin-bottom: 2rem;
     }
-
+    &__Summary{
+        display: grid;
+        grid-column-gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+    }
+    .Preparation{
+        display: flex;
+        div{
+            flex-basis: 50%;
+        }
+    }
 }

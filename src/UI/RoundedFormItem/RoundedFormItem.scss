@@ -1,8 +1,12 @@
 .FormBox{
     display: flex;
     padding: 2rem 0;
+    align-items: flex-start;
+    width: 100%;
     label{
-        width: 20%;
+        display: block;
+        padding-right: 1rem;
+        min-width: 13rem;
         font-size: 2rem;
     }
 }
@@ -12,6 +16,7 @@
     border-radius: 1rem;
     width: 80%;
     padding: 1rem;
+    display: block;
     outline: none;
     caret-color: $color-secondary-dark;
 }
@@ -19,8 +24,35 @@
     @extend %item;
 }
 
+.Select{
+    overflow: hidden;
+    border: 1px solid $color-gray-light;
+    border-radius: 1rem;
+    padding: .5rem;
+    width: 100%;
+    select{
+        font-size: 1.5rem;
+        background: transparent;
+        height: 100%;
+        width: 100%;
+        border: none;
+        outline: none;
+    }
+}
+
 .TextArea{
     @extend %item;
     resize: none;
     height: 15rem;
+}
+
+.Number{
+    @extend %item;
+    padding: .5rem;
+    padding-left: 1rem;
+    &::-webkit-inner-spin-button, 
+    &::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
 }

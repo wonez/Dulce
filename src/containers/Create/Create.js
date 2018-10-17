@@ -24,6 +24,25 @@ class Create extends React.Component {
                             type="textarea"
                             placeholder='Short Description of your recipe'
                             />
+                        <div className={classes.Create__Summary}>
+                            <RoundedFormItem 
+                                label="Difficulty"
+                                type="select"
+                            />
+                            <RoundedFormItem 
+                                placeholder="Preparation time"
+                                label="Preparation"
+                                type="number"
+                            />
+                        </div>
+                        <div className={classes.Preparation}>
+                            <div className={classes.Preparation__Ingredient}>
+                                fdas
+                            </div>
+                            <div className={classes.Preparation__Directions}>
+                                fdas
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Aux>

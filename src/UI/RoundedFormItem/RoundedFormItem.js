@@ -16,6 +16,21 @@ class RoundedFormItem extends React.Component {
             input = (
                 <textarea className={classes.TextArea} placeholder={this.props.placeholder} ></textarea>
             )
+        } else if(this.props.type=='select'){
+            input = (
+                <div className={classes.Select}>
+                    <select >
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+            )
+        } else if(this.props.type=='number'){
+            input = (
+                <input  className={classes.Number} placeholder={this.props.placeholder}
+                        min='1' max='999' type="number"></input>
+            )
         }
 
         return(
