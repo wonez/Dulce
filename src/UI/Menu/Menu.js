@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import classes from './Menu.scss';
 
@@ -11,6 +12,10 @@ class MenuBtn extends Component {
         this.checkbox.checked = false;
     }
 
+    goTo(url){
+        this.props.history.replace(url)
+    }
+
     render(){
         return (
             <div className={classes.Btn}>
@@ -18,13 +23,13 @@ class MenuBtn extends Component {
                 <div onClick={this.uncheck} className={classes.MenuBg}>
                 </div>
                 <div className={classes.Menu}>
-                    <a href="#" className={classes.Menu__Btn}>
+                    <a onClick={() => {this.goTo('/profile')}} className={classes.Menu__Btn}>
                         My Profile
                     </a>
-                    <a href="#" className={classes.Menu__Btn}>
+                    <a onClick={() => {console.log('nema jos')}} className={classes.Menu__Btn}>
                         Edit Profile
                     </a>
-                    <a href="#" className={classes.Menu__Btn}>
+                    <a onClick={() => {this.goTo('')}} className={classes.Menu__Btn}>
                         Log out
                     </a>
                 </div>
@@ -36,4 +41,4 @@ class MenuBtn extends Component {
     }
 }
 
-export default MenuBtn;
+export default withRouter(MenuBtn);

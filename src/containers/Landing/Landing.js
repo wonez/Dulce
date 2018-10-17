@@ -16,7 +16,7 @@ class Landing extends Component {
         return(
             <Aux>
                 <Entry handleCategories={this.handleCategories}/>
-                <LearnMore />
+                {/* <LearnMore /> */}
             </Aux>
         )
     }

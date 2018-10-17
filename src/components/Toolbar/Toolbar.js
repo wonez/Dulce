@@ -11,7 +11,7 @@ import { IconMagnifyingGlass, IconPlus, IconCake } from '../../UI/Icons/Icons'
 class Toolbar extends Component {
 
     handleHome = () => {
-        this.props.history.push('/');
+        this.props.history.push('/newsfeed');
     }
 
     handleSearch = (e) => {

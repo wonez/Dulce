@@ -1,0 +1,26 @@
+.FormBox{
+    display: flex;
+    padding: 2rem 0;
+    label{
+        width: 20%;
+        font-size: 2rem;
+    }
+}
+%item{
+    font-size: 1.5rem;
+    border: 1px solid $color-gray-light;
+    border-radius: 1rem;
+    width: 80%;
+    padding: 1rem;
+    outline: none;
+    caret-color: $color-secondary-dark;
+}
+.Input{
+    @extend %item;
+}
+
+.TextArea{
+    @extend %item;
+    resize: none;
+    height: 15rem;
+}

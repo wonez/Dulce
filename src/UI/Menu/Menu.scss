@@ -18,7 +18,7 @@
         position: absolute;
         transform: translate(100rem, 30%);
         transition: .3s all;
-        .Menu__Btn{
+        &__Btn{
             color: inherit;
             display: block;
             text-decoration: none;
@@ -27,7 +27,8 @@
             margin: 0;
             padding: .5rem .3rem;
             &:hover{
-                text-decoration: underline
+                text-decoration: underline;
+                cursor: pointer;
             }
         }
     }

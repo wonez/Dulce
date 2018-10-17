@@ -5,8 +5,17 @@
 }
 .Create{
     margin: 0 5rem;
+    padding: 3rem;
     background: white;
     border-radius: 1rem;
+    
     min-height: 500px;
     min-width: 700px;
+
+    &__Heading{
+        font-size: 3rem;
+        color: $color-primary-dark;
+        margin-bottom: 2rem;
+    }
+
 }
