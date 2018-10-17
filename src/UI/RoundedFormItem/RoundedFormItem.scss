@@ -56,3 +56,35 @@
         margin: 0; 
     }
 }
+
+.PreparationBox{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    label{
+        font-size: 2rem;
+        padding-right: 1rem;
+        color: $color-primary-dark;
+    }
+}
+
+.Preparation{
+    @extend %item;
+    padding: .5rem;
+    width: 100%;
+    &__Button{
+        padding: 0 1rem;
+        // border: 1px solid red;   
+        // border: none;
+        // display: flex;
+        // align-items: center;
+        background: transparent;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: $color-primary-dark;
+        &:hover{
+            cursor: pointer;
+            color: $color-secondary-light;
+        }
+    }
+}

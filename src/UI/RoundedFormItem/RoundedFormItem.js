@@ -33,12 +33,24 @@ class RoundedFormItem extends React.Component {
             )
         }
 
-        return(
+        let result = (
             <div className={classes.FormBox}>
                 <label>{this.props.label}</label>
                 {input}
             </div>
         )
+
+        if(this.props.type=='preparation'){
+            result = (
+                <div className={classes.PreparationBox}>
+                    {/* <label>{this.props.label}</label> */}
+                    <input placeholder={this.props.placeholder} type="text" className={classes.Preparation}/>
+                    <div onClick={this.props.click} className={classes.Preparation__Button}>X</div>
+                </div>
+            )
+        }
+
+        return result
     }
 }
 
