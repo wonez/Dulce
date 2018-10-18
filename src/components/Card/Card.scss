@@ -60,4 +60,42 @@
             cursor: pointer;
         }
     }
+    // &__MenuBtn{
+    //     align-self: flex-start;
+    //     margin-left: auto;
+    //     padding-bottom: 1.5rem;
+    //     border: none;
+    //     background: transparent;
+    //     outline: none;
+    //     &:hover{
+    //         cursor: pointer;
+    //     }
+    // }
+    // &__MenuIcon{
+    //     margin-left: auto;
+    //     transform: scale(.5);
+    //     position: relative;
+    //     width: 10px;
+    //     height: 10px;
+    //     border-radius: 100%;
+    //     top: 0;
+    //     background: $color-gray-light;
+    //     align-self: flex-start;
+
+    //     &::before, &::after{
+    //         content: '';
+    //         position: absolute;
+    //         display: block;
+    //         width: 10px;
+    //         height: 10px;
+    //         border-radius: 100%;
+    //         background: $color-gray-light;
+    //     }
+    //     &::before{
+    //         top: 1.5rem;
+    //     }
+    //     &::after{
+    //         top: 3rem;
+    //     }
+    // }
 }

@@ -1,0 +1,83 @@
+.Popup{
+    margin-left: auto;
+    align-self: flex-start;
+}
+.PopupBg{
+    background: transparent;
+    top: -100rem;
+    left: 0rem;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+.Menu{
+    position: absolute;
+    background: $color-gray-dark;
+    height: 0;
+    width: 0;
+    transition: .3s all;
+    overflow: hidden;
+    color: $color-white;
+    border-radius: 1rem;
+    transform: translate(-100%, 2rem);
+    &__Link{
+        display: block;
+        font-weight: bold;
+        text-align: right;
+        font-size: 1.5rem;
+        &:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+.Input{
+    display: none;
+}
+.Input:checked ~ .PopupBg{
+    top: 0;
+}
+.Input:checked ~ .Menu{
+    width: auto;
+    height: auto;
+    padding: 1.5rem;
+}
+.PopupBtn{
+    display: block;
+    align-self: flex-start;
+    margin-left: auto;
+    padding-bottom: 1.5rem;
+    border: none;
+    background: transparent;
+    outline: none;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.PopupIcon{
+    margin-left: auto;
+    transform: scale(.5);
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    top: 0;
+    background: $color-gray-light;
+    align-self: flex-start;
+
+    &::before, &::after{
+        content: '';
+        position: absolute;
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background: $color-gray-light;
+    }
+    &::before{
+        top: 1.5rem;
+    }
+    &::after{
+        top: 3rem;
+    }
+}
