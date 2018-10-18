@@ -28,7 +28,7 @@
 }
 
 .Preparation{
-    padding-top: 3rem;
+    padding-top: 2rem;
     display: grid;
     grid-column-gap: 2rem;
     grid-template-columns: 1fr 1fr;
@@ -41,25 +41,10 @@
         font-size: 2rem;
         margin-bottom: 2rem;
     }
-    &__AddBtn{
-        padding: 1rem 2rem;
-        font-size: 1.5rem;
-        background: $color-primary-dark;
-        color: white;
-        border: none;
-        outline: none;
-        align-self: center;
-        border-radius: .5rem;
-        transition: .3s all;
-        &:hover{
-            cursor: pointer;
-            box-shadow: 0 .3rem .3rem rgba(0,0,0,.3);
-        }
-    }
 }
 
 .ImageBox{
-    padding-top: 1rem;
+    padding: 3rem 0;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -99,22 +84,9 @@
 }
 
 .Submit{
-    text-align: center;
+    text-align: right;
     padding-top: 2rem;
-    button{
-        padding: 1rem 2rem;
-        border: none;
-        outline: none;
-        background: linear-gradient(
-            to bottom right,
-            $color-secondary-dark,
-            $color-secondary-light
-        );
-        color: white;
-        border-radius: .5rem;
-        font-size: 1.5rem;
-        &:hover{
-            cursor: pointer;
-        }
+    button:first-child{
+        margin-right: 1rem;
     }
 }

@@ -72,25 +72,6 @@ class Create extends React.Component {
                             type="textarea"
                             placeholder='Short Description of your recipe'
                             />
-                        <div className={classes.Create__Summary}>
-                            <RoundedFormItem 
-                                label="Difficulty"
-                                type="select"
-                            />
-                            <RoundedFormItem 
-                                placeholder="Preparation time"
-                                label="Preparation (mins)"
-                                type="number"
-                            />
-                        </div>
-                        <div className={classes.ImageBox}>
-                            <input onChange={this.fileHandler} id="img" type="file" />
-                            <div    className={classes.Img}
-                                    style={{backgroundImage: `url('${this.state.imgSrc}')`}}>
-                                {!this.state.imgSrc ? <p>No image to show</p> : null}
-                            </div>
-                            <label htmlFor="img">Add Image</label>
-                        </div>
                         <div className={classes.Preparation}>
                             <div className={classes.Preparation__Ingredients}>
                                 <label className={classes.Preparation__Heading}>Ingredients</label>
@@ -103,12 +84,11 @@ class Create extends React.Component {
                                         click={() => {this.removeOne('ingredients', item)}}
                                     />
                                 ))}
-                                {/* <FormButton click={this.addAnother('ingredients')}>
+                                <FormButton
+                                    type="primary"
+                                    click={() => {this.addAnother('ingredients')}}>
                                     Add another +
-                                </FormButton> */}
-                                {/* <button 
-                                    onClick={() => this.addAnother('ingredients')}
-                                    className={classes.Preparation__AddBtn}>Add another +</button> */}
+                                </FormButton>
                             </div>
                             <div className={classes.Preparation__Directions}>
                                 <label className={classes.Preparation__Heading}>Directions</label>
@@ -121,14 +101,39 @@ class Create extends React.Component {
                                         click={() => {this.removeOne('directions', item)}}
                                     />
                                 ))}
-                                <button 
-                                    onClick={() => this.addAnother('directions')}
-                                    className={classes.Preparation__AddBtn}>Add another +</button>
+                                <FormButton
+                                    type="primary"
+                                    click={() => {this.addAnother('directions')}}>
+                                    Add another +
+                                </FormButton>
                             </div>
                         </div>
+                        <div className={classes.ImageBox}>
+                            <input onChange={this.fileHandler} id="img" type="file" />
+                            <div    className={classes.Img}
+                                    style={{backgroundImage: `url('${this.state.imgSrc}')`}}>
+                                {!this.state.imgSrc ? <p>No image to show</p> : null}
+                            </div>
+                            <label htmlFor="img">Add Image</label>
+                        </div>
+                        <div className={classes.Create__Summary}>
+                            <RoundedFormItem 
+                                label="Difficulty"
+                                type="select"
+                            />
+                            <RoundedFormItem 
+                                placeholder="Preparation time"
+                                label="Preparation (mins)"
+                                type="number"
+                            />
+                        </div>
                         <div className={classes.Submit}>
-                            <button>Create New</button>
-                            <button>Cancle</button>
+                            <FormButton
+                                type="secondary"
+                                >Create New</FormButton>
+                            <FormButton
+                                type="danger"
+                                >Cancel</FormButton>
                         </div>
                     </div>
                 </div>
