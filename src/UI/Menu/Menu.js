@@ -26,7 +26,7 @@ class MenuBtn extends Component {
                     <a onClick={() => {this.goTo('/profile')}} className={classes.Menu__Btn}>
                         My Profile
                     </a>
-                    <a onClick={() => {console.log('nema jos')}} className={classes.Menu__Btn}>
+                    <a onClick={() => {this.goTo('/editProfile')}} className={classes.Menu__Btn}>
                         Edit Profile
                     </a>
                     <a onClick={() => {this.goTo('')}} className={classes.Menu__Btn}>
