@@ -3,13 +3,21 @@
     background: $color-white;
     border-radius: 1rem;
     margin: 2rem;
-    border: 1px solid $color-gray-light;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+    transition: 1s all;
+    &:hover{
+        cursor: pointer;
+        box-shadow: 0 .5rem 2rem rgba(0,0,0,.5);
+    }
 
     &__Img{
         position: relative;
-        height: 20rem;
-        width: 30rem;
+        height: 25rem;
+        width: 100%;
         overflow: hidden;
+        background-position: center;
+        background-size: cover;
+
         &:after{
             content: '';
             display: block;
@@ -18,16 +26,16 @@
             background: $color-white;
             position: absolute;
             left: -50%;
-            top: 16rem;
+            top: 20rem;
             border-radius: 50%;
         }
     }
 
     &__Info{
-        padding: 1.4rem;
+        padding: 0 2rem 2rem 2rem;
     }
     &__Heading{
-        background: linear-gradient(to bottom right, $color-dark, $color-darker);
+        background: linear-gradient(to bottom right, $color-primary-light, $color-primary-dark);
         font-size: 2.6rem;
         color: transparent;
         background-clip: text;

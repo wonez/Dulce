@@ -24,10 +24,9 @@
      )
 }
 .light{
-    color: $color-gray-darker;
-    margin: 0 auto;
-    &:hover{
-        transform: scale(1.2);
-        box-shadow: none;
-    }
+    color: $color-gray-dark;
+    border: 1px solid $color-gray-light;
+}
+.danger{
+    background: $color-danger;
 }

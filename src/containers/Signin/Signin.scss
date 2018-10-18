@@ -2,8 +2,8 @@
     min-height: 100vh;
     background: linear-gradient(
         to bottom right, 
-        rgba($color-primary-dark, .5),
-        rgba($color-secondary-dark, .5)
+        $color-gray-lighter,
+        $color-white
     );
     display: flex;
     flex-direction: column;
@@ -18,8 +18,8 @@
         padding: 1rem 0 1.5rem 0;
         font-size: 2rem;
         color: $color-gray-dark;
-        fill: currentColor;
-        fill: $color-gray-darker;
+        fill: $color-primary-dark;
+        border-bottom: 1px solid $color-primary-dark;
         span{
             display: block;
             font-size: 2em;
@@ -53,8 +53,8 @@
         display: flex;
         background: linear-gradient(
             to bottom right,
-            $color-secondary-light,
-            $color-secondary-dark
+            $color-primary-light,
+            $color-primary-dark
         ) fixed;
         width: 100%;
         top: 0;
