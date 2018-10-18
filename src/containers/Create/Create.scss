@@ -15,6 +15,9 @@
     &__Heading{
         font-size: 3rem;
         color: $color-primary-dark;
+    }
+    &__Required{
+        color: $color-gray-dark;
         margin-bottom: 2rem;
     }
     &__Summary{
@@ -51,6 +54,67 @@
         &:hover{
             cursor: pointer;
             box-shadow: 0 .3rem .3rem rgba(0,0,0,.3);
+        }
+    }
+}
+
+.ImageBox{
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    label{
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        color: $color-white;
+        background: $color-secondary-dark;
+        border-radius: 1rem;
+        transition: .3s all;
+        &:hover{
+            box-shadow: 0 .3rem 1rem rgba(0,0,0,.3);
+            cursor: pointer;
+        }
+    }
+    .Img{
+        height: 250px;
+        width: 65%;
+        border-radius: 1rem;
+        background-color: $color-gray-lighter;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        p{
+            color: $color-gray-light;
+            position: absolute;
+            font-size: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    input{
+        display: none;
+    }
+}
+
+.Submit{
+    text-align: center;
+    padding-top: 2rem;
+    button{
+        padding: 1rem 2rem;
+        border: none;
+        outline: none;
+        background: linear-gradient(
+            to bottom right,
+            $color-secondary-dark,
+            $color-secondary-light
+        );
+        color: white;
+        border-radius: .5rem;
+        font-size: 1.5rem;
+        &:hover{
+            cursor: pointer;
         }
     }
 }
