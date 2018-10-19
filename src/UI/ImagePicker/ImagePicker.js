@@ -21,7 +21,7 @@ class ImagePicker extends React.Component {
         if(this.props.type == 'create'){
             picker = (
                 <div className={classes.ImageBox}>
-                    <input onChange={this.changeHandler} id={this.props.id} type="file" />
+                    <input className={classes.Input} onChange={this.changeHandler} id={this.props.id} type="file" />
                     <div className={classes.Img}
                         style={{ backgroundImage: `url('${this.props.src}')` }}>
                         {!this.props.src ? <p>No image to show</p> : null}
@@ -32,14 +32,14 @@ class ImagePicker extends React.Component {
         } else if (this.props.type == 'avatar'){
             picker = (
                 <div className={classes.AvatarImage}>
-                    <input onChange={this.changeHandler} id={this.props.id} type="file" />
+                    <input className={classes.Input} onChange={this.changeHandler} id={this.props.id} type="file" />
                     <label htmlFor={this.props.id}>{this.props.label}</label>
                 </div>
             )
         } else if (this.props.type == 'cover') {
             picker = (
                 <div className={classes.CoverImage}>
-                    <input onChange={this.changeHandler} id={this.props.id} type="file" />
+                    <input className={classes.Input} onChange={this.changeHandler} id={this.props.id} type="file" />
                     <label htmlFor={this.props.id}>{this.props.label}</label>
                 </div>
             )
