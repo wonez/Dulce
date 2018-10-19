@@ -4,6 +4,7 @@ import Aux from '../../hoc/Aux'
 import Toolbar from '../../components/Toolbar/Toolbar'
 import RoundedFormItem from '../../UI/RoundedFormItem/RoundedFormItem'
 import FormButton from '../../UI/FormButton/FormButton'
+import ImagePicker from '../../UI/ImagePicker/ImagePicker'
 
 import classes from './Create.scss'
 
@@ -56,16 +57,10 @@ class Create extends React.Component {
         })
     }
 
-    fileHandler = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            this.setState({
-                imgSrc: [reader.result]
-            })
-        }
+    fileHandler = (data) => {
+        this.setState({
+            imgSrc: data
+        })
     }
 
     render(){
@@ -122,14 +117,12 @@ class Create extends React.Component {
                                 </FormButton>
                             </div>
                         </div>
-                        <div className={classes.ImageBox}>
-                            <input onChange={this.fileHandler} id="img" type="file" />
-                            <div    className={classes.Img}
-                                    style={{backgroundImage: `url('${this.state.imgSrc}')`}}>
-                                {!this.state.imgSrc ? <p>No image to show</p> : null}
-                            </div>
-                            <label htmlFor="img">Add Image</label>
-                        </div>
+                        <ImagePicker    id='img'
+                                        type='create'
+                                        label='Add Image' 
+                                        src={this.state.imgSrc}
+                                        fileHandler={this.fileHandler}
+                                        />
                         <div className={classes.Create__Summary}>
                             <RoundedFormItem 
                                 label="Difficulty"

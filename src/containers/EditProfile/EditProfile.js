@@ -5,6 +5,7 @@ import RoundedFormItem from '../../UI/RoundedFormItem/RoundedFormItem';
 import FormButton from '../../UI/FormButton/FormButton'
 
 import classes from './EditProfile.scss'
+import ImagePicker from '../../UI/ImagePicker/ImagePicker';
 
 class EditProfile extends Component {
 
@@ -22,6 +23,15 @@ class EditProfile extends Component {
         }
     }
 
+    pickHandler = (img, data) => {
+        this.setState({
+            profile:{
+                ...this.state.profile,
+                [img]: data
+            }
+        })
+    } 
+
     render(){
         return(
             <Page width="900">
@@ -29,9 +39,23 @@ class EditProfile extends Component {
                 <div className={classes.Cover}
                     style={{backgroundImage: `url('${this.state.profile.cover}')`}}
                 >
+                    <ImagePicker 
+                            id="cover"
+                            label="Change photo"
+                            type="cover"
+                            fileHandler={(data) => { this.pickHandler('cover', data) }}
+                        />
+                    {/* choose photo */}
                     <div className={classes.Avatar}
                         style={{backgroundImage: `url('${this.state.profile.avatar}')`}}
                         >
+                        <ImagePicker 
+                            id="avatar"
+                            label="Choose image"
+                            type="avatar"
+                            fileHandler={(data) => { this.pickHandler('avatar', data) }}
+                        />
+                        {/* choose photo */}
                     </div>                    
                 </div>
                 <div className={classes.Data}>
@@ -62,7 +86,7 @@ class EditProfile extends Component {
                     <RoundedFormItem 
                         label="Biography"
                         type="textarea"
-                        placeholder='Tell other people about yourselft, your hobbies and interests...'
+                        placeholder='Tell other people about yourself, your hobbies and interests...'
                         />
                     <div className={classes.Data__Buttons}>
                             <FormButton

@@ -1,0 +1,81 @@
+.ImageBox{
+    padding: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    label{
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        color: $color-white;
+        background: $color-secondary-dark;
+        border-radius: 1rem;
+        transition: .3s all;
+        &:hover{
+            box-shadow: 0 .3rem 1rem rgba(0,0,0,.3);
+            cursor: pointer;
+        }
+    }
+}
+.Img{
+    height: 300px;
+    width: 75%;
+    border-radius: 1rem;
+    background-color: $color-gray-lighter;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    p{
+        color: $color-gray-light;
+        position: absolute;
+        font-size: 2rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+.AvatarImage{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    label{
+        display: block;
+        text-align: center;
+        font-size: 1rem;
+        width: 100%;
+        font-weight: bold;
+        color: $color-white;
+        background: $color-gray-darker;
+        padding: .5rem 1rem 1.5rem 1rem;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+.CoverImage{
+    label{
+        display: inline-block;
+        padding: 1rem 2rem;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 1.5rem;
+        color: $color-white;
+        background: $color-gray-darker; 
+        border-bottom-right-radius: 1rem;
+        border-top-left-radius: 1rem;
+        border-top: 1px solid $color-white;
+        border-left: 1px solid $color-white;
+        transition: .3s all;
+        &:hover{
+            cursor: pointer;
+        }  
+    }
+}
+input{
+    display: none;
+}

@@ -28,7 +28,7 @@
 }
 
 .Preparation{
-    padding-top: 2rem;
+    padding: 2rem 0;
     display: grid;
     grid-column-gap: 2rem;
     grid-template-columns: 1fr 1fr;
@@ -40,46 +40,6 @@
         display: flex;
         font-size: 2rem;
         margin-bottom: 2rem;
-    }
-}
-
-.ImageBox{
-    padding: 3rem 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    label{
-        display: block;
-        padding: 1rem 2rem;
-        font-size: 1.5rem;
-        color: $color-white;
-        background: $color-secondary-dark;
-        border-radius: 1rem;
-        transition: .3s all;
-        &:hover{
-            box-shadow: 0 .3rem 1rem rgba(0,0,0,.3);
-            cursor: pointer;
-        }
-    }
-    .Img{
-        height: 300px;
-        width: 75%;
-        border-radius: 1rem;
-        background-color: $color-gray-lighter;
-        background-position: center;
-        background-size: cover;
-        position: relative;
-        p{
-            color: $color-gray-light;
-            position: absolute;
-            font-size: 2rem;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    }
-    input{
-        display: none;
     }
 }
 
