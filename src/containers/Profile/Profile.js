@@ -47,7 +47,10 @@ class Profile extends Component{
             <div className={classes.Profile}>
                 <Toolbar />
                 <div className={classes.Profile__Data}>
-                    <ProfileCover profile={this.state.profile}/>
+                    <ProfileCover images={{
+                        cover: 'src/assets/cover.jpg',
+                        avatar: 'src/assets/profile.jpg'
+                    }} profile={this.state.profile}/>
                     <ProfileNavigation active={this.state.active} handler={this.activeHandler} />
                     {content}
                 </div>

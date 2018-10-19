@@ -1,0 +1,17 @@
+.Container{
+    padding: 15rem 0 10rem 0;
+    display: flex;
+    justify-content: center;
+}
+.Page{
+    // min-width: 700px;
+    background: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    min-height: 500px;
+}
+
+.Heading{
+    font-size: 3rem;
+    color: $color-primary-dark;
+}

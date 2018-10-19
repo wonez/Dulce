@@ -23,7 +23,7 @@
     &__Summary{
         display: grid;
         grid-column-gap: 2rem;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

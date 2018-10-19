@@ -1,8 +1,5 @@
 .ProfileCover{
-    // min-height: 60vh;
     height: 40rem;
-    background: linear-gradient(to bottom, transparent, rgba(black, .6)), 
-                url('../../assets//cover.jpg');
     background-position: center;
     background-size: cover;
     position: relative;
@@ -21,7 +18,6 @@
         &__Img{
             height: 15rem;
             width: 15rem;
-            background: url('../../assets//profile.jpg');
             background-position: center;
             background-size: cover;
             margin-left: 3rem;

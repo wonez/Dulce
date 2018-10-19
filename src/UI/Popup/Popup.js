@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import classes from './Popup.scss' 
 
@@ -23,8 +24,8 @@ class Popup extends Component {
                         className={classes.PopupBg}>
                 </div>
                 <div className={classes.Menu}>
-                    <a className={classes.Menu__Link}>Edit Post</a>
-                    <a className={classes.Menu__Link}>Delete Post</a>
+                    <a onClick={() => {this.goTo('/editpost')}} className={classes.Menu__Link}>Edit Post</a>
+                    <a onClick={() => {console.log('delete')}} className={classes.Menu__Link}>Delete Post</a>
                 </div>
                 <label  htmlFor="popup" 
                         className={classes.PopupBtn}>
@@ -36,4 +37,4 @@ class Popup extends Component {
     }
 }
 
-export default Popup;
+export default withRouter(Popup);

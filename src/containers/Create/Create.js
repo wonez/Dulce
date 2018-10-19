@@ -12,7 +12,21 @@ class Create extends React.Component {
     state = {
         ingredients: [1,2,3],
         directions: [1,2,3],
-        imgSrc: ''
+        imgSrc: '',
+        difficulties: [
+            {value: 'easy', display: 'Easy'},
+            {value: 'medium', display: 'Medium'},
+            {value: 'hard', display: 'Hard'}
+        ],
+        categories: [
+            {value: '<15min', display: 'Less than 15 minutes'},
+            {value: 'chocolate', display: 'Chocolate'},
+            {value: 'birthday', display: 'Birthday'},
+            {value: 'fruit', display: 'Fruit Made'},
+            {value: 'nobaking', display: 'No Baking needed'},
+            {value: 'grandmas', display: 'Grandmas Recipe'},
+            {value: 'wedding', display: 'Wedding'},
+        ]
     }
 
     addAnother = (arr) => {
@@ -120,11 +134,17 @@ class Create extends React.Component {
                             <RoundedFormItem 
                                 label="Difficulty"
                                 type="select"
+                                options={this.state.difficulties}
                             />
                             <RoundedFormItem 
-                                placeholder="Preparation time"
-                                label="Preparation (mins)"
+                                placeholder="e.g. 25min"
+                                label="Preparation Time (min)"
                                 type="number"
+                            />
+                            <RoundedFormItem 
+                                label="Category"
+                                type="select"
+                                options={this.state.categories}
                             />
                         </div>
                         <div className={classes.Submit}>

@@ -20,9 +20,10 @@ class RoundedFormItem extends React.Component {
             input = (
                 <div className={classes.Select}>
                     <select >
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
+                        {this.props.options.map(opt => (
+                                <option key={opt.value} value={opt.value}>{opt.display}</option>
+                            ))
+                        }
                     </select>
                 </div>
             )
