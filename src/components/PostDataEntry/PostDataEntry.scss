@@ -1,0 +1,20 @@
+.Preparation{
+    padding: 2rem 0;
+    display: grid;
+    grid-column-gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    &__Directions, &__Ingredients{
+        display: flex;
+        flex-direction: column;
+    }
+    &__Heading{
+        display: flex;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+.Summary{
+    display: grid;
+    grid-column-gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+}

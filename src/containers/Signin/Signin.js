@@ -4,10 +4,11 @@ import { withRouter } from 'react-router-dom'
 import classes from './Signin.scss';
 import typography from '../../_typography.scss';
 
-import { IconCake } from '../../UI/Icons/Icons';
-import IconButton from '../../UI/IconButton/IconButton';
+// import { IconCake } from '../../UI/Icons/Icons';
+// import IconButton from '../../UI/IconButton/IconButton';
 import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
+import ToolbarPlain from '../../components/ToolbarPlain/ToolbarPlain'
 
 class Signin extends Component {
 
@@ -85,13 +86,7 @@ class Signin extends Component {
 
         return(
             <div className={classes.Signin}>
-                <div className={classes.Signin__Toolbar}>
-                    <div style={{display: 'inline-block'}}>
-                        <IconButton click={this.goHome}>
-                            <IconCake /> <span>Dulce</span>
-                        </IconButton>
-                    </div>
-                </div>
+                <ToolbarPlain click={this.goHome}/>
 
                 <div className={classes.Signin__Form}>
                     <div className={classes.Signin__Options}>

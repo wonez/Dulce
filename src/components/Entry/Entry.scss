@@ -72,7 +72,7 @@
         &__Gradient{
             flex: 1 45%;
             padding-left: 5rem;
-            background: linear-gradient(to bottom left, rgba($color-primary-light, .75), rgba($color-primary-dark, .75)), url('../../../assets/woman-cake.jpg');
+            background: linear-gradient(to bottom left, rgba($color-primary-light, .75), rgba($color-primary-dark, .75)), url('/src/assets/woman-cake.jpg');
             background-size: cover;
             background-position: top;
             transform: scale(1.5);
@@ -81,7 +81,7 @@
         &__Img{
             flex: 1 55%;
             clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
-            background:  linear-gradient(rgba($color-gray-light, .75), rgba($color-gray-light, .75)), url('../../../assets/baner-cake.jpg');
+            background:  linear-gradient(rgba($color-gray-light, .75), rgba($color-gray-light, .75)), url('/src/assets/baner-cake.jpg');
             background-size: cover;
             background-position: center;
         }

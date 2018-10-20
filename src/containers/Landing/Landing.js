@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import { withRouter } from 'react-router-dom'
 
-import Entry from './Entry/Entry';
-import LearnMore from './LearnMore/LearnMore'
+import Entry from '../../components/Entry/Entry';
 import Aux from '../../hoc/Aux';
 
 class Landing extends Component {
@@ -16,7 +15,6 @@ class Landing extends Component {
         return(
             <Aux>
                 <Entry handleCategories={this.handleCategories}/>
-                {/* <LearnMore /> */}
             </Aux>
         )
     }

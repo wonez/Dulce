@@ -1,15 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
+import PostDataEntry from '../../components/PostDataEntry/PostDataEntry'
 import Aux from '../../hoc/Aux'
 import Toolbar from '../../components/Toolbar/Toolbar'
-import RoundedFormItem from '../../UI/RoundedFormItem/RoundedFormItem'
 import FormButton from '../../UI/FormButton/FormButton'
-import ImagePicker from '../../UI/ImagePicker/ImagePicker'
-import PostDataEntry from '../../components/PostDataEntry/PostDataEntry'
 
-import classes from './Create.scss'
+import classes from './EditPost.scss'
 
-class Create extends React.Component {
+class EditPost extends Component{
 
     state = {
         ingredients: [1,2,3],
@@ -69,9 +67,9 @@ class Create extends React.Component {
             <Aux>
                 <Toolbar />
                 <div className={classes.Container}>
-                    <div className={classes.Create}>
-                        <h2 className={classes.Create__Heading}>Create New</h2>
-                        <p className={classes.Create__Required}>* All fields are required</p>
+                    <div className={classes.Edit}>
+                        <h2 className={classes.Edit__Heading}>Edit Post</h2>
+                        <p className={classes.Edit__Required}>* All fields are required</p>
                         <PostDataEntry 
                             ingredients={this.state.ingredients}
                             directions={this.state.directions}
@@ -85,7 +83,7 @@ class Create extends React.Component {
                         <div className={classes.Submit}>
                             <FormButton
                                 type="secondary"
-                                >Create New</FormButton>
+                                >Update</FormButton>
                             <FormButton
                                 type="danger"
                                 >Cancel</FormButton>
@@ -97,4 +95,4 @@ class Create extends React.Component {
     }
 }
 
-export default Create;
+export default EditPost
