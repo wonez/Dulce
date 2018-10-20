@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 
-import classes from './Signin.scss';
+import classes from './Join.scss';
 import typography from '../../_typography.scss';
 
-// import { IconCake } from '../../UI/Icons/Icons';
-// import IconButton from '../../UI/IconButton/IconButton';
 import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
 import ToolbarPlain from '../../components/ToolbarPlain/ToolbarPlain'
 
-class Signin extends Component {
+class Join extends Component {
 
     state ={ 
         signin: true
@@ -101,4 +99,4 @@ class Signin extends Component {
     }
 }
 
-export default withRouter(Signin);
+export default withRouter(Join);

@@ -16,7 +16,7 @@ const Nav = () => {
                     </a>
                 </li>
                 <li className={classes.Nav__Item}>
-                    <Link to='/signin' className={classes.Nav__Link}>
+                    <Link to='/join' className={classes.Nav__Link}>
                         Join now
                     </Link>
                 </li>
