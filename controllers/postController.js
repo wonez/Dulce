@@ -1,40 +1,51 @@
 const Post = require('../models/post');
 
 const createPost = async (req, res) => {
-    const { title } = req.body;
-    const post = await new Post({
-        title
-    }).save();
-    console.log(req.body);
-    res.end(`Created: ${post.title}`)
-}
-
-const getPost = async (req, res) => {
-    const id = req.params.id
-    const post = await Post.findOne({ title: id });
-    res.json(post)
+    try{
+        const post = await new Post({ ...req.body })
+            .save();
+        res.status(200).json(post);
+    }catch(err){
+        res.status(500).end(err.message)
+    }
 }
 
 const editPost = async (req, res) => {
-    const id = req.params.id;
-    const { title } = req.body;
+    try{
+        const post = await Post.findOneByIdAndUpdate(req.params.id,{
+            ...req.body
+        });
+        res.status(200).json(post)
+    }catch(err){
+        res.status(500).end(err.message)
+    }
+}
 
-    const post = await Post.findOne({ title: id});
-    post.title = title 
-    await post.save();
-    res.end('Post edited')
+const getPost = async (req, res) => {
+    try{
+        const post = await Post.findById(req.params.id)
+        res.status(200).json(post);
+    }catch(err){
+        res.status(500).end(err.message)
+    }
 }
 
 const deletePost = async (req, res) => {
-    const id = req.params.id;
-
-    await Post.findOneAndDelete({ title: id });
-    res.end('Post deleted')
+    try{
+        await Post.findOneAndDelete(req.params.id)
+        res.status(200).end('Post deleted');
+    }catch(err){
+        res.status(500).end(err.message)
+    }
 }
 
 const getManyPosts = async (req, res) => {
-    const posts = await Post.find({});
-    res.json(posts);
+    try{
+        const posts = await Post.find({})
+        res.status(200).json(posts);
+    }catch(err){
+        res.status(500).end(err.message)
+    }
 }
 
 module.exports = {
