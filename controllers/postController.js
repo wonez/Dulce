@@ -5,6 +5,7 @@ const createPost = async (req, res) => {
     const post = await new Post({
         title
     }).save();
+    console.log(req.body);
     res.end(`Created: ${post.title}`)
 }
 
