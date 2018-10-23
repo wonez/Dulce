@@ -6,13 +6,13 @@ const postSchema = new Schema({
     dateCreated: { type: Date, default: Date.now() },
     imgUrl: String,
     authorId: {type: Schema.Types.ObjectId, ref: 'User' },
-    category: {type: Schema.Types.ObjectId, ref: 'Category'},
+    categories: { type: [ {type: Schema.Types.ObjectId, ref: 'Category'} ], default: [] },
     ingredients: [ String ],
     directions: [ String ],
     level: String,
     prepTime: Number,
     likes: Number,
-    comments: [ { type: Schema.Types.ObjectId, ref: 'Comment' } ]
+    comments: { type: [ { type: Schema.Types.ObjectId, ref: 'Comment' } ], default: [] },
 })
 
 module.exports = mongoose.model('Post', postSchema)
