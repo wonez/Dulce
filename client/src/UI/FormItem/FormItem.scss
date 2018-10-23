@@ -12,13 +12,10 @@
         border-radius: .1rem;
         color: $color-gray-darker;
         width: 400px;
-        border-bottom: .1rem solid $color-success;
+        border-bottom: .1rem solid transparent;
         box-shadow: 0 .1rem 1rem rgba(0,0,0, .2);
         &::placeholder{
             color: $color-gray-dark
-        }
-        &:invalid{
-            border-color: $color-danger;
         }
     }
 
@@ -38,4 +35,11 @@
         height: 0;
         z-index: -1;
     }
+}
+
+.invalid{
+    border-color: $color-danger;
+}
+.valid{
+    border-color: $color-success;
 }

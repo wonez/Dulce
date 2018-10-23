@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import classes from './Join.scss';
 import typography from '../../_typography.scss';
+import { validateField, validateForm } from '../../utility/validate'
 
 import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
@@ -11,12 +12,102 @@ import ToolbarPlain from '../../components/ToolbarPlain/ToolbarPlain'
 class Join extends Component {
 
     state ={ 
-        signin: true
+        signin: true,
+        formSignIn: {
+            fields: {
+                email: {
+                    value: '',
+                    valid: false,
+                    rules: {
+                        required: true,
+                        email: true
+                    }
+                },
+                password: {
+                    value: '',
+                    valid: false,
+                    rules: {
+                        required: true,
+                        minLength: 4
+                    }
+                }
+            },
+            valid: false
+        },
+        formSignUp : {
+            fields: {
+                name: {
+                    value: '',
+                    valid: false,
+                    rules: {
+                        required: true,
+                        minLength: 3
+                    }
+                },
+                surname: {
+                    value: '',
+                    valid: false,
+                    rules: {
+                        required: true,
+                        minLength: 3
+                    }
+                },
+                email: {
+                    value: '',
+                    valid: false,
+                    rules: {
+                        required: true,
+                        email: true
+                    }
+                },
+                password: {
+                    value: '',
+                    valid: false,
+                    rules: {
+                        required: true,
+                        minLength: 4
+                    }
+                },
+            },
+            valid: false
+        }
     }
 
-    handleSubmit = (e) => {
+    inputChanged = (form, field, value) => {
+        this.setState(prevState => {
+            const newState = {
+                ...prevState,
+                [form] : {
+                    ...prevState[form],
+                    fields:{
+                        ...prevState[form].fields,
+                        [field] : {
+                            ...prevState[form].fields[field],
+                            value: value,
+                            valid: validateField(prevState[form].fields[field]['rules'], value)
+                        }
+                    },
+                }
+            }
+            newState[form].valid = validateForm(newState[form].fields);
+            return newState
+        })
+    }
+
+    handleSubmit = (e, form) => {
         e.preventDefault();
-        console.log('submited');
+        if(this.state[form].valid){
+            const formData = {}
+            for(let field in this.state[form].fields){
+                formData[field] = this.state[form].fields[field].value
+            }
+            console.log(formData);
+            if(form == 'formSingIn'){
+                // console.log('sign in');
+            } else if(form == 'formSignUp') {
+                //dispatch sign up
+            }
+        }
     }
 
     goHome = () => {
@@ -26,49 +117,62 @@ class Join extends Component {
     render(){
 
         let form = (
-            <form onSubmit={this.handleSubmit}>
+            <form   noValidate 
+                    onSubmit={(e) => this.handleSubmit(e, 'formSignIn')}>
                 <FormItem   type="email"
-                            label="Email" 
-                            required
+                            value={this.state.formSignIn.fields.email.value}
+                            onChange={(e) => this.inputChanged('formSignIn', 'email', e.target.value)}
+                            label="Email"
+                            validity={this.state.formSignIn.fields.email.valid ? 'valid' : 'invalid'} 
                             />
 
-                <FormItem   type="password" 
+                <FormItem   type="password"
+                            value={this.state.formSignIn.fields.password.value}
+                            onChange={(e) => this.inputChanged('formSignIn', 'password', e.target.value)}
                             label="Password"
-                            required
+                            validity={this.state.formSignIn.fields.password.valid ? 'valid' : 'invalid'} 
                             />
 
-                <FlatLink type='submit' kind='light' to='profile'>Sign in</FlatLink>
+                <FlatLink validity={this.state.formSignIn.valid} kind='light' >Sign in</FlatLink>
                 <hr style={{margin: '2.5rem 0'}}/>
-                <FlatLink kind='primary' to='fb'>Continue Using Facebook</FlatLink>
-                <FlatLink kind='danger' to='ggl'>Continue Using Google+</FlatLink>
+                <FlatLink validity kind='primary' >Continue Using Facebook</FlatLink>
+                <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
             </form>
         )
 
         if(!this.state.signin){
             form = (
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={(e) => this.handleSubmit(e, 'formSignUp')}>
                     <FormItem   type="text"
-                                label="Name" 
-                                required
+                                label="Name"
+                                value={this.state.formSignUp.fields.name.value}
+                                onChange={(e) => this.inputChanged('formSignUp', 'name', e.target.value)}
+                                validity={this.state.formSignUp.fields.name.valid ? 'valid' : 'invalid'} 
                                 />
                     <FormItem   type="text"
-                                label="Surname" 
-                                required
+                                label="Surname"
+                                value={this.state.formSignUp.fields.surname.value}
+                                onChange={(e) => this.inputChanged('formSignUp', 'surname', e.target.value)}
+                                validity={this.state.formSignUp.fields.surname.valid ? 'valid' : 'invalid'}  
                                 />
 
                     <FormItem   type="email" 
                                 label="Email"
-                                required
+                                value={this.state.formSignUp.fields.email.value}
+                                onChange={(e) => this.inputChanged('formSignUp', 'email', e.target.value)}
+                                validity={this.state.formSignUp.fields.email.valid ? 'valid' : 'invalid'} 
                                 />
                     <FormItem   type="password" 
                                 label="Password"
-                                required
+                                value={this.state.formSignUp.fields.password.value}
+                                onChange={(e) => this.inputChanged('formSignUp', 'password', e.target.value)}
+                                validity={this.state.formSignUp.fields.password.valid ? 'valid' : 'invalid'} 
                                 />
 
-                <FlatLink type='submit' kind='light' to='oo'>Sign up</FlatLink>
-                <hr style={{margin: '2.5rem 0'}}/>
-                <FlatLink kind='primary' to='fb'>Continue Using Facebook</FlatLink>
-                <FlatLink kind='danger' to='ggl'>Continue Using Google+</FlatLink>
+                    <FlatLink validity={this.state.formSignUp.valid} kind='light'>Sign up</FlatLink>
+                    <hr style={{margin: '2.5rem 0'}}/>
+                    <FlatLink validity kind='primary'>Continue Using Facebook</FlatLink>
+                    <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
                 </form>
             )
         }

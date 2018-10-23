@@ -1,14 +1,17 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
-
 import classes from './FlatLink.scss';
 
 const FlatLink = (props) => {
+    const classList = [classes.FlatLink, classes[props.kind] ];
+    if(!props.validity){
+        classList.push(classes['disabled'])
+    }
     return(
-        <Link to={props.to} {...props} className={[classes.FlatLink, classes[props.kind]].join(' ')}>
+        <button 
+            className={classList.join(' ')}>
            {props.children} 
-        </Link>
+        </button>
     );
 };
 
