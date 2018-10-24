@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import classes from './Join.scss';
 import typography from '../../_typography.scss';
@@ -8,6 +9,8 @@ import { validateField, validateForm } from '../../utility/validate'
 import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
 import ToolbarPlain from '../../components/ToolbarPlain/ToolbarPlain'
+
+import { tryLogin } from '../../store/creators/authCreators'
 
 class Join extends Component {
 
@@ -101,9 +104,8 @@ class Join extends Component {
             for(let field in this.state[form].fields){
                 formData[field] = this.state[form].fields[field].value
             }
-            console.log(formData);
-            if(form == 'formSingIn'){
-                // console.log('sign in');
+            if(form == 'formSignIn'){
+                this.props.tryLogin(formData);
             } else if(form == 'formSignUp') {
                 //dispatch sign up
             }
@@ -203,4 +205,16 @@ class Join extends Component {
     }
 }
 
-export default withRouter(Join);
+const mapStateToProps = state => {
+    return {
+        id: state.auth.id
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        tryLogin: (userData) => dispatch(tryLogin(userData))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Join));
