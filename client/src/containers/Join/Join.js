@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import classes from './Join.scss';
@@ -10,7 +10,7 @@ import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
 import ToolbarPlain from '../../components/ToolbarPlain/ToolbarPlain'
 
-import { tryLogin } from '../../store/creators/authCreators'
+import { tryLogin, trySignUp} from '../../store/creators/authCreators'
 
 class Join extends Component {
 
@@ -107,7 +107,7 @@ class Join extends Component {
             if(form == 'formSignIn'){
                 this.props.tryLogin(formData);
             } else if(form == 'formSignUp') {
-                //dispatch sign up
+                this.props.trySignUp(formData);
             }
         }
     }
@@ -134,8 +134,11 @@ class Join extends Component {
                             label="Password"
                             validity={this.state.formSignIn.fields.password.valid ? 'valid' : 'invalid'} 
                             />
-
-                <FlatLink validity={this.state.formSignIn.valid} kind='light' >Sign in</FlatLink>
+                {
+                    this.props.loading ? 
+                    <h2>Loading...</h2> : 
+                    <FlatLink validity={this.state.formSignIn.valid} kind='light' >Sign in</FlatLink>
+                }
                 <hr style={{margin: '2.5rem 0'}}/>
                 <FlatLink validity kind='primary' >Continue Using Facebook</FlatLink>
                 <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
@@ -170,8 +173,11 @@ class Join extends Component {
                                 onChange={(e) => this.inputChanged('formSignUp', 'password', e.target.value)}
                                 validity={this.state.formSignUp.fields.password.valid ? 'valid' : 'invalid'} 
                                 />
-
-                    <FlatLink validity={this.state.formSignUp.valid} kind='light'>Sign up</FlatLink>
+                    {
+                        this.props.loading ? 
+                        <h2>Loading...</h2> : 
+                        <FlatLink validity={this.state.formSignUp.valid} kind='light'>Sign up</FlatLink>
+                    }
                     <hr style={{margin: '2.5rem 0'}}/>
                     <FlatLink validity kind='primary'>Continue Using Facebook</FlatLink>
                     <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
@@ -190,8 +196,8 @@ class Join extends Component {
 
         return(
             <div className={classes.Signin}>
+                {this.props.email ? <Redirect to='/profile'/> : null}
                 <ToolbarPlain click={this.goHome}/>
-
                 <div className={classes.Signin__Form}>
                     <div className={classes.Signin__Options}>
                         <button className={signinClasses.join(' ')} 
@@ -207,13 +213,15 @@ class Join extends Component {
 
 const mapStateToProps = state => {
     return {
-        id: state.auth.id
+        email: state.auth.email,
+        loading: state.ui.loading
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        tryLogin: (userData) => dispatch(tryLogin(userData))
+        tryLogin: (userData) => dispatch(tryLogin(userData)),
+        trySignUp: (userData) => dispatch(trySignUp(userData))
     }
 }
 

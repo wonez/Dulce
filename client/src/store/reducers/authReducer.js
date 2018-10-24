@@ -1,4 +1,4 @@
-import { LOGGED_IN, REGISTERED } from '../types/authTypes'
+import { STORE_AUTH_DATA } from '../types/authTypes'
 
 const initialState = {
     email: '',
@@ -9,11 +9,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
-        case LOGGED_IN : return {
-            ...state,
-            ...action.user
-        }
-        case REGISTERED : return {
+        case STORE_AUTH_DATA : return {
             ...state,
             ...action.user
         }

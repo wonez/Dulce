@@ -1,6 +1,23 @@
 const User = require('../models/user');
 
-const createUser = async (req, res) => {
+// const createUser = async (req, res) => {
+//     try{
+//         const user = await new User({ ...req.body })
+//             .save();
+//         res.status(200).json(user);
+//     }catch(err){
+//         res.status(500).end(err.message)
+//     }
+// }
+// const getUser = async (req, res) => {
+//     try{
+//         const user = await User.findById(req.params.id)
+//         res.status(200).json(user);
+//     }catch(err){
+//         res.status(500).end(err.message)
+//     }
+// }
+const registerUser = async (req, res) => {
     try{
         const user = await new User({ ...req.body })
             .save();
@@ -9,19 +26,19 @@ const createUser = async (req, res) => {
         res.status(500).end(err.message)
     }
 }
+const loginUser = async (req, res) => {
+      try{
+          const user = await User.findOne({email: req.body.email})
+          res.status(200).json(user);
+      }catch(err){
+          res.status(500).end(err.message)
+      }
+}
 const editUser = async (req, res) => {
     try{
         const user = await User.findByIdAndUpdate(req.params.id,{
             ...req.body
         })
-        res.status(200).json(user);
-    }catch(err){
-        res.status(500).end(err.message)
-    }
-}
-const getUser = async (req, res) => {
-    try{
-        const user = await User.findById(req.params.id)
         res.status(200).json(user);
     }catch(err){
         res.status(500).end(err.message)
@@ -37,8 +54,10 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {
-    createUser,
+    // createUser,
+    // getUser,
+    loginUser,
+    registerUser,
     editUser,
-    getUser,
     deleteUser
 }

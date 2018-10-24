@@ -4,10 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "cd client && npm start",
-    "server": "nodemon server.js",
+    "server": "killall -9 node || nodemon server.js",
     "client": "cd client && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "killall -9 node || concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,6 @@
   },
   "devDependencies": {
     "concurrently": "^4.0.1",
-    "nodemon": "^1.18.4",
-    "redux-devtools-extension": "^2.13.5"
+    "nodemon": "^1.18.4"
   }
 }
