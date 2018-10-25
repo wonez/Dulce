@@ -196,7 +196,7 @@ class Join extends Component {
 
         return(
             <div className={classes.Signin}>
-                {this.props.email ? <Redirect to='/profile'/> : null}
+                {this.props.user && this.props.user.email ? <Redirect to='/profile'/> : null}
                 <ToolbarPlain click={this.goHome}/>
                 <div className={classes.Signin__Form}>
                     <div className={classes.Signin__Options}>
@@ -213,7 +213,7 @@ class Join extends Component {
 
 const mapStateToProps = state => {
     return {
-        email: state.auth.email,
+        user: state.auth.user,
         loading: state.ui.loading
     }
 }

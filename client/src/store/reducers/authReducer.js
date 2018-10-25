@@ -1,17 +1,22 @@
-import { STORE_AUTH_DATA } from '../types/authTypes'
+import { STORE_AUTH_DATA, REMOVE_AUTH_DATA } from '../types/authTypes'
 
 const initialState = {
-    email: '',
-    name: '',
-    surname: '',
-    id: ''
+    user: null,
+    token: null,
+    refreshToken: null,
+    expirationDate: null
 }
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case STORE_AUTH_DATA : return {
             ...state,
-            ...action.user
+            user: {
+                ...action.user
+            }     
+        }
+        case REMOVE_AUTH_DATA: return {
+            ...initialState
         }
         default: 
             return state

@@ -1,4 +1,4 @@
-import { STORE_AUTH_DATA } from '../types/authTypes'
+import { STORE_AUTH_DATA, REMOVE_AUTH_DATA } from '../types/authTypes'
 import { startLoading, endLoading } from './uiCreator'
 import axios from '../../utility/axios'
 
@@ -15,6 +15,7 @@ export const tryLogin = (userData) => {
             })
     }
 }
+
 export const trySignUp = (userData) => {
     return dispatch => {
         dispatch(startLoading())
@@ -29,6 +30,22 @@ export const trySignUp = (userData) => {
     }
 }
 
+export const checkCookies = () => {
+    return dispatch => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if(user){
+            dispatch(storeAuthData(user))
+        }
+    }
+}
+
+export const logout = () => {
+    return dispatch => {
+        deleteCookies();
+        dispatch(removeAuthData())
+    }
+}
+
 const storeAuthData = (userData) => {
     return{
         type: STORE_AUTH_DATA,
@@ -36,6 +53,20 @@ const storeAuthData = (userData) => {
     }
 }
 
-const storeCookies = (data) => {
-    //
+const removeAuthData = () => {
+    return {
+        type: REMOVE_AUTH_DATA
+    }
+}
+
+const storeCookies = (user) => {
+    localStorage.setItem('user', JSON.stringify(user))
+    // localStorage.setItem('token', JSON.stringify(data))
+    // localStorage.setItem('expirationDate', JSON.stringify(data))
+}
+
+const deleteCookies = () => {
+    localStorage.removeItem('user')
+    // localStorage.removeItem('token')
+    // localStorage.removeItem('expirationDate')
 }

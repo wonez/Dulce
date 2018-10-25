@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 import ProfileCover from '../../components/ProfileCover/ProfileCover';
 import ProfileNavigation from '../../components/ProfileNavigation/ProfileNavigation'
@@ -14,9 +15,6 @@ class Profile extends Component{
 
     state = {
         active: 'timeline',
-        profile: {
-            name: 'John Doe'
-        }
     }
 
     activeHandler = (active) => {
@@ -43,14 +41,13 @@ class Profile extends Component{
             )
         }
 
+        console.log(this.props);
+
         return(
             <div className={classes.Profile}>
                 <Toolbar />
                 <div className={classes.Profile__Data}>
-                    <ProfileCover images={{
-                        cover: 'src/assets/cover.jpg',
-                        avatar: 'src/assets/profile.jpg'
-                    }} profile={this.state.profile}/>
+                    <ProfileCover profile={this.props.user}/>
                     <ProfileNavigation active={this.state.active} handler={this.activeHandler} />
                     {content}
                 </div>
@@ -59,4 +56,10 @@ class Profile extends Component{
     }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user
+    }
+}
+
+export default connect(mapStateToProps, null)(Profile); 

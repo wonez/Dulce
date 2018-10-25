@@ -1,3 +1,4 @@
 export {
-    tryLogin
+    tryLogin, 
+    logout
 }from './creators/authCreators'

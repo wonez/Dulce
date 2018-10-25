@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 import Landing from '../Landing/Landing';
 import Join from '../Join/Join';
 import Profile from '../Profile/Profile';
@@ -13,7 +15,15 @@ import Create from '../Create/Create'
 import EditProfile from '../EditProfile/EditProfile'
 import EditPost from '../EditPost/EditPost'
 
+import { checkCookies } from '../../store/creators/authCreators'
+
 class App extends Component {
+
+		
+	componentDidMount(){
+		this.props.checkCookies();
+	}
+
 	render() {
 		return (
 			<BrowserRouter>
@@ -36,4 +46,10 @@ class App extends Component {
 	}
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		checkCookies: () => { dispatch(checkCookies()) }
+	}
+}
+
+export default connect(null, mapDispatchToProps)(App);

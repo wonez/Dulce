@@ -10,8 +10,8 @@ const userSchema = new Schema({
     city: String,
     country: String,
     biography: String,
-    avatarUrl: {type: String, default: 'http://chittagongit.com//images/chef-icon-png/chef-icon-png-6.jpg' },
-    coverUrl: {type: String, default: 'https://www.sleekcover.com/covers/yummy-sweet-chocolates-facebook-cover.jpg' },
+    avatarUrl: {type: String, default: 'http://deafhhcenter.org/wp-content/uploads/2017/12/profile-default.jpg' },
+    coverUrl: {type: String, default: 'https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2ce08c47852fb7cceac5e1e0fa88f404&auto=format&fit=crop&w=1012&q=80' },
     following: { type: [ { type: Schema.Types.ObjectId, ref: 'User' } ], default: [] }
 })
 

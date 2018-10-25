@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import { logout } from '../../store'
 
 import classes from './Menu.scss';
 
@@ -29,7 +32,7 @@ class MenuBtn extends Component {
                     <a onClick={() => {this.goTo('/editProfile')}} className={classes.Menu__Btn}>
                         Edit Profile
                     </a>
-                    <a onClick={() => {this.goTo('')}} className={classes.Menu__Btn}>
+                    <a onClick={() => {this.props.logout(); this.goTo('')}} className={classes.Menu__Btn}>
                         Log out
                     </a>
                 </div>
@@ -41,4 +44,10 @@ class MenuBtn extends Component {
     }
 }
 
-export default withRouter(MenuBtn);
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(MenuBtn));
