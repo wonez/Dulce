@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+
 import Page from '../../hoc/Page/Page'
 import RoundedFormItem from '../../UI/RoundedFormItem/RoundedFormItem';
 import FormButton from '../../UI/FormButton/FormButton'
@@ -10,17 +12,7 @@ import ImagePicker from '../../UI/ImagePicker/ImagePicker';
 class EditProfile extends Component {
 
     state = {
-        profile: {
-            name: 'John',
-            surname: 'Doe',
-            aboutMe: 'Hi, I’m John, I’m 36 and I work as a Digital Designer, I like sports, sweets and videogames as well.',
-            joined: new Date('Oct 2, 2017'),
-            gender: 'M',
-            from: 'Wien, Austria',
-            avatar: 'src/assets/profile.jpg',
-            cover: 'src/assets/cover.jpg',
-            followers: 623
-        }
+        profile: {}
     }
 
     pickHandler = (img, data) => {
@@ -32,74 +24,104 @@ class EditProfile extends Component {
         })
     } 
 
+    componentDidUpdate(){
+        this.setState({
+            profile: {
+                ...this.props.profile
+            }
+        })
+    }
+
+    shouldComponentUpdate(){
+        return !this.state.profile.email
+    }
+
     render(){
-        return(
-            <Page width="900">
-                <h2 className={classes.Heading}>Edit Profile</h2>
-                <div className={classes.Cover}
-                    style={{backgroundImage: `url('${this.state.profile.cover}')`}}
-                >
-                    <ImagePicker 
-                            id="cover"
-                            label="Change photo"
-                            type="cover"
-                            fileHandler={(data) => { this.pickHandler('cover', data) }}
-                        />
-                    {/* choose photo */}
-                    <div className={classes.Avatar}
-                        style={{backgroundImage: `url('${this.state.profile.avatar}')`}}
-                        >
+        let content = null
+
+        if(this.props.profile){
+            content = (
+                <Page width="900">
+                    <h2 className={classes.Heading}>Edit Profile</h2>
+                    <div className={classes.Cover}
+                        style={{backgroundImage: `url('${this.state.profile.coverUrl}')`}}
+                    >
                         <ImagePicker 
-                            id="avatar"
-                            label="Choose image"
-                            type="avatar"
-                            fileHandler={(data) => { this.pickHandler('avatar', data) }}
-                        />
+                                id="cover"
+                                label="Change photo"
+                                type="cover"
+                                fileHandler={(data) => { this.pickHandler('cover', data) }}
+                            />
                         {/* choose photo */}
-                    </div>                    
-                </div>
-                <div className={classes.Data}>
-                    <div className={classes.Data__Name}>
-                        <RoundedFormItem
-                            label="Name" 
-                            type="input"
-                            placeholder='First Name'
+                        <div className={classes.Avatar}
+                            style={{backgroundImage: `url('${this.state.profile.avatarUrl}')`}}
+                            >
+                            <ImagePicker 
+                                id="avatar"
+                                label="Choose image"
+                                type="avatar"
+                                fileHandler={(data) => { this.pickHandler('avatar', data) }}
                             />
+                            {/* choose photo */}
+                        </div>                    
+                    </div>
+                    <div className={classes.Data}>
+                        <div className={classes.Data__Name}>
+                            <RoundedFormItem
+                                label="New Password" 
+                                type="password"
+                                placeholder='New Password'
+                                />
+                            <RoundedFormItem 
+                                label="Confirm New Password" 
+                                type="password"
+                                placeholder='Confirm New Password'
+                                />
+                        </div>
+                        <div className={classes.Data__From}>
+                            <RoundedFormItem
+                                label="Country" 
+                                type="input"
+                                placeholder='Country Name'
+                                />
+                            <RoundedFormItem 
+                                label="City" 
+                                type="input"
+                                placeholder='City Name'
+                                />
+                        </div>
                         <RoundedFormItem 
-                            label="Surname" 
-                            type="input"
-                            placeholder='Last Name'
+                            label="Biography"
+                            type="textarea"
+                            placeholder='Tell other people about yourself, your hobbies and interests...'
                             />
+                        <div className={classes.Data__Buttons}>
+                                <FormButton
+                                    type="primary"
+                                    >Update</FormButton>
+                                <FormButton
+                                    type="danger"
+                                    >Cancel</FormButton>
+                        </div>
                     </div>
-                    <div className={classes.Data__From}>
-                        <RoundedFormItem
-                            label="Country" 
-                            type="input"
-                            placeholder='Country Name'
-                            />
-                        <RoundedFormItem 
-                            label="City" 
-                            type="input"
-                            placeholder='City Name'
-                            />
-                    </div>
-                    <RoundedFormItem 
-                        label="Biography"
-                        type="textarea"
-                        placeholder='Tell other people about yourself, your hobbies and interests...'
-                        />
-                    <div className={classes.Data__Buttons}>
-                            <FormButton
-                                type="primary"
-                                >Update</FormButton>
-                            <FormButton
-                                type="danger"
-                                >Cancel</FormButton>
-                    </div>
-                </div>
-            </Page>
-        )
+                </Page>
+            )
+        }
+
+        return content;
     }
 }
 
-export default EditProfile;
+const mapStateToProps = state => {
+    return {
+        profile: state.auth.user
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

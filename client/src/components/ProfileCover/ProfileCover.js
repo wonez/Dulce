@@ -10,9 +10,7 @@ const ProfileCover = (props) => {
 
     if(props.profile){
 
-        const bg = props.profile.coverUrl ? 
-        `linear-gradient(to bottom, transparent, rgba(0,0,0,.6)), url('${props.profile.coverUrl}')` :
-        `linear-gradient(to bottom, gold, goldenrod)`
+        const bg = `linear-gradient(to bottom, transparent, rgba(0,0,0,.6)), url('${props.profile.coverUrl}')`;
 
         content = (
             <div className={classes.ProfileCover}

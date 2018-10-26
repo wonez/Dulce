@@ -32,6 +32,10 @@ class RoundedFormItem extends React.Component {
                 <input  className={classes.Number} placeholder={this.props.placeholder}
                         min='1' max='999' type="number"></input>
             )
+        } else if (this.props.type=='password'){
+            input = (
+                <input className={classes.Password} placeholder={this.props.placeholder} type="password"></input>
+            )
         }
 
         let result = (
