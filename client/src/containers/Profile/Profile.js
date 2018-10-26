@@ -41,8 +41,6 @@ class Profile extends Component{
             )
         }
 
-        console.log(this.props);
-
         return(
             <div className={classes.Profile}>
                 <Toolbar />

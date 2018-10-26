@@ -194,9 +194,16 @@ class Join extends Component {
             signupClasses.push(classes.Signin__Options__Btn__Active);
         }
 
+        let redirect = null;
+
+        if(this.props.isLogged){
+            const to = this.props.location.state ? this.props.location.state.from.pathname : '/profile';
+            redirect = <Redirect to={to}/> 
+        }
+        
         return(
             <div className={classes.Signin}>
-                {this.props.user && this.props.user.email ? <Redirect to='/profile'/> : null}
+                {redirect}
                 <ToolbarPlain click={this.goHome}/>
                 <div className={classes.Signin__Form}>
                     <div className={classes.Signin__Options}>
@@ -213,7 +220,7 @@ class Join extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.auth.user,
+        isLogged: state.auth.isLogged,
         loading: state.ui.loading
     }
 }

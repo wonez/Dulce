@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "killall -9 node || nodemon server.js",
+    "server": "nodemon server.js",
     "client": "cd client && npm start",
     "dev": "killall -9 node || concurrently \"npm run server\" \"npm run client\""
   },

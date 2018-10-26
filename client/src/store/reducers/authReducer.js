@@ -4,7 +4,8 @@ const initialState = {
     user: null,
     token: null,
     refreshToken: null,
-    expirationDate: null
+    expirationDate: null,
+    isLogged: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,10 +14,11 @@ const reducer = (state = initialState, action) => {
             ...state,
             user: {
                 ...action.user
-            }     
+            },
+            isLogged: true     
         }
         case REMOVE_AUTH_DATA: return {
-            ...initialState
+            ...initialState,
         }
         default: 
             return state

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import Protected from '../../hoc/Protected'
+
 import { connect } from 'react-redux';
 
 import Landing from '../Landing/Landing';
@@ -30,19 +32,29 @@ class App extends Component {
 				<Switch>
 					<Route path='/' exact component={Landing}/>
 					<Route path="/join" component={Join}/>
+
 					<Route path="/profile" component={Profile}/>
 					<Route path="/post" component={Post}/>
 					<Route path="/newsfeed" component={NewsFeed}/>
 					<Route path="/search" component={Search}/>
 					<Route path="/allcategories" component={AllCategories}/>
 					<Route path="/singleCategory" component={Category}/>
-					<Route path="/create" component={Create}/>
-					<Route path="/editProfile" component={EditProfile}/>
-					<Route path="/editPost" component={EditPost}/>
+					<Protected isLogged={this.props.isLogged} path="/create" component={Create}/>
+					<Protected isLogged={this.props.isLogged} path="/editProfile" component={EditProfile}/>
+					<Protected isLogged={this.props.isLogged} path="/editPost" component={EditPost}/>
+					{/* <Route path="/create" component={Create}/> */}
+					{/* <Route path="/editProfile" component={EditProfile}/> */}
+					{/* <Route path="/editPost" component={EditPost}/> */}
 					<Route render={()=> (<h1>404</h1>)} />
 				</Switch>
 			</BrowserRouter>
 		);
+	}
+}
+
+const mapStateToProps = (state) => {
+	return {
+		isLogged: state.auth.isLogged
 	}
 }
 
@@ -52,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

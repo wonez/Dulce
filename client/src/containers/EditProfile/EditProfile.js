@@ -12,7 +12,10 @@ import ImagePicker from '../../UI/ImagePicker/ImagePicker';
 class EditProfile extends Component {
 
     state = {
-        profile: {}
+        profile: {},
+        form: {
+            //popunit formu
+        }
     }
 
     pickHandler = (img, data) => {
@@ -24,22 +27,20 @@ class EditProfile extends Component {
         })
     } 
 
-    componentDidUpdate(){
-        this.setState({
-            profile: {
-                ...this.props.profile
-            }
-        })
-    }
-
-    shouldComponentUpdate(){
-        return !this.state.profile.email
+    componentDidMount(){
+        if (!this.state.profile.email){
+            this.setState({
+                profile: {
+                    ...this.props.profile
+                }
+            })
+        }
     }
 
     render(){
         let content = null
 
-        if(this.props.profile){
+        if(this.state.profile){
             content = (
                 <Page width="900">
                     <h2 className={classes.Heading}>Edit Profile</h2>
@@ -50,7 +51,7 @@ class EditProfile extends Component {
                                 id="cover"
                                 label="Change photo"
                                 type="cover"
-                                fileHandler={(data) => { this.pickHandler('cover', data) }}
+                                fileHandler={(data) => { this.pickHandler('coverUrl', data) }}
                             />
                         {/* choose photo */}
                         <div className={classes.Avatar}
@@ -60,7 +61,7 @@ class EditProfile extends Component {
                                 id="avatar"
                                 label="Choose image"
                                 type="avatar"
-                                fileHandler={(data) => { this.pickHandler('avatar', data) }}
+                                fileHandler={(data) => { this.pickHandler('avatarUrl', data) }}
                             />
                             {/* choose photo */}
                         </div>                    
@@ -118,10 +119,10 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
+// const mapDispatchToProps = dispatch => {
+//     return {
 
-    }
-}
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
+export default connect(mapStateToProps, null)(EditProfile);
