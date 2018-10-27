@@ -10,6 +10,8 @@ import classes from './EditProfile.scss'
 import ImagePicker from '../../UI/ImagePicker/ImagePicker';
 
 import { validateField, validateForm } from '../../utility/validate'
+import Loading from '../../UI/Loading/Loading';
+import Confirm from '../../UI/Confirm/Confirm';
 
 class EditProfile extends Component {
 
@@ -19,7 +21,7 @@ class EditProfile extends Component {
             fields: {
                 password: {
                     value: '',
-                    valid: false,
+                    valid: true,
                     touched: false,
                     rules: {
                         minLength: 4,
@@ -27,7 +29,7 @@ class EditProfile extends Component {
                 },
                 passwordConfirm: {
                     value: '',
-                    valid: false,
+                    valid: true,
                     touched: false,
                     rules: {
                         minLength: 4,
@@ -94,6 +96,22 @@ class EditProfile extends Component {
         newState.form.fields[field].valid = valid;
         newState.form.fields[otherField].valid = valid;
         newState.form.fields[otherField].touched = true;
+        if(!newState.form.fields[field].value.length && !newState.form.fields[otherField].value.length){
+            newState.form.fields[field].valid = true;
+            newState.form.fields[field].touched = false;
+            newState.form.fields[otherField].valid = true;
+            newState.form.fields[otherField].touched = false;
+        }
+    }
+
+    submitHandler = () => {
+        if(this.state.form.valid){
+            console.log('submited');
+        }
+    }
+
+    cancelHandler = () => {
+        console.log('cancel');
     }
 
     textChanged = (field, val) => {
@@ -203,12 +221,17 @@ class EditProfile extends Component {
                             />
                         <div className={classes.Data__Buttons}>
                                 <FormButton
+                                    click={this.submitHandler}
+                                    disabled={!this.state.form.valid}
                                     type="primary"
                                     >Update</FormButton>
                                 <FormButton
+                                    click={this.cancelHandler}
                                     type="danger"
                                     >Cancel</FormButton>
                         </div>
+                        <Confirm />
+                        {/* <Loading /> */}
                     </div>
                 </Page>
             )

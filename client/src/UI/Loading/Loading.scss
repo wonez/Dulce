@@ -1,0 +1,32 @@
+.Modal{
+    background: rgba($color-white, .7);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 0;
+    overflow: hidden;
+}
+
+.show{
+    height: 100vh;
+}
+
+.Spinner{
+    top: 50%;
+    left: 50%;
+    position: relative;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    border: 2rem solid $color-gray-lighter;
+    border-top-color: $color-primary-dark;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0%{ transform: translate(-50%, -50%) rotate(0deg) }
+    100%{ transform: translate(-50%, -50%) rotate(360deg) }
+}

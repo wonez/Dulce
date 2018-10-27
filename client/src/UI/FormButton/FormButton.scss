@@ -11,12 +11,24 @@
         cursor: pointer;
         box-shadow: 0 .3rem 1rem rgba(0,0,0,.3);
     }
+    &:disabled{
+        background: $color-gray-light;
+        &:hover{
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+    }
 }
 .primary{
     background: $color-primary-dark;
 }
 .secondary{
     background: $color-secondary-dark;
+}
+.light{
+    background: white;
+    color: $color-gray-dark;
+    border: 1px solid $color-gray-dark;
 }
 .danger{
     background: $color-danger;
