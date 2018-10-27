@@ -74,6 +74,13 @@
     }
 }
 
+.invalid{
+    border-color: $color-danger;
+}
+.valid{
+    border-color: $color-success;
+}
+
 .Preparation{
     @extend %item;
     padding: .5rem;

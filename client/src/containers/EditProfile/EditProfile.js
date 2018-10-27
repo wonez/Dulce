@@ -9,15 +9,62 @@ import FormButton from '../../UI/FormButton/FormButton'
 import classes from './EditProfile.scss'
 import ImagePicker from '../../UI/ImagePicker/ImagePicker';
 
+import { validateField, validateForm } from '../../utility/validate'
+
 class EditProfile extends Component {
 
     state = {
         profile: {},
         form: {
-            //popunit formu
+            fields: {
+                password: {
+                    value: '',
+                    valid: false,
+                    touched: false,
+                    rules: {
+                        minLength: 4,
+                    }
+                },
+                passwordConfirm: {
+                    value: '',
+                    valid: false,
+                    touched: false,
+                    rules: {
+                        minLength: 4,
+                    }
+                },
+                country: {
+                    value: '',
+                    valid: false,
+                    touched: false,
+                    rules: {
+                        required: true,
+                        minLength: 3
+                    }
+                },
+                city: {
+                    value: '',
+                    valid: false,
+                    touched: false,
+                    rules: {
+                        required: true,
+                        minLength: 3,
+                    }
+                },
+                biography: {
+                    value: '',
+                    valid: false,
+                    touched: false,
+                    rules: {
+                        required: true,
+                        minLength: 15
+                    }
+                }
+            },
+            valid: false
         }
     }
-
+    
     pickHandler = (img, data) => {
         this.setState({
             profile:{
@@ -36,6 +83,44 @@ class EditProfile extends Component {
             })
         }
     }
+
+    handlePasswordValidation = (newState, field, val) => {
+        let otherField = 'password';
+        if(field == 'password'){
+            otherField = 'passwordConfirm'
+        }
+        newState.form.fields[field].value = val
+        const valid = validateField(newState.form.fields[field].rules, val) && newState.form.fields[field].value === newState.form.fields[otherField].value
+        newState.form.fields[field].valid = valid;
+        newState.form.fields[otherField].valid = valid;
+        newState.form.fields[otherField].touched = true;
+    }
+
+    textChanged = (field, val) => {
+        this.setState(oldState => {
+            const newState = {
+                ...oldState,
+                form : {
+                    ...oldState.form,
+                    fields: {
+                        ...oldState.form.fields,
+                        [field]: {
+                            ...oldState.form.fields[field],
+                            touched: true,                            
+                            value: val,
+                            valid: validateField(oldState.form.fields[field].rules, val)
+                        }
+                    }
+                }
+            }
+            if(field == 'password' || field == 'passwordConfirm'){
+                this.handlePasswordValidation(newState, field, val)
+            }
+            newState.form.valid = validateForm(newState.form.fields)
+            return newState;
+        })
+    }
+
 
     render(){
         let content = null
@@ -67,16 +152,24 @@ class EditProfile extends Component {
                         </div>                    
                     </div>
                     <div className={classes.Data}>
-                        <div className={classes.Data__Name}>
+                        <div className={classes.Data__Password}>
                             <RoundedFormItem
                                 label="New Password" 
                                 type="password"
                                 placeholder='New Password'
+                                value={this.state.form.fields.password.value}
+                                onChange={(e) => this.textChanged('password', e.target.value)}
+                                validity={this.state.form.fields.password.valid ? 'valid' : 'invalid'}
+                                touched={this.state.form.fields.password.touched}
                                 />
                             <RoundedFormItem 
                                 label="Confirm New Password" 
                                 type="password"
                                 placeholder='Confirm New Password'
+                                value={this.state.form.fields.passwordConfirm.value}
+                                onChange={(e) => this.textChanged('passwordConfirm', e.target.value)}
+                                validity={this.state.form.fields.passwordConfirm.valid ? 'valid' : 'invalid'}
+                                touched={this.state.form.fields.passwordConfirm.touched}
                                 />
                         </div>
                         <div className={classes.Data__From}>
@@ -84,17 +177,29 @@ class EditProfile extends Component {
                                 label="Country" 
                                 type="input"
                                 placeholder='Country Name'
+                                value={this.state.form.fields.country.value}
+                                onChange={(e) => this.textChanged('country', e.target.value)}
+                                validity={this.state.form.fields.country.valid ? 'valid' : 'invalid'}
+                                touched={this.state.form.fields.country.touched}
                                 />
                             <RoundedFormItem 
                                 label="City" 
                                 type="input"
                                 placeholder='City Name'
+                                value={this.state.form.fields.city.value}
+                                onChange={(e) => this.textChanged('city', e.target.value)}
+                                validity={this.state.form.fields.city.valid ? 'valid' : 'invalid'}
+                                touched={this.state.form.fields.city.touched}
                                 />
                         </div>
                         <RoundedFormItem 
                             label="Biography"
                             type="textarea"
                             placeholder='Tell other people about yourself, your hobbies and interests...'
+                            value={this.state.form.fields.biography.value}
+                            onChange={(e) => this.textChanged('biography', e.target.value)}
+                            validity={this.state.form.fields.biography.valid ? 'valid' : 'invalid'}
+                            touched={this.state.form.fields.biography.touched}
                             />
                         <div className={classes.Data__Buttons}>
                                 <FormButton

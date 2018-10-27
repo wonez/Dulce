@@ -29,7 +29,7 @@
 }
 .Data{
     margin-top: 10rem;
-    &__Name, &__From{
+    &__Password, &__From{
         display: grid;
         grid-column-gap: 2rem;
         grid-template-columns: repeat(2, 1fr);

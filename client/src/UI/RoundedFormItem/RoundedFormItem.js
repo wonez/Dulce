@@ -9,12 +9,28 @@ class RoundedFormItem extends React.Component {
         let input = null;
 
         if(this.props.type == 'input'){
+            const classList = [classes.Input];
+            if(this.props.touched){
+                classList.push(classes[this.props.validity])
+            }
             input = (
-                <input className={classes.Input} type="text" placeholder={this.props.placeholder} />
+                <input  className={classList.join(' ')} 
+                        type="text" 
+                        value={this.props.value}
+                        onChange={this.props.onChange}
+                        placeholder={this.props.placeholder} />
             )
         } else if(this.props.type == 'textarea') {
+            const classList = [classes.TextArea];
+            if(this.props.touched){
+                classList.push(classes[this.props.validity])
+            }
             input = (
-                <textarea className={classes.TextArea} placeholder={this.props.placeholder} ></textarea>
+                <textarea   className={classList.join(' ')}
+                            value={this.props.value}
+                            onChange={this.props.onChange}
+                            placeholder={this.props.placeholder} >
+                 </textarea>
             )
         } else if(this.props.type=='select'){
             input = (
@@ -28,13 +44,28 @@ class RoundedFormItem extends React.Component {
                 </div>
             )
         } else if(this.props.type=='number'){
+            const classList = [classes.Number];
+            if(this.props.touched){
+                classList.push(classes[this.props.validity])
+            }
             input = (
-                <input  className={classes.Number} placeholder={this.props.placeholder}
+                <input  className={classList.join(' ')} 
+                        value={this.props.value}
+                        onChange={this.props.onChange}
+                        placeholder={this.props.placeholder}
                         min='1' max='999' type="number"></input>
             )
         } else if (this.props.type=='password'){
+            const classList = [classes.Password];
+            if(this.props.touched){
+                classList.push(classes[this.props.validity])
+            }
             input = (
-                <input className={classes.Password} placeholder={this.props.placeholder} type="password"></input>
+                <input  className={classList.join(' ')} 
+                        value={this.props.value}
+                        onChange={this.props.onChange}
+                        placeholder={this.props.placeholder} 
+                        type="password"></input>
             )
         }
 
