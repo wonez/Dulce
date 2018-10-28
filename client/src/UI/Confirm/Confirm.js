@@ -1,30 +1,24 @@
 import React from 'react'
 
+import { connect } from 'react-redux'
+
 import classes from './Confirm.scss'
 import FormButton from '../FormButton/FormButton';
 
+import { hideConfirmDialog } from '../../store/index'
+
 class Confirm extends React.Component{
-
-    state = {
-        show: true
-    }   
-
-    dismissHandler = () => {
-        this.setState({
-            show: false
-        })
-    }
 
     render(){
         return(
-            <div className={[classes.Modal, this.state.show ? null : classes.hide].join(' ')} onClick={this.dismissHandler}>
-                <div className={classes.Box}>
+            <div className={classes.Modal} onClick={this.props.hideConfirmDialog}>
+                <div className={classes.Box} onClick={(e) => {e.stopPropagation()}}>
                     <h2>Are you sure</h2>
                     <div className={classes.Btns}>
-                        <FormButton type="danger">
+                        <FormButton type="danger" click={this.props.hideConfirmDialog}>
                             Confirm
                         </FormButton>
-                        <FormButton type="light" click={this.dismissHandler}>
+                        <FormButton type="light" click={this.props.hideConfirmDialog}>
                             Cancel
                         </FormButton>
                     </div>
@@ -34,4 +28,10 @@ class Confirm extends React.Component{
     }
 }
 
-export default Confirm;
+const mapDispatchToProps = dispatch => {
+    return{
+        hideConfirmDialog: () => dispatch(hideConfirmDialog())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Confirm);

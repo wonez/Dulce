@@ -1,5 +1,5 @@
 import { STORE_AUTH_DATA, REMOVE_AUTH_DATA } from '../types/authTypes'
-import { startLoading, endLoading } from './uiCreator'
+import { startLoading, endLoading } from './uiCreators'
 import axios from '../../utility/axios'
 
 export const tryLogin = (userData) => {

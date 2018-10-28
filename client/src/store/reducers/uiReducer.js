@@ -1,7 +1,8 @@
-import { START_LOADING, END_LOADING } from '../types/uiTypes'
+import { START_LOADING, END_LOADING, SHOW_CONFIRM_DIALOG, HIDE_CONFIRM_DIALOG} from '../types/uiTypes'
 
 const initialState = {
-    loading: false
+    loading: false,
+    confirm: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +14,14 @@ const reducer = (state = initialState, action) => {
         case END_LOADING : return {
             ...state,
             loading: false
+        }
+        case SHOW_CONFIRM_DIALOG : return {
+            ...state,
+            confirm: true
+        }
+        case HIDE_CONFIRM_DIALOG : return {
+            ...state,
+            confirm: false
         }
         default: 
             return state

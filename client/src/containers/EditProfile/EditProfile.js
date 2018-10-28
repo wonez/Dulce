@@ -5,13 +5,14 @@ import { connect } from 'react-redux'
 import Page from '../../hoc/Page/Page'
 import RoundedFormItem from '../../UI/RoundedFormItem/RoundedFormItem';
 import FormButton from '../../UI/FormButton/FormButton'
-
-import classes from './EditProfile.scss'
 import ImagePicker from '../../UI/ImagePicker/ImagePicker';
 
-import { validateField, validateForm } from '../../utility/validate'
-import Loading from '../../UI/Loading/Loading';
+import classes from './EditProfile.scss'
+
+import { validateField } from '../../utility/validate'
 import Confirm from '../../UI/Confirm/Confirm';
+
+import { showConfirmDialog, tryEditProfile } from '../../store/index'
 
 class EditProfile extends Component {
 
@@ -37,30 +38,15 @@ class EditProfile extends Component {
                 },
                 country: {
                     value: '',
-                    valid: false,
                     touched: false,
-                    rules: {
-                        required: true,
-                        minLength: 3
-                    }
                 },
                 city: {
                     value: '',
-                    valid: false,
                     touched: false,
-                    rules: {
-                        required: true,
-                        minLength: 3,
-                    }
                 },
                 biography: {
                     value: '',
-                    valid: false,
                     touched: false,
-                    rules: {
-                        required: true,
-                        minLength: 15
-                    }
                 }
             },
             valid: false
@@ -72,6 +58,10 @@ class EditProfile extends Component {
             profile:{
                 ...this.state.profile,
                 [img]: data
+            },
+            form: {
+                ...this.state.form,
+                valid: true
             }
         })
     } 
@@ -96,6 +86,7 @@ class EditProfile extends Component {
         newState.form.fields[field].valid = valid;
         newState.form.fields[otherField].valid = valid;
         newState.form.fields[otherField].touched = true;
+
         if(!newState.form.fields[field].value.length && !newState.form.fields[otherField].value.length){
             newState.form.fields[field].valid = true;
             newState.form.fields[field].touched = false;
@@ -105,13 +96,15 @@ class EditProfile extends Component {
     }
 
     submitHandler = () => {
-        if(this.state.form.valid){
-            console.log('submited');
-        }
-    }
-
-    cancelHandler = () => {
-        console.log('cancel');
+        this.props.tryEditProfile({
+            coverUrl: this.profile.coverUrl,
+            avatarUrl: this.profile.avatarUrl,
+            password: this.state.form.fields.password.value,
+            country: this.state.form.fields.country.value,
+            city: this.state.form.fields.city.value,
+            biography: this.state.form.fields.biography.value,
+            
+        });
     }
 
     textChanged = (field, val) => {
@@ -124,9 +117,8 @@ class EditProfile extends Component {
                         ...oldState.form.fields,
                         [field]: {
                             ...oldState.form.fields[field],
-                            touched: true,                            
+                            touched: val.length != 0,                            
                             value: val,
-                            valid: validateField(oldState.form.fields[field].rules, val)
                         }
                     }
                 }
@@ -134,7 +126,12 @@ class EditProfile extends Component {
             if(field == 'password' || field == 'passwordConfirm'){
                 this.handlePasswordValidation(newState, field, val)
             }
-            newState.form.valid = validateForm(newState.form.fields)
+            newState.form.valid = 
+                (   newState.form.fields.country.touched ||
+                    newState.form.fields.city.touched ||
+                    newState.form.fields.biography.touched ) &&
+                ( newState.form.fields.password.valid && newState.form.fields.passwordConfirm.valid) ||
+                ( newState.form.fields.password.valid && newState.form.fields.password.touched && newState.form.fields.passwordConfirm.valid && newState.form.fields.passwordConfirm.touched)
             return newState;
         })
     }
@@ -197,7 +194,7 @@ class EditProfile extends Component {
                                 placeholder='Country Name'
                                 value={this.state.form.fields.country.value}
                                 onChange={(e) => this.textChanged('country', e.target.value)}
-                                validity={this.state.form.fields.country.valid ? 'valid' : 'invalid'}
+                                validity={this.state.form.fields.country.touched ? 'valid' : 'invalid'}
                                 touched={this.state.form.fields.country.touched}
                                 />
                             <RoundedFormItem 
@@ -206,7 +203,7 @@ class EditProfile extends Component {
                                 placeholder='City Name'
                                 value={this.state.form.fields.city.value}
                                 onChange={(e) => this.textChanged('city', e.target.value)}
-                                validity={this.state.form.fields.city.valid ? 'valid' : 'invalid'}
+                                validity={this.state.form.fields.city.touched ? 'valid' : 'invalid'}
                                 touched={this.state.form.fields.city.touched}
                                 />
                         </div>
@@ -216,7 +213,7 @@ class EditProfile extends Component {
                             placeholder='Tell other people about yourself, your hobbies and interests...'
                             value={this.state.form.fields.biography.value}
                             onChange={(e) => this.textChanged('biography', e.target.value)}
-                            validity={this.state.form.fields.biography.valid ? 'valid' : 'invalid'}
+                            validity={this.state.form.fields.biography.touched ? 'valid' : 'invalid'}
                             touched={this.state.form.fields.biography.touched}
                             />
                         <div className={classes.Data__Buttons}>
@@ -226,12 +223,11 @@ class EditProfile extends Component {
                                     type="primary"
                                     >Update</FormButton>
                                 <FormButton
-                                    click={this.cancelHandler}
+                                    click={this.props.showConfirmDialog}
                                     type="danger"
                                     >Cancel</FormButton>
                         </div>
-                        <Confirm />
-                        {/* <Loading /> */}
+                        {this.props.confirm ? <Confirm /> : null }
                     </div>
                 </Page>
             )
@@ -243,14 +239,16 @@ class EditProfile extends Component {
 
 const mapStateToProps = state => {
     return {
-        profile: state.auth.user
+        profile: state.auth.user,
+        confirm: state.ui.confirm
     }
 }
 
-// const mapDispatchToProps = dispatch => {
-//     return {
+const mapDispatchToProps = dispatch => {
+    return {
+        showConfirmDialog: () => { dispatch(showConfirmDialog()) },
+        tryEditProfile: (data) => dispatch(tryEditProfile(data))
+    }
+}
 
-//     }
-// }
-
-export default connect(mapStateToProps, null)(EditProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
