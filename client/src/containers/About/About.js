@@ -1,50 +1,67 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+
 import classes from './About.scss'
 
 class About extends Component {
 
     state = {
-        profile: {
-            aboutMe: 'Hi, I’m John, I’m 36 and I work as a Digital Designer, I like sports, sweets and videogames as well.',
-            joined: new Date('Oct 2, 2017'),
-            from: 'Wien, Austria',
-            imgPath: 'src/assets/profile.jpg',
-            followers: 623
-        }
+        profile: {}
+    }
+
+    componentDidMount() {
+        this.setState({
+            profile: this.props.profile
+        })
     }
 
     render() {
 
-        const joined = this.state.profile.joined.toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        let content = null;
 
-        return (
-            <div className={classes.About}>
-                <div className={classes.About__Image}
-                    style={{backgroundImage: `url(${this.state.profile.imgPath})`}}>
-                    {/* slika */}
+        if (this.state.profile.dateCreated) {
+
+            const joined = new Date(this.state.profile.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+            content = (
+                <div className={classes.About}>
+                    <div className={classes.About__Image}
+                        style={{ backgroundImage: `url(${this.state.profile.avatarUrl})` }}>
+                        {/* slika */}
+                    </div>
+                    <div className={classes.About__Container}>
+                        <p className={classes.About__AboutMe}>
+                            {this.state.profile.biography ? this.state.profile.biography : "No Biography added yet"}
+                        </p>
+                        <hr />
+                        <div className={classes.About__Item}>
+                            <h4>Joined</h4>
+                            <p>{joined}</p>
+                        </div>
+                        <div className={classes.About__Item}>
+                            <h4>Followers</h4>
+                            <p>{this.state.profile.following.length}</p>
+                        </div>
+                        <div className={classes.About__Item}>
+                            <h4>From</h4>
+                            <p>
+                                {this.state.profile.city && this.state.profile.country ? `${this.state.profile.city}, ${this.state.profile.country}` : "No Place added yet"}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div className={classes.About__Container}>
-                    <p className={classes.About__AboutMe}>
-                        {this.state.profile.aboutMe}
-                    </p>
-                    <hr />
-                    <div className={classes.About__Item}>
-                        <h4>Joined</h4>
-                        <p>{joined}</p>
-                    </div>
-                    <div className={classes.About__Item}>
-                        <h4>Followers</h4>
-                        <p>{this.state.profile.followers}</p>
-                    </div>
-                    <div className={classes.About__Item}>
-                        <h4>From</h4>
-                        <p>{this.state.profile.from}</p>
-                    </div>
-                </div>
-            </div>
-        )
+            )
+        }
+
+        return content;
     }
 }
 
-export default About;
+const mapStateToProps = state => {
+    return {
+        profile: state.auth.user
+    }
+}
+
+export default connect(mapStateToProps)(About)

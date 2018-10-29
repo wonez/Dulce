@@ -6,13 +6,14 @@ import Page from '../../hoc/Page/Page'
 import RoundedFormItem from '../../UI/RoundedFormItem/RoundedFormItem';
 import FormButton from '../../UI/FormButton/FormButton'
 import ImagePicker from '../../UI/ImagePicker/ImagePicker';
+import Loading from '../../UI/Loading/Loading'
 
 import classes from './EditProfile.scss'
 
 import { validateField } from '../../utility/validate'
 import Confirm from '../../UI/Confirm/Confirm';
 
-import { showConfirmDialog, tryEditProfile } from '../../store/index'
+import { showConfirmDialog, tryEditProfile,  } from '../../store/index'
 
 class EditProfile extends Component {
 
@@ -20,36 +21,12 @@ class EditProfile extends Component {
         profile: {},
         form: {
             fields: {
-                password: {
-                    value: '',
-                    valid: true,
-                    touched: false,
-                    rules: {
-                        minLength: 4,
-                    }
-                },
-                passwordConfirm: {
-                    value: '',
-                    valid: true,
-                    touched: false,
-                    rules: {
-                        minLength: 4,
-                    }
-                },
-                country: {
-                    value: '',
-                    touched: false,
-                },
-                city: {
-                    value: '',
-                    touched: false,
-                },
-                biography: {
-                    value: '',
-                    touched: false,
-                }
-            },
-            valid: false
+                password: { value: ''},
+                passwordConfirm: { value: '' },
+                country: { value: '' },
+                city: { value: '' },
+                biography: { value: '' },
+            }
         }
     }
     
@@ -68,9 +45,44 @@ class EditProfile extends Component {
 
     componentDidMount(){
         if (!this.state.profile.email){
-            this.setState({
-                profile: {
-                    ...this.props.profile
+            this.setState(_ => {
+                return {
+                    profile: {
+                        ...this.props.profile
+                    },
+                    form: {
+                        fields: {
+                            password: {
+                                value: '',
+                                valid: true,
+                                touched: false,
+                                rules: {
+                                    minLength: 4,
+                                }
+                            },
+                            passwordConfirm: {
+                                value: '',
+                                valid: true,
+                                touched: false,
+                                rules: {
+                                    minLength: 4,
+                                }
+                            },
+                            country: {
+                                value: this.props.profile.country,
+                                touched: false,
+                            },
+                            city: {
+                                value: this.props.profile.city,
+                                touched: false,
+                            },
+                            biography: {
+                                value: this.props.profile.biography,
+                                touched: false,
+                            }
+                        },
+                        valid: false
+                    }
                 }
             })
         }
@@ -97,14 +109,16 @@ class EditProfile extends Component {
 
     submitHandler = () => {
         this.props.tryEditProfile({
-            coverUrl: this.profile.coverUrl,
-            avatarUrl: this.profile.avatarUrl,
+            _id: this.state.profile._id,
+            coverUrl: this.state.profile.coverUrl,
+            avatarUrl: this.state.profile.avatarUrl,
             password: this.state.form.fields.password.value,
             country: this.state.form.fields.country.value,
             city: this.state.form.fields.city.value,
             biography: this.state.form.fields.biography.value,
-            
-        });
+        }).then(() => {
+            this.props.history.replace('/profile')
+        })
     }
 
     textChanged = (field, val) => {
@@ -227,7 +241,8 @@ class EditProfile extends Component {
                                     type="danger"
                                     >Cancel</FormButton>
                         </div>
-                        {this.props.confirm ? <Confirm /> : null }
+                        <Confirm confirmHandler={ () => this.props.history.replace('/profile')} />
+                        <Loading />
                     </div>
                 </Page>
             )
@@ -240,7 +255,6 @@ class EditProfile extends Component {
 const mapStateToProps = state => {
     return {
         profile: state.auth.user,
-        confirm: state.ui.confirm
     }
 }
 

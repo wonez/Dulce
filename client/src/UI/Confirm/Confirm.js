@@ -7,24 +7,30 @@ import FormButton from '../FormButton/FormButton';
 
 import { hideConfirmDialog } from '../../store/index'
 
-class Confirm extends React.Component{
+const Confirm = (props) => {
 
-    render(){
-        return(
-            <div className={classes.Modal} onClick={this.props.hideConfirmDialog}>
-                <div className={classes.Box} onClick={(e) => {e.stopPropagation()}}>
-                    <h2>Are you sure</h2>
-                    <div className={classes.Btns}>
-                        <FormButton type="danger" click={this.props.hideConfirmDialog}>
-                            Confirm
-                        </FormButton>
-                        <FormButton type="light" click={this.props.hideConfirmDialog}>
-                            Cancel
-                        </FormButton>
-                    </div>
+    const render = props.confirm ? (
+        <div className={classes.Modal} onClick={props.hideConfirmDialog}>
+            <div className={classes.Box} onClick={(e) => {e.stopPropagation()}}>
+                <h2>Are you sure</h2>
+                <div className={classes.Btns}>
+                    <FormButton type="danger" click={() => { props.hideConfirmDialog(); props.confirmHandler() }}>
+                        Confirm
+                    </FormButton>
+                    <FormButton type="light" click={props.hideConfirmDialog}>
+                        Cancel
+                    </FormButton>
                 </div>
             </div>
-        )
+        </div>
+    ) : null;
+
+    return render;
+}
+
+const mapStateToProps = state => {
+    return {
+        confirm: state.ui.confirm
     }
 }
 
@@ -34,4 +40,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Confirm);
+export default connect(mapStateToProps, mapDispatchToProps)(Confirm);

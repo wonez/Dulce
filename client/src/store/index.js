@@ -1,6 +1,7 @@
 export {
     tryLogin, 
-    logout
+    logout,
+    updateAuthData
 }from './creators/authCreators'
 export {
     startLoading,

@@ -39,6 +39,13 @@ export const checkCookies = () => {
     }
 }
 
+export const updateAuthData = (userData) => {
+    return dispatch => {
+        dispatch(storeAuthData(userData));
+        storeCookies(userData)
+    }
+}
+
 export const logout = () => {
     return dispatch => {
         deleteCookies();

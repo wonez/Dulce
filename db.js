@@ -1,7 +1,11 @@
 module.exports = () => {
     const mongoose = require('mongoose')
     
-    mongoose.connect('mongodb://localhost:27017/dulce', { useNewUrlParser: true, useCreateIndex: true }).then(res => {
+    mongoose.connect('mongodb://localhost:27017/dulce',{
+        useNewUrlParser: true, 
+        useCreateIndex: true,
+        useFindAndModify: false 
+    }).then(res => {
         console.log('DB connected successfully');
     }).catch(err => {
         console.log(err.message, '\nDB not connected')
