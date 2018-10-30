@@ -16,6 +16,7 @@ class RoundedFormItem extends React.Component {
             input = (
                 <input  className={classList.join(' ')} 
                         type="text" 
+                        style={this.props.style}
                         value={this.props.value}
                         onChange={this.props.onChange}
                         placeholder={this.props.placeholder} />
@@ -35,9 +36,13 @@ class RoundedFormItem extends React.Component {
         } else if(this.props.type=='select'){
             input = (
                 <div className={classes.Select}>
-                    <select >
+                    <select 
+                        value={this.props.value}
+                        onChange={this.props.onChange}
+                    >
                         {this.props.options.map(opt => (
-                                <option key={opt.value} value={opt.value}>{opt.display}</option>
+                                <option key={opt.value} 
+                                        value={opt.value}>{opt.display}</option>
                             ))
                         }
                     </select>
@@ -79,8 +84,14 @@ class RoundedFormItem extends React.Component {
         if(this.props.type=='preparation'){
             result = (
                 <div className={classes.PreparationBox}>
-                    <input placeholder={this.props.placeholder} type="text" className={classes.Preparation}/>
-                    <div onClick={this.props.click} className={classes.Preparation__Button}>X</div>
+                    <input  placeholder={this.props.placeholder} 
+                            type="text" 
+                            className={classes.Preparation}
+                            value={this.props.value}
+                            onChange={this.props.onChange}
+                            />
+                    <div    onClick={this.props.click} 
+                            className={classes.Preparation__Button}>X</div>
                 </div>
             )
         }

@@ -6,7 +6,7 @@ const postSchema = new Schema({
     dateCreated: { type: Date, default: Date.now() },
     imgUrl: String,
     authorId: {type: Schema.Types.ObjectId, ref: 'User' },
-    categories: { type: [ {type: Schema.Types.ObjectId, ref: 'Category'} ], default: [] },
+    category: String,
     ingredients: [ String ],
     directions: [ String ],
     level: String,
