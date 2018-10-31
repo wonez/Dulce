@@ -1,9 +1,14 @@
 import React from 'react'
 
+import { connect } from 'react-redux'
+
 import Aux from '../../hoc/Aux'
 import Toolbar from '../../components/Toolbar/Toolbar'
 import FormButton from '../../UI/FormButton/FormButton'
 import PostDataEntry from '../../components/PostDataEntry/PostDataEntry'
+import Confirm from '../../UI/Confirm/Confirm'
+
+import { showConfirmDialog } from '../../store/index'
 
 import classes from './Create.scss'
 
@@ -124,6 +129,10 @@ class Create extends React.Component {
         })
     }
 
+    submitHandler = () => {
+        console.log('form submited');
+    }
+
     render(){
         return(
             <Aux>
@@ -146,16 +155,25 @@ class Create extends React.Component {
                             <FormButton
                                 type="secondary"
                                 disabled={!this.state.valid}
+                                click={this.submitHandler}
                                 >Create New</FormButton>
                             <FormButton
                                 type="danger"
+                                click={this.props.showConfirmModal}
                                 >Cancel</FormButton>
                         </div>
                     </div>
+                    <Confirm confirmHandler={()=> this.props.history.push('/profile')}/>
                 </div>
             </Aux>
         )
     }
 }
 
-export default Create;
+const mapDispatchToProps = dispatch => {
+    return {
+        showConfirmModal: () => dispatch(showConfirmDialog())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Create);
