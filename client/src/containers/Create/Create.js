@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import Aux from '../../hoc/Aux'
 import Toolbar from '../../components/Toolbar/Toolbar'
@@ -8,9 +9,10 @@ import FormButton from '../../UI/FormButton/FormButton'
 import PostDataEntry from '../../components/PostDataEntry/PostDataEntry'
 import Confirm from '../../UI/Confirm/Confirm'
 
-import { showConfirmDialog } from '../../store/index'
+import { showConfirmDialog, tryCreatePost } from '../../store/index'
 
 import classes from './Create.scss'
+import Loading from '../../UI/Loading/Loading';
 
 class Create extends React.Component {
 
@@ -130,7 +132,15 @@ class Create extends React.Component {
     }
 
     submitHandler = () => {
-        console.log('form submited');
+        const postData = {
+            ...this.state.form,
+            imgUrl: this.state.imgSrc
+        }
+        this.props.tryCreatePost(postData)
+            .then(res => {
+                console.log(res);
+                this.props.history.replace('/newsfeed')
+            })
     }
 
     render(){
@@ -164,6 +174,7 @@ class Create extends React.Component {
                         </div>
                     </div>
                     <Confirm confirmHandler={()=> this.props.history.push('/profile')}/>
+                    <Loading />
                 </div>
             </Aux>
         )
@@ -172,8 +183,9 @@ class Create extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        showConfirmModal: () => dispatch(showConfirmDialog())
+        showConfirmModal: () => dispatch(showConfirmDialog()),
+        tryCreatePost: (postData) => dispatch(tryCreatePost(postData))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Create);
+export default connect(null, mapDispatchToProps)(withRouter(Create));

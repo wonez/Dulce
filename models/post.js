@@ -3,15 +3,16 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
     title: String,
-    dateCreated: { type: Date, default: Date.now() },
-    imgUrl: String,
-    authorId: {type: Schema.Types.ObjectId, ref: 'User' },
-    category: String,
+    description: String,
+    prepTime: Number,
     ingredients: [ String ],
     directions: [ String ],
     level: String,
-    prepTime: Number,
-    likes: Number,
+    category: String,
+    imgUrl: String,
+    authorId: {type: Schema.Types.ObjectId, ref: 'User' },
+    dateCreated: { type: Date, default: Date.now() },
+    likes: { type: Number, default: 0 },
     comments: { type: [ { type: Schema.Types.ObjectId, ref: 'Comment' } ], default: [] },
 })
 

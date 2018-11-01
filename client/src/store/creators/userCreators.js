@@ -7,14 +7,14 @@ export const tryEditProfile = (data) => {
         dispatch(startLoading())
         return new Promise((resolve, reject)=>{
             axios.put(`/user/${data._id}`, data)
+            .catch(err => {
+                reject(err.message)
+                dispatch(endLoading())
+            })
             .then(res => {
                 dispatch(endLoading())
                 dispatch(updateAuthData(res.data))
                 resolve(null)
-            })
-            .catch(err => {
-                reject(err.message)
-                dispatch(endLoading())
             })
         })
     }

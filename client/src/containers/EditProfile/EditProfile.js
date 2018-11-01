@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import Page from '../../hoc/Page/Page'
 import RoundedFormItem from '../../UI/RoundedFormItem/RoundedFormItem';
@@ -265,4 +266,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditProfile));
