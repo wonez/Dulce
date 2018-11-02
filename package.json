@@ -21,6 +21,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "formidable": "^1.2.1",
     "mongoose": "^5.3.4"
   },
   "devDependencies": {

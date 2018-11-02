@@ -35,14 +35,15 @@ const loginUser = async (req, res) => {
       }
 }
 const editUser = async (req, res) => {
-    try{
-        const user = await User.findOneAndUpdate({ _id: req.params.id },{
-            ...req.body
-        }, {new: true})
-        res.status(200).json(user);
-    }catch(err){
-        res.status(500).end(err.message)
-    }
+    console.log(req);
+    // try{
+    //     const user = await User.findOneAndUpdate({ _id: req.params.id },{
+    //         ...req.body
+    //     }, {new: true})
+    //     res.status(200).json(user);
+    // }catch(err){
+    //     res.status(500).end(err.message)
+    // }
 }
 const deleteUser = async (req, res) => {
     try{

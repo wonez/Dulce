@@ -6,7 +6,13 @@ export const tryEditProfile = (data) => {
     return dispatch => {
         dispatch(startLoading())
         return new Promise((resolve, reject)=>{
-            axios.put(`/user/${data._id}`, data)
+            // axios.put(`/user/${data._id}`, data)
+            axios({
+                method: 'PUT',
+                url: `/user/${data._id}`,
+                headers: { 'Content-Type': 'multipart/form-data' },
+                data: JSON.stringify(data)
+            })
             .catch(err => {
                 reject(err.message)
                 dispatch(endLoading())
