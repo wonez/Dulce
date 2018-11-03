@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const formidable = require('formidable');
 
 // const createUser = async (req, res) => {
 //     try{
@@ -35,7 +36,14 @@ const loginUser = async (req, res) => {
       }
 }
 const editUser = async (req, res) => {
-    console.log(req);
+    const form = new formidable.IncomingForm();
+    form.multiples = true;
+    form.uploadDir = 'public/images'
+    form.keepExtensions = true;
+    
+    form.parse(req, (err, fields, files) => {
+        console.log(fields, files)
+    })
     // try{
     //     const user = await User.findOneAndUpdate({ _id: req.params.id },{
     //         ...req.body

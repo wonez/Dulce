@@ -10,7 +10,7 @@ class ImagePicker extends React.Component {
         
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-            this.props.fileHandler(reader.result)
+            this.props.fileHandler(reader.result, file)
         }
     }
 

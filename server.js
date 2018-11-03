@@ -8,6 +8,8 @@ const port = process.env.PORT || 8000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use(express.static('public'))
+
 //cors
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

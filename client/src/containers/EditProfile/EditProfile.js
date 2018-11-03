@@ -27,11 +27,13 @@ class EditProfile extends Component {
                 country: { value: '' },
                 city: { value: '' },
                 biography: { value: '' },
+                avatarUrlFile: null,
+                coverUrlFile: null
             }
         }
     }
     
-    pickHandler = (img, data) => {
+    pickHandler = (img, data, file) => {
         this.setState({
             profile:{
                 ...this.state.profile,
@@ -39,6 +41,10 @@ class EditProfile extends Component {
             },
             form: {
                 ...this.state.form,
+                fields: {
+                    ...this.state.form.fields,
+                    [`${img}File`]: file
+                },
                 valid: true
             }
         })
@@ -111,8 +117,8 @@ class EditProfile extends Component {
     submitHandler = () => {
         this.props.tryEditProfile({
             _id: this.state.profile._id,
-            coverUrl: this.state.profile.coverUrl,
-            avatarUrl: this.state.profile.avatarUrl,
+            coverUrlFile: this.state.form.fields.coverUrlFile,
+            avatarUrlFile: this.state.form.fields.avatarUrlFile,
             password: this.state.form.fields.password.value,
             country: this.state.form.fields.country.value,
             city: this.state.form.fields.city.value,
@@ -166,7 +172,7 @@ class EditProfile extends Component {
                                 id="cover"
                                 label="Change photo"
                                 type="cover"
-                                fileHandler={(data) => { this.pickHandler('coverUrl', data) }}
+                                fileHandler={(data, file) => { this.pickHandler('coverUrl', data, file) }}
                             />
                         {/* choose photo */}
                         <div className={classes.Avatar}
@@ -176,7 +182,7 @@ class EditProfile extends Component {
                                 id="avatar"
                                 label="Choose image"
                                 type="avatar"
-                                fileHandler={(data) => { this.pickHandler('avatarUrl', data) }}
+                                fileHandler={(data, file) => { this.pickHandler('avatarUrl', data, file) }}
                             />
                             {/* choose photo */}
                         </div>                    
