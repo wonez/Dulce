@@ -51,7 +51,7 @@ class Create extends React.Component {
                 valid = valid && 
                     form[key].filter(item => (item != '')).length > 0;
             }else{
-                valid = valid && form[key].length > 0
+                valid = valid && form[key]
             }
         }
         return valid;
@@ -125,16 +125,22 @@ class Create extends React.Component {
         })
     }
 
-    fileHandler = (data) => {
-        this.setState({
-            imgSrc: data
+    fileHandler = (data, file) => {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                imgSrc: data,
+                form: {
+                    ...prevState.form,
+                    img: file
+                }
+            }
         })
     }
 
     submitHandler = () => {
         const postData = {
-            ...this.state.form,
-            imgUrl: this.state.imgSrc
+            ...this.state.form
         }
         this.props.tryCreatePost(postData)
             .then(res => {
@@ -164,7 +170,7 @@ class Create extends React.Component {
                         <div className={classes.Submit}>
                             <FormButton
                                 type="secondary"
-                                disabled={!this.state.valid}
+                                disabled={!(this.state.valid && this.state.imgSrc)}
                                 click={this.submitHandler}
                                 >Create New</FormButton>
                             <FormButton

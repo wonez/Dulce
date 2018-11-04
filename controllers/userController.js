@@ -58,7 +58,6 @@ const editUser = async (req, res) => {
             const user = await User.findOneAndUpdate({ _id: req.params.id },updated, {new: true})
             res.status(200).json(user);
         } catch(err){
-            console.log(err);
             res.status(500).end(err.message)
         }
     })

@@ -1,9 +1,12 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 const db = require('./db')();
 const bodyParser = require('body-parser')
 
 const port = process.env.PORT || 8000
+
+app.use(morgan('dev'))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -15,7 +18,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true)
   res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
 
