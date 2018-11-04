@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "proxy": "http://localhost:8000",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js --open",
     "build": "webpack --config webpack.config.prod.js"
@@ -43,5 +42,6 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
-  }
+  },
+  "proxy": "http://localhost:8000"
 }
