@@ -1,8 +1,11 @@
 const express = require('express')
 const morgan = require('morgan')
-const app = express()
-const db = require('./db')();
 const bodyParser = require('body-parser')
+
+require('./db')();
+require('./utlity/passport')
+
+const app = express()
 
 const port = process.env.PORT || 8000
 

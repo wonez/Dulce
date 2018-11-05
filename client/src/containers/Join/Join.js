@@ -10,6 +10,10 @@ import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
 import ToolbarPlain from '../../components/ToolbarPlain/ToolbarPlain'
 
+import withError from '../../hoc/withError'
+
+import axios from '../../utility/axios'
+
 import { tryLogin, trySignUp} from '../../store/creators/authCreators'
 
 class Join extends Component {
@@ -232,4 +236,5 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Join));
+// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Join));
+export default connect(mapStateToProps, mapDispatchToProps)(withError(Join, axios));

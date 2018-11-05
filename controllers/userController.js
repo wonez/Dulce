@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const formidable = require('formidable');
-
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const { localSecret } = require('../utlity/passport');
 // const createUser = async (req, res) => {
 //     try{
 //         const user = await new User({ ...req.body })
@@ -20,20 +22,29 @@ const formidable = require('formidable');
 // }
 const registerUser = async (req, res) => {
     try{
+        req.body.password = User.hashPassword(req.body.password);
         const user = await new User({ ...req.body })
             .save();
-        res.status(200).json(user);
+        const token = jwt.sign(user.toJSON(), localSecret);                
+        res.status(200).json({user, token});
     }catch(err){
+        console.log(err.message);
         res.status(500).end(err.message)
     }
 }
 const loginUser = async (req, res) => {
-      try{
-          const user = await User.findOne({email: req.body.email})
-          res.status(200).json(user);
-      }catch(err){
-          res.status(500).end(err.message)
-      }
+        passport.authenticate('local', {session: false}, (err, user, info) => {
+            if (err || !user) {
+                return res.status(400).json(info);
+            }
+           req.login(user, {session: false}, (err) => {
+               if (err) {
+                   res.send(err);
+               }
+               const token = jwt.sign(user.toJSON(), localSecret);
+               return res.json({user, token});
+            });
+        })(req, res);
 }
 const editUser = async (req, res) => {
     const form = new formidable.IncomingForm();
@@ -43,8 +54,12 @@ const editUser = async (req, res) => {
     
     form.parse(req, async (err, fields, files) => {
         try{
-            //hash password
             const updated = {...fields}
+            if(updated.password){
+                updated.password = User.hashPassword(updated.password)
+            } else {
+                delete updated.password;
+            }
             if(files.avatarUrlFile){
                 const paths = files.avatarUrlFile.path.split('/');
                 paths[0] = 'http://localhost:8000/';
@@ -56,7 +71,8 @@ const editUser = async (req, res) => {
                 updated.coverUrl = paths.join('/');
             }
             const user = await User.findOneAndUpdate({ _id: req.params.id },updated, {new: true})
-            res.status(200).json(user);
+            const token = jwt.sign(user.toJSON(), localSecret)
+            res.status(200).json({user, token});
         } catch(err){
             res.status(500).end(err.message)
         }
