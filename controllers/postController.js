@@ -3,13 +3,12 @@ const { createForm, transformPath } = require('../utlity/form')
 
 const createPost = async (req, res) => {
     const form = createForm();
-    console.log(req);
     form.parse(req, async(err, fields, files) => {
-        console.log(fields);
         try{
             const postData = {
                 ...fields,
-                imgUrl: transformPath(files.img.path)
+                imgUrl: transformPath(files.img.path),
+                authorId: req.user._id
             }
             const post = await new Post(postData).save();
             res.status(200).json(post);
@@ -26,6 +25,16 @@ const editPost = async (req, res) => {
         });
         res.status(200).json(post)
     }catch(err){
+        res.status(500).end(err.message)
+    }
+}
+
+const getUserPosts = async(req, res) => {
+    try{
+        const authorId = req.params.userId;
+        const posts = await Post.find({ authorId });
+        res.status(200).json({posts})
+    } catch(err) {
         res.status(500).end(err.message)
     }
 }
@@ -62,5 +71,6 @@ module.exports = {
     createPost,
     editPost,
     deletePost,
-    getManyPosts
+    getManyPosts,
+    getUserPosts
 };

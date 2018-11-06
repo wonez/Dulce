@@ -1,7 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-
 require('./db')();
 require('./utlity/passport')
 
@@ -24,6 +23,8 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
+
+app.use(require('./utlity/tokenChecker'));
 
 app.use('/api', require('./routes.js'));
 
