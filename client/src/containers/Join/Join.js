@@ -201,7 +201,7 @@ class Join extends Component {
         let redirect = null;
 
         if(this.props.isLogged){
-            const to = this.props.location.state ? this.props.location.state.from.pathname : '/profile';
+            const to = this.props.location.state ? this.props.location.state.from.pathname : `/profile/${this.props.userId}`;
             redirect = <Redirect to={to}/> 
         }
         
@@ -225,7 +225,8 @@ class Join extends Component {
 const mapStateToProps = state => {
     return {
         isLogged: state.auth.isLogged,
-        loading: state.ui.loading
+        loading: state.ui.loading,
+        userId: state.auth._id
     }
 }
 

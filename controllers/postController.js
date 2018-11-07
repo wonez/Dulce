@@ -6,13 +6,14 @@ const createPost = async (req, res) => {
     form.parse(req, async(err, fields, files) => {
         try{
             const postData = {
-                ...fields,
+                ...JSON.parse(fields.data),
                 imgUrl: transformPath(files.img.path),
-                authorId: req.user._id
+                author: req.user._id
             }
             const post = await new Post(postData).save();
             res.status(200).json(post);
         }catch(err){
+            console.log(err.message);
             res.status(500).end(err.message)
         }
     })
@@ -31,8 +32,10 @@ const editPost = async (req, res) => {
 
 const getUserPosts = async(req, res) => {
     try{
-        const authorId = req.params.userId;
-        const posts = await Post.find({ authorId });
+        const author = req.params.userId;
+        const posts = await Post
+            .find({ author })
+            .populate('author', { avatarUrl: 1, name: 1, surname: 1 });
         res.status(200).json({posts})
     } catch(err) {
         res.status(500).end(err.message)

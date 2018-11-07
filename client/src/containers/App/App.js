@@ -33,7 +33,7 @@ class App extends Component {
 					<Route path='/' exact component={Landing}/>
 					<Route path="/join" component={Join}/>
 
-					<Protected isLogged={this.props.isLogged} path="/profile" component={Profile}/>
+					<Protected isLogged={this.props.isLogged} path="/profile/:userId" component={Profile}/>
 					<Route path="/post" component={Post}/>
 					<Route path="/newsfeed" component={NewsFeed}/>
 					<Route path="/search" component={Search}/>

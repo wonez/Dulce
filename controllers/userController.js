@@ -3,14 +3,19 @@ const formidable = require('formidable');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const config = require('../utlity/jwtConfig');
-// const getUser = async (req, res) => {
-//     try{
-//         const user = await User.findById(req.params.id)
-//         res.status(200).json(user);
-//     }catch(err){
-//         res.status(500).end(err.message)
-//     }
-// }
+
+const getUser = async (req, res) => {
+    try{
+        const user = await User.findById(req.params.id, {
+            password: 0,
+            email: 0
+        })
+        res.status(200).json(user);
+    }catch(err){
+        res.status(500).end(err.message)
+    }
+}
+
 const registerUser = async (req, res) => {
     try{
         req.body.password = User.hashPassword(req.body.password);
@@ -25,6 +30,7 @@ const registerUser = async (req, res) => {
         res.status(500).end(err.message)
     }
 }
+
 const loginUser = async (req, res) => {
         passport.authenticate('local', {session: false}, (err, user, info) => {
             if (err || !user) {
@@ -40,6 +46,7 @@ const loginUser = async (req, res) => {
             });
         })(req, res);
 }
+
 const editUser = async (req, res) => {
     const form = new formidable.IncomingForm();
     form.multiples = true;
@@ -73,6 +80,7 @@ const editUser = async (req, res) => {
         }
     })
 }
+
 const deleteUser = async (req, res) => {
     try{
         await User.findOneAndDelete(req.params.id)
@@ -83,8 +91,7 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {
-    // createUser,
-    // getUser,
+    getUser,
     loginUser,
     registerUser,
     editUser,

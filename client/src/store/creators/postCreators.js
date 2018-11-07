@@ -6,9 +6,8 @@ export const tryCreatePost = (data) => {
         dispatch(startLoading())
         return new Promise((resolve, reject) => {
             const formData = new FormData();
-            for(let key in data){   
-                formData.append(key, data[key])
-            }
+            formData.append('img', data.img)
+            formData.append('data', JSON.stringify(data))
             axios({
                 method: 'post',
                 url: '/post',

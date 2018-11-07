@@ -8,17 +8,17 @@ import Popup from '../../UI/Popup/Popup'
 class Card extends React.Component {
     
     render() {
-        const date = this.props.data.date.toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        const date = new Date(this.props.data.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
         return (
             <div className={classes.Card}>
                 <div className={classes.Card__AuthorBox}>
                     <div className={classes.Card__Avatar}
-                        style={{ backgroundImage: `url(${this.props.data.author.imgPath})` }}>
+                        style={{ backgroundImage: `url(${this.props.data.author.avatarUrl})` }}>
                         {/* slika */}
                     </div>
                     <div className={classes.Card__Data}>
-                        <h5 className={classes.Card__Data__Name}>{this.props.data.author.name}</h5>
+                        <h5 className={classes.Card__Data__Name}>{`${this.props.data.author.name} ${this.props.data.author.surname}`}</h5>
                         <p className={classes.Card__Data__Date}>{date}</p>
                     </div>
                     <Popup />
@@ -27,14 +27,14 @@ class Card extends React.Component {
                     {this.props.data.description}
                 </p>
                 <div className={classes.Card__Image}
-                    style={{ backgroundImage: `url(${this.props.data.imgPath})` }}>
+                    style={{ backgroundImage: `url(${this.props.data.imgUrl})` }}>
                     {/* slika */}
                 </div>
-                <h2 onClick={() => this.props.singlePost(this.props.data.heading)} className={classes.Card__Heading}>{this.props.data.heading} &rarr;</h2>
+                <h2 onClick={() => this.props.singlePost(this.props.data.title)} className={classes.Card__Heading}>{this.props.data.title} &rarr;</h2>
                 <div style={{ padding: '0 2rem' }}>
-                    <Summary time={this.props.data.time}
-                        difficulty={this.props.data.difficulty}
-                        hearts={this.props.data.hearts} />
+                    <Summary time={this.props.data.prepTime}
+                        difficulty={this.props.data.level}
+                        hearts={this.props.data.likes} />
                 </div>
             </div>
         )

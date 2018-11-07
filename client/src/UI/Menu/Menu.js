@@ -26,7 +26,7 @@ class MenuBtn extends Component {
                 <div onClick={this.uncheck} className={classes.MenuBg}>
                 </div>
                 <div className={classes.Menu}>
-                    <a onClick={() => {this.goTo('/profile')}} className={classes.Menu__Btn}>
+                    <a onClick={() => {this.goTo(`/profile/${this.props.userId}`)}} className={classes.Menu__Btn}>
                         My Profile
                     </a>
                     <a onClick={() => {this.goTo('/editProfile')}} className={classes.Menu__Btn}>
@@ -44,10 +44,16 @@ class MenuBtn extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        userId: state.auth.user._id
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         logout: () => dispatch(logout())
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(MenuBtn));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MenuBtn));

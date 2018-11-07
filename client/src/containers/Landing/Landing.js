@@ -16,8 +16,8 @@ class Landing extends Component {
 
         let redirect = null;
 
-        if(this.props.isLogged){
-            const to = this.props.location.state ? this.props.location.state.from.pathname : '/profile';
+        if(this.props.user){
+            const to = this.props.location.state ? this.props.location.state.from.pathname : `/profile/${this.props.user._id}`;
             redirect = <Redirect to={to}/> 
         }
         
@@ -32,7 +32,7 @@ class Landing extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLogged: state.auth.isLogged
+        user: state.auth.user
     }
 }
 

@@ -144,7 +144,6 @@ class Create extends React.Component {
         }
         this.props.tryCreatePost(postData)
             .then(res => {
-                console.log(res);
                 this.props.history.replace('/newsfeed')
             })
     }
