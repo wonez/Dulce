@@ -24,18 +24,9 @@ class Timeline extends Component {
             })
     }
 
-    singlePostHandler = (heading) => {
-        const post = this.state.items.find( post => {
-            return post.heading === heading
-        })
-        this.props.history.push({
-            pathname: '/post',
-            state: {
-                item: post
-            }
-        });
+    singlePostHandler = (id) => {
+        this.props.history.replace(`/post/${id}`)
     }
-
 
     render(){
         return(

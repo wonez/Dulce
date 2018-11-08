@@ -9,7 +9,7 @@ const ProfileCover = (props) => {
     let bg = 'white'
     let avatar = 'white'
     let fullName = ''
-    let follow = null
+    let follow = <div style={{width: "160px"}}></div>
 
     if(props.profile){
         bg = `linear-gradient(to bottom, transparent, rgba(0,0,0,.6)), url('${props.profile.coverUrl}')`;
@@ -18,11 +18,9 @@ const ProfileCover = (props) => {
 
         if(props.userId !== props.profile._id){
             follow = (
-                <div style={{marginRight: '3rem'}}>
-                    <BtnPrimary size="big">
-                        Follow
-                    </BtnPrimary>
-                </div>
+                <BtnPrimary size="big">
+                    Follow
+                </BtnPrimary>
             )
         }
     }
@@ -41,7 +39,9 @@ const ProfileCover = (props) => {
                     {/* slika */}
                 </div>
                 <h2 className={classes.ProfileCover__Data__Name}>{fullName}</h2>                
-                {follow}
+                <div style={{marginRight: '3rem'}}>
+                    {follow}
+                </div>
             </div>
         </div>
     );
@@ -49,7 +49,7 @@ const ProfileCover = (props) => {
 
 const mapStateToProps = state => {
     return {
-        userId: state.auth.user_id
+        userId: state.auth.user._id
     }
 }
 

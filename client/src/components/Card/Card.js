@@ -30,7 +30,7 @@ class Card extends React.Component {
                     style={{ backgroundImage: `url(${this.props.data.imgUrl})` }}>
                     {/* slika */}
                 </div>
-                <h2 onClick={() => this.props.singlePost(this.props.data.title)} className={classes.Card__Heading}>{this.props.data.title} &rarr;</h2>
+                <h2 onClick={() => this.props.singlePost(this.props.data._id)} className={classes.Card__Heading}>{this.props.data.title} &rarr;</h2>
                 <div style={{ padding: '0 2rem' }}>
                     <Summary time={this.props.data.prepTime}
                         difficulty={this.props.data.level}
