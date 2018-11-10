@@ -6,22 +6,52 @@ import Summary from '../Summary/Summary';
 
 const PostData = (props) => {
 
-    const date = props.item.date.toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    let date = ''
+    let authorImg = ''
+    let authorName = ''
+    let ingredients = ''
+    let directions = ''
+
+    if(props.item.title){
+        date = new Date(props.item.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });   
+        authorImg = props.item.author.avatarUrl;
+        authorName = props.item.author.name + ' ' + props.item.author.surname
+
+        ingredients = props.item.ingredients.map(ing => {
+            return (
+                <li className={classes.Data__Preparation__IngItem}
+                    key={ing}>
+                    <span className={classes.Data__Preparation__ItemTag}>&gt;</span>
+                    {ing}
+                </li>
+            )
+        })
+
+        directions = props.item.directions.map((dir, i) => {
+            return (
+                <li className={classes.Data__Preparation__DescItem}
+                    key={dir}>
+                    <span className={classes.Data__Preparation__ItemTag}>{i + 1}.</span>
+                    {dir}
+                </li>
+            )
+        })
+    } 
 
     return (
         <div className={classes.Data}>
-            <h2 className={classes.Data__Heading}>{props.item.heading}</h2>
+            <h2 className={classes.Data__Heading}>{props.item.title}</h2>
             <div className={classes.Data__Image}
-                style={{ backgroundImage: `url(${props.item.imgPath})` }} >
+                style={{ backgroundImage: `url(${props.item.imgUrl})` }} >
                 {/* slika */}
             </div>
             <div className={classes.Data__AuthorContainer}>
                 <div className={classes.Data__Author}>
                     <div className={classes.Data__Author__Avatar}
-                        style={{ backgroundImage: `url(${props.item.author.imgPath})` }} >
+                        style={{ backgroundImage: `url(${authorImg})` }} >
                         {/* slika */}
                     </div>
-                    <h4 className={classes.Data__Author__Name}>{props.item.author.name}</h4>
+                    <h4 className={classes.Data__Author__Name}>{authorName}</h4>
                 </div>
                 <p className={classes.Data__Date}>{date}</p>
             </div>
@@ -32,30 +62,19 @@ const PostData = (props) => {
                 <div className={classes.Data__Preparation__Ingredients}>
                     <h3 className={classes.Data__Preparation__Heading}>Ingredients</h3>
                     <ul className={classes.Data__Preparation__IngList}>
-                        {props.item.ingredients.map(ing => {
-                            return <li className={classes.Data__Preparation__IngItem}
-                                key={ing}>
-                                <span className={classes.Data__Preparation__ItemTag}>&gt;</span>
-                                {ing}
-                            </li>
-                        })}
+                        {ingredients}
                     </ul>
                 </div>
                 <div className={classes.Data__Preparation__Directions}>
                     <h3 className={classes.Data__Preparation__Heading}>Directions</h3>
                     <ul className={classes.Data__Preparation__DirList}>
-                        {props.item.directions.map((dir, i) => {
-                            return <li className={classes.Data__Preparation__DescItem}
-                                key={dir}>
-                                <span className={classes.Data__Preparation__ItemTag}>{i + 1}.</span>
-                                {dir}</li>
-                        })}
+                        {directions}
                     </ul>
                 </div>
             </div>
-            <Summary time={props.item.time}
-                difficulty={props.item.difficulty}
-                hearts={props.item.hearts} />
+            <Summary time={props.item.prepTime}
+                difficulty={props.item.level}
+                hearts={props.item.likes} />
         </div>
     )
 }
