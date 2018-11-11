@@ -124,7 +124,7 @@ class EditProfile extends Component {
             city: this.state.form.fields.city.value,
             biography: this.state.form.fields.biography.value,
         }).then(() => {
-            this.props.history.replace('/profile')
+            this.props.history.replace('/')
         })
     }
 

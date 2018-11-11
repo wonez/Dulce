@@ -20,14 +20,30 @@ const createPost = async (req, res) => {
 }
 
 const editPost = async (req, res) => {
-    try{
-        const post = await Post.findOneByIdAndUpdate(req.params.id,{
-            ...req.body
-        });
-        res.status(200).json(post)
-    }catch(err){
-        res.status(500).end(err.message)
-    }
+    const form = createForm();
+    form.parse(req, async(err, fields, files) => {
+        try{
+            const postId = req.params.id
+            const post = await Post.findById(postId);
+            if(req.user._id == post.author){
+                const data = JSON.parse(fields.data);
+                for(let key in data){
+                    post[key] = data[key]
+                }
+                if(files.img){
+                    post.imgUrl = transformPath(files.img.path)
+                    //remove old photo
+                }
+                post.save();
+                res.status(200).json(post);
+            } else {
+                throw new Error('Unauthorized')
+            }
+        }catch(err){
+            console.log(err.message);
+            res.status(500).end(err.message)
+        }
+    })
 }
 
 const getUserPosts = async(req, res) => {

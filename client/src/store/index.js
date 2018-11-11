@@ -13,5 +13,6 @@ export {
     tryEditProfile
 } from './creators/userCreators'
 export {
-    tryCreatePost
+    tryCreatePost,
+    tryEditPost
 } from './creators/postCreators'

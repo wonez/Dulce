@@ -7,12 +7,13 @@ import Aux from '../../hoc/Aux'
 import Toolbar from '../../components/Toolbar/Toolbar'
 import FormButton from '../../UI/FormButton/FormButton'
 import PostDataEntry from '../../components/PostDataEntry/PostDataEntry'
-import Confirm from '../../UI/Confirm/Confirm'
 
 import { showConfirmDialog, tryCreatePost } from '../../store/index'
 
 import classes from './Create.scss'
+
 import Loading from '../../UI/Loading/Loading';
+import Confirm from '../../UI/Confirm/Confirm'
 
 class Create extends React.Component {
 
@@ -144,7 +145,7 @@ class Create extends React.Component {
         }
         this.props.tryCreatePost(postData)
             .then(res => {
-                this.props.history.replace('/newsfeed')
+                this.props.history.replace('/')
             })
     }
 

@@ -9,7 +9,6 @@ class Card extends React.Component {
     
     render() {
         const date = new Date(this.props.data.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-
         return (
             <div className={classes.Card}>
                 <div className={classes.Card__AuthorBox}>
@@ -21,7 +20,7 @@ class Card extends React.Component {
                         <h5 className={classes.Card__Data__Name}>{`${this.props.data.author.name} ${this.props.data.author.surname}`}</h5>
                         <p className={classes.Card__Data__Date}>{date}</p>
                     </div>
-                    <Popup />
+                    <Popup post={this.props.data}/>
                 </div>
                 <p className={classes.Card__Description} >
                     {this.props.data.description}
