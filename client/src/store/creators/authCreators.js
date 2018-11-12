@@ -11,12 +11,13 @@ export const tryLogin = (userData) => {
                 console.log(err.message);
             })
             .then(res => {
+                console.log(res);
                 dispatch(endLoading())
                 if(res.status == 200) return res.data
                 else throw new Error(res.status)
             }).then(data => {
-                dispatch(storeAuthData(data))
-                storeCookies(data)
+                console.log(data);
+                dispatch(updateAuthData(data))
             }).catch(err => {
                 dispatch(endLoading());
                 console.log(err.message);
@@ -28,13 +29,22 @@ export const trySignUp = (userData) => {
     return dispatch => {
         dispatch(startLoading())
         axios.post('/user/register', userData)
+            .catch(err => {
+                dispatch(endLoading());
+                console.log(err.message);
+            })
             .then(res => {
                 dispatch(endLoading())
-                return res.data
+                if(!res) throw new Error('Something went wrong')
+                if(res.status == 200) return res.data
+                else throw new Error(res.status)
             }).then(data => {
-                dispatch(storeAuthData(data))
-                storeCookies(data)
-            })
+                console.log(data);
+                dispatch(updateAuthData(data))
+            }).catch(err => {
+                dispatch(endLoading());
+                console.log(err.message);
+        })
     }
 }
 

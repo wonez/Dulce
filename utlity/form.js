@@ -10,6 +10,6 @@ exports.createForm = () => {
 
 exports.transformPath = (path) => {
     const paths = path.split('/');
-    paths[0] = 'http://localhost:8000/';
+    paths[0] = 'http://localhost:8000';
     return paths.join('/')
 }

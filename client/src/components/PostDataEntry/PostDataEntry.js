@@ -33,7 +33,7 @@ const PostDataEntry = (props) => {
                     {props.form.ingredients.map((item, i) => (
                         <RoundedFormItem
                             placeholder={`Element ${i + 1}`}
-                            type="preparation"
+                            type="ingredients"
                             label="&gt;"
                             key={i + 1}
                             value={item}
@@ -52,7 +52,7 @@ const PostDataEntry = (props) => {
                     {props.form.directions.map((item, i) => (
                         <RoundedFormItem
                             placeholder={`Step ${i + 1}`}
-                            type="preparation"
+                            type="directions"
                             label={i + 1}
                             key={i + 1}
                             value={item}

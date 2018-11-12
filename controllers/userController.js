@@ -24,10 +24,13 @@ const registerUser = async (req, res) => {
         const expiresIn = 1000 * 60 * 60//ms;
         const token = jwt.sign(user.toJSON(), config.secret);
         // TODO: refreshtokens
-        res.status(200).json({user, token, refreshToken, expiresIn});
-    }catch(err){
-        console.log(err.message);
-        res.status(500).end(err.message)
+        res.status(200).json({user, token, expiresIn});
+    } catch(err) {
+        let msg = err.message;
+        if(err.code === 11000){
+            msg = 'User already exists'
+        }
+        res.status(500).json({message: msg})
     }
 }
 

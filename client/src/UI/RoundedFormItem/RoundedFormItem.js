@@ -81,7 +81,7 @@ class RoundedFormItem extends React.Component {
             </div>
         )
 
-        if(this.props.type=='preparation'){
+        if(this.props.type=='ingredients'){
             result = (
                 <div className={classes.PreparationBox}>
                     <input  placeholder={this.props.placeholder} 
@@ -93,6 +93,21 @@ class RoundedFormItem extends React.Component {
                     <div    onClick={this.props.click} 
                             className={classes.Preparation__Button}>X</div>
                 </div>
+            )
+        }
+
+        if(this.props.type == 'directions'){
+            result = (
+                <div className={classes.PreparationBox}>
+                    <textarea   placeholder={this.props.placeholder} 
+                                type="text" 
+                                className={[classes.Preparation, classes.Directions].join(' ')}
+                                value={this.props.value}
+                                onChange={this.props.onChange}
+                            />
+                    <div    onClick={this.props.click} 
+                            className={classes.Preparation__Button}>X</div>
+                </div>   
             )
         }
 
