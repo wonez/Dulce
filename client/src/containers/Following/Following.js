@@ -2,80 +2,42 @@ import React, { Component } from 'react'
 
 import classes from './Following.scss';
 
+import { IconUser } from '../../UI/Icons/Icons'
+
 import Person from '../../components/Person/Person'
+import Aux from '../../hoc/Aux';
 
 class Following extends Component{
 
     state = {
-        people: [
-            {
-                name: 'Ben Franklin',
-                followers: 1589,
-                imgPath: 'src/assets/profile.jpg',
-                id: 1,
-            },
-            {
-                name: 'JJ Thompson',
-                followers: 2314,
-                imgPath: 'src/assets/profile.jpg',
-                id: 2,
-            },
-            {
-                name: 'Bjarne Stroustrup',
-                followers: 512,
-                imgPath: 'src/assets/profile.jpg',
-                id: 3
-            },
-            {
-                name: 'Ben Franklin',
-                followers: 1589,
-                imgPath: 'src/assets/profile.jpg',
-                id: 4
-            },
-            {
-                name: 'JJ Thompson',
-                followers: 2314,
-                imgPath: 'src/assets/profile.jpg',
-                id: 5
-            },
-            {
-                name: 'Bjarne Stroustrup',
-                followers: 512,
-                imgPath: 'src/assets/profile.jpg',
-                id: 6
-            },
-            {
-                name: 'Ben Franklin',
-                followers: 1589,
-                imgPath: 'src/assets/profile.jpg',
-                id: 7
-            },
-            {
-                name: 'JJ Thompson',
-                followers: 2314,
-                imgPath: 'src/assets/profile.jpg',
-                id: 8
-            },
-            {
-                name: 'Bjarne Stroustrup',
-                followers: 512,
-                imgPath: 'src/assets/profile.jpg',
-                id: 9                
-            },
-        ]
+        people: []
     }
 
     render(){
-        return(
-            <div className={classes.Following}>
-                <h2 className={classes.Following__Heading}>Followers: 9</h2>
-                <div className={classes.Following__Container}>
-                    {this.state.people.map(person => (
-                        <Person data={person} key={person.id} />
-                    ))}
+
+        let content = (
+            <div className={classes.FollowingEmpty}>
+                <div className={classes.Icon}>
+                    <IconUser />
                 </div>
+                <p>User is not following anyone</p>
             </div>
         )
+
+        if(this.state.people.length > 0){
+            content = (
+                <div className={classes.Following}>
+                    <h2 className={classes.Following__Heading}>Followers: {this.state.people.length}</h2>
+                    <div className={classes.Following__Container}>
+                        {this.state.people.map(person => (
+                            <Person data={person} key={person.id} />
+                            ))}
+                    </div>
+                </div>
+            )
+        }
+
+        return content;
     }
 }
 

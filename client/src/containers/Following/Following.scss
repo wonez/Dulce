@@ -15,3 +15,23 @@
         grid-gap: 3rem 0;
     }
 }
+
+.FollowingEmpty{
+    background: $color-white;
+    width: 70%;
+    padding: 3rem;
+    margin: 0 auto;
+    border-radius: 1rem;
+    font-size: 2rem;
+    text-align: center;
+    color: $color-gray-light;
+    .Icon{
+        fill: $color-gray-lighter;
+        width: 7rem;
+        height: 7rem;
+        margin: 0 auto;
+    }
+    p{
+        padding-top: 2rem;
+    }
+}
