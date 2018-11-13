@@ -7,7 +7,8 @@ router.post('/', checkAuth, postController.createPost);
 router.get('/:id', postController.getPost);
 
 router.get('/user/:userId', postController.getUserPosts)
-// router.get('/', postController.getManyPosts);
+
+router.get('/', postController.getManyPosts);
 
 //check that the post belongs to the editor
 router.put('/:id', checkAuth, postController.editPost);

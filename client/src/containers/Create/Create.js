@@ -25,22 +25,13 @@ class Create extends React.Component {
             {value: 'hard', display: 'Hard'}
         ],
         categories: [],
-        // categories: [
-        //     {value: '<15min', display: 'Less than 15 minutes'},
-        //     {value: 'chocolate', display: 'Chocolate'},
-        //     {value: 'birthday', display: 'Birthday'},
-        //     {value: 'fruit', display: 'Fruit Made'},
-        //     {value: 'nobaking', display: 'No Baking needed'},
-        //     {value: 'grandmas', display: 'Grandmas Recipe'},
-        //     {value: 'wedding', display: 'Wedding'},
-        // ],
         form: {
             title: '',
             description: '',
             prepTime: '',
             ingredients: ['', '', '', '', ''],
             directions: ['', '', ''],
-            level: 'Easy',
+            level: 'easy',
             category: '<15min',
         },
         valid: false
@@ -104,6 +95,7 @@ class Create extends React.Component {
                         }
                     }
                 })
+                break;
             case 'directions':
             case 'ingredients':
                 this.setState(prevState => {

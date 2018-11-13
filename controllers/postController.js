@@ -78,7 +78,9 @@ const deletePost = async (req, res) => {
 
 const getManyPosts = async (req, res) => {
     try{
-        const posts = await Post.find({})
+        const posts = await Post
+            .find({})
+            .populate('author', { avatarUrl: 1, name: 1, surname: 1 });
         res.status(200).json(posts);
     }catch(err){
         res.status(500).end(err.message)

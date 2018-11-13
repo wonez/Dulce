@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from '../../utility/axios'
 
 import Toolbar from '../../components/Toolbar/Toolbar';
 import Card from '../../components/Card/Card';
@@ -9,46 +10,22 @@ import classes from './NewsFeed.scss'
 class NewsFeed extends React.Component {
 
     state = {
-        items: [
-            {
-                author: {
-                    name: 'John Doe',
-                    imgPath: 'src/assets/profile.jpg'
-                },
-                date: new Date(1538983770888),
-                description: 'New way to make new kind of pancakes. Easy to start, tastes perfect after first try already. Tastes like a chocolate while still having flavour of your favorite fruit.',
-                imgPath: 'src/assets/mp-img-1.jpg',
-                heading: 'Raspberry Pancakes',
-                time: 25,
-                difficulty: 'Beginner',
-                hearts: 131
-            },
-            {
-                author: {
-                    name: 'Edin Dzeko',
-                    imgPath: 'src/assets/profile.jpg'
-                },
-                date: new Date(1538983770888),
-                description: 'New way to make new kind of pancakes. Easy to start, tastes perfect after first try already. Tastes like a chocolate while still having flavour of your favorite fruit.',
-                imgPath: 'src/assets/mp-img-2.jpg',
-                heading: 'Tiramisu',
-                time: 25,
-                difficulty: 'Beginner',
-                hearts: 131
-            }
-        ]
+        items: []
     }
 
-    handleSinglePost = (heading) => {
-        const post = this.state.items.find( post => {
-            return post.heading === heading
-        })
-        this.props.history.push({
-            pathname: '/post',
-            state: {
-                item: post
-            }
-        });
+    componentDidMount(){
+        axios.get('/post')
+            .then(res => {
+                if(res.status == 200){
+                    this.setState({
+                        items: res.data
+                    })
+                }
+            })
+    }
+
+    handleSinglePost = (id) => {
+        this.props.history.push(`post/${id}`)
     }
 
     render(){
@@ -57,7 +34,7 @@ class NewsFeed extends React.Component {
                 <Toolbar />
                 <div className={classes.NewsFeed} >
                     {this.state.items.map( item => {
-                        return <Card    key={item.heading}
+                        return <Card    key={item._id}
                                         data={item} 
                                         singlePost={this.handleSinglePost} />
                     })}

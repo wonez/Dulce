@@ -11,6 +11,7 @@ const PostData = (props) => {
     let authorName = ''
     let ingredients = ''
     let directions = ''
+    let summary = ''
 
     if(props.item.title){
         date = new Date(props.item.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });   
@@ -36,6 +37,11 @@ const PostData = (props) => {
                 </li>
             )
         })
+        summary = (
+            <Summary time={props.item.prepTime}
+                difficulty={props.item.level}
+                hearts={props.item.likes} />
+        )
     } 
 
     return (
@@ -72,9 +78,7 @@ const PostData = (props) => {
                     </ul>
                 </div>
             </div>
-            <Summary time={props.item.prepTime}
-                difficulty={props.item.level}
-                hearts={props.item.likes} />
+            {summary}
         </div>
     )
 }
