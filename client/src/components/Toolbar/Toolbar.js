@@ -6,7 +6,7 @@ import classes from './Toolbar.scss';
 import IconButton from '../../UI/IconButton/IconButton'
 import Menu from '../../UI/Menu/Menu'
 
-import { IconMagnifyingGlass, IconPlus, IconCake } from '../../UI/Icons/Icons'
+import { IconMagnifyingGlass, IconPlus, IconCake, IconCategories } from '../../UI/Icons/Icons'
 
 class Toolbar extends Component {
 
@@ -21,6 +21,10 @@ class Toolbar extends Component {
 
     handleCreate = (e) => {
         this.props.history.push('/create')
+    }
+
+    handleCategories = (e) => {
+        this.props.history.push('/categories')
     }
 
     render(){
@@ -40,6 +44,9 @@ class Toolbar extends Component {
                     </form>
                 </div>
                 <div className={classes.Buttons}>
+                    <IconButton click={this.handleCategories}>
+                        <IconCategories />
+                    </IconButton>
                     <IconButton click={this.handleCreate}>
                         <IconPlus />
                     </IconButton>

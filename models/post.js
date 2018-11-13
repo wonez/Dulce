@@ -8,7 +8,7 @@ const postSchema = new Schema({
     ingredients: [ String ],
     directions: [ String ],
     level: String,
-    category: String,
+    category: {type: Schema.Types.ObjectId, ref: 'Category'},
     imgUrl: String,
     author: {type: Schema.Types.ObjectId, ref: 'User' },
     dateCreated: { type: Date, default: Date.now() },

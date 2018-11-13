@@ -15,7 +15,7 @@ const Summary = ({ time, difficulty, hearts }) => {
                 <IconClock/> &nbsp; {time} min
             </p>
             <p className={classes.Summary__Icon}>
-                <IconLevel /> &nbsp; {difficulty}
+                <IconLevel /> &nbsp; {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
             </p>
         </div>
     );

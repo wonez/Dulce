@@ -38,7 +38,7 @@ class App extends Component {
 					{/* <Route path="/post" component={Post}/> */}
 					<Route path="/newsfeed" component={NewsFeed}/>
 					<Route path="/search" component={Search}/>
-					<Route path="/allcategories" component={AllCategories}/>
+					<Route path="/categories" component={AllCategories}/>
 					<Route path="/singleCategory" component={Category}/>
 					<Protected isLogged={this.props.isLogged} path="/create" component={Create}/>
 					<Protected isLogged={this.props.isLogged} path="/editProfile" component={EditProfile}/>

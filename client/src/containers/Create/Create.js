@@ -1,5 +1,5 @@
 import React from 'react'
-
+import axios from '../../utility/axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -24,25 +24,43 @@ class Create extends React.Component {
             {value: 'medium', display: 'Medium'},
             {value: 'hard', display: 'Hard'}
         ],
-        categories: [
-            {value: '<15min', display: 'Less than 15 minutes'},
-            {value: 'chocolate', display: 'Chocolate'},
-            {value: 'birthday', display: 'Birthday'},
-            {value: 'fruit', display: 'Fruit Made'},
-            {value: 'nobaking', display: 'No Baking needed'},
-            {value: 'grandmas', display: 'Grandmas Recipe'},
-            {value: 'wedding', display: 'Wedding'},
-        ],
+        categories: [],
+        // categories: [
+        //     {value: '<15min', display: 'Less than 15 minutes'},
+        //     {value: 'chocolate', display: 'Chocolate'},
+        //     {value: 'birthday', display: 'Birthday'},
+        //     {value: 'fruit', display: 'Fruit Made'},
+        //     {value: 'nobaking', display: 'No Baking needed'},
+        //     {value: 'grandmas', display: 'Grandmas Recipe'},
+        //     {value: 'wedding', display: 'Wedding'},
+        // ],
         form: {
             title: '',
             description: '',
             prepTime: '',
             ingredients: ['', '', '', '', ''],
             directions: ['', '', ''],
-            level: 'easy',
+            level: 'Easy',
             category: '<15min',
         },
         valid: false
+    }
+
+    componentDidMount(){
+        axios.get('/category').then(res => {
+            if(res.status == 200){
+                const categories = []
+                for(let obj of res.data){
+                    categories.push({
+                        value: obj._id,
+                        display: obj.name
+                    })
+                }
+                this.setState({
+                    categories
+                })
+            }
+        })
     }
 
     isFormValid = (form) => {
@@ -63,7 +81,6 @@ class Create extends React.Component {
             case 'title':
             case 'description': 
             case 'prepTime':
-            case 'level':
             case 'category':
                 this.setState(prevState => {
                     const newState = {
@@ -77,6 +94,16 @@ class Create extends React.Component {
                     return newState;
                 })
                 break;
+            case 'level':
+                this.setState(prevState => {
+                    return {
+                        ...prevState,
+                        form: {
+                            ...prevState.form,
+                            level: value
+                        }
+                    }
+                })
             case 'directions':
             case 'ingredients':
                 this.setState(prevState => {
