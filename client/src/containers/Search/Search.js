@@ -10,9 +10,23 @@ import classes from './Search.scss'
 
 class Search extends React.Component{
 
-    // componentDidMount(){
-    //     // handle request
-    // }
+
+    componentDidUpdate(prevProps){
+        if(this.props.location !== prevProps.location){
+            this.onRouteChanged();
+        }
+    }
+
+    componentDidMount(){
+        this.onRouteChanged();
+    }
+
+    onRouteChanged(){
+
+        const params = new URLSearchParams(this.props.location.search)
+        console.log(params.get('value'));
+    }
+
     state = {
         recipes : [
             {

@@ -19,7 +19,17 @@ class Profile extends Component{
         user: null
     }
 
+    componentDidUpdate(prevProps){
+        if(this.props.location !== prevProps.location){
+            this.onRouteChanged();
+        }
+    }
+
     componentDidMount(){
+        this.onRouteChanged();
+    }
+
+    onRouteChanged() {
         const userId = this.props.match.params.userId;
         if(userId){
             axios.get(`/user/${userId}`)

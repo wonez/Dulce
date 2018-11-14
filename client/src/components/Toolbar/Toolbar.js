@@ -10,13 +10,26 @@ import { IconMagnifyingGlass, IconPlus, IconCake, IconCategories } from '../../U
 
 class Toolbar extends Component {
 
+    state = {
+        search: ''
+    }
+
+    textChangedHandler = (e) => {
+        this.setState({
+            search: e.target.value
+        })
+    }
+
     handleHome = () => {
-        this.props.history.push('/newsfeed');
+        this.props.history.push('/')
     }
 
     handleSearch = (e) => {
         e.preventDefault();
-        this.props.history.push('/search')
+        this.props.history.push({
+            pathname: '/search',
+            search:  "?" + new URLSearchParams({value: this.state.search}).toString()
+        });
     }
 
     handleCreate = (e) => {
@@ -35,7 +48,11 @@ class Toolbar extends Component {
                 </IconButton>
                 <div className={classes.Search__InputBox}>
                     <form onSubmit={this.handleSearch}>
-                        <input className={classes.Search__Input} type="text" placeholder="Search for a Recipe or a User"></input>
+                        <input  className={classes.Search__Input} 
+                                value={this.state.search}
+                                onChange={this.textChangedHandler} 
+                                type="text" 
+                                placeholder="Search for a Recipe or a User"></input>
                         <div className={classes.Search__Icon}>
                             <IconButton click={this.handleSearch}>
                                 <IconMagnifyingGlass />

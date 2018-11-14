@@ -1,12 +1,18 @@
 import React from 'react'
 
+import { withRouter } from 'react-router-dom'
+
 import classes from './Card.scss'
 
 import Summary from '../Summary/Summary';
 import Popup from '../../UI/Popup/Popup'
 
 class Card extends React.Component {
-    
+
+    handleUser = () => {
+        this.props.history.push(`/profile/${this.props.data.author._id}`)
+    }
+
     render() {
         const date = new Date(this.props.data.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         return (
@@ -17,7 +23,7 @@ class Card extends React.Component {
                         {/* slika */}
                     </div>
                     <div className={classes.Card__Data}>
-                        <h5 className={classes.Card__Data__Name}>{`${this.props.data.author.name} ${this.props.data.author.surname}`}</h5>
+                        <h5 onClick={this.handleUser} className={classes.Card__Data__Name}>{`${this.props.data.author.name} ${this.props.data.author.surname}`}</h5>
                         <p className={classes.Card__Data__Date}>{date}</p>
                     </div>
                     <Popup post={this.props.data}/>
@@ -40,4 +46,4 @@ class Card extends React.Component {
     }
 }
 
-export default Card;
+export default withRouter(Card);
