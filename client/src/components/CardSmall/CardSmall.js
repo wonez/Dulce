@@ -1,7 +1,4 @@
 import React from 'react';
-
-import MainButton from '../../UI/MainButton/MainButton'
-
 import classes from './CardSmall.scss';
 import typography from '../../_typography.scss'
 
@@ -12,19 +9,19 @@ const CardSmall = (props) => {
     return(
         <figure className={classes.Card} onClick={props.click}>
             <div className={classes.Card__Img} style={{
-                backgroundImage: `url(${card.img})`,
-            }} src={card.img}> </div>
+                backgroundImage: `url(${card.imgUrl})`,
+            }}> </div>
             <div className={classes.Card__Info}>
-                <h4 className={[classes.Card__Heading, typography['margin-bottom-sm']].join(' ')} >{card.heading}</h4>
+                <h4 className={[classes.Card__Heading, typography['margin-bottom-sm']].join(' ')} >{card.title}</h4>
                 <div className={classes.Card__Summary}>
                     <p className={classes.Card__Summary__Icon}>
-                        <IconClock/> &nbsp; {card.time} min
+                        <IconClock/> &nbsp; {card.prepTime} min
                     </p>
                     <p className={classes.Card__Summary__Icon}>
-                        <IconLevel /> &nbsp; {card.difficulty}
+                        <IconLevel /> &nbsp; {card.level.charAt(0).toUpperCase() + card.level.slice(1)}
                     </p>
                     <p className={classes.Card__Summary__Icon}> 
-                         {card.hearts} &nbsp; <IconHeart />
+                         {card.likes} &nbsp; <IconHeart />
                     </p>
                 </div>
             </div>

@@ -84,6 +84,15 @@ const editUser = async (req, res) => {
     })
 }
 
+const getManyUsers = async (req, res) => {
+    try{
+        const value = req.query.start;
+        
+    }catch(err){
+        res.status(500).json({message: err.message})
+    }
+}
+
 const deleteUser = async (req, res) => {
     try{
         await User.findOneAndDelete(req.params.id)
@@ -98,5 +107,6 @@ module.exports = {
     loginUser,
     registerUser,
     editUser,
-    deleteUser
+    deleteUser,
+    getManyUsers
 }

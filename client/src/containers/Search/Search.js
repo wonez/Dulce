@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { withRouter } from 'react-router-dom' 
+import axios from '../../utility/axios'
+
 import Aux from '../../hoc/Aux'
 import Toolbar from '../../components/Toolbar/Toolbar';
 
@@ -10,6 +13,15 @@ import classes from './Search.scss'
 
 class Search extends React.Component{
 
+    state = {
+        search: '',
+        recipes: [],
+        users: [],
+        recipesCount: 0,
+        usersCount: 0,
+        usersLoading: false,
+        recipesLoading: false
+    }
 
     componentDidUpdate(prevProps){
         if(this.props.location !== prevProps.location){
@@ -22,102 +34,121 @@ class Search extends React.Component{
     }
 
     onRouteChanged(){
-
         const params = new URLSearchParams(this.props.location.search)
-        console.log(params.get('value'));
+        this.setState({
+            search: params.get('value')
+        })
+        axios({
+            method: 'get',
+            url: '/search',
+            params: {
+                value: this.state.search
+            }
+        }).then(res => {
+            if(res.status == 200){
+                this.setState({
+                    recipes: res.data.recipes,
+                    users: res.data.users,
+                    recipesCount: res.data.recipesCount,
+                    usersCount: res.data.usersCount
+                })
+            }
+        })
     }
 
-    state = {
-        recipes : [
-            {
-                img: 'src/assets/mp-img-1.jpg',
-                heading: 'Raspberry Pancakes',
-                time: 25,
-                difficulty: 'Beginner',
-                hearts: 131
-            },
-            {
-                img: 'src/assets/mp-img-3.jpg',
-                heading: 'Strawberry Pancakes',
-                time: 21,
-                difficulty: 'Beginner',
-                hearts: 231
-            },
-            {
-                img: 'src/assets/mp-img-1.jpg',
-                heading: 'Raspberry Pancakes',
-                time: 252,
-                difficulty: 'Beginner',
-                hearts: 1311
-            },
-        ],
-        people: [
-            {
-                name: 'Ben Franklin',
-                followers: 1589,
-                imgPath: 'src/assets/profile.jpg',
-                id: 1,
-            },
-            {
-                name: 'JJ Thompson',
-                followers: 2314,
-                imgPath: 'src/assets/profile.jpg',
-                id: 2,
-            },
-            {
-                name: 'Bjarne Stroustrup',
-                followers: 512,
-                imgPath: 'src/assets/profile.jpg',
-                id: 3
-            },
-            {
-                name: 'Ben Franklin',
-                followers: 1589,
-                imgPath: 'src/assets/profile.jpg',
-                id: 4,
-            },
-            {
-                name: 'JJ Thompson',
-                followers: 2314,
-                imgPath: 'src/assets/profile.jpg',
-                id: 5,
-            },
-            {
-                name: 'Bjarne Stroustrup',
-                followers: 512,
-                imgPath: 'src/assets/profile.jpg',
-                id: 6
-            },
-        ]
+    clickHandler = (type, uri) => {
+        let url = ''
+        if(type == 'card'){
+            url = `post/${uri}`
+        }else if(type == 'person'){
+            url = `profile/${uri}`
+        }
+        this.props.history.push(url);
+    }
+
+    getMore = (type) => {
+        if(type == 'recipes'){
+            return axios.get(`search/recipes?value=${this.state.search}&start=${this.state.recipes.length}`);
+        }else if(type == 'users'){
+            return axios.get(`serach/users?value=${this.state.search}&start=${this.state.users.length}`);
+        }
+    }
+
+    loadMoreHandler = (type) => {
+        if(type == 'recipes'){
+            this.setState({ recipesLoading: true })
+            this.getMore('recipes').then(res => {
+                this.setState(prevState => {
+                    const newState = {
+                        ...prevState,
+                        recipes: res.status == 200 ? prevState.recipes.concat(res.data.recipes) : [...prevState.recipes],
+                        recipesLoading: false,
+                    }
+                    return newState
+                })
+            })
+        } else if (type == 'users'){
+            this.setState({ usersLoading: true })
+            this.getMore('users').then(res => {
+                this.setState(prevState => {
+                    const newState = {
+                        ...prevState,
+                        users: res.status == 200 ? prevState.users.concat(res.data.users) : [...prevState.users],
+                        usersLoading: false,
+                    }
+                    return newState
+                })
+            })
+        }
     }
 
     render(){
+
+        let loadMorePosts = null;
+        let loadMoreUsers = null;
+
+        if(this.state.recipesLoading){
+            loadMorePosts = <h2>Loading...</h2>
+        } else if (this.state.recipes.length < this.state.recipesCount){
+            loadMorePosts = <a className={classes.Search__LoadMore} onClick={() => this.loadMoreHandler('recipes')} >Load More</a>
+        }
+
+        if(this.state.usersLoading){
+            loadMoreUsers = <h2>Loading...</h2> 
+        } else if (this.state.users.length < this.state.usersCount){
+            loadMoreUsers = <a className={classes.Search__LoadMore} onClick={() => this.loadMoreHandler('users')}>Load More</a>
+        }
+
         return(
             <Aux>
                 <Toolbar />
                 <div className={classes.Info}>
-                    <h1>Search results for: <span>pancakes</span></h1>
+                    <h1>Search results for: <span>{this.state.search}</span></h1>
                 </div>
                 <div className={classes.Search}>
                     <div className={classes.Search__Container}>
                         <h2 className={classes.Search__Heading}>Recipes</h2>
-                        <small>Results: 18</small>
+                        <small>Results: {this.state.recipesCount}</small>
                         <div className={classes.Search__Items}>
                             {this.state.recipes.map(item => {
-                                return <CardSmall card={item} key={item.time} />
+                                return <CardSmall   card={item} 
+                                                    click={() => this.clickHandler('card', item._id)}
+                                                    key={item._id} />
                             })}
                         </div>
-                        <a className={classes.Search__LoadMore}>Load More</a>
+                        {loadMorePosts}
                     </div>
                     <div className={classes.Search__Container}>
                         <h2 className={classes.Search__Heading}>People</h2>
-                        <small>Results: 12</small>                        
+                        <small>Results: {this.state.users.length}</small>                        
                         <div className={classes.Search__Items}>
-                            {this.state.people.map(person => {
-                                return <Person data={person} key={person.id} />
+                            {this.state.users.map(person => {
+                                return <Person  data={person} 
+                                                click={() => this.clickHandler('person', person._id)}                
+                                                key={person._id} />
                             })}
                         </div>
-                        <a className={classes.Search__LoadMore}>Load More</a>
+                        {loadMoreUsers}
                     </div>
                 </div>
             </Aux>
@@ -125,4 +156,4 @@ class Search extends React.Component{
     }
 }
 
-export default Search;
+export default withRouter(Search);
