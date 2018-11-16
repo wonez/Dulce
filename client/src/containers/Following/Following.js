@@ -6,6 +6,7 @@ import { IconUser } from '../../UI/Icons/Icons'
 
 import Person from '../../components/Person/Person'
 import Aux from '../../hoc/Aux';
+import NothingToShow from '../NothingToShow/NohtingToShow';
 
 class Following extends Component{
 
@@ -16,12 +17,9 @@ class Following extends Component{
     render(){
 
         let content = (
-            <div className={classes.FollowingEmpty}>
-                <div className={classes.Icon}>
-                    <IconUser />
-                </div>
-                <p>User is not following anyone</p>
-            </div>
+            <NothingToShow 
+                message='User is not following anyone'
+                icon='user'/>
         )
 
         if(this.state.people.length > 0){

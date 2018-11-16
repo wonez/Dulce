@@ -4,9 +4,8 @@ import axios from '../../utility/axios'
 
 import Card from '../../components/Card/Card';
 
-import { IconCake } from '../../UI/Icons/Icons'
-
 import classes from './Timeline.scss'
+import NothingToShow from '../NothingToShow/NohtingToShow';
 
 class Timeline extends Component {
 
@@ -30,26 +29,15 @@ class Timeline extends Component {
     }
 
     render(){
-        
-        let empty = null;
-
-        if(this.state.items.length < 1){
-            empty = (
-                <div className={classes.NoPosts}>
-                    <div className={classes.Icon}>
-                        <IconCake />
-                    </div>
-                    <p>User has no posts</p>
-                </div>
-            )
-        }
-
+    
         return(
             <div className={classes.Timeline}>
                 {this.state.items.map(item => (
                     <Card  singlePost={this.singlePostHandler} data={item} key={item.title}/>
                 ))}
-                {empty}
+                {this.state.items.length < 1 ? <NothingToShow 
+                                                    icon='post'
+                                                    message='User has no posts'/> : null}
             </div>
         )
     }

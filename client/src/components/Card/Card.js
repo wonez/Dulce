@@ -40,9 +40,9 @@ class Card extends React.Component {
                 </div>
                 <h2 onClick={() => this.props.singlePost(this.props.data._id)} className={classes.Card__Heading}>{this.props.data.title} &rarr;</h2>
                 <div style={{ padding: '0 2rem' }}>
-                    <Summary time={this.props.data.prepTime}
-                        difficulty={this.props.data.level}
-                        hearts={this.props.data.likes} />
+                    <Summary    time={this.props.data.prepTime}
+                                difficulty={this.props.data.level}
+                                hearts={this.props.data.likes} />
                 </div>
             </div>
         )

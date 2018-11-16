@@ -10,6 +10,7 @@ import CardSmall from '../../components/CardSmall/CardSmall'
 import Person from '../../components/Person/Person'
 
 import classes from './Search.scss'
+import NothingToShow from '../NothingToShow/NohtingToShow';
 
 class Search extends React.Component{
 
@@ -105,7 +106,7 @@ class Search extends React.Component{
     render(){
 
         let loadMorePosts = null;
-        let loadMoreUsers = null;
+        let loadMoreUsers = null
 
         if(this.state.recipesLoading){
             loadMorePosts = <h2>Loading...</h2>
@@ -119,6 +120,18 @@ class Search extends React.Component{
             loadMoreUsers = <a className={classes.Search__LoadMore} onClick={() => this.loadMoreHandler('users')}>Load More</a>
         }
 
+        const recipes = this.state.recipes.map(item => {
+            return <CardSmall   card={item} 
+                                click={() => this.clickHandler('card', item._id)}
+                                key={item._id} />
+        })
+
+        const users = this.state.users.map(person => {
+            return <Person  data={person} 
+                            click={() => this.clickHandler('person', person._id)}                
+                            key={person._id} />
+        })
+
         return(
             <Aux>
                 <Toolbar />
@@ -129,25 +142,25 @@ class Search extends React.Component{
                     <div className={classes.Search__Container}>
                         <h2 className={classes.Search__Heading}>Recipes</h2>
                         <small>Results: {this.state.recipesCount}</small>
-                        <div className={classes.Search__Items}>
-                            {this.state.recipes.map(item => {
-                                return <CardSmall   card={item} 
-                                                    click={() => this.clickHandler('card', item._id)}
-                                                    key={item._id} />
-                            })}
-                        </div>
+                        {this.state.recipes.length > 0 ?
+                            <div className={classes.Search__Items}>
+                                {recipes}
+                            </div>
+                        : <NothingToShow
+                            icon='post'
+                            message='No recipes found'/>}
                         {loadMorePosts}
                     </div>
                     <div className={classes.Search__Container}>
                         <h2 className={classes.Search__Heading}>People</h2>
                         <small>Results: {this.state.users.length}</small>                        
-                        <div className={classes.Search__Items}>
-                            {this.state.users.map(person => {
-                                return <Person  data={person} 
-                                                click={() => this.clickHandler('person', person._id)}                
-                                                key={person._id} />
-                            })}
-                        </div>
+                        {this.state.users.length > 0 ?
+                            <div className={classes.Search__Items}>
+                                {users}
+                            </div>
+                        : <NothingToShow 
+                                icon='user'
+                                message='No users found'/>}
                         {loadMoreUsers}
                     </div>
                 </div>

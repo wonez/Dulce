@@ -1,0 +1,21 @@
+.NothingToShow{
+    padding: 3rem;
+    background: $color-white;
+    width: 70%;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    color: $color-gray-light;
+    margin: 0 auto;
+
+    &__Icon{
+        fill: $color-gray-lighter;
+        width: 7rem;
+        height: 7rem;
+        margin: 0 auto;
+    }
+
+    p{
+        padding-top: 2rem;
+    }
+}

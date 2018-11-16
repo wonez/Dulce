@@ -1,13 +1,20 @@
 .Summary{
-    // padding: 0 2rem;
-    width: 100%;
     display: flex;
+
+    svg{
+        height: 3rem;
+        width: 3rem;
+        fill: $color-primary-dark;
+        &:hover{
+            fill: $color-secondary-dark;
+        }
+    }
 
     &__Icon{
         display: flex;
-        font-size: 1.6rem;
         color: $color-gray-dark;
         align-items: center;
+        font-size: 1.6rem;
         &:last-child{
             margin-left: 2rem;
         }
@@ -24,13 +31,33 @@
             }
         }
     }
+}
+
+.SummarySmall{
+    display: flex;
 
     svg{
-        height: 3rem;
-        width: 3rem;
-        fill: $color-primary-dark;
-        &:hover{
-            fill: $color-secondary-dark;
+        height: 2rem;
+        width: 2rem;
+        fill: $color-secondary-light;
+    }
+
+    &__Icon{
+        display: flex;
+        font-size: 1.4rem;
+        color: $color-gray-dark;
+        align-items: center;
+
+        &:first-child{
+            margin-right: 2rem;
+        }
+
+        &:last-child{
+            margin-left: auto;
+            svg{
+                fill: red;
+            }
         }
     }
+
 }

@@ -41,32 +41,4 @@
         background-clip: text;
         font-weight: bold;
     }
-    &__Summary{
-        display: flex;
-
-        svg{
-            height: 2rem;
-            width: 2rem;
-            fill: $color-secondary-light;
-        }
-
-        &__Icon{
-            display: flex;
-            font-size: 1.4rem;
-            color: $color-gray-dark;
-            align-items: center;
-
-            &:first-child{
-                margin-right: 2rem;
-            }
-
-            &:last-child{
-                margin-left: auto;
-                svg{
-                    fill: red;
-                }
-            }
-        }
-
-    }
 }
