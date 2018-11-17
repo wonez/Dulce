@@ -10,7 +10,7 @@ import CardSmall from '../../components/CardSmall/CardSmall'
 import Person from '../../components/Person/Person'
 
 import classes from './Search.scss'
-import NothingToShow from '../NothingToShow/NohtingToShow';
+import NothingToShow from '../../components/NothingToShow/NothingToShow';
 
 class Search extends React.Component{
 

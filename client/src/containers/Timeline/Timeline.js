@@ -5,7 +5,7 @@ import axios from '../../utility/axios'
 import Card from '../../components/Card/Card';
 
 import classes from './Timeline.scss'
-import NothingToShow from '../NothingToShow/NohtingToShow';
+import NothingToShow from '../../components/NothingToShow/NothingToShow';
 
 class Timeline extends Component {
 

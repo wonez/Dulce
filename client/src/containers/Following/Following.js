@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 
 import classes from './Following.scss';
 
-import { IconUser } from '../../UI/Icons/Icons'
 
 import Person from '../../components/Person/Person'
-import Aux from '../../hoc/Aux';
-import NothingToShow from '../NothingToShow/NohtingToShow';
+import NothingToShow from '../../components/NothingToShow/NothingToShow'
 
 class Following extends Component{
 
