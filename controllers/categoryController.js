@@ -1,4 +1,17 @@
 const Category = require('../models/category')
+const Post = require('../models/post')
+
+const getCategoryPosts = async (req, res) => {
+    try{
+        //query for load more
+        const id = req.params.id;
+        const category = await Category.findById(id)
+        const posts = await Post.find({ category: id })
+        res.status(200).json({posts, category})
+    }catch(err){
+        res.status(500).json({message: err.message})
+    }
+} 
 
 const getCategories = async (req, res) => {
     try{
@@ -29,5 +42,6 @@ const deleteCategory = async (req, res) => {
 module.exports = {
     createCategory,
     deleteCategory,
-    getCategories
+    getCategories,
+    getCategoryPosts
 }
