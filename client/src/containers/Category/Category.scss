@@ -5,9 +5,10 @@
     justify-content: center;
     &__Container{
         background: white;
-        padding: 5rem 5rem;
+        padding: 3rem 2rem;
         border-radius: 1rem;
         text-align: center;
+        min-width: 1111px;
     }
     &__Heading{
         color: $color-primary-dark;

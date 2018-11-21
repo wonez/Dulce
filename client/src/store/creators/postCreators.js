@@ -13,6 +13,12 @@ const submitHandler = (data, method, url) => {
     return dispatch => {
         dispatch(startLoading())
         return new Promise((resolve, reject) => {
+            data.ingredients = data.ingredients.filter(item => {
+                return item != ''
+            })
+            data.directions = data.directions.filter(item => {
+                return item != ''
+            })
             const formData = new FormData();
             formData.append('img', data.img)
             formData.append('data', JSON.stringify(data))

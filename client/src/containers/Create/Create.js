@@ -32,7 +32,7 @@ class Create extends React.Component {
             ingredients: ['', '', '', '', ''],
             directions: ['', '', ''],
             level: 'easy',
-            category: '<15min',
+            category: '',
         },
         valid: false
     }
@@ -47,8 +47,15 @@ class Create extends React.Component {
                         display: obj.name
                     })
                 }
-                this.setState({
-                    categories
+                this.setState(prevState => {
+                    return {
+                        ...prevState,
+                        categories,
+                        form: {
+                            ...prevState.form,
+                            category: categories[0].value
+                        }
+                    }
                 })
             }
         })
