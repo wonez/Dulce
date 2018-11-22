@@ -57,7 +57,7 @@ const PostData = (props) => {
                         style={{ backgroundImage: `url(${authorImg})` }} >
                         {/* slika */}
                     </div>
-                    <h4 className={classes.Data__Author__Name}>{authorName}</h4>
+                    <h4 onClick={props.handleUser} className={classes.Data__Author__Name}>{authorName}</h4>
                 </div>
                 <p className={classes.Data__Date}>{date}</p>
             </div>

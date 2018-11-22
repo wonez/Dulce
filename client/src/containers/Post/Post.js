@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { withRouter } from 'react-router-dom'
+
 import classes from './Post.scss'
 
 import Toolbar from '../../components/Toolbar/Toolbar'
@@ -25,13 +27,19 @@ class Post extends Component {
         item: {}
     }
 
+    handleUser = () => {
+        this.props.history.push(`/user/${this.state.item.author._id}`);
+    }
+
     render() {
 
         return (
             <div className={classes.Post}>
                 <Toolbar />
                 <div className={classes.Post__Container}>
-                    <PostData item={this.state.item} />
+                    <PostData 
+                        handleUser={this.handleUser}
+                        item={this.state.item} />
                     <Comments comments={this.state.item.comments} />
                 </div>
             </div>
@@ -39,4 +47,4 @@ class Post extends Component {
     }
 }
 
-export default Post;
+export default withRouter(Post);

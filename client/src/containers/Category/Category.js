@@ -60,6 +60,7 @@ class Category extends Component {
                     <div className={classes.Category__Container}>
                         <h1 className={classes.Category__Heading}>{this.state.name}</h1>
                         {content}
+                        {/* load more */}
                     </div>
                 </div>
             </Aux>

@@ -60,7 +60,9 @@ const getUserPosts = async(req, res) => {
 
 const getPost = async (req, res) => {
     try{
-        const post = await Post.findById(req.params.id).populate('author')
+        const post = await Post
+            .findById(req.params.id)
+            .populate('author', { avatarUrl: 1, name: 1, surname: 1 })
         res.status(200).json(post);
     }catch(err){
         res.status(500).end(err.message)

@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from '../../utility/axios'
+import { withRouter } from 'react-router-dom'
 
 import Toolbar from '../../components/Toolbar/Toolbar';
 import Card from '../../components/Card/Card';
@@ -25,6 +26,7 @@ class NewsFeed extends React.Component {
     }
 
     handleSinglePost = (id) => {
+        console.log(id);
         this.props.history.push(`post/${id}`)
     }
 
@@ -44,4 +46,4 @@ class NewsFeed extends React.Component {
     }
 }
 
-export default NewsFeed;
+export default withRouter(NewsFeed);

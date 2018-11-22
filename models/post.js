@@ -12,7 +12,7 @@ const postSchema = new Schema({
     imgUrl: String,
     author: {type: Schema.Types.ObjectId, ref: 'User' },
     dateCreated: { type: Date, default: Date.now() },
-    likes: { type: Number, default: 0 },
+    likes: { type: [ { type: Schema.Types.ObjectId, ref: 'User' } ], default: [] },
     comments: { type: [ { type: Schema.Types.ObjectId, ref: 'Comment' } ], default: [] },
 })
 

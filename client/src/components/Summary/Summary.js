@@ -10,7 +10,7 @@ const Summary = ({ time, difficulty, hearts, small }) => {
         <div className={classes.Summary}>
             <p className={classes.Summary__Icon}> 
                 <IconHeart /> 
-                &nbsp; {hearts}
+                &nbsp; {hearts.length}
             </p>
             <p className={classes.Summary__Icon}>
                 <IconClock/> &nbsp; {time} min
@@ -31,7 +31,7 @@ const Summary = ({ time, difficulty, hearts, small }) => {
                     <IconLevel /> &nbsp; {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
                 </p>
                 <p className={classes.SummarySmall__Icon}> 
-                    {hearts} &nbsp; <IconHeart />
+                    {hearts.length} &nbsp; <IconHeart />
                 </p>
             </div>
         )
