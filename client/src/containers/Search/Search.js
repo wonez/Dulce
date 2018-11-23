@@ -36,25 +36,30 @@ class Search extends React.Component{
 
     onRouteChanged(){
         const params = new URLSearchParams(this.props.location.search)
-        this.setState({
-            search: params.get('value')
-        })
-        axios({
-            method: 'get',
-            url: '/search',
-            params: {
-                value: this.state.search
-            }
-        }).then(res => {
-            if(res.status == 200){
-                this.setState({
-                    recipes: res.data.recipes,
-                    users: res.data.users,
-                    recipesCount: res.data.recipesCount,
-                    usersCount: res.data.usersCount
-                })
-            }
-        })
+        const search = params.get('value');
+        if(!search){
+            this.props.history.replace('/')
+        } else {
+            this.setState({
+                search
+            })
+            axios({
+                method: 'get',
+                url: '/search',
+                params: {
+                    value: search
+                }
+            }).then(res => {
+                if(res.status == 200){
+                    this.setState({
+                        recipes: res.data.recipes,
+                        users: res.data.users,
+                        recipesCount: res.data.recipesCount,
+                        usersCount: res.data.usersCount
+                    })
+                }
+            })
+        }
     }
 
     clickHandler = (type, uri) => {

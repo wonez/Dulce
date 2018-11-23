@@ -3,13 +3,13 @@ const Post = require('../models/post')
 
 const getCategoryPosts = async (req, res) => {
     try{
-        //query for load more
         const start = req.query.start;
         const id = req.params.id;
         const category = await Category.findById(id)
         const postsCount = await Post.find({ category: id }).countDocuments();
         let posts = [];
         if(start){  
+            //load more
             posts = await Post.find({ category: id }).skip(+start).limit(9);
         }else{
             posts = await Post.find({ category: id }).limit(9);

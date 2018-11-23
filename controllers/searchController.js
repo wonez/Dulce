@@ -3,15 +3,12 @@ const User = require('../models/user');
 
 const searchByValue = async (req, res) => {
     try{
-        const value = req.query.value;
-        //find posts find users 
-        // const posts = await Post.find({ title: value});
-        // const users = await Post.find({ name: value, surname: value })
-        const recipes = await Post.find({}).limit(3);
-        const users = await User.find({}).limit(8);
+        const value = new RegExp(req.query.value, "i");;
+        const recipes = await Post.find({ title: value }).limit(6);
+        const users = await User.find({ $or: [{name: value}, {surname: value}] }).limit(8);
 
-        const recipesCount = await Post.find({}).countDocuments();
-        const usersCount = await User.find({}).countDocuments();
+        const recipesCount = await Post.find({ title: value }).countDocuments();
+        const usersCount = await User.find({ $or: [{name: value}, {surname: value}] }).countDocuments();
 
         res.status(200).json({
             recipes,
