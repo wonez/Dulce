@@ -14,7 +14,8 @@ class Category extends Component {
     state = {
         items : [],
         name: '',
-        count: 0
+        count: 0,
+        loading: false
     }
 
     componentDidMount(){
@@ -37,6 +38,9 @@ class Category extends Component {
 
     loadItems = () => {
         const id  = this.props.match.params.id;
+        this.setState({
+            loading: true
+        })
         axios.get(`/category/${id}?start=${this.state.items.length}`)
             .then(res => {
                 if(res.status == 200){
@@ -44,7 +48,8 @@ class Category extends Component {
                         return{
                             items: prevState.items.concat(res.data.posts),
                             name: res.data.category.name,
-                            count: res.data.postsCount
+                            count: res.data.postsCount,
+                            loading: false
                         }
                     })
                 } 
@@ -72,6 +77,14 @@ class Category extends Component {
             )
         }
 
+        let loadMore = null;
+
+        if(this.state.loading){
+            loadMore = <h2>Loading...</h2>
+        }else{
+            loadMore = <LoadMore click={this.loadItems }/>
+        }
+
         return(
             <Aux>
                 <Toolbar />
@@ -80,7 +93,7 @@ class Category extends Component {
                         <h1 className={classes.Category__Heading}>{this.state.name}</h1>
                         {content}
                         {this.state.items.length ? <p className={classes.Category__Count}>{`Showing ${this.state.items.length}/${this.state.count} items`}</p> : null }
-                        { this.state.items.length < this.state.count ? <LoadMore click={this.loadItems }/> : null }
+                        {this.state.items.length < this.state.count ? loadMore : null}
                     </div>
                 </div>
             </Aux>
