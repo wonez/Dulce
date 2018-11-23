@@ -21,4 +21,11 @@
         grid-template-columns: repeat(3, 1fr);
         grid-row-gap: 3rem;
     }
+    &__Count{
+        font-size: 1.5rem;
+        color: $color-gray-dark;
+        font-weight: bold;
+        text-align: right;
+        padding-right: 3rem;
+    }
 }

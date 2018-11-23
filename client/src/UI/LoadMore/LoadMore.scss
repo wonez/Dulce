@@ -1,0 +1,13 @@
+.LoadMore{
+    font-size: 2rem;
+    padding: 1rem 0;
+    display: inline-block;
+    color: $color-primary-dark;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: .3s all;
+    &:hover{
+        cursor: pointer;
+        color: $color-secondary-dark;
+    }
+}

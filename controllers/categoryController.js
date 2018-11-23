@@ -4,11 +4,19 @@ const Post = require('../models/post')
 const getCategoryPosts = async (req, res) => {
     try{
         //query for load more
+        const start = req.query.start;
         const id = req.params.id;
         const category = await Category.findById(id)
-        const posts = await Post.find({ category: id })
-        res.status(200).json({posts, category})
+        const postsCount = await Post.find({ category: id }).countDocuments();
+        let posts = [];
+        if(start){  
+            posts = await Post.find({ category: id }).skip(+start).limit(9);
+        }else{
+            posts = await Post.find({ category: id }).limit(9);
+        } 
+        res.status(200).json({posts, postsCount, category})
     }catch(err){
+        console.log(err);
         res.status(500).json({message: err.message})
     }
 } 

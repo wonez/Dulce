@@ -171,7 +171,7 @@ class Create extends React.Component {
         }
         this.props.tryCreatePost(postData)
             .then(res => {
-                this.props.history.replace('/')
+                // this.props.history.replace('/')
             })
     }
 

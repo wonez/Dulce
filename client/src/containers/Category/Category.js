@@ -7,12 +7,14 @@ import Aux from '../../hoc/Aux'
 import CardSmall from '../../components/CardSmall/CardSmall'
 import Toolbar from '../../components/Toolbar/Toolbar';
 import NothingToShow from '../../components/NothingToShow/NothingToShow';
+import LoadMore from '../../UI/LoadMore/LoadMore'
 
 class Category extends Component {
 
     state = {
         items : [],
-        name: ''
+        name: '',
+        count: 0
     }
 
     componentDidMount(){
@@ -22,7 +24,8 @@ class Category extends Component {
                 if(res.status == 200){
                     this.setState({
                         items: res.data.posts,
-                        name: res.data.category.name
+                        name: res.data.category.name,
+                        count: res.data.postsCount
                     })
                 }
             })
@@ -30,6 +33,22 @@ class Category extends Component {
 
     clickHandler = (id) => {
         this.props.history.push(`/post/${id}`);
+    }
+
+    loadItems = () => {
+        const id  = this.props.match.params.id;
+        axios.get(`/category/${id}?start=${this.state.items.length}`)
+            .then(res => {
+                if(res.status == 200){
+                    this.setState(prevState => {
+                        return{
+                            items: prevState.items.concat(res.data.posts),
+                            name: res.data.category.name,
+                            count: res.data.postsCount
+                        }
+                    })
+                } 
+            })
     }
 
     render(){
@@ -60,7 +79,8 @@ class Category extends Component {
                     <div className={classes.Category__Container}>
                         <h1 className={classes.Category__Heading}>{this.state.name}</h1>
                         {content}
-                        {/* load more */}
+                        {this.state.items.length ? <p className={classes.Category__Count}>{`Showing ${this.state.items.length}/${this.state.count} items`}</p> : null }
+                        { this.state.items.length < this.state.count ? <LoadMore click={this.loadItems }/> : null }
                     </div>
                 </div>
             </Aux>
