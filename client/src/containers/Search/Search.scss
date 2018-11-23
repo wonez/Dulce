@@ -52,4 +52,11 @@
             color: $color-secondary-dark;
         }
     }
+    &__Count{
+        font-size: 1.5rem;
+        color: $color-gray-dark;
+        font-weight: bold;
+        text-align: right;
+        padding-right: 3rem;
+    }
 }

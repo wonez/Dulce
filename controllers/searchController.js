@@ -5,7 +5,7 @@ const searchByValue = async (req, res) => {
     try{
         const value = new RegExp(req.query.value, "i");;
         const recipes = await Post.find({ title: value }).limit(6);
-        const users = await User.find({ $or: [{name: value}, {surname: value}] }).limit(8);
+        const users = await User.find({ $or: [{name: value}, {surname: value}] }).limit(6);
 
         const recipesCount = await Post.find({ title: value }).countDocuments();
         const usersCount = await User.find({ $or: [{name: value}, {surname: value}] }).countDocuments();
@@ -23,9 +23,11 @@ const searchByValue = async (req, res) => {
 
 const getMoreRecipes = async (req, res) => {
     try{
-        const { value, start } = req.query;
-        const recipes = await Post.find({}).skip(+start).limit(9);
-        res.status(200).json({ recipes })
+        const { start } = req.query;
+        const value = new RegExp(req.query.value, "i");
+        const recipesCount = await Post.find({ title: value }).countDocuments();
+        const recipes = await Post.find({ title: value }).skip(+start).limit(6);
+        res.status(200).json({ recipes, recipesCount })
     }catch(err){
         console.log(err.message)
         res.status(500).json({message: err.message})
@@ -34,9 +36,11 @@ const getMoreRecipes = async (req, res) => {
 
 const getMoreUsers = async (req, res) => {
     try{
-        const { value, start } = req.query;
-        const users = User.find({}).skip(+start).limit(6);
-        res.status(200).json({ users })
+        const { start } = req.query;
+        const value = new RegExp(req.query.value, "i");
+        const usersCount = await User.find({ $or: [{name: value}, {surname: value}] }).count();
+        const users = await User.find({ $or: [{name: value}, {surname: value}] }).skip(+start).limit(6);
+        res.status(200).json({ users, usersCount })
     }catch(err){
         console.log(err.message)
         res.status(500).json({message: err.message})

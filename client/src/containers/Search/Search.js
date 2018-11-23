@@ -89,6 +89,7 @@ class Search extends React.Component{
                         ...prevState,
                         recipes: res.status == 200 ? prevState.recipes.concat(res.data.recipes) : [...prevState.recipes],
                         recipesLoading: false,
+                        recipesCount: res.data.recipesCount
                     }
                     return newState
                 })
@@ -101,6 +102,7 @@ class Search extends React.Component{
                         ...prevState,
                         users: res.status == 200 ? prevState.users.concat(res.data.users) : [...prevState.users],
                         usersLoading: false,
+                        usersCount: res.data.usersCount
                     }
                     return newState
                 })
@@ -146,19 +148,18 @@ class Search extends React.Component{
                 <div className={classes.Search}>
                     <div className={classes.Search__Container}>
                         <h2 className={classes.Search__Heading}>Recipes</h2>
-                        <small>Results: {this.state.recipesCount}</small>
                         {this.state.recipes.length > 0 ?
                             <div className={classes.Search__Items}>
                                 {recipes}
                             </div>
                         : <NothingToShow
-                            icon='post'
-                            message='No recipes found'/>}
+                                icon='post'
+                                message='No recipes found'/>}
+                        {this.state.recipes.length ? <p className={classes.Search__Count}>{`Showing ${this.state.recipes.length}/${this.state.recipesCount} items`}</p> : null }
                         {loadMorePosts}
                     </div>
                     <div className={classes.Search__Container}>
                         <h2 className={classes.Search__Heading}>People</h2>
-                        <small>Results: {this.state.users.length}</small>                        
                         {this.state.users.length > 0 ?
                             <div className={classes.Search__Items}>
                                 {users}
@@ -166,6 +167,7 @@ class Search extends React.Component{
                         : <NothingToShow 
                                 icon='user'
                                 message='No users found'/>}
+                        {this.state.users.length ? <p className={classes.Search__Count}>{`Showing ${this.state.users.length}/${this.state.usersCount} items`}</p> : null }
                         {loadMoreUsers}
                     </div>
                 </div>
