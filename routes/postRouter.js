@@ -10,6 +10,8 @@ router.get('/user/:userId', postController.getUserPosts)
 
 router.get('/', postController.getManyPosts);
 
+router.post('/comment/:postId', postController.postComment)
+
 //check that the post belongs to the editor
 router.put('/:id', checkAuth, postController.editPost);
 

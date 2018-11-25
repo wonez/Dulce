@@ -25,10 +25,15 @@ const Comments = (props) => {
                 <div className={classes.NewComment__CommentBox}>
                     <Avatar url={props.user.avatarUrl}/>
                     <textarea   className={classes.NewComment__InputArea}
+                                value={props.comment}
+                                onChange={(e) => props.commentInputHandler(e.target.value)}
                                 placeholder="Enter your comment here." />
                 </div>
                 <div className={classes.NewComment__BtnBox}>
-                    <BtnPrimary size="small">Comment</BtnPrimary>
+                    <BtnPrimary 
+                        disabled={props.comment.trim().length == 0}
+                        click={props.commentSubmit}
+                        size="small">Comment</BtnPrimary>
                 </div>
             </div>
             <div className={classes.Comments}>

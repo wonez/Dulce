@@ -24,11 +24,26 @@ class Post extends Component {
     }
 
     state = {
-        item: {}
+        item: {},
+        comment: ''
+    }
+
+    commentInputHandler = (text) => {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                comment: text
+            }
+        })
     }
 
     handleUser = () => {
         this.props.history.push(`/user/${this.state.item.author._id}`);
+    }
+
+    commentSubmit = () => {
+        axios.post('/')
+        console.log(this.state.comment);
     }
 
     render() {
@@ -40,7 +55,11 @@ class Post extends Component {
                     <PostData 
                         handleUser={this.handleUser}
                         item={this.state.item} />
-                    <Comments comments={this.state.item.comments} />
+                    <Comments 
+                        commentSubmit={this.commentSubmit}
+                        commentInputHandler={this.commentInputHandler}
+                        comment={this.state.comment}
+                        comments={this.state.item.comments} />
                 </div>
             </div>
         )

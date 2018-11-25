@@ -33,7 +33,10 @@ class Timeline extends Component {
         return(
             <div className={classes.Timeline}>
                 {this.state.items.map(item => (
-                    <Card  singlePost={this.singlePostHandler} data={item} key={item.title}/>
+                    <Card  
+                        singlePost={this.singlePostHandler} 
+                        data={item} 
+                        key={item._id}/>
                 ))}
                 {this.state.items.length < 1 ? <NothingToShow 
                                                     icon='post'

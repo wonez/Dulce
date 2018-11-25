@@ -58,6 +58,18 @@ const getUserPosts = async(req, res) => {
     }
 }
 
+const postComment = async(req, res) => {
+    try{
+        const postId = req.params.postId;
+        const post = await Post.findByIdAndUpdate(postId, {
+            comment: 
+        })
+    }catch(err){
+        console.log(err.message);
+        res.status(500).json({message: err.message})
+    }
+}
+
 const getPost = async (req, res) => {
     try{
         const post = await Post

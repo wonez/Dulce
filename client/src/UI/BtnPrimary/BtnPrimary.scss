@@ -13,6 +13,14 @@
     &:hover{
         cursor: pointer;
     }
+    &:disabled{
+        background: $color-gray-light;
+        box-shadow: none;
+        &:hover{
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+    }
 }
 .small{
     @extend %btn;
