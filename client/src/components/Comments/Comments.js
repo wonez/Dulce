@@ -6,6 +6,7 @@ import Comment from '../Comment/Comment'
 import Avatar from '../Avatar/Avatar'
 import Aux from '../../hoc/Aux'
 import BtnPrimary from '../../UI/BtnPrimary/BtnPrimary'
+import Loading from '../../UI/Loading/Loading'
 
 import classes from './Comments.scss'
 
@@ -15,7 +16,10 @@ const Comments = (props) => {
 
     if(props.comments){
         comments = props.comments.map(comment => {
-            return <Comment comment={comment} key={comment.author.name} />
+            return <Comment 
+                        handleUser={props.handleUser}
+                        comment={comment} 
+                        key={comment._id} />
         })
     }
 
@@ -36,6 +40,7 @@ const Comments = (props) => {
                         size="small">Comment</BtnPrimary>
                 </div>
             </div>
+            <Loading />
             <div className={classes.Comments}>
                 {comments}
             </div>
@@ -45,7 +50,7 @@ const Comments = (props) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.auth.user
+        user: state.auth.user,
     }
 }
 

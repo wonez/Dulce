@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 const { createForm, transformPath } = require('../utlity/form')
 
 const createPost = async (req, res) => {
@@ -61,8 +62,30 @@ const getUserPosts = async(req, res) => {
 const postComment = async(req, res) => {
     try{
         const postId = req.params.postId;
-        const post = await Post.findByIdAndUpdate(postId, {
-            comment: 
+        const comment = await new Comment({
+            text: req.body.text,
+            author: req.user._id,
+            postId
+        }).save();
+        await Post.findByIdAndUpdate(postId, {
+            $push: { comments: comment._id }
+        });
+        const post = await Post
+            .findById(postId)
+            .populate({
+                path: 'comments',
+                select: 'text author dateCreated',
+                populate: {
+                    path: 'author',
+                    select: 'avatarUrl name surname'
+                }
+            })
+            .populate({
+                path: 'author',
+                select: 'avatarUrl name surname'
+            });
+        res.status(200).json({
+            comments: post.comments
         })
     }catch(err){
         console.log(err.message);
@@ -74,7 +97,18 @@ const getPost = async (req, res) => {
     try{
         const post = await Post
             .findById(req.params.id)
-            .populate('author', { avatarUrl: 1, name: 1, surname: 1 })
+            .populate({
+                path: 'comments',
+                select: 'text author dateCreated',
+                populate: {
+                    path: 'author',
+                    select: 'avatarUrl name surname'
+                }
+            })
+            .populate({
+                path: 'author',
+                select: 'avatarUrl name surname'
+            });
         res.status(200).json(post);
     }catch(err){
         res.status(500).end(err.message)
@@ -107,5 +141,6 @@ module.exports = {
     editPost,
     deletePost,
     getManyPosts,
-    getUserPosts
+    getUserPosts,
+    postComment
 };

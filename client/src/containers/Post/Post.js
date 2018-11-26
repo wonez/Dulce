@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 
 import { withRouter } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+
 import classes from './Post.scss'
 
 import Toolbar from '../../components/Toolbar/Toolbar'
 import PostData from '../../components/PostData/PostData'
 import Comments from '../../components/Comments/Comments'
+
+import { startLoading, endLoading } from '../../store/creators/uiCreators'
+
 import axios from '../../utility/axios'
 
 class Post extends Component {
@@ -16,6 +21,7 @@ class Post extends Component {
         axios.get(`/post/${postId}`)
             .then(res => {
                 if(res.status == 200){
+                    console.log(res.data);
                     this.setState({
                         item: res.data
                     })
@@ -37,13 +43,29 @@ class Post extends Component {
         })
     }
 
-    handleUser = () => {
-        this.props.history.push(`/user/${this.state.item.author._id}`);
+    handleUser = (id) => {
+        this.props.history.push(`/user/${id}`);
     }
 
     commentSubmit = () => {
-        axios.post('/')
-        console.log(this.state.comment);
+        this.props.load();
+        axios.post(`/post/comment/${this.state.item._id}`, {
+            text: this.state.comment,
+        }).then(res => {
+            if(res.status == 200){
+                this.props.loaded();
+                this.setState(prevState => {
+                    return{
+                        ...prevState,
+                        comment: '',
+                        item: {
+                            ...prevState.item,
+                            comments: res.data.comments
+                        }
+                    }
+                })
+            }
+        })
     }
 
     render() {
@@ -53,9 +75,10 @@ class Post extends Component {
                 <Toolbar />
                 <div className={classes.Post__Container}>
                     <PostData 
-                        handleUser={this.handleUser}
+                        handleUser={() => this.handleUser(this.state.author._id)}
                         item={this.state.item} />
                     <Comments 
+                        handleUser={this.handleUser}
                         commentSubmit={this.commentSubmit}
                         commentInputHandler={this.commentInputHandler}
                         comment={this.state.comment}
@@ -66,4 +89,11 @@ class Post extends Component {
     }
 }
 
-export default withRouter(Post);
+const mapDispatchToProps = dispatch => {
+    return{
+        load: () => dispatch(startLoading()),
+        loaded: () => dispatch(endLoading())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Post));

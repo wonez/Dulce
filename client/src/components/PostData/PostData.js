@@ -18,10 +18,10 @@ const PostData = (props) => {
         authorImg = props.item.author.avatarUrl;
         authorName = props.item.author.name + ' ' + props.item.author.surname
 
-        ingredients = props.item.ingredients.map(ing => {
+        ingredients = props.item.ingredients.map((ing, i) => {
             return (
                 <li className={classes.Data__Preparation__IngItem}
-                    key={ing}>
+                    key={ing + i}>
                     <span className={classes.Data__Preparation__ItemTag}>&gt;</span>
                     {ing}
                 </li>
@@ -31,7 +31,7 @@ const PostData = (props) => {
         directions = props.item.directions.map((dir, i) => {
             return (
                 <li className={classes.Data__Preparation__DescItem}
-                    key={dir}>
+                    key={dir + i}>
                     <span className={classes.Data__Preparation__ItemTag}>{i + 1}.</span>
                     {dir}
                 </li>
