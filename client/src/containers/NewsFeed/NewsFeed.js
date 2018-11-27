@@ -26,8 +26,28 @@ class NewsFeed extends React.Component {
     }
 
     handleSinglePost = (id) => {
-        console.log(id);
         this.props.history.push(`post/${id}`)
+    }
+
+    handleLike = (id, i) => {
+        axios.post(`/post/like/${id}`)
+            .then(res => {
+                if(res.status == 200){
+                    this.setState(prevState => {
+                        const newState = {
+                            ...prevState,
+                            items:[
+                                ...prevState.items,
+                            ]
+                        }
+                        newState.items[i] = {
+                            ...prevState.items[i],
+                            likes: [...res.data.likes]
+                        }
+                        return newState;
+                    })
+                }
+            })
     }
 
     render(){
@@ -35,10 +55,12 @@ class NewsFeed extends React.Component {
             <Aux>
                 <Toolbar />
                 <div className={classes.NewsFeed} >
-                    {this.state.items.map( item => {
-                        return <Card    key={item._id}
-                                        data={item} 
-                                        singlePost={this.handleSinglePost} />
+                    {this.state.items.map( (item, i) => {
+                        return <Card
+                                    handleLike={() => this.handleLike(item._id, i)}    
+                                    key={item._id}
+                                    data={item} 
+                                    singlePost={this.handleSinglePost} />
                     })}
                 </div>
             </Aux>

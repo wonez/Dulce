@@ -38,7 +38,9 @@ const PostData = (props) => {
             )
         })
         summary = (
-            <Summary time={props.item.prepTime}
+            <Summary 
+                handleLike={props.handleLike}
+                time={props.item.prepTime}
                 difficulty={props.item.level}
                 hearts={props.item.likes} />
         )

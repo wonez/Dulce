@@ -21,7 +21,6 @@ class Post extends Component {
         axios.get(`/post/${postId}`)
             .then(res => {
                 if(res.status == 200){
-                    console.log(res.data);
                     this.setState({
                         item: res.data
                     })
@@ -44,7 +43,7 @@ class Post extends Component {
     }
 
     handleUser = (id) => {
-        this.props.history.push(`/user/${id}`);
+        this.props.history.push(`/profile/${id}`);
     }
 
     commentSubmit = () => {
@@ -68,6 +67,24 @@ class Post extends Component {
         })
     }
 
+    handleLike = () => {
+        axios.post(`/post/like/${this.state.item._id}`)
+            .then(res => {
+                if(res.status == 200){
+                    this.setState(prevState => {
+                        return{
+                            ...prevState,
+                            item:{
+                                ...prevState.item,
+                                likes: res.data.likes
+                            }
+                        }
+
+                    })
+                }
+            })
+    }
+
     render() {
 
         return (
@@ -75,7 +92,8 @@ class Post extends Component {
                 <Toolbar />
                 <div className={classes.Post__Container}>
                     <PostData 
-                        handleUser={() => this.handleUser(this.state.author._id)}
+                        handleLike={this.handleLike}
+                        handleUser={() => this.handleUser(this.state.item.author._id)}
                         item={this.state.item} />
                     <Comments 
                         handleUser={this.handleUser}

@@ -93,6 +93,24 @@ const postComment = async(req, res) => {
     }
 }
 
+const postLike = async(req, res) => {
+    try{
+        const postId = req.params.postId;
+        const post = await Post.findById(postId);
+        const index = post.likes.indexOf(req.user._id);
+        if(index != -1){
+            post.likes.splice(index, 1);
+        }else{
+            post.likes.push(req.user._id);
+        }
+        post.save();
+        res.status(200).json({likes: post.likes});
+    } catch(err) {
+        console.log(err.message);
+        res.status(500).end(err.message)
+    }
+}
+
 const getPost = async (req, res) => {
     try{
         const post = await Post
@@ -142,5 +160,6 @@ module.exports = {
     deletePost,
     getManyPosts,
     getUserPosts,
-    postComment
+    postComment,
+    postLike
 };

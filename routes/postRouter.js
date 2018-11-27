@@ -12,6 +12,8 @@ router.get('/', postController.getManyPosts);
 
 router.post('/comment/:postId', postController.postComment)
 
+router.post('/like/:postId', postController.postLike)
+
 //check that the post belongs to the editor
 router.put('/:id', checkAuth, postController.editPost);
 

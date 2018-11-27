@@ -14,6 +14,10 @@ class Card extends React.Component {
         this.props.history.push(`/profile/${this.props.data.author._id}`)
     }
 
+    singlePost = (id) => {
+        this.props.history.replace(`/post/${id}`)
+    }
+
     render() {
         const date = new Date(this.props.data.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         return (
@@ -38,11 +42,13 @@ class Card extends React.Component {
                     style={{ backgroundImage: `url(${this.props.data.imgUrl})` }}>
                     {/* slika */}
                 </div>
-                <h2 onClick={() => this.props.singlePost(this.props.data._id)} className={classes.Card__Heading}>{this.props.data.title} &rarr;</h2>
+                <h2 onClick={() => this.singlePost(this.props.data._id)} className={classes.Card__Heading}>{this.props.data.title} &rarr;</h2>
                 <div style={{ padding: '0 2rem' }}>
-                    <Summary    time={this.props.data.prepTime}
-                                difficulty={this.props.data.level}
-                                hearts={this.props.data.likes} />
+                    <Summary    
+                        handleLike={this.props.handleLike}
+                        time={this.props.data.prepTime}
+                        difficulty={this.props.data.level}
+                        hearts={this.props.data.likes} />
                 </div>
             </div>
         )

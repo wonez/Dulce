@@ -24,17 +24,34 @@ class Timeline extends Component {
             })
     }
 
-    singlePostHandler = (id) => {
-        this.props.history.replace(`/post/${id}`)
+    handleLike = (id, i) => {
+        axios.post(`/post/like/${id}`)
+            .then(res => {
+                if(res.status == 200){
+                    this.setState(prevState => {
+                        const newState = {
+                            ...prevState,
+                            items:[
+                                ...prevState.items,
+                            ]
+                        }
+                        newState.items[i] = {
+                            ...prevState.items[i],
+                            likes: [...res.data.likes]
+                        }
+                        return newState;
+                    })
+                }
+            })
     }
 
     render(){
     
         return(
             <div className={classes.Timeline}>
-                {this.state.items.map(item => (
+                {this.state.items.map((item, i) => (
                     <Card  
-                        singlePost={this.singlePostHandler} 
+                        handleLike={() => { this.handleLike(item._id, i) }}
                         data={item} 
                         key={item._id}/>
                 ))}

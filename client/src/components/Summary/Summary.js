@@ -1,37 +1,40 @@
 import React from 'react';
 
+import { connect } from 'react-redux'
 import { IconClock, IconLevel, IconHeart } from '../../UI/Icons/Icons'
 
 import classes from './Summary.scss'
 
-const Summary = ({ time, difficulty, hearts, small }) => {
+const Summary = (props) => {
+
+    const liked = props.hearts.indexOf(props.userId) != -1 ? classes.Liked : '';
 
     let content = (
         <div className={classes.Summary}>
-            <p className={classes.Summary__Icon}> 
+            <p onClick={props.handleLike} className={[classes.Summary__Icon, liked].join(' ')}> 
                 <IconHeart /> 
-                &nbsp; {hearts.length}
+                &nbsp; {props.hearts.length}
             </p>
             <p className={classes.Summary__Icon}>
-                <IconClock/> &nbsp; {time} min
+                <IconClock/> &nbsp; {props.time} min
             </p>
             <p className={classes.Summary__Icon}>
-                <IconLevel /> &nbsp; { difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                <IconLevel /> &nbsp; { props.difficulty.charAt(0).toUpperCase() + props.difficulty.slice(1)}
             </p>
         </div>
     )
 
-    if(small){
+    if(props.small){
         content = (
             <div className={classes.SummarySmall}>
                 <p className={classes.SummarySmall__Icon}>
-                    <IconClock/> &nbsp; {time} min
+                    <IconClock/> &nbsp; {props.time} min
                 </p>
                 <p className={classes.SummarySmall__Icon}>
-                    <IconLevel /> &nbsp; {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                    <IconLevel /> &nbsp; {props.difficulty.charAt(0).toUpperCase() + props.difficulty.slice(1)}
                 </p>
-                <p className={classes.SummarySmall__Icon}> 
-                    {hearts.length} &nbsp; <IconHeart />
+                <p className={[classes.SummarySmall__Icon, liked].join(' ')}> 
+                    {props.hearts.length} &nbsp; <IconHeart />
                 </p>
             </div>
         )
@@ -40,4 +43,10 @@ const Summary = ({ time, difficulty, hearts, small }) => {
     return content;
 }
 
-export default Summary;
+const mapStateToProps = state => {
+    return{
+        userId: state.auth.user._id
+    }
+}
+
+export default connect(mapStateToProps)(Summary);
