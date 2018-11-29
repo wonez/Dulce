@@ -20,7 +20,7 @@ class Profile extends Component{
     }
 
     componentDidUpdate(prevProps){
-        if(this.props.location !== prevProps.location){
+        if(this.props.location.pathname !== prevProps.location.pathname){
             this.onRouteChanged();
         }
     }
@@ -63,7 +63,7 @@ class Profile extends Component{
             )
         } else if (this.state.active === 'about'){
             content = (
-                <About userId={this.props.match.params.userId} />
+                <About user={this.state.user} />
             )
         }
 

@@ -14,6 +14,16 @@ class Timeline extends Component {
     }
 
     componentDidMount(){
+        this.onRouteChanged();
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.userId !== prevProps.userId){
+            this.onRouteChanged();
+        }
+    }
+
+    onRouteChanged(){
         axios.get(`/post/user/${this.props.userId}`)
             .then(res => {
                 if(res.status == 200){

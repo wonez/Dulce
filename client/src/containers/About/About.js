@@ -7,12 +7,12 @@ import classes from './About.scss'
 class About extends Component {
 
     state = {
-        profile: {}
+        profile: null
     }
 
     componentDidMount() {
         this.setState({
-            profile: this.props.profile
+            profile: this.props.user
         })
     }
 
@@ -20,7 +20,7 @@ class About extends Component {
 
         let content = null;
 
-        if (this.state.profile.dateCreated) {
+        if (this.state.profile) {
 
             const joined = new Date(this.state.profile.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
@@ -58,10 +58,4 @@ class About extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        profile: state.auth.user
-    }
-}
-
-export default connect(mapStateToProps)(About)
+export default About;
