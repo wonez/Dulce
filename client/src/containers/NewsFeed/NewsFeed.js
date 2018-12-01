@@ -87,6 +87,9 @@ class NewsFeed extends React.Component {
                                     key={item._id}
                                     data={item} />
                     })}
+                    {this.state.items.length < 1 ? <NothingToShow 
+                                                        icon='post'
+                                                        message= 'Nothing to show' /> : null}
                 </div>
                 <Confirm 
                     confirmHandler={this.deleteHandler}
