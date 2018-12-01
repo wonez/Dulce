@@ -1,16 +1,21 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router' 
+import { connect } from 'react-redux'
 import axios from '../../utility/axios'
 
 import Card from '../../components/Card/Card';
+import Confirm from '../../UI/Confirm/Confirm';
+import Loading from '../../UI/Loading/Loading';
+import NothingToShow from '../../components/NothingToShow/NothingToShow';
+
+import { startLoading, endLoading } from '../../store'
 
 import classes from './Timeline.scss'
-import NothingToShow from '../../components/NothingToShow/NothingToShow';
 
 class Timeline extends Component {
 
     state = {
-        items: []
+        items: [],
     }
 
     componentDidMount(){
@@ -55,12 +60,36 @@ class Timeline extends Component {
             })
     }
 
+    deleteHandler = () => {
+        this.props.startLoading();
+        axios.delete(`/post/${this.state.selected}`)
+            .then(res => {
+                this.props.endLoading();
+                this.setState(prevState => {
+                    const items = [...prevState.items];
+                    items.splice(prevState.position, 1)
+                    return {
+                        ...prevState,
+                        items
+                    }
+                })
+            })
+    }    
+
+    selectForDeletion = (id, i) => {
+        this.setState({
+            selected: id,
+            position: i
+        })
+    }
+
     render(){
     
         return(
             <div className={classes.Timeline}>
                 {this.state.items.map((item, i) => (
-                    <Card  
+                    <Card
+                        selectForDeletion={() => {this.selectForDeletion(item._id, i)}}
                         handleLike={() => { this.handleLike(item._id, i) }}
                         data={item} 
                         key={item._id}/>
@@ -68,9 +97,20 @@ class Timeline extends Component {
                 {this.state.items.length < 1 ? <NothingToShow 
                                                     icon='post'
                                                     message='User has no posts'/> : null}
+                <Confirm 
+                    confirmHandler={this.deleteHandler}
+                    />
+                <Loading />
             </div>
         )
     }
 }
 
-export default withRouter(Timeline);
+const mapDispatchToProps = dispatch => {
+    return {
+        startLoading: () => dispatch(startLoading()),        
+        endLoading: () => dispatch(endLoading()),        
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Timeline));

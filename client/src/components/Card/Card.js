@@ -31,8 +31,12 @@ class Card extends React.Component {
                         <h5 onClick={this.handleUser} className={classes.Card__Data__Name}>{`${this.props.data.author.name} ${this.props.data.author.surname}`}</h5>
                         <p className={classes.Card__Data__Date}>{date}</p>
                     </div>
-                    {this.props.data._id == this.props.user._id ?
-                         <Popup post={this.props.data}/>
+
+                    {this.props.data.author._id == this.props.user._id ?
+                         <Popup 
+                            selectForDeletion={this.props.selectForDeletion}
+                            post={this.props
+                                .data}/>
                     : null}
                 </div>
                 <p className={classes.Card__Description} >

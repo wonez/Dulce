@@ -1,6 +1,7 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 const { createForm, transformPath } = require('../utlity/form')
+const fs = require('fs');
 
 const createPost = async (req, res) => {
     const form = createForm();
@@ -135,10 +136,18 @@ const getPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
     try{
+        const post = await Post.findById(req.params.id);
+        const { imgUrl, comments } = post;
+        const imgPath = imgUrl.substring(imgUrl.indexOf('images'))
+        fs.unlinkSync(`public/${imgPath}`);
+        for(let comment of comments){
+            await Comment.findByIdAndDelete(comment);
+        }
         await Post.findOneAndDelete(req.params.id)
-        res.status(200).end('Post deleted');
+        res.status(200).json({message: 'Post deleted'});
     }catch(err){
-        res.status(500).end(err.message)
+        console.log(err.message)
+        res.status(500).json({messageer: err.message})
     }
 }
 

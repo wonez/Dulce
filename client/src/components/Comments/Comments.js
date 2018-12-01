@@ -22,7 +22,7 @@ const Comments = (props) => {
                         key={comment._id} />
         })
     }
-
+    
     return(
         <Aux>
             <div className={classes.NewComment}>
