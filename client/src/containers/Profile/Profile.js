@@ -12,6 +12,8 @@ import About from '../About/About';
 
 import classes from './Profile.scss';
 
+import { updateAuthData } from '../../store/index'
+
 class Profile extends Component{
 
     state = {
@@ -49,6 +51,24 @@ class Profile extends Component{
         })
     }
 
+    followHandler = () => {
+        axios.post(`following/follow/${this.state.user._id}`)
+            .then(res => {
+                if(res.status == 200){
+                    this.props.updateUser(res.data);
+                }
+            })
+    }
+
+    unfollowHandler = () => {
+        axios.post(`following/unfollow/${this.state.user._id}`)
+            .then(res => {
+                if(res.status == 200){
+                    this.props.updateUser(res.data);
+                } 
+            })
+    }
+
     render(){
 
         let content = null;
@@ -59,7 +79,7 @@ class Profile extends Component{
             )
         } else if(this.state.active === 'following'){
             content = (
-                <Following userId={this.props.match.params.userId} />
+                <Following count={this.state.user.following.length} userId={this.props.match.params.userId} />
             )
         } else if (this.state.active === 'about'){
             content = (
@@ -71,7 +91,10 @@ class Profile extends Component{
             <div className={classes.Profile}>
                 <Toolbar />
                 <div className={classes.Profile__Data}>
-                    <ProfileCover profile={this.state.user}/>
+                    <ProfileCover 
+                        unfollowHandler={this.unfollowHandler}
+                        followHandler={this.followHandler}
+                        profile={this.state.user}/>
                     <ProfileNavigation active={this.state.active} handler={this.activeHandler} />
                     {content}
                 </div>
@@ -80,4 +103,10 @@ class Profile extends Component{
     }
 }
 
-export default Profile; 
+const mapDispatchToProps = dispatch => {
+    return {
+        updateUser: (data) => dispatch(updateAuthData({user: data}))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Profile); 

@@ -16,7 +16,6 @@ export const tryLogin = (userData) => {
                 if(res.status == 200) return res.data
                 else throw new Error(res.status)
             }).then(data => {
-                console.log(data);
                 dispatch(updateAuthData(data))
             }).catch(err => {
                 dispatch(endLoading());
@@ -50,11 +49,16 @@ export const trySignUp = (userData) => {
 
 export const checkCookies = () => {
     return dispatch => {
+        const id = JSON.parse(localStorage.getItem('id'))
         //check if expired get new
-        const user = JSON.parse(localStorage.getItem('user'))
         const token = JSON.parse(localStorage.getItem('token'))
-        if(user){
-            dispatch(storeAuthData({user, token}))
+        if(id){
+            axios.get(`/user/${id}`)
+                .then(res => {
+                    if(res.status == 200){
+                        dispatch(storeAuthData({user: res.data, token}))
+                    }
+                })
         }
     }
 }
@@ -62,9 +66,11 @@ export const checkCookies = () => {
 export const updateAuthData = (userData) => {
     return dispatch => {
         dispatch(storeAuthData(userData));
-        storeCookies(userData)
+        if(userData.token)
+            storeCookies(userData)
     }
 }
+
 
 export const logout = () => {
     return dispatch => {
@@ -88,13 +94,15 @@ const removeAuthData = () => {
 
 const storeCookies = (userData) => {
     // console.log(userData);
-    localStorage.setItem('user', JSON.stringify(userData.user))
+    // localStorage.setItem('user', JSON.stringify(userData.user))
+    localStorage.setItem('id', JSON.stringify(userData.user._id))
     localStorage.setItem('token', JSON.stringify(userData.token))
     // localStorage.setItem('expirationDate', JSON.stringify(data))
 }
 
 const deleteCookies = () => {
-    localStorage.removeItem('user')
+    // localStorage.removeItem('user')
+    localStorage.removeItem('id')
     localStorage.removeItem('token')
     // localStorage.removeItem('expirationDate')
 }

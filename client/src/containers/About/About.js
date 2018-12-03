@@ -10,7 +10,17 @@ class About extends Component {
         profile: null
     }
 
-    componentDidMount() {
+    componentDidMount(){
+        this.onRouteChanged();
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.user._id !== prevProps.user._id){
+            this.onRouteChanged();
+        }
+    }
+
+    onRouteChanged = () => {
         this.setState({
             profile: this.props.user
         })
@@ -22,6 +32,7 @@ class About extends Component {
 
         if (this.state.profile) {
 
+            console.log(this.state.profile);
             const joined = new Date(this.state.profile.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
             content = (
@@ -40,7 +51,7 @@ class About extends Component {
                             <p>{joined}</p>
                         </div>
                         <div className={classes.About__Item}>
-                            <h4>Followers</h4>
+                            <h4>Following</h4>
                             <p>{this.state.profile.following.length}</p>
                         </div>
                         <div className={classes.About__Item}>

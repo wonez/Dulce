@@ -11,6 +11,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case STORE_AUTH_DATA : return {
+            ...state,
             ...action.userData,
             isLogged: true     
         }

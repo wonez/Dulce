@@ -15,10 +15,19 @@ const ProfileCover = (props) => {
         bg = `linear-gradient(to bottom, transparent, rgba(0,0,0,.6)), url('${props.profile.coverUrl}')`;
         avatar = `url('${props.profile.avatarUrl}')`;
         fullName = `${props.profile.name} ${props.profile.surname}`
-
-        if(props.userId !== props.profile._id){
+        if (props.user.following.indexOf(props.profile._id) != -1){
             follow = (
-                <BtnPrimary size="big">
+                <BtnPrimary 
+                    click={props.unfollowHandler}
+                    size="big">
+                    Unfollow
+                </BtnPrimary>
+            )
+        }else if(props.user._id != props.profile._id){
+            follow = (
+                <BtnPrimary 
+                    click={props.followHandler}
+                    size="big">
                     Follow
                 </BtnPrimary>
             )
@@ -49,7 +58,7 @@ const ProfileCover = (props) => {
 
 const mapStateToProps = state => {
     return {
-        userId: state.auth.user._id
+        user: state.auth.user
     }
 }
 

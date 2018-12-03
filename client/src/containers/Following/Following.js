@@ -1,15 +1,52 @@
 import React, { Component } from 'react'
-
+import axios from '../../utility/axios'
+import { withRouter } from 'react-router-dom'
 import classes from './Following.scss';
-
 
 import Person from '../../components/Person/Person'
 import NothingToShow from '../../components/NothingToShow/NothingToShow'
+import LoadMore from '../../UI/LoadMore/LoadMore'
 
 class Following extends Component{
 
     state = {
-        people: []
+        people: [],
+    }
+
+    componentDidMount(){
+        this.onRouteChanged();
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.userId !== prevProps.userId ){
+            this.onRouteChanged();
+        }
+    }
+
+    onRouteChanged = () => {
+        this.setState({
+            people: []
+        }, ()=> {
+            this.getUsers();
+        })
+    }
+
+    getUsers = () => {
+        axios.get(`/following/${this.props.userId}?start=${this.state.people.length}`)
+            .then(res => {
+                if(res.status == 200){
+                    this.setState(prevState => {
+                        return {
+                            ...prevState,
+                            people: prevState.people.concat(res.data.people)
+                        }
+                    })
+                }
+            })
+    }
+
+    goToUser = (id) => {
+        this.props.history.push(`/profile/${id}`)
     }
 
     render(){
@@ -20,15 +57,17 @@ class Following extends Component{
                 icon='user'/>
         )
 
-        if(this.state.people.length > 0){
+        if(this.props.count > 0){
             content = (
                 <div className={classes.Following}>
-                    <h2 className={classes.Following__Heading}>Followers: {this.state.people.length}</h2>
+                    <h2 className={classes.Following__Heading}>Followers: {this.props.count}</h2>
                     <div className={classes.Following__Container}>
                         {this.state.people.map(person => (
-                            <Person data={person} key={person.id} />
+                            <Person click={() => this.goToUser(person._id)} data={person} key={person._id} />
                             ))}
                     </div>
+                    {this.state.people.length < this.props.count ? 
+                        <LoadMore click={this.getUsers} /> : null}
                 </div>
             )
         }
@@ -37,4 +76,4 @@ class Following extends Component{
     }
 }
 
-export default Following;
+export default withRouter(Following);
