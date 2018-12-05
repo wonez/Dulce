@@ -18,6 +18,7 @@ class NewsFeed extends React.Component {
 
     state = {
         items: [],
+        count: 0
     }
 
     componentDidMount(){
@@ -25,7 +26,8 @@ class NewsFeed extends React.Component {
             .then(res => {
                 if(res.status == 200){
                     this.setState({
-                        items: res.data
+                        items: res.data.posts,
+                        count: res.data.count
                     })
                 }
             })
@@ -100,6 +102,12 @@ class NewsFeed extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         startLoading: () => dispatch(startLoading()),        
@@ -107,4 +115,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(NewsFeed));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewsFeed));

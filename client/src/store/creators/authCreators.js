@@ -65,6 +65,7 @@ export const checkCookies = () => {
 
 export const updateAuthData = (userData) => {
     return dispatch => {
+        console.log(userData);
         dispatch(storeAuthData(userData));
         if(userData.token)
             storeCookies(userData)
@@ -94,7 +95,6 @@ const removeAuthData = () => {
 
 const storeCookies = (userData) => {
     // console.log(userData);
-    // localStorage.setItem('user', JSON.stringify(userData.user))
     localStorage.setItem('id', JSON.stringify(userData.user._id))
     localStorage.setItem('token', JSON.stringify(userData.token))
     // localStorage.setItem('expirationDate', JSON.stringify(data))

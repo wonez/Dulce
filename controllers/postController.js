@@ -151,12 +151,12 @@ const deletePost = async (req, res) => {
     }
 }
 
-const getManyPosts = async (req, res) => {
+const getNewsFeed = async (req, res) => {
     try{
-        const posts = await Post
-            .find({})
-            .populate('author', { avatarUrl: 1, name: 1, surname: 1 });
-        res.status(200).json(posts);
+        const posts = await Post.find({
+            $or: [{ author: req.user._id }, { author: { $in: req.user.following }}]
+        }).populate('author', { avatarUrl: 1, name: 1, surname: 1 }).sort({ dateCreated: -1 })
+        res.status(200).json({posts, count: posts.length});
     }catch(err){
         res.status(500).end(err.message)
     }
@@ -167,7 +167,7 @@ module.exports = {
     createPost,
     editPost,
     deletePost,
-    getManyPosts,
+    getNewsFeed,
     getUserPosts,
     postComment,
     postLike

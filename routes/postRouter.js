@@ -8,7 +8,7 @@ router.get('/:id', postController.getPost);
 
 router.get('/user/:userId', postController.getUserPosts)
 
-router.get('/', postController.getManyPosts);
+router.get('/', postController.getNewsFeed);
 
 router.post('/comment/:postId', postController.postComment)
 
