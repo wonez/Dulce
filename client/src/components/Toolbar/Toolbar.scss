@@ -58,3 +58,28 @@
         align-items: flex-end;
     }
 }
+
+.ToolbarPlain{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: $color-white;
+    text-align: center;
+    justify-self: flex-start;
+    align-self: stretch;
+    padding: 1rem 0 1.5rem 0;
+    font-size: 2rem;
+    color: $color-gray-dark;
+    fill: $color-primary-dark;
+    border-bottom: 1px solid $color-primary-dark;
+    span{
+        display: block;
+        font-size: 2em;
+        margin: .3rem 0 0 2rem;
+        text-transform: uppercase;
+        letter-spacing: 1rem;
+        line-height: .8;
+    }
+}

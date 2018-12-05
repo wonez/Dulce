@@ -3,12 +3,15 @@ const User = require('../models/user');
 
 const searchByValue = async (req, res) => {
     try{
-        const value = new RegExp(req.query.value, "i");;
-        const recipes = await Post.find({ title: value }).limit(6);
-        const users = await User.find({ $or: [{name: value}, {surname: value}] }).limit(6);
-
-        const recipesCount = await Post.find({ title: value }).countDocuments();
-        const usersCount = await User.find({ $or: [{name: value}, {surname: value}] }).countDocuments();
+        const values = req.query.value.split(' ');
+        const possible = [];
+        for(let val of values){
+            possible.push(new RegExp(val, "i"));
+        }
+        const recipes = await Post.find({ title: { $in: possible }}).limit(6);
+        const users = await User.find({ $or: [{name: { $in: possible }}, {surname: { $in: possible }}] }).limit(6);
+        const recipesCount = await Post.find({ title: { $in: possible } }).countDocuments();
+        const usersCount = await User.find({ $or: [{name: { $in: possible }}, {surname: { $in: possible }}] }).countDocuments();
 
         res.status(200).json({
             recipes,
@@ -24,9 +27,13 @@ const searchByValue = async (req, res) => {
 const getMoreRecipes = async (req, res) => {
     try{
         const { start } = req.query;
-        const value = new RegExp(req.query.value, "i");
-        const recipesCount = await Post.find({ title: value }).countDocuments();
-        const recipes = await Post.find({ title: value }).skip(+start).limit(6);
+        const values = req.query.value.split(' ');
+        const possible = [];
+        for(let val of values){
+            possible.push(new RegExp(val, "i"));
+        }
+        const recipesCount = await Post.find({ title: { $in: possible } }).countDocuments();
+        const recipes = await Post.find({ title: { $in: possible }}).skip(+start).limit(6);
         res.status(200).json({ recipes, recipesCount })
     }catch(err){
         console.log(err.message)
@@ -37,9 +44,14 @@ const getMoreRecipes = async (req, res) => {
 const getMoreUsers = async (req, res) => {
     try{
         const { start } = req.query;
-        const value = new RegExp(req.query.value, "i");
-        const usersCount = await User.find({ $or: [{name: value}, {surname: value}] }).count();
-        const users = await User.find({ $or: [{name: value}, {surname: value}] }).skip(+start).limit(6);
+        const values = req.query.value.split(' ');
+        const possible = [];
+        for(let val of values){
+            possible.push(new RegExp(val, "i"));
+        }
+        const users = await User.find({ $or: [{name: { $in: possible }}, {surname: { $in: possible }}] }).limit(6);
+        const usersCount = await User.find({ $or: [{name: { $in: possible }}, {surname: { $in: possible }}] }).countDocuments();
+
         res.status(200).json({ users, usersCount })
     }catch(err){
         console.log(err.message)

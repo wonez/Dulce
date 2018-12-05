@@ -11,7 +11,7 @@ const Nav = () => {
             <Logo />
             <ul className={classes.Nav__Items}>
                 <li className={classes.Nav__Item}>
-                    <a href="/allcategories" className={classes.Nav__Link}>
+                    <a href="/categories" className={classes.Nav__Link}>
                         Categories
                     </a>
                 </li>

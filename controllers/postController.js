@@ -137,14 +137,18 @@ const getPost = async (req, res) => {
 const deletePost = async (req, res) => {
     try{
         const post = await Post.findById(req.params.id);
-        const { imgUrl, comments } = post;
-        const imgPath = imgUrl.substring(imgUrl.indexOf('images'))
-        fs.unlinkSync(`public/${imgPath}`);
-        for(let comment of comments){
-            await Comment.findByIdAndDelete(comment);
+        if(req.user._id == post.author){
+            const { imgUrl, comments } = post;
+            const imgPath = imgUrl.substring(imgUrl.indexOf('images'))
+            fs.unlinkSync(`public/${imgPath}`);
+            for(let comment of comments){
+                await Comment.findByIdAndRemove(comment);
+            }
+            await Post.findByIdAndRemove(req.params.id)
+            res.status(200).json({message: 'Post deleted'});
+        }else{
+            throw new Error('Unothorized')
         }
-        await Post.findOneAndDelete(req.params.id)
-        res.status(200).json({message: 'Post deleted'});
     }catch(err){
         console.log(err.message)
         res.status(500).json({messageer: err.message})

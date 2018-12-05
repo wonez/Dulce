@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 
+import { connect } from 'react-redux'
+
 import classes from './Toolbar.scss';
 
 import IconButton from '../../UI/IconButton/IconButton'
@@ -41,37 +43,57 @@ class Toolbar extends Component {
     }
 
     render(){
-        return (
-            <div className={classes.Toolbar}>
-                <IconButton click={this.handleHome}>
-                    <IconCake />
-                </IconButton>
-                <div className={classes.Search__InputBox}>
-                    <form onSubmit={this.handleSearch}>
-                        <input  className={classes.Search__Input} 
-                                value={this.state.search}
-                                onChange={this.textChangedHandler} 
-                                type="text" 
-                                placeholder="Search for a Recipe or a User"></input>
-                        <div className={classes.Search__Icon}>
-                            <IconButton click={this.handleSearch}>
-                                <IconMagnifyingGlass />
-                            </IconButton>
-                        </div>
-                    </form>
-                </div>
-                <div className={classes.Buttons}>
-                    <IconButton click={this.handleCategories}>
-                        <IconCategories />
+
+        let content = (
+            <div className={classes.ToolbarPlain}>
+                <div style={{display: 'inline-block'}}>
+                    <IconButton click={this.handleHome}>
+                        <IconCake /> <span>Dulce</span>
                     </IconButton>
-                    <IconButton click={this.handleCreate}>
-                        <IconPlus />
-                    </IconButton>
-                    <Menu />
                 </div>
             </div>
         )
+
+        if(this.props.user && this.props.user._id){
+            content = (
+                <div className={classes.Toolbar}>
+                    <IconButton click={this.handleHome}>
+                        <IconCake />
+                    </IconButton>
+                    <div className={classes.Search__InputBox}>
+                        <form onSubmit={this.handleSearch}>
+                            <input  className={classes.Search__Input} 
+                                    value={this.state.search}
+                                    onChange={this.textChangedHandler} 
+                                    type="text" 
+                                    placeholder="Search for a Recipe or a User"></input>
+                            <div className={classes.Search__Icon}>
+                                <IconButton click={this.handleSearch}>
+                                    <IconMagnifyingGlass />
+                                </IconButton>
+                            </div>
+                        </form>
+                    </div>
+                    <div className={classes.Buttons}>
+                        <IconButton click={this.handleCategories}>
+                            <IconCategories />
+                        </IconButton>
+                        <IconButton click={this.handleCreate}>
+                            <IconPlus />
+                        </IconButton>
+                        <Menu />
+                    </div>
+                </div>
+            )
+        }
+        return content;
     }
 }
 
-export default withRouter(Toolbar);
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Toolbar));
