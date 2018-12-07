@@ -14,8 +14,11 @@ router.post('/comment/:postId', postController.postComment)
 
 router.post('/like/:postId', postController.postLike)
 
-//check that the post belongs to the editor
+router.put('/comment/:commentId', postController.editComment)
+
 router.put('/:id', checkAuth, postController.editPost);
+
+router.delete('/comment/:postId/:commentId', postController.deleteComment)
 
 router.delete('/:id', checkAuth, postController.deletePost);
 

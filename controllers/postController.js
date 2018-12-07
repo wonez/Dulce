@@ -166,6 +166,32 @@ const getNewsFeed = async (req, res) => {
     }
 }
 
+const deleteComment = async(req, res) => {
+    try{
+        const { postId, commentId } = req.params;
+        await Post.findByIdAndUpdate(postId, {
+            $pull: { comments: commentId }
+        })
+        await Comment.findByIdAndRemove(commentId);
+        res.status(200).json({message: 'Comment deleted'})
+    }catch(err){
+        console.log(err.message);
+        res.status(500).end(err.message)
+    }
+}
+
+const editComment = async(req, res) => {
+    try{
+        const comment = await Comment.findByIdAndUpdate(req.params.commentId, {
+            text: req.body.text
+        }, {new: true})
+        res.status(200).json({text: comment.text});
+    }catch(err){
+        console.log(err.message);
+        res.status(500).end(err.message)
+    }
+}
+
 module.exports = {
     getPost,
     createPost,
@@ -174,5 +200,7 @@ module.exports = {
     getNewsFeed,
     getUserPosts,
     postComment,
-    postLike
+    postLike,
+    editComment,
+    deleteComment
 };

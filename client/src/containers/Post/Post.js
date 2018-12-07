@@ -9,6 +9,8 @@ import classes from './Post.scss'
 import Toolbar from '../../components/Toolbar/Toolbar'
 import PostData from '../../components/PostData/PostData'
 import Comments from '../../components/Comments/Comments'
+import Confirm from '../../UI/Confirm/Confirm';
+import Loading from '../../UI/Loading/Loading';
 
 import { startLoading, endLoading } from '../../store/creators/uiCreators'
 
@@ -30,7 +32,8 @@ class Post extends Component {
 
     state = {
         item: {},
-        comment: ''
+        comment: '',
+        selected: -1,
     }
 
     commentInputHandler = (text) => {
@@ -85,8 +88,58 @@ class Post extends Component {
             })
     }
 
-    render() {
+    editComment = (id, text, i) => {
+        this.props.load();
+        axios.put(`/post/comment/${id}`, {text})
+            .then(res => {
+                if(res.status == 200){
+                    this.setState(prevState => {
+                        const newState = {
+                            ...prevState,
+                            item:{
+                                ...prevState.item,
+                                comments:[
+                                    ...prevState.item.comments
+                                ]
+                            }
+                        }
+                        newState.item.comments[i].text = res.data.text
+                        return newState;
+                    })
+                    this.props.loaded();
+                }
+            })
+    }
 
+    selectComment = (i) => {
+        this.setState({
+            selected: i
+        })
+    }
+
+    deleteComment = () => {
+        axios.delete(`/post/comment/${this.state.item._id}/${this.state.item.comments[this.state.selected]._id}`)
+            .then(res => {
+                if(res.status == 200){
+                    this.setState(prevState => {
+                        const newState = {
+                            ...prevState,
+                            item:{
+                                ...prevState.item,
+                                comments:[
+                                    ...prevState.item.comments
+                                ]
+                            }
+                        }
+                        newState.item.comments.splice(this.state.selected, 1);
+                        return newState;
+                    })
+                    this.props.loaded();
+                }
+            })
+    }
+
+    render() {
         return (
             <div className={classes.Post}>
                 <Toolbar />
@@ -96,12 +149,16 @@ class Post extends Component {
                         handleUser={() => this.handleUser(this.state.item.author._id)}
                         item={this.state.item} />
                     <Comments 
+                        selectComment={this.selectComment}
                         handleUser={this.handleUser}
                         commentSubmit={this.commentSubmit}
                         commentInputHandler={this.commentInputHandler}
                         comment={this.state.comment}
+                        editComment={this.editComment}
                         comments={this.state.item.comments} />
                 </div>
+                <Confirm confirmHandler={this.deleteComment} />
+                <Loading />
             </div>
         )
     }

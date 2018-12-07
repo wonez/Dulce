@@ -6,7 +6,6 @@ import Comment from '../Comment/Comment'
 import Avatar from '../Avatar/Avatar'
 import Aux from '../../hoc/Aux'
 import BtnPrimary from '../../UI/BtnPrimary/BtnPrimary'
-import Loading from '../../UI/Loading/Loading'
 
 import classes from './Comments.scss'
 
@@ -15,8 +14,10 @@ const Comments = (props) => {
     let comments = null;
 
     if(props.comments){
-        comments = props.comments.map(comment => {
-            return <Comment 
+        comments = props.comments.map((comment, i) => {
+            return <Comment
+                        selectComment={()=>{props.selectComment(i)}} 
+                        editComment={(id, text) => {props.editComment(id, text, i)}}
                         handleUser={props.handleUser}
                         comment={comment} 
                         key={comment._id} />
@@ -40,7 +41,6 @@ const Comments = (props) => {
                         size="small">Comment</BtnPrimary>
                 </div>
             </div>
-            <Loading />
             <div className={classes.Comments}>
                 {comments}
             </div>
