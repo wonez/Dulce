@@ -7,7 +7,6 @@ import { logout } from '../../store'
 import classes from './Menu.scss';
 
 import { IconUser } from '../Icons/Icons'
-import Aux from '../../hoc/Aux'
 
 class MenuBtn extends Component {
 
@@ -16,7 +15,7 @@ class MenuBtn extends Component {
     }
 
     goTo(url){
-        this.props.history.replace(url)
+        this.props.history.push(url)
     }
 
     render(){
@@ -26,7 +25,7 @@ class MenuBtn extends Component {
                 <div onClick={this.uncheck} className={classes.MenuBg}>
                 </div>
                 <div className={classes.Menu}>
-                    <a onClick={() => {this.goTo(`/profile/${this.props.user._id}`)}} className={classes.Menu__Btn}>
+                    <a onClick={() => {this.goTo(''); setTimeout(()=> this.goTo(`/profile/${this.props.user._id}`), 0)}} className={classes.Menu__Btn}>
                         My Profile
                     </a>
                     <a onClick={() => {this.goTo('/editProfile')}} className={classes.Menu__Btn}>

@@ -16,10 +16,17 @@ class Timeline extends Component {
 
     state = {
         items: [],
+        count: 0,
+        requested: false
     }
 
     componentDidMount(){
         this.onRouteChanged();
+        window.addEventListener('scroll', this.loadMore);
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.loadMore)
     }
 
     componentDidUpdate(prevProps){
@@ -28,13 +35,30 @@ class Timeline extends Component {
         }
     }
 
+    loadMore = () => {
+        const elem = document.scrollingElement;
+        if(elem.scrollHeight - (elem.scrollTop + elem.clientHeight) < 200 && 
+            this.state.items.length < this.state.count &&
+            !this.state.requested ){
+                //last 200px
+                this.setState({
+                    requested: true
+                })
+                this.onRouteChanged()
+            }
+    }
+
     onRouteChanged(){
-        axios.get(`/post/user/${this.props.userId}`)
+        this.props.startLoading();
+        axios.get(`/post/user/${this.props.userId}?start=${this.state.items.length}`)
             .then(res => {
+                this.props.endLoading();
                 if(res.status == 200){
-                    this.setState({
-                        items: res.data.posts
-                    })
+                    this.setState(prevState => ({
+                        items: prevState.items.concat(res.data.posts),
+                        count: res.data.count,
+                        requested: false
+                    }))
                 }
             })
     }

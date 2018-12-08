@@ -51,10 +51,16 @@ const editPost = async (req, res) => {
 const getUserPosts = async(req, res) => {
     try{
         const author = req.params.userId;
+        const start = +req.query.start; 
+        
+        const count = await Post.find({author}).count();
         const posts = await Post
             .find({ author })
+            .skip(start)
+            .limit(10)
+            .sort({ dateCreated: -1 })
             .populate('author', { avatarUrl: 1, name: 1, surname: 1 });
-        res.status(200).json({posts})
+        res.status(200).json({posts, count})
     } catch(err) {
         res.status(500).end(err.message)
     }
@@ -157,10 +163,20 @@ const deletePost = async (req, res) => {
 
 const getNewsFeed = async (req, res) => {
     try{
-        const posts = await Post.find({
+        const start = +req.query.start;
+        const count = await Post.aggregate([
+            { $match: {$or: [{ author: req.user._id }, { author: { $in: req.user.following }}]}},
+            { $count: "posts" }
+        ]);
+        const posts = await Post
+        .find({
             $or: [{ author: req.user._id }, { author: { $in: req.user.following }}]
-        }).populate('author', { avatarUrl: 1, name: 1, surname: 1 }).sort({ dateCreated: -1 })
-        res.status(200).json({posts, count: posts.length});
+        })
+        .skip(start)
+        .limit(10)
+        .sort({ dateCreated: -1 })
+        .populate('author', { avatarUrl: 1, name: 1, surname: 1 })
+        res.status(200).json({posts, count: count[0].posts});
     }catch(err){
         res.status(500).end(err.message)
     }

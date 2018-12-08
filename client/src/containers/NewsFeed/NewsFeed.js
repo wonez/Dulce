@@ -18,17 +18,30 @@ class NewsFeed extends React.Component {
 
     state = {
         items: [],
-        count: 0
+        count: 0,
+        requested: false
     }
 
     componentDidMount(){
-        axios.get('/post')
+        this.getPosts();
+        window.addEventListener('scroll', this.loadMore);
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.loadMore)
+    }
+
+    getPosts = () => {
+        this.props.startLoading();
+        axios.get(`/post?start=${this.state.items.length}`)
             .then(res => {
+                this.props.endLoading();
                 if(res.status == 200){
-                    this.setState({
-                        items: res.data.posts,
-                        count: res.data.count
-                    })
+                    this.setState(prevState => ({
+                        items: prevState.items.concat(res.data.posts),
+                        count: res.data.count,
+                        requested: false
+                    }))
                 }
             })
     }
@@ -75,6 +88,19 @@ class NewsFeed extends React.Component {
             selected: id,
             position: i
         })
+    }
+
+    loadMore = () => {
+        const elem = document.scrollingElement;
+        if(elem.scrollHeight - (elem.scrollTop + elem.clientHeight) < 200 && 
+            this.state.items.length < this.state.count &&
+            !this.state.requested ){
+                //last 200px
+                this.setState({
+                    requested: true
+                })
+                this.getPosts();
+            }
     }
 
     render(){
