@@ -15,7 +15,7 @@ class Card extends React.Component {
     }
 
     singlePost = (id) => {
-        this.props.history.replace(`/post/${id}`)
+        this.props.history.push(`/post/${id}`)
     }
 
     render() {
@@ -32,7 +32,7 @@ class Card extends React.Component {
                         <p className={classes.Card__Data__Date}>{date}</p>
                     </div>
 
-                    {this.props.data.author._id == this.props.user._id ?
+                    {this.props.user && this.props.data.author._id == this.props.user._id ?
                          <Popup 
                             selectForDeletion={this.props.selectForDeletion}
                             post={this.props

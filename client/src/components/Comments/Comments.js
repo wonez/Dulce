@@ -2,6 +2,8 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
+import { withRouter } from 'react-router-dom'
+
 import Comment from '../Comment/Comment'
 import Avatar from '../Avatar/Avatar'
 import Aux from '../../hoc/Aux'
@@ -23,10 +25,22 @@ const Comments = (props) => {
                         key={comment._id} />
         })
     }
-    
-    return(
+
+    let newComment = (
         <Aux>
-            <div className={classes.NewComment}>
+            <div className={classes.NewCommentGuest__CommentBox}>
+                <h2>Only regitered users can post comments</h2>
+                <BtnPrimary 
+                    click={() => props.history.push('/join')}
+                    size="small">Sign Up</BtnPrimary>
+            </div>
+        </Aux>
+    )
+    
+
+    if(props.isLogged){
+        newComment = (
+            <Aux>
                 <div className={classes.NewComment__CommentBox}>
                     <Avatar url={props.user.avatarUrl}/>
                     <textarea   className={classes.NewComment__InputArea}
@@ -40,10 +54,20 @@ const Comments = (props) => {
                         click={props.commentSubmit}
                         size="small">Comment</BtnPrimary>
                 </div>
+            </Aux>
+        )
+    }
+    
+    return(
+        <Aux>
+            <div className={props.isLogged ? classes.NewComment : classes.NewCommentGuest}>
+                {newComment}
             </div>
-            <div className={classes.Comments}>
-                {comments}
-            </div>
+            {props.comments && props.comments.length ? 
+                <div className={classes.Comments}>
+                    {comments}
+                </div>
+            : null }
         </Aux>
     )
 }
@@ -51,7 +75,8 @@ const Comments = (props) => {
 const mapStateToProps = state => {
     return {
         user: state.auth.user,
+        isLogged: state.auth.isLogged
     }
 }
 
-export default connect(mapStateToProps)(Comments)
+export default connect(mapStateToProps)(withRouter(Comments))

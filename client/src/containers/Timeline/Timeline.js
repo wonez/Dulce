@@ -64,6 +64,8 @@ class Timeline extends Component {
     }
 
     handleLike = (id, i) => {
+        if(!this.props.user)
+            return;
         axios.post(`/post/like/${id}`)
             .then(res => {
                 if(res.status == 200){
@@ -130,6 +132,12 @@ class Timeline extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         startLoading: () => dispatch(startLoading()),        
@@ -137,4 +145,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(Timeline));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Timeline));

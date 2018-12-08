@@ -33,17 +33,16 @@ class App extends Component {
 					<Route path='/' exact component={Landing}/>
 					<Route path="/join" component={Join}/>
 
-					<Protected isLogged={this.props.isLogged} path="/profile/:userId" component={Profile}/>
-					<Protected isLogged={this.props.isLogged} path="/post/:postId" component={Post}/>
-					{/* <Route path="/post" component={Post}/> */}
-					{/* <Route path="/newsfeed" component={NewsFeed}/> */}
+					{/* <Protected isLogged={this.props.isLogged} path="/profile/:userId" component={Profile}/>
+					<Protected isLogged={this.props.isLogged} path="/post/:postId" component={Post}/> */}
+					<Route path="/profile/:userId" component={Profile}/>
+					<Route path="/post/:postId" component={Post}/>
 					<Route path="/search" component={Search}/>
 					<Route path="/categories" component={AllCategories}/>
 					<Route path="/category/:id" component={Category}/>
 					<Protected isLogged={this.props.isLogged} path="/create" component={Create}/>
 					<Protected isLogged={this.props.isLogged} path="/editProfile" component={EditProfile}/>
 					<Protected isLogged={this.props.isLogged} path="/editPost" component={EditPost}/>
-					{/* <Route render={()=> (<h1>404</h1>)} /> */}
 					<Redirect to='/' />
 				</Switch>
 			</BrowserRouter>

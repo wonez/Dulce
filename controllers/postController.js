@@ -27,7 +27,7 @@ const editPost = async (req, res) => {
         try{
             const postId = req.params.id
             const post = await Post.findById(postId);
-            if(req.user._id == post.author){
+            if(req.user._id.toString() == post.author){
                 const data = JSON.parse(fields.data);
                 for(let key in data){
                     post[key] = data[key]

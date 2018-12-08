@@ -71,6 +71,8 @@ class Post extends Component {
     }
 
     handleLike = () => {
+        if(!this.props.user)
+            return;
         axios.post(`/post/like/${this.state.item._id}`)
             .then(res => {
                 if(res.status == 200){
@@ -164,6 +166,12 @@ class Post extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return{
         load: () => dispatch(startLoading()),
@@ -171,4 +179,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(Post));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Post));

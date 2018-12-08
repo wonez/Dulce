@@ -4,19 +4,6 @@
     width: 90%;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-}
-
-.Comments{
-    padding: 3rem 6rem;
-    width: 90%;
-    padding-top: 0;
-    flex: 1;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    background: white;
-}
-
-.NewComment{
     &__CommentBox{
         display: flex;
     }
@@ -37,4 +24,24 @@
         padding-top: 2rem;
         justify-content: flex-end;
     }
+}
+.NewCommentGuest{
+    padding: 3rem;
+    background: white;
+    width: 90%;
+    border-radius: 1rem;
+    &__CommentBox{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+}
+.Comments{
+    padding: 3rem 6rem;
+    width: 90%;
+    padding-top: 0;
+    flex: 1;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background: white;
 }

@@ -32,7 +32,6 @@ class About extends Component {
 
         if (this.state.profile) {
 
-            console.log(this.state.profile);
             const joined = new Date(this.state.profile.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
             content = (

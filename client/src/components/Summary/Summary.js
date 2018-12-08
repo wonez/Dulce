@@ -7,7 +7,10 @@ import classes from './Summary.scss'
 
 const Summary = (props) => {
 
-    const liked = props.hearts.indexOf(props.userId) != -1 ? classes.Liked : '';
+    let liked = ''
+    if(props.user){
+        liked = props.hearts.indexOf(props.user._id) != -1 ? classes.Liked : '';
+    }
 
     let content = (
         <div className={classes.Summary}>
@@ -45,7 +48,7 @@ const Summary = (props) => {
 
 const mapStateToProps = state => {
     return{
-        userId: state.auth.user._id
+        user: state.auth.user
     }
 }
 

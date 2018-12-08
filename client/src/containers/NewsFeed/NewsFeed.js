@@ -47,6 +47,8 @@ class NewsFeed extends React.Component {
     }
 
     handleLike = (id, i) => {
+        if(!this.props.user)
+            return;
         axios.post(`/post/like/${id}`)
             .then(res => {
                 if(res.status == 200){

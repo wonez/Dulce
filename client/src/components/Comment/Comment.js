@@ -88,7 +88,7 @@ class Comment extends Component {
                                 onClick={()=> this.props.handleUser(this.props.comment.author._id)}>{`${this.props.comment.author.name} ${this.props.comment.author.surname}`}</a>
                             <div className={classes.InfoBox__Info__Misc}>
                                 <p className={classes.InfoBox__Info__Date}>{date}</p>
-                                {this.props.user._id === this.props.comment.author._id ? 
+                                {this.props.user && this.props.user._id === this.props.comment.author._id ? 
                                     <Popup
                                         selectForDeletion={this.props.selectComment}
                                         editComment={this.editComment}

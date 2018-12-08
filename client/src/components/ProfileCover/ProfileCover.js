@@ -15,22 +15,24 @@ const ProfileCover = (props) => {
         bg = `linear-gradient(to bottom, transparent, rgba(0,0,0,.6)), url('${props.profile.coverUrl}')`;
         avatar = `url('${props.profile.avatarUrl}')`;
         fullName = `${props.profile.name} ${props.profile.surname}`
-        if (props.user.following.indexOf(props.profile._id) != -1){
-            follow = (
-                <BtnPrimary 
-                    click={props.unfollowHandler}
-                    size="big">
-                    Unfollow
-                </BtnPrimary>
-            )
-        }else if(props.user._id != props.profile._id){
-            follow = (
-                <BtnPrimary 
-                    click={props.followHandler}
-                    size="big">
-                    Follow
-                </BtnPrimary>
-            )
+        if(props.user){
+            if (props.user.following.indexOf(props.profile._id) != -1){
+                follow = (
+                    <BtnPrimary 
+                        click={props.unfollowHandler}
+                        size="big">
+                        Unfollow
+                    </BtnPrimary>
+                )
+            }else if(props.user._id != props.profile._id){
+                follow = (
+                    <BtnPrimary 
+                        click={props.followHandler}
+                        size="big">
+                        Follow
+                    </BtnPrimary>
+                )
+            }
         }
     }
 
