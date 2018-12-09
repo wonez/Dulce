@@ -20,6 +20,13 @@
         transform: translateX(-50%);
         z-index: 1;
         text-align: center;
+
+        @media only screen and(max-width: $bp-medium){
+            width: 90vw;
+        }
+        @media only screen and(max-width: $bp-large){
+            width: 80vw;
+        }
         
         &__InputBox{
             position: relative;
@@ -59,9 +66,13 @@
         display: block;
         font-size: 2rem;
         transition: .3s all;
+        margin-top: 1.5rem;
         &:hover{
             transform: scale(1.1);
             cursor: pointer;
+        }
+        @media only screen and(max-width: $bp-small){
+            font-size: 1.7rem;
         }
     }
     
@@ -84,7 +95,29 @@
             background:  linear-gradient(rgba($color-gray-light, .75), rgba($color-gray-light, .75)), url('/src/assets/baner-cake.jpg');
             background-size: cover;
             background-position: center;
+            @media only screen and(max-width: $bp-large){
+                display: none;
+            }
         }
     
+    }
+}
+
+.HeadingMain{
+    color: $color-white;
+    letter-spacing: .3rem;
+    text-transform: uppercase;
+    font-size: 6rem;
+    line-height: 1.2;
+    transition: 1s all;
+    margin-bottom: 3rem;
+
+    &:hover{
+        transform: scale(.9);
+        cursor: default;
+    }
+
+    @media only screen and(max-width: $bp-small){
+        font-size: 3rem;
     }
 }

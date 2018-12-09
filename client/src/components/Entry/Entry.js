@@ -34,7 +34,7 @@ class Entry extends React.Component {
                     <Nav />
                 </nav>
                 <main className={classes.Entry__Search}>
-                    <h1 className={[typography.HeadingMain, typography['margin-bottom-md']].join(' ')}>
+                    <h1 className={classes.HeadingMain}>
                         New recepies added every day
                     </h1>
                     <div className={classes.Entry__Search__InputBox}>
@@ -49,7 +49,7 @@ class Entry extends React.Component {
                             </div>
                         </form>
                     </div>
-                    <a  className={[classes.Entry__ShowAll, typography['margin-top-sm']].join(' ')}
+                    <a  className={classes.Entry__ShowAll}
                         onClick={this.handleCategories} >
                         Show all categories
                     </a>
