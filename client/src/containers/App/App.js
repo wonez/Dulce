@@ -30,16 +30,13 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<Switch>
-					<Route path='/' exact component={Landing}/>
-					<Route path="/join" component={Join}/>
-
-					{/* <Protected isLogged={this.props.isLogged} path="/profile/:userId" component={Profile}/>
-					<Protected isLogged={this.props.isLogged} path="/post/:postId" component={Post}/> */}
+					<Route path='/' exact component={Landing}/>{/* newsfeed */}
+					<Route path="/join" component={Join}/>{/* done */}
 					<Route path="/profile/:userId" component={Profile}/>
 					<Route path="/post/:postId" component={Post}/>
 					<Route path="/search" component={Search}/>
-					<Route path="/categories" component={AllCategories}/>
-					<Route path="/category/:id" component={Category}/>
+					<Route path="/categories" component={AllCategories}/>{/* done */}
+					<Route path="/category/:id" component={Category}/>{/* done, provjeri onaj krug na card small */}
 					<Protected isLogged={this.props.isLogged} path="/create" component={Create}/>
 					<Protected isLogged={this.props.isLogged} path="/editProfile" component={EditProfile}/>
 					<Protected isLogged={this.props.isLogged} path="/editPost" component={EditPost}/>

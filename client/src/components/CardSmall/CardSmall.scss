@@ -28,11 +28,18 @@
             left: -50%;
             top: 20rem;
             border-radius: 50%;
+            @media only screen and (max-width: $bp-large) {
+                display: none;
+            }
+            //see for other screens
         }
     }
 
     &__Info{
         padding: 0 2rem 2rem 2rem;
+        @media only screen and (max-width: $bp-large){
+            padding: 2rem;
+        }
     }
     &__Heading{
         background: linear-gradient(to bottom right, $color-primary-light, $color-primary-dark);

@@ -8,7 +8,6 @@ import { validateField, validateForm } from '../../utility/validate'
 
 import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
-// import ToolbarPlain from '../../components/ToolbarPlain/ToolbarPlain'
 import Toolbar from '../../components/Toolbar/Toolbar'
 
 import withError from '../../hoc/withError'

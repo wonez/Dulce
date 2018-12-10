@@ -16,7 +16,7 @@
 }
 .disabled{
     color: $color-gray-light !important;
-    border-color: $color-gray-lighter !important;
+    background: $color-gray-lighter !important;    
     &:hover{
         box-shadow: none;
         cursor: not-allowed;

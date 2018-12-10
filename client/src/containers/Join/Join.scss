@@ -11,7 +11,6 @@
     align-items: center;
     
     &__Form{
-        min-height: 50rem;
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -19,13 +18,21 @@
         text-align: center;
         background: $color-white;
         border-radius: 1rem;
+        width: 45rem;
         box-shadow: 0rem 1rem 3rem rgba(0,0,0,.3);
+        @media only screen and (max-width: $bp-small){
+            width: 90vw;
+            margin: 11rem 0 3rem 0;
+        }
         form{
             height: 100%;
             padding: 3rem;
             padding-top: 5rem;
             display: flex;
             flex-direction: column;
+            @media only screen and(max-width: $bp-small){
+                padding: 3rem 2rem 2em 2rem;
+            }
         }
     }
 

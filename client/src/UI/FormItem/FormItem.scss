@@ -1,5 +1,4 @@
 .FormItem{
-
     margin-bottom: 3.5rem;
     position: relative;
 
@@ -11,11 +10,14 @@
         border: none;
         border-radius: .1rem;
         color: $color-gray-darker;
-        width: 400px;
+        width: 100%;
         border-bottom: .1rem solid transparent;
         box-shadow: 0 .1rem 1rem rgba(0,0,0, .2);
         &::placeholder{
             color: $color-gray-dark
+        }
+        @media only screen and (max-width: $bp-small){
+            font-size: 1.2rem;
         }
     }
 

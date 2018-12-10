@@ -2,6 +2,9 @@
     padding: 15rem 0;
     display: flex;
     justify-content: center;
+    @media only screen and(max-width: $bp-small){
+        padding: 10rem 0 3rem 0;
+    }
 }
 
 .Container{
@@ -9,6 +12,9 @@
     border-radius: 1rem;
     padding: 3rem 10rem;
     text-align: center; 
+    @media only screen and(max-width: $bp-small){
+        padding: 3rem;
+    }
 }
 
 .Heading{
