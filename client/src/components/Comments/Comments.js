@@ -29,7 +29,7 @@ const Comments = (props) => {
     let newComment = (
         <Aux>
             <div className={classes.NewCommentGuest__CommentBox}>
-                <h2>Only regitered users can post comments</h2>
+                <h2>Only registered users can post comments</h2>
                 <BtnPrimary 
                     click={() => props.history.push('/join')}
                     size="small">Sign Up</BtnPrimary>

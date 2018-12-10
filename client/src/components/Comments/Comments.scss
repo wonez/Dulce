@@ -4,6 +4,10 @@
     width: 90%;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+    @media only screen and (max-width: $bp-small){
+        padding: 1rem;
+        width: 95%;
+    }
     &__CommentBox{
         display: flex;
     }
@@ -29,7 +33,20 @@
     padding: 3rem;
     background: white;
     width: 90%;
-    border-radius: 1rem;
+    // border-r: 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    @media only screen and (max-width: $bp-small){
+        width: 95%;
+        padding: 1rem;
+    }
+    h2{
+        color: $color-gray-dark;
+        font-weight: lighter;
+        @media only screen and (max-width: $bp-small){
+            font-size: 1rem;
+        }
+    }
     &__CommentBox{
         display: flex;
         align-items: center;
@@ -44,4 +61,8 @@
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     background: white;
+    @media only screen and (max-width: $bp-small){
+        padding: 1rem;
+        width: 95%;
+    }
 }

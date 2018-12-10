@@ -1,12 +1,18 @@
 .Comment{
     display: flex;
     padding: 2rem 1rem;
+    @media only screen and (max-width: $bp-small){
+        padding: 1rem .5rem;
+    }
     &:not(:last-child){
         border-bottom: 1px solid $color-gray-light;
     }
     &:first-child{
         // padding-top: 4rem;
         border-top: 1px dashed $color-gray-light;
+        @media only screen and (max-width: $bp-small){
+            border: none;
+        }
     }
 }
 .AvatarBox{
@@ -17,11 +23,18 @@
         border-radius: 50%;
         background-position: center;
         background-size: cover;
+        @media only screen and (max-width: $bp-small){
+            width: 3.5rem;
+            height: 3.5rem;
+        }
     }
 }
 .InfoBox{
     width: 100%;
     padding-left: 1.5rem;
+    @media only screen and (max-width: $bp-small){
+        padding-left: 1rem;
+    }
     &__Info{
         display: flex;
         // justify-content: space-between;
@@ -31,6 +44,9 @@
             font-size: 1.3rem;
             color: $color-gray-dark;
             margin-right: 1rem;
+            @media only screen and (max-width: $bp-small){
+                font-size: 1rem;
+            }
         }
         &__Name{
             font-size: 2rem;
@@ -38,6 +54,9 @@
             color: $color-primary-dark;
             font-weight: bold;
             margin-right: auto;
+            @media only screen and (max-width: $bp-small){
+                font-size: 1.5rem;
+            }
             &:hover{
                 cursor: pointer;
                 text-decoration: underline;
@@ -50,6 +69,9 @@
     }
     &__Content{
         font-size: 1.6rem;
+        @media only screen and (max-width: $bp-small){
+            font-size: 1.3rem;
+        }
     }
 }
 

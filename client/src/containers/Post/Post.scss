@@ -9,9 +9,14 @@
 
     &__Container{
         padding: 10rem 0;
-        width: 800px;
+        width: 90vw;
+        max-width: 80rem;
         display: flex;
         flex-direction: column;
         align-items: center;
+        @media only screen and (max-width: $bp-small){
+            width: 95%;
+            padding: 7rem 0;
+        }
     }
 }
