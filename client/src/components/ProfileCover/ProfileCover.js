@@ -50,7 +50,7 @@ const ProfileCover = (props) => {
                     {/* slika */}
                 </div>
                 <h2 className={classes.ProfileCover__Data__Name}>{fullName}</h2>                
-                <div style={{marginRight: '3rem'}}>
+                <div className={classes.ProfileCover__FollowBox}>
                     {follow}
                 </div>
             </div>

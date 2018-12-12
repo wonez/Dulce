@@ -143,7 +143,7 @@ const getPost = async (req, res) => {
 const deletePost = async (req, res) => {
     try{
         const post = await Post.findById(req.params.id);
-        if(req.user._id == post.author){
+        if(req.user._id.toString() == post.author){
             const { imgUrl, comments } = post;
             const imgPath = imgUrl.substring(imgUrl.indexOf('images'))
             fs.unlinkSync(`public/${imgPath}`);

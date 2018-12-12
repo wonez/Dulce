@@ -9,12 +9,21 @@
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
 
+    @media only screen and (max-width: $bp-small) {
+        height: 30rem;
+        border-radius: none;
+    }
+
     &__Data{
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
         width: 100%;
         margin-bottom: 3rem;
+        @media only screen and (max-width: $bp-small) {
+            flex-direction: column;
+            align-items: center;
+        }
         &__Img{
             height: 15rem;
             width: 15rem;
@@ -23,12 +32,25 @@
             margin-left: 3rem;
             border-radius:   50%;
             border: 1rem solid white;
+            @media only screen and (max-width: $bp-small){
+                margin: 0 0 2rem 0;
+            }
         }
         &__Name{
             color: white;
             font-size: 5rem;
             &:hover{
                 cursor: default;
+            }
+            @media only screen and (max-width: $bp-small){
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+        }
+        &__FollowBox{
+            margin-right: 3rem;
+            @media only screen and (max-width: $bp-small){
+                margin: 0;
             }
         }
     }

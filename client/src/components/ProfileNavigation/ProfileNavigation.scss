@@ -9,11 +9,17 @@
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
 
-    &__Name{
-        color: $color-gray-light;
-        margin-left: 5rem;
-        margin-right: auto;
+    @media only screen and (max-width: $bp-small){
+        border-radius: 0;
+        font-size: 1.5rem;
+        padding: 1rem;       
     }
+
+    // &__Name{
+    //     color: $color-gray-light;
+    //     margin-left: 5rem;
+    //     margin-right: auto;
+    // }
     &__Btn{
         color: $color-gray-darker;
         padding: 1rem 2rem;

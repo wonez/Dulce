@@ -6,6 +6,9 @@
     text-decoration: underline;
     font-weight: bold;
     transition: .3s all;
+    @media only screen and (max-width: $bp-small){
+        font-size: 1.5rem;       
+    }
     &:hover{
         cursor: pointer;
         color: $color-secondary-dark;

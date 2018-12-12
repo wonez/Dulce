@@ -8,6 +8,11 @@
     color: $color-gray-light;
     margin: 0 auto;
 
+    @media only screen and (max-width: $bp-small){
+        width: 100%;
+        border-radius: 0;      
+    }
+
     &__Icon{
         fill: $color-gray-lighter;
         width: 7rem;

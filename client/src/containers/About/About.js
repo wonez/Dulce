@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import { connect } from 'react-redux'
-
 import classes from './About.scss'
 
 class About extends Component {

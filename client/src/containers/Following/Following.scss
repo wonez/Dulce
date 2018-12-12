@@ -3,35 +3,43 @@
     border-radius: 1rem;
     padding: 3rem 2rem;
     box-shadow: 0 1rem 3rem rgba(0,0,0,.3);
-
+    @media only screen and (max-width: $bp-small){
+        border-radius: 0;    
+    }
     &__Heading{
         font-size: 3rem;
         color: $color-gray-darker;
         padding: 0 0 2rem 2rem;
+        @media only screen and (max-width: $bp-small){
+            font-size: 2rem;    
+        }
     }
     &__Container{
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(20rem,1fr));
         grid-gap: 3rem 0;
+        @media only screen and (max-width: $bp-small){
+            padding: 0 1.5rem;       
+        }
     }
 }
 
-.FollowingEmpty{
-    background: $color-white;
-    width: 70%;
-    padding: 3rem;
-    margin: 0 auto;
-    border-radius: 1rem;
-    font-size: 2rem;
-    text-align: center;
-    color: $color-gray-light;
-    .Icon{
-        fill: $color-gray-lighter;
-        width: 7rem;
-        height: 7rem;
-        margin: 0 auto;
-    }
-    p{
-        padding-top: 2rem;
-    }
-}
+// .FollowingEmpty{
+//     background: $color-white;
+//     width: 70%;
+//     padding: 3rem;
+//     margin: 0 auto;
+//     border-radius: 1rem;
+//     font-size: 2rem;
+//     text-align: center;
+//     color: $color-gray-light;
+//     .Icon{
+//         fill: $color-gray-lighter;
+//         width: 7rem;
+//         height: 7rem;
+//         margin: 0 auto;
+//     }
+//     p{
+//         padding-top: 2rem;
+//     }
+// }
