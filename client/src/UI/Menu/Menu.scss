@@ -2,6 +2,12 @@
     width: 2em;
     height: 2em;
     margin: 0 2rem;
+    @media only screen and (max-width: $bp-small){
+        margin: 0 .5rem;
+        height: 1.5em;
+        width: 1.5em;
+    }
+    
     .MenuBg{
         background: transparent;
         top: -100rem;
@@ -19,6 +25,11 @@
         position: absolute;
         transform: translate(100rem, 30%);
         transition: .3s all;
+        white-space: nowrap;
+        @media only screen and (max-width: $bp-small){
+            width: 9rem;
+            padding: .5rem;
+        }
         &__Btn{
             color: inherit;
             display: block;
@@ -50,6 +61,9 @@
     height: auto;    
     transform: translate(-70%, 33%) scale(1);
     border: 1px solid $color-primary-dark;
+    @media only screen and (max-width: $bp-small){
+        transform: translate(-75%, 33%) scale(1);
+    }
 }
 .Input{
     display: none;

@@ -22,6 +22,12 @@
         resize: none;
         height: 15rem;
         caret-color: $color-secondary-dark;
+        @media only screen and (max-width: $bp-large){
+           font-size: 1.3rem;
+           padding: 1rem;
+           height: 5rem;
+           margin-left: .5rem;
+        }
     }
     &__BtnBox{
         display: flex;
