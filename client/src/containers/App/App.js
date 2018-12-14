@@ -9,7 +9,6 @@ import Landing from '../Landing/Landing';
 import Join from '../Join/Join';
 import Profile from '../Profile/Profile';
 import Post from '../Post/Post'
-import NewsFeed from '../NewsFeed/NewsFeed'
 import AllCategories from '../AllCategories/AllCategories'
 import Category from '../Category/Category'
 import Search from '../Search/Search'
@@ -33,7 +32,7 @@ class App extends Component {
 					<Route path='/' exact component={Landing}/>{/* landscape */}
 					<Route path="/join" component={Join}/>{/* landscape */}
 					<Route path="/profile/:userId" component={Profile}/>{/* done */}
-					<Route path="/post/:postId" component={Post}/>{/* done border-radius left when noc omments */}
+					<Route path="/post/:postId" component={Post}/>{/* done */}
 					<Route path="/search" component={Search}/>
 					<Route path="/categories" component={AllCategories}/>{/* done */}
 					<Route path="/category/:id" component={Category}/>{/*  provjeri onaj krug na card small */}

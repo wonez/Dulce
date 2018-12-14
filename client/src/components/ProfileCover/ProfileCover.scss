@@ -42,7 +42,7 @@
             &:hover{
                 cursor: default;
             }
-            @media only screen and (max-width: $bp-small){
+            @media only screen and (max-width: $bp-medium){
                 font-size: 3rem;
                 margin-bottom: 1rem;
             }

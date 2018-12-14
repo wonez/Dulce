@@ -14,6 +14,7 @@ import classes from './Comments.scss'
 const Comments = (props) => {
 
     let comments = null;
+    let newCommentClasses = props.isLogged ? [classes.NewComment] : [classes.NewCommentGuest]
 
     if(props.comments){
         comments = props.comments.map((comment, i) => {
@@ -24,6 +25,8 @@ const Comments = (props) => {
                         comment={comment} 
                         key={comment._id} />
         })
+        if(!props.comments.length)
+            newCommentClasses.push(classes.CommRounded)
     }
 
     let newComment = (
@@ -60,7 +63,7 @@ const Comments = (props) => {
     
     return(
         <Aux>
-            <div className={props.isLogged ? classes.NewComment : classes.NewCommentGuest}>
+            <div className={newCommentClasses.join(' ')}>
                 {newComment}
             </div>
             {props.comments && props.comments.length ? 

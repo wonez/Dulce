@@ -10,13 +10,13 @@
     font-weight: bold;
     text-transform: uppercase;
     font-size: 1.5rem;
-    display: flex;
+    display: flex;  
     fill: $color-primary-dark;    
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid $color-primary-dark;
 
-    @media only screen and (max-width: $bp-small){
+    @media only screen and (max-width: $bp-medium){
         padding: 1rem .5rem;
         font-size: 1.3rem;
     }
@@ -24,7 +24,7 @@
     a{
         margin: 0 2rem;
         transition: .3s all;    
-        @media only screen and (max-width: $bp-small){
+        @media only screen and (max-width: $bp-medium){
             margin: 0 .5rem;
         }
         &:hover{
@@ -37,7 +37,7 @@
             position: relative;
             text-align: center;
             width: 50%;
-            @media only screen and (max-width: $bp-small){
+            @media only screen and (max-width: $bp-medium){
                 min-width: 190px;
             }
         }
@@ -49,7 +49,7 @@
             font-size: 1.5rem;
             border-radius: 10rem;
             transition: .3s all;
-            @media only screen and (max-width: $bp-small){
+            @media only screen and (max-width: $bp-medium){
                 font-size: 1rem;
                 padding: 0.5rem 1rem;
                 justify-self: stretch;
@@ -65,7 +65,7 @@
             top: 10%;
             right: 5%;
             transition: .3s all;
-            @media only screen and (max-width: $bp-small){
+            @media only screen and (max-width: $bp-medium){
                 maring: 0 .5rem;
                 top: 7%;
                 right: 0;
