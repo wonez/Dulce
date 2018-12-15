@@ -2,15 +2,25 @@
     padding: 15rem 0 10rem 0;
     display: flex;
     justify-content: center;
+    @media only screen and (max-width: $bp-medium){
+        padding: 8rem 0 0rem 0;
+    }
 }
 .Edit{
     margin: 0 5rem;
     padding: 3rem;
     background: white;
     border-radius: 1rem;
-    
-    min-height: 500px;
-    min-width: 700px;
+
+    @media only screen and (max-width: $bp-medium){
+        width: 80vw;
+    }
+    @media only screen and (max-width: $bp-small){
+        margin: 0;
+        padding: 1rem;
+        width: 100%;
+        border-radius: 0;
+    }
 
     &__Heading{
         font-size: 3rem;

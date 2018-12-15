@@ -176,8 +176,14 @@ const getNewsFeed = async (req, res) => {
         .limit(10)
         .sort({ dateCreated: -1 })
         .populate('author', { avatarUrl: 1, name: 1, surname: 1 })
-        res.status(200).json({posts, count: count[0].posts});
+        const ret = {
+            posts, 
+            count: count[0] ? count[0].posts : 0
+        }
+        
+        res.status(200).json(ret);
     }catch(err){
+        console.log(err.message);
         res.status(500).end(err.message)
     }
 }

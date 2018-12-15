@@ -8,17 +8,17 @@
     }
     &__Container{
         background: white;
-        padding: 3rem 2rem;
+        padding: 3rem 3rem;
         border-radius: 1rem;
         text-align: center;
         width: 80vw;
-        // width: 1111px;
-        @media only screen and (max-width: $bp-medium) {
+        @media only screen and (max-width: $bp-large) {
             width: 95vw;
+            padding: 2rem;
         }
         @media only screen and (max-width: $bp-small){
             width: 95vw;
-            padding: 2rem 0; 
+            padding: 1rem;
         }
     }
     &__Heading{
@@ -29,11 +29,12 @@
     }
     &__Items{
         display: grid;
-        // grid-template-columns: repeat(3, 1fr);
         grid-template-columns: repeat( auto-fill, minmax(27rem, 1fr) );
         grid-row-gap: 3rem;
-        @media only screen and (max-width: $bp-medium) {
-            grid-row-gap: 1rem;
+        grid-column-gap: 3rem;
+        @media only screen and (max-width: $bp-medium){
+            grid-row-gap: 2rem;
+            grid-column-gap: 1.5rem;
         }
         
     }

@@ -2,6 +2,9 @@
     padding: 10rem 0 3rem 0;
     background: white;
     text-align: center;
+    @media only screen and (max-width: $bp-medium){
+        padding: 7rem 0 3rem 0;
+    }
     color: $color-gray-dark;
     h1{
         font-weight: lighter;
@@ -15,10 +18,17 @@
     align-items: center;
     flex-direction: column;
     &__Container{
-        padding: 3rem 2rem;
+        padding: 3rem;
         margin: 5rem;
         text-align: center;
-        width: 1111px;
+        width: 80vw;
+        @media only screen and (max-width: $bp-large){
+            width: 80%;
+            padding: 2rem;
+        }
+        @media only screen and (max-width: $bp-small){
+            width: 90%;
+        }
         &:first-child{
             margin-bottom: 0;
         }
@@ -34,10 +44,15 @@
         font-size: 3rem;
     }
     &__Items{
-        margin-top: 2rem;
+        margin: 2rem 0;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(25rem,1fr));        
         grid-row-gap: 3rem;
+        grid-column-gap: 3rem;
+        @media only screen and (max-width: $bp-medium){
+            grid-row-gap: 2rem;
+            grid-column-gap: 1.5rem;
+        }
     }
     &__LoadMore{
         font-size: 2rem;

@@ -15,6 +15,7 @@ import withError from '../../hoc/withError'
 import axios from '../../utility/axios'
 
 import { tryLogin, trySignUp} from '../../store/creators/authCreators'
+import Loading from '../../UI/Loading/Loading';
 
 class Join extends Component {
 
@@ -134,11 +135,8 @@ class Join extends Component {
                             label="Password"
                             validity={this.state.formSignIn.fields.password.valid ? 'valid' : 'invalid'} 
                             />
-                {
-                    this.props.loading ? 
-                    <h2>Loading...</h2> : 
-                    <FlatLink validity={this.state.formSignIn.valid} kind='light' >Sign in</FlatLink>
-                }
+                
+                <FlatLink validity={this.state.formSignIn.valid} kind='light' >Sign in</FlatLink>
                 <hr style={{margin: '2.5rem 0'}}/>
                 <FlatLink validity kind='primary' >Continue Using Facebook</FlatLink>
                 <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
@@ -173,11 +171,7 @@ class Join extends Component {
                                 onChange={(e) => this.inputChanged('formSignUp', 'password', e.target.value)}
                                 validity={this.state.formSignUp.fields.password.valid ? 'valid' : 'invalid'} 
                                 />
-                    {
-                        this.props.loading ? 
-                        <h2>Loading...</h2> : 
-                        <FlatLink validity={this.state.formSignUp.valid} kind='light'>Sign up</FlatLink>
-                    }
+                    <FlatLink validity={this.state.formSignUp.valid} kind='light'>Sign up</FlatLink>
                     <hr style={{margin: '2.5rem 0'}}/>
                     <FlatLink validity kind='primary'>Continue Using Facebook</FlatLink>
                     <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
@@ -213,6 +207,7 @@ class Join extends Component {
                     </div>
                     {form}
                 </div>
+                <Loading />
             </div>
         )
     }
@@ -221,7 +216,6 @@ class Join extends Component {
 const mapStateToProps = state => {
     return {
         isLogged: state.auth.isLogged,
-        loading: state.ui.loading,
         user: state.auth.user
     }
 }

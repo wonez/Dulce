@@ -2,9 +2,11 @@
     overflow: hidden;
     background: $color-white;
     border-radius: 1rem;
-    margin: 2rem;
     box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
     transition: 1s all;
+    @media only screen and (max-width: $bp-small){
+        margin: 1rem 0;
+    }
     &:hover{
         cursor: pointer;
         box-shadow: 0 .5rem 2rem rgba(0,0,0,.5);
@@ -17,29 +19,10 @@
         overflow: hidden;
         background-position: center;
         background-size: cover;
-
-        &:after{
-            content: '';
-            display: block;
-            width: 60rem;
-            height: 60rem;
-            background: $color-white;
-            position: absolute;
-            left: -50%;
-            top: 20rem;
-            border-radius: 50%;
-            @media only screen and (max-width: $bp-large) {
-                display: none;
-            }
-            //see for other screens
-        }
     }
 
     &__Info{
-        padding: 0 2rem 2rem 2rem;
-        @media only screen and (max-width: $bp-large){
-            padding: 2rem;
-        }
+        padding: 2rem;
     }
     &__Heading{
         background: linear-gradient(to bottom right, $color-primary-light, $color-primary-dark);

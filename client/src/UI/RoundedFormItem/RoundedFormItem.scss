@@ -7,19 +7,27 @@
         color: $color-gray-darker;
         display: block;
         padding-right: 1rem;
-        width: 15rem;
+        flex-basis: 15rem;
         font-size: 2rem;
+        @media only screen and (max-width: $bp-medium){
+            flex-basis: 13rem;
+            font-size: 1.5rem;
+        }
     }
 }
 %item{
     font-size: 1.5rem;
     border: 1px solid $color-gray-light;
     border-radius: 1rem;
-    width: 80%;
+    flex: 1;
     padding: 1rem;
     display: block;
     outline: none;
     caret-color: $color-secondary-dark;
+    @media only screen and (max-width: $bp-medium){
+        font-size: 1rem;
+        padding: .5rem;
+    }
 }
 .Input{
     @extend %item;
@@ -30,7 +38,7 @@
     border: 1px solid $color-gray-light;
     border-radius: 1rem;
     padding: .5rem;
-    width: 100%;
+    flex: 1;
     select{
         font-size: 1.5rem;
         background: transparent;
@@ -38,6 +46,9 @@
         width: 100%;
         border: none;
         outline: none;
+        @media only screen and (max-width: $bp-medium){
+            font-size: 1rem;
+        }
     }
 }
 
@@ -45,7 +56,9 @@
     @extend %item;
     resize: none;
     height: 15rem;
-    width: 100%;
+    @media only screen and (max-width: $bp-medium){
+        height: 5rem;
+    }
 }
 
 .Number{
@@ -84,7 +97,6 @@
 .Preparation{
     @extend %item;
     padding: .5rem;
-    width: 100%;
     &__Button{
         padding: 0 1rem;
         background: transparent;
@@ -101,4 +113,7 @@
 .Directions{
     resize: none;
     height: 5.5rem;
+    @media only screen and (max-width: $bp-medium){
+        height: 3rem;
+    }
 }

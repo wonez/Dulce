@@ -14,7 +14,7 @@
     svg{
         height: 2em;
         width: 2em;
-        @media only screen and (max-width: $bp-small){
+        @media only screen and (max-width: $bp-medium){
             height: 1.5em;
             width: 1.5em;
         }

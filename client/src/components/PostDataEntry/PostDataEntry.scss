@@ -3,6 +3,11 @@
     display: grid;
     grid-column-gap: 2rem;
     grid-template-columns: 1fr 1fr;
+    @media only screen and (max-width: $bp-medium){
+        grid-template-columns: 1fr;
+        grid-row-gap: 2rem;
+        padding: 1rem 0;
+    }
     &__Directions, &__Ingredients{
         display: flex;
         flex-direction: column;
@@ -11,10 +16,17 @@
         display: flex;
         font-size: 2rem;
         margin-bottom: 2rem;
+        @media only screen and (max-width: $bp-medium){
+            font-size: 1.5rem
+        }
     }
 }
 .Summary{
     display: grid;
     grid-column-gap: 2rem;
-    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    // @media only screen and (max-width: $bp-medium){
+    //     grid-tem
+    // }
 }
