@@ -29,8 +29,8 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<Switch>
-					<Route path='/' exact component={Landing}/>{/* landscape */}
-					<Route path="/join" component={Join}/>{/* landscape */}
+					<Route path='/' exact component={Landing}/>{/* done */}
+					<Route path="/join" component={Join}/>{/* done */}
 					<Route path="/profile/:userId" component={Profile}/>{/* done */}
 					<Route path="/post/:postId" component={Post}/>{/* done */}
 					<Route path="/search" component={Search}/>

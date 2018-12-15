@@ -1,31 +1,43 @@
 .Entry{
-    min-height: 100vh;
-    max-width: 100vw;
-    // overflow: hidden;
-    position: relative;
+    overflow-x: hidden;
+
+    &__Content{
+        position: absolute;
+        top: 0; 
+        left: 0;
+        width: 99vw;
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
     &__Nav{
-        position: absolute;
         z-index: 1;
         width: 100%;
         height: 7rem;
+        justify-self: flex-start;
+    }
+
+    &__Empty{
+        height: 5rem;
     }
 
     &__Search{
-        position: absolute;
         border-radius: 1rem;
-        top: 30%;
-        left: 50%;
+        margin: 10rem auto;
         width: 60vw;
-        transform: translateX(-50%);
         z-index: 1;
         text-align: center;
 
         @media only screen and(max-width: $bp-medium){
             width: 90vw;
+            margin: 5rem auto;
         }
         @media only screen and(max-width: $bp-large){
             width: 80vw;
+            margin: 3rem auto;
         }
         
         &__InputBox{
@@ -78,19 +90,33 @@
     
     &__Background{
         display: flex;
-        min-height: 100vh;
+        overflow: hidden;
+        @media only screen and(max-width: $bp-large){
+            overflow: visible;
+        }
 
         &__Gradient{
-            flex: 1 45%;
-            padding-left: 5rem;
+            height: 100vh;
+            flex-basis: 50%;
             background: linear-gradient(to bottom left, rgba($color-primary-light, .75), rgba($color-primary-dark, .75)), url('/src/assets/woman-cake.jpg');
             background-size: cover;
             background-position: top;
-            transform: scale(1.5);
+            transform: scale(1.3);
+            
+            @media only screen and(max-width: $bp-large){
+                flex-basis: 100%;
+                transform: scale(1);
+                height: 150vh;
+            }
+            @media only screen and(max-width: $bp-small){
+                height: 100vh;
+            }
         }
 
         &__Img{
-            flex: 1 55%;
+            flex-basis: 50%;
+            height: 100vh;
+            transform: scale(1.3);
             clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
             background:  linear-gradient(rgba($color-gray-light, .75), rgba($color-gray-light, .75)), url('/src/assets/baner-cake.jpg');
             background-size: cover;
@@ -120,4 +146,7 @@
     @media only screen and(max-width: $bp-small){
         font-size: 3rem;
     }
+}
+.Em{
+    color: $color-gray-light;
 }

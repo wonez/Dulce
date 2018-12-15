@@ -10,7 +10,28 @@ import { withRouter } from 'react-router-dom'
 class Entry extends React.Component {
 
     state = {
-        search: ''
+        adjectives: ['New', 'Tasty', 'Fresh', 'Quick', 'Easy'],
+        i: 0,
+        search: '',
+        interval: null,
+    }
+
+    componentDidMount(){
+        const interval = setInterval(()=> {
+            this.setState(prevState => {
+                return{
+                    ...prevState,
+                    i: prevState.i < prevState.adjectives.length - 1 ? prevState.i + 1 : 0
+                }
+            })
+        }, 1000)
+        this.setState({
+            interval
+        })
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.state.interval)
     }
 
     searchInputHandler = (e) => {
@@ -29,38 +50,41 @@ class Entry extends React.Component {
 
     render(){
         return(
-            <section className={classes.Entry}>
-                <nav className={classes.Entry__Nav}>
-                    <Nav />
-                </nav>
-                <main className={classes.Entry__Search}>
-                    <h1 className={classes.HeadingMain}>
-                        New recepies added every day
-                    </h1>
-                    <div className={classes.Entry__Search__InputBox}>
-                        <form onSubmit={this.searchSubmit}>
-                            <input  value={this.state.search} 
-                                    onChange={this.searchInputHandler}
-                                    className={classes.Entry__Search__Input} type="text" placeholder="e.g. Pancakes"></input>
-                            <div className={classes.Entry__Search__Icon}>
-                                <IconButton click={this.searchSubmit}>
-                                    <IconMagnifyingGlass />
-                                </IconButton>
-                            </div>
-                        </form>
-                    </div>
-                    <a  className={classes.Entry__ShowAll}
-                        onClick={this.handleCategories} >
-                        Show all categories
-                    </a>
-                </main>
+            <div className={classes.Entry}>
                 <div className={classes.Entry__Background}>
                     <div className={classes.Entry__Background__Gradient}>
                     </div>
                     <div className={classes.Entry__Background__Img}>
                     </div>
                 </div>
-            </section>
+                <div className={classes.Entry__Content}>
+                    <nav className={classes.Entry__Nav}>
+                        <Nav />
+                    </nav>
+                    <main className={classes.Entry__Search}>
+                        <h1 className={classes.HeadingMain}>
+                            <span className={classes.Em}>{this.state.adjectives[this.state.i]}</span> recepies added every day
+                        </h1>
+                        <div className={classes.Entry__Search__InputBox}>
+                            <form onSubmit={this.searchSubmit}>
+                                <input  value={this.state.search} 
+                                        onChange={this.searchInputHandler}
+                                        className={classes.Entry__Search__Input} type="text" placeholder="e.g. Pancakes"></input>
+                                <div className={classes.Entry__Search__Icon}>
+                                    <IconButton click={this.searchSubmit}>
+                                        <IconMagnifyingGlass />
+                                    </IconButton>
+                                </div>
+                            </form>
+                        </div>
+                        <a  className={classes.Entry__ShowAll}
+                            onClick={this.handleCategories} >
+                            Show all categories
+                        </a>
+                    </main>
+                    <div className={classes.Entry__Empty}></div>
+                </div>
+            </div>
         );
     }
 }
