@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const passport = require('passport')
 const bodyParser = require('body-parser')
 require('./db')();
 require('./utlity/passport')

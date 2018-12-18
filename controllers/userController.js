@@ -2,7 +2,8 @@ const User = require('../models/user');
 const formidable = require('formidable');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const config = require('../utlity/jwtConfig');
+const config = require('../utlity/config');
+const saveProfilePhoto = require('../utlity/saveProfilePhoto');
 
 const getUser = async (req, res) => {
     try{
@@ -21,9 +22,8 @@ const registerUser = async (req, res) => {
         req.body.password = User.hashPassword(req.body.password);
         const user = await new User({ ...req.body })
             .save();
-        const expiresIn = 1000 * 60 * 60//ms;
+        const expiresIn = 1000 * 60 * 60//1hour;
         const token = jwt.sign(user.toJSON(), config.secret);
-        // TODO: refreshtokens
         res.status(200).json({user, token, expiresIn});
     } catch(err) {
         let msg = err.message;
@@ -39,13 +39,13 @@ const loginUser = async (req, res) => {
             if (err || !user) {
                 return res.status(400).json(info);
             }
-            // TODO: refreshtokens
             req.login(user, {session: false}, (err) => {
                 if (err) {
                     res.send(err);
                 }
+                const expiresIn = 1000 * 60 * 60//1hour;
                 const token = jwt.sign(user.toJSON(), config.secret);
-                return res.json({user, token});
+                return res.status(200).json({user, token, expiresIn});
             });
         })(req, res);
 }
@@ -76,7 +76,6 @@ const editUser = async (req, res) => {
             }
             const user = await User.findOneAndUpdate({ _id: req.params.id },updated, {new: true})
             const token = jwt.sign(user.toJSON(), config.secret)
-            //refresh token
             res.status(200).json({user, token});
         } catch(err){
             res.status(500).end(err.message)
@@ -93,11 +92,35 @@ const deleteUser = async (req, res) => {
     }
 }
 
+const facebookAuth = async (req, res) => {
+    try{
+        const accessToken = req.body.access_token;
+        const userData = req.user._json;
+        const imgUrl = await saveProfilePhoto(userData.id, accessToken);
+
+        let user = await User.findOne({ fbId: userData.id });
+        if(!user){
+            user = await new User({
+                fbId: userData.id,
+                name: userData.first_name,
+                surname: userData.last_name,
+                avatarUrl: imgUrl
+            }).save();
+        }
+        const expiresIn = 1000 * 60 * 60//1hour;
+        const token = jwt.sign(user.toJSON(), config.secret);
+        res.status(200).json({user, token, expiresIn});
+    }catch(err){
+        console.log(err);
+        res.status(500).end(err.message);
+    }
+}
 
 module.exports = {
     getUser,
     loginUser,
     registerUser,
     editUser,
-    deleteUser
+    deleteUser,
+    facebookAuth
 }

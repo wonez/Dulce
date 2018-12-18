@@ -27,8 +27,10 @@
     "mongoose": "^5.3.4",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
+    "passport-facebook-token": "^3.3.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",

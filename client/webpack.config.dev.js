@@ -1,10 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const fs = require('fs');
 
 module.exports = {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
+        https: true,
+        key: fs.readFileSync('/Users/wonez/SSLCert/server.key'),
+        cert: fs.readFileSync('/Users/wonez/SSlCert/server.crt'),
         historyApiFallback: true,
     },
     entry: './src/index.js',

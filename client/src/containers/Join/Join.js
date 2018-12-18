@@ -10,11 +10,13 @@ import FormItem from '../../UI/FormItem/FormItem';
 import FlatLink from '../../UI/FlatLink/FlatLink';
 import Toolbar from '../../components/Toolbar/Toolbar'
 
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+
 import withError from '../../hoc/withError'
 
 import axios from '../../utility/axios'
 
-import { tryLogin, trySignUp} from '../../store/creators/authCreators'
+import { tryLogin, trySignUp, facebookAuth } from '../../store/creators/authCreators'
 import Loading from '../../UI/Loading/Loading';
 
 class Join extends Component {
@@ -81,6 +83,13 @@ class Join extends Component {
         }
     }
 
+    responseFb = (data) => {
+        console.log(data);
+         this.props.facebookAuth({
+            access_token: data.accessToken
+        })
+    }
+
     inputChanged = (form, field, value) => {
         this.setState(prevState => {
             const newState = {
@@ -138,7 +147,15 @@ class Join extends Component {
                 
                 <FlatLink validity={this.state.formSignIn.valid} kind='light' >Sign in</FlatLink>
                 <hr style={{margin: '2.5rem 0'}}/>
-                <FlatLink validity kind='primary' >Continue Using Facebook</FlatLink>
+                <FacebookLogin
+                    appId="499705663851006"
+                    autoLoad
+                    fields="name,email"
+                    callback={this.responseFb}
+                    render={renderProps => (
+                        <FlatLink click={renderProps.onClick} validity kind='primary' >Continue Using Facebook</FlatLink>
+                    )}
+                />
                 <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
             </form>
         )
@@ -173,7 +190,15 @@ class Join extends Component {
                                 />
                     <FlatLink validity={this.state.formSignUp.valid} kind='light'>Sign up</FlatLink>
                     <hr style={{margin: '2.5rem 0'}}/>
-                    <FlatLink validity kind='primary'>Continue Using Facebook</FlatLink>
+                    <FacebookLogin
+                        appId="499705663851006"
+                        autoLoad
+                        fields="name,email,picture"
+                        callback={this.responseFb}
+                        render={renderProps => (
+                            <FlatLink click={renderProps.onClick} validity kind='primary' >Continue Using Facebook</FlatLink>
+                        )}
+                    />
                     <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
                 </form>
             )
@@ -223,7 +248,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         tryLogin: (userData) => dispatch(tryLogin(userData)),
-        trySignUp: (userData) => dispatch(trySignUp(userData))
+        trySignUp: (userData) => dispatch(trySignUp(userData)),
+        facebookAuth: (userData) => dispatch(facebookAuth(userData))
     }
 }
 

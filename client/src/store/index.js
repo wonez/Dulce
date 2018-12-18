@@ -2,6 +2,7 @@ export {
     tryLogin, 
     logout,
     updateAuthData,
+    facebookAuth
 }from './creators/authCreators'
 export {
     startLoading,

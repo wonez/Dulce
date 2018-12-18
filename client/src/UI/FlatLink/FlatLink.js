@@ -8,7 +8,8 @@ const FlatLink = (props) => {
         classList.push(classes['disabled'])
     }
     return(
-        <button 
+        <button
+            onClick={props.click} 
             className={classList.join(' ')}>
            {props.children} 
         </button>

@@ -53,7 +53,7 @@ const getUserPosts = async(req, res) => {
         const author = req.params.userId;
         const start = +req.query.start; 
         
-        const count = await Post.find({author}).count();
+        const count = await Post.find({author}).countDocuments();
         const posts = await Post
             .find({ author })
             .skip(start)

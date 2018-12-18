@@ -1,7 +1,9 @@
 const User = require('../models/user')
 const passport = require('passport');
+const config = require('./config')
 
 const LocalStrategy = require('passport-local').Strategy;
+const FacebookTokenStrategy = require('passport-facebook-token');
 const passportJWT = require("passport-jwt");
 
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -44,4 +46,16 @@ passport.use(new JWTStrategy({
             });
     }
 ));
-
+passport.use(new FacebookTokenStrategy({
+    clientID: config.facebook_app_id,
+    clientSecret: config.facebook_app_secret,
+  },
+  async (accessToken, refreshToken, profile, cb) => {
+    try{
+        cb(null, profile, null)
+    }catch(err){
+        console.log(err.message)
+        cb(err, null, null)
+    }
+  }
+));
