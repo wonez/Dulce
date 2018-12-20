@@ -4,6 +4,7 @@ const config = require('./config')
 
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookTokenStrategy = require('passport-facebook-token');
+const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const passportJWT = require("passport-jwt");
 
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -59,3 +60,16 @@ passport.use(new FacebookTokenStrategy({
     }
   }
 ));
+
+passport.use(new GooglePlusTokenStrategy({
+    clientID: config.google_client_id,
+    clientSecret: config.google_client_id,
+}, (accessToken, refreshToken, profile, cb) => {
+    try{
+        cb(null, profile, null)
+    }catch(err){
+        console.log(err.message)
+        cb(err, null, null)
+    }
+}));
+

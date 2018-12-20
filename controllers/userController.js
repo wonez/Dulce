@@ -116,11 +116,22 @@ const facebookAuth = async (req, res) => {
     }
 }
 
+const googleAuth = async (req, res) => {
+    try{
+        console.log('eo google');
+        console.log(req.user);
+    }catch(err){
+        console.log(err);
+        res.status(500).end(err.message);
+    }
+}
+
 module.exports = {
     getUser,
     loginUser,
     registerUser,
     editUser,
     deleteUser,
-    facebookAuth
+    facebookAuth,
+    googleAuth
 }
