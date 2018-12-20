@@ -6,6 +6,7 @@ const userSchema = new Schema({
     email: { type: String, unique: true }, 
     password: { type: String },
     fbId: { type: String },
+    googleId: { type: String },
     dateCreated: { type: Date, default: Date.now() },
     name: { type: String, required: true },
     surname: { type: String, required: true },

@@ -2,7 +2,8 @@ export {
     tryLogin, 
     logout,
     updateAuthData,
-    facebookAuth
+    facebookAuth,
+    googleAuth
 }from './creators/authCreators'
 export {
     startLoading,

@@ -11,12 +11,13 @@ import FlatLink from '../../UI/FlatLink/FlatLink';
 import Toolbar from '../../components/Toolbar/Toolbar'
 
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { GoogleLogin } from 'react-google-login';
 
 import withError from '../../hoc/withError'
 
 import axios from '../../utility/axios'
 
-import { tryLogin, trySignUp, facebookAuth } from '../../store/creators/authCreators'
+import { tryLogin, trySignUp, facebookAuth, googleAuth } from '../../store/creators/authCreators'
 import Loading from '../../UI/Loading/Loading';
 
 class Join extends Component {
@@ -84,8 +85,13 @@ class Join extends Component {
     }
 
     responseFb = (data) => {
-        console.log(data);
-         this.props.facebookAuth({
+        this.props.facebookAuth({
+            access_token: data.accessToken
+        })
+    }
+
+    responseGoogle = (data) => {
+        this.props.googleAuth({
             access_token: data.accessToken
         })
     }
@@ -149,14 +155,20 @@ class Join extends Component {
                 <hr style={{margin: '2.5rem 0'}}/>
                 <FacebookLogin
                     appId="499705663851006"
-                    autoLoad
                     fields="name,email"
                     callback={this.responseFb}
                     render={renderProps => (
                         <FlatLink click={renderProps.onClick} validity kind='primary' >Continue Using Facebook</FlatLink>
                     )}
+                /> 
+                <GoogleLogin
+                    clientId="607501341620-s4su6rj3lns0025pggjbenkgcfctc9di.apps.googleusercontent.com"
+                    render={renderProps => (
+                        <FlatLink click={renderProps.onClick} validity kind='danger'>Continue Using Google+</FlatLink>
+                    )}
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
                 />
-                <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
             </form>
         )
 
@@ -199,7 +211,14 @@ class Join extends Component {
                             <FlatLink click={renderProps.onClick} validity kind='primary' >Continue Using Facebook</FlatLink>
                         )}
                     />
-                    <FlatLink validity kind='danger'>Continue Using Google+</FlatLink>
+                    <GoogleLogin
+                        clientId="607501341620-s4su6rj3lns0025pggjbenkgcfctc9di.apps.googleusercontent.com"
+                        render={renderProps => (
+                            <FlatLink click={renderProps.onClick} validity kind='danger'>Continue Using Google+</FlatLink>
+                        )}
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
+                    />
                 </form>
             )
         }
@@ -249,7 +268,8 @@ const mapDispatchToProps = dispatch => {
     return {
         tryLogin: (userData) => dispatch(tryLogin(userData)),
         trySignUp: (userData) => dispatch(trySignUp(userData)),
-        facebookAuth: (userData) => dispatch(facebookAuth(userData))
+        facebookAuth: (userData) => dispatch(facebookAuth(userData)),
+        googleAuth: (userData) => dispatch(googleAuth(userData))
     }
 }
 

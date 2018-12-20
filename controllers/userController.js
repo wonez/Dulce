@@ -96,11 +96,17 @@ const facebookAuth = async (req, res) => {
     try{
         const accessToken = req.body.access_token;
         const userData = req.user._json;
-        const imgUrl = await saveProfilePhoto(userData.id, accessToken);
 
-        let user = await User.findOne({ fbId: userData.id });
+        let user = await User.findOne({ 
+            $or:[
+                { fbId: userData.id },
+                { email: userData.email }
+            ]
+        });
         if(!user){
+            const imgUrl = await saveProfilePhoto(userData.id, accessToken);
             user = await new User({
+                email: userData.email,
                 fbId: userData.id,
                 name: userData.first_name,
                 surname: userData.last_name,
@@ -118,8 +124,25 @@ const facebookAuth = async (req, res) => {
 
 const googleAuth = async (req, res) => {
     try{
-        console.log('eo google');
-        console.log(req.user);
+        const userData = req.user._json;
+        let user = await User.findOne({ 
+            $or: [
+                { googleId: userData.id },
+                { email: userData.emails[0].value }
+            ] 
+        });
+        if(!user){
+            user = await new User({
+                email: userData.emails[0].value,
+                googleId: userData.id,
+                name: userData.name.givenName,
+                surname: userData.name.familyName,
+                avatarUrl: [userData.image.url.split('sz')[0], 'sz=500'].join('')
+            }).save();
+        }
+        const expiresIn = 1000 * 60 * 60//1hour;
+        const token = jwt.sign(user.toJSON(), config.secret);
+        res.status(200).json({user, token, expiresIn});
     }catch(err){
         console.log(err);
         res.status(500).end(err.message);

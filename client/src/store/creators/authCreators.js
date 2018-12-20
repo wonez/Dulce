@@ -33,9 +33,12 @@ export const trySignUp = (userData) => {
     return handleRequest('/user/register', userData);
 }
 
-
 export const facebookAuth = (userData) => {
     return handleRequest('user/facebook', userData)
+}
+
+export const googleAuth = (userData) => {
+    return handleRequest('user/google', userData)
 }
 
 export const checkCookies = () => {
