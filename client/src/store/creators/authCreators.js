@@ -1,6 +1,7 @@
 import { STORE_AUTH_DATA, REMOVE_AUTH_DATA } from '../types/authTypes'
 import { startLoading, endLoading } from './uiCreators'
 import axios from '../../utility/axios'
+import handleSocket from '../creators/chatCreators'
 
 const handleRequest = (url, userData) => {
     return dispatch => {
@@ -18,6 +19,7 @@ const handleRequest = (url, userData) => {
             }).then(data => {
                 console.log(data);
                 dispatch(updateAuthData(data))
+                createWebSocket();
             }).catch(err => {
                 dispatch(endLoading());
                 console.log(err.message);
@@ -50,7 +52,7 @@ export const checkCookies = () => {
             axios.get(`/user/${id}`)
                 .then(res => {
                     if(res.status == 200){
-                        dispatch(storeAuthData({user: res.data, token}))
+                        dispatch(updateAuthData({user: res.data, token}))
                     }
                 })
         }
@@ -60,6 +62,7 @@ export const checkCookies = () => {
 export const updateAuthData = (userData) => {
     return dispatch => {
         dispatch(storeAuthData(userData));
+        createWebSocket();
         if(userData.token)
             storeCookies(userData)
     }
@@ -98,4 +101,10 @@ const deleteCookies = () => {
     localStorage.removeItem('id')
     localStorage.removeItem('token')
     // localStorage.removeItem('expirationDate')
+}
+
+const createWebSocket = () => {
+    const socket = new WebSocket('ws://localhost:8000')
+    document.socket = socket;
+    handleSocket(socket);
 }

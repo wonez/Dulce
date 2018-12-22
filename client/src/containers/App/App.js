@@ -20,7 +20,6 @@ import { checkCookies } from '../../store/creators/authCreators'
 
 class App extends Component {
 
-		
 	componentDidMount(){
 		this.props.checkCookies();
 	}

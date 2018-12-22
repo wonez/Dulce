@@ -1,13 +1,13 @@
 const express = require('express')
 const morgan = require('morgan')
-const passport = require('passport')
 const bodyParser = require('body-parser')
-require('./db')();
-require('./utlity/passport')
+const WebSocket = require('ws');
 
 const app = express()
+const port = process.env.PORT || 8000;
 
-const port = process.env.PORT || 8000
+require('./db')();
+require('./utlity/passport')
 
 app.use(morgan('dev'))
 
@@ -29,4 +29,6 @@ app.use(require('./utlity/tokenChecker'));
 
 app.use('/api', require('./routes.js'));
 
-app.listen(port, () => console.log(`Dulce listening on port ${port}!`))
+const server = app.listen(port, () => console.log(`Dulce listening on port ${port}!`))
+
+require('./wss')(new WebSocket.Server({ server }))
