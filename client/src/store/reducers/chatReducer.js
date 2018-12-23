@@ -1,4 +1,4 @@
-import { RES_ONLINE } from '../types/chatTypes'
+import { SET_ONLINE, ADD_ONLINE, REMOVE_ONLINE } from '../types/chatTypes'
 
 const initialState = {
     online: [],
@@ -6,13 +6,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
-        case RES_ONLINE: return {
+        case SET_ONLINE: return {
             ...state,
             online: action.online 
         }
-        case RES_JOINED: return {
+        case ADD_ONLINE: return {
             ...state,
             online: state.online.concat(action.user) 
+        }
+        case REMOVE_ONLINE: return {
+            ...state,
+            online: state.online.filter(user => {
+                return user._id != action.user._id
+            }) 
         }
         default: 
             return state

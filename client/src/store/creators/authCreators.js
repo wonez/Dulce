@@ -19,7 +19,6 @@ const handleRequest = (url, userData) => {
             }).then(data => {
                 console.log(data);
                 dispatch(updateAuthData(data))
-                createWebSocket();
             }).catch(err => {
                 dispatch(endLoading());
                 console.log(err.message);
@@ -62,7 +61,7 @@ export const checkCookies = () => {
 export const updateAuthData = (userData) => {
     return dispatch => {
         dispatch(storeAuthData(userData));
-        createWebSocket();
+        dispatch(createWebSocket());
         if(userData.token)
             storeCookies(userData)
     }
@@ -104,7 +103,9 @@ const deleteCookies = () => {
 }
 
 const createWebSocket = () => {
-    const socket = new WebSocket('ws://localhost:8000')
-    document.socket = socket;
-    handleSocket(socket);
+    return dispatch => {
+        const socket = new WebSocket('ws://localhost:8000')
+        document.socket = socket;
+        dispatch(handleSocket(socket));
+    }
 }
