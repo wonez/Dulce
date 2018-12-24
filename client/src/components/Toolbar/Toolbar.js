@@ -8,7 +8,9 @@ import classes from './Toolbar.scss';
 import IconButton from '../../UI/IconButton/IconButton'
 import Menu from '../../UI/Menu/Menu'
 
-import { IconMagnifyingGlass, IconPlus, IconCake, IconCategories } from '../../UI/Icons/Icons'
+import Chat from '../Chat/Chat'
+
+import { IconMagnifyingGlass, IconPlus, IconCake, IconCategories, IconChat } from '../../UI/Icons/Icons'
 
 class Toolbar extends Component {
 
@@ -81,6 +83,7 @@ class Toolbar extends Component {
                         <IconButton click={this.handleCreate}>
                             <IconPlus />
                         </IconButton>
+                        <Chat />
                         <Menu />
                     </div>
                 </div>

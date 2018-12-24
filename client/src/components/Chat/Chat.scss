@@ -1,0 +1,54 @@
+.Chat{
+    position: fixed;
+    bottom: 0;
+    right: 5rem;
+    height: 40rem;
+    width: 30rem;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $color-primary-dark;
+    background: white;
+    &__Box{
+        display: flex;
+        flex: 1;
+        border-bottom: 1px solid $color-primary-dark;
+    }
+    &__Online{
+        flex-basis: 20%;
+        border-right: 1px solid $color-primary-dark;
+    }
+    &__Written{
+        flex-basis: 80%;
+    }
+    &__New{
+        outline: none;
+        border: none;
+        font-size: 1.3rem;
+        padding: 1rem;
+        color: $color-gray-darker;
+    }
+    &__Info{
+        border-bottom: 1px solid $color-primary-dark;
+        display: flex;
+        padding: 1rem;
+        justify-content: space-between;
+        align-items: center;
+        background: $color-primary-dark;
+        p{
+            flex: 1;
+            text-transform: initial;
+            font-weight: lighter;
+        }
+    }
+    &__Close{
+        color: white;
+        flex-basis: 2rem;
+        &:hover{
+            cursor: pointer;
+            color: $color-secondary-light;
+        }
+    }
+}
