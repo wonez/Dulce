@@ -1,4 +1,6 @@
-const online = [];
+const online = []; //{data}[opened sockets]
+
+const User = require('./models/user');
 
 module.exports = (server) => {
     
@@ -9,44 +11,62 @@ module.exports = (server) => {
                 case 'REQ_ONLINE': return reqOnline(socket, data.data)
             }
         })
-        socket.on('close', (msg) => {
+        socket.on('close', () => {
             for(let i=0; i<online.length; i++){
-                let exists = false;
-                try{
-                    server.clients.forEach(sock => {
-                        if(sock == online[i][1]){
-                            exists = true;
-                            throw 'break';
+                for(let j=0; j<online[i][1].length; j++){
+                    let exists = false;
+                    try{
+                        server.clients.forEach(sock => {
+                            if(sock == online[i][1][j]){
+                                exists = true;
+                                throw 'break';
+                            }
+                        })
+                    }catch(e){}
+                    if(!exists){
+                        online[i][1].splice(j, 1);
+                        if(online[i][1].length == 0){
+                            emitLeft(online[i][0])
+                            online.splice(i,1);
                         }
-                    })
-                }catch(e){}
-
-                if(!exists){
-                    emitLeft(online[i][0])
-                    online.splice(i, 1);
-                    break;
+                        break;
+                    }
                 }
             }
         })
     })
 
     const reqOnline = (socket, data) => {
-        online.push([data, socket]);
-        const packet = { 
-            type: 'RES_ONLINE_JOINED', 
-            data
-        }
-        const msg = JSON.stringify(packet)
-        server.clients.forEach(sock => {
-            if(sock == socket){
-                sock.send(JSON.stringify({
-                    type: 'RES_ONLINE', 
-                    data: online.map(on => on[0])
-                }))
-            } else {
-                sock.send(msg)
+        const item = online.find(item => {
+            return item[0]._id == data._id;
+        })
+        if(item){
+            //alredy joined anotehr connection
+            item[1].push(socket);
+        }else{
+            //new connection, new user
+            online.push([data, [socket]])
+            const packet = { 
+                type: 'RES_ONLINE_JOINED', 
+                data
             }
-        });
+            const msg = JSON.stringify(packet)
+            server.clients.forEach(sock => {
+                if(sock != socket){
+                    sock.send(msg)
+                }
+            });
+        }
+        User.find({}).then(res => {
+            socket.send(JSON.stringify({
+                type: 'RES_ONLINE',
+                data: res
+            }))
+        })
+        // socket.send(JSON.stringify({
+        //     type: 'RES_ONLINE', 
+        //     data: online.map(on => on[0])
+        // }))
     }
 
     const emitLeft = data => {

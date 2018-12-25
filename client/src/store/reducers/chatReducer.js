@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
         }
         case ADD_ONLINE: return {
             ...state,
-            online: state.online.concat(action.user) 
+            online: state.online.indexOf(action.user) != -1 ? state.online : state.online.concat(action.user) 
         }
         case REMOVE_ONLINE: return {
             ...state,

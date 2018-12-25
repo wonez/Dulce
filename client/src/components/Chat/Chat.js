@@ -1,4 +1,6 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import classes from './Chat.scss'
 
@@ -9,7 +11,7 @@ import Aux from '../../hoc/Aux'
 class Chat extends React.Component{
 
     state = {
-        show: false
+        show: true
     }
 
     handleChat = () => {
@@ -19,6 +21,10 @@ class Chat extends React.Component{
                 show: !prevState.show
             }
         })
+    }
+
+    handleAvatarClick = (id) => {
+        this.props.history.push(`/profile/${id}`);
     }
 
     render(){
@@ -34,6 +40,21 @@ class Chat extends React.Component{
                     </div>
                     <div className={classes.Chat__Box}>
                         <div className={classes.Chat__Online}>
+                            {
+                                this.props.users.slice(0, 6).map(user => {
+                                    return (
+                                        <div    className={classes.Chat__Avatar}
+                                                onClick={() => this.handleAvatarClick(user._id)}
+                                                style={{backgroundImage: `url(${user.avatarUrl})`}}
+                                                key={user._id}>
+                                            <div className={classes.Chat__Tooltip}>
+                                                {user.name} {user.surname}
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                            {this.props.users.length > 6 ? <p className={classes.LoadMore}>...</p> : null}
                         </div>
                         <div className={classes.Chat__Written}>
                         </div>
@@ -55,5 +76,11 @@ class Chat extends React.Component{
     }
 }
 
-export default Chat;
+const mapStateToProps = state => {
+    return{
+        users: state.chat.online
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Chat));
 

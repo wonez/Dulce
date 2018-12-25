@@ -17,11 +17,13 @@
         border-bottom: 1px solid $color-primary-dark;
     }
     &__Online{
-        flex-basis: 20%;
+        padding: 1rem;
+        flex-direction: column;
         border-right: 1px solid $color-primary-dark;
+        height: 100%;
     }
     &__Written{
-        flex-basis: 80%;
+        flex: 1;
     }
     &__New{
         outline: none;
@@ -50,5 +52,45 @@
             cursor: pointer;
             color: $color-secondary-light;
         }
+    }
+    &__Avatar{
+        width: 4rem;
+        height: 4rem;
+        border: .2rem solid $color-success;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        &:not(:last-child){
+            margin-bottom: .8rem;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    &__Avatar:hover &__Tooltip{
+        visibility: visible;
+    }
+    &__Tooltip{
+        color: white;
+        background: rgba($color-gray-darker, .7);
+        white-space: nowrap;
+        position: absolute;
+        top: .8rem;
+        left: 4rem;
+        padding: .5rem .8rem;
+        font-size: 1rem;
+        border-radius: 1rem;
+        visibility: hidden;
+        text-transform: capitalize;
+    }
+}
+.LoadMore{
+    color: $color-gray-dark;
+    text-align: center;
+    transition: .3s all;
+    &:hover{
+        transform: scale(1.2);
+        cursor: pointer;
     }
 }
