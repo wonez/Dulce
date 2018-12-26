@@ -7,11 +7,14 @@ import classes from './Chat.scss'
 import IconButton from '../../UI/IconButton/IconButton'
 import { IconChat } from '../../UI/Icons/Icons'
 import Aux from '../../hoc/Aux'
+import ChatAvatar from '../ChatAvatar/ChatAvatar';
+import ChatShowOnlineAll from '../ChatShowOnlineAll/ChatShowOnlineAll'
 
 class Chat extends React.Component{
 
     state = {
-        show: true
+        show: true,
+        showAll: false
     }
 
     handleChat = () => {
@@ -21,6 +24,13 @@ class Chat extends React.Component{
                 show: !prevState.show
             }
         })
+    }
+
+    handleShowALl = () => {
+        this.setState(prevState => ({
+            ...prevState,
+            showAll: !prevState.showAll
+        }))
     }
 
     handleAvatarClick = (id) => {
@@ -33,35 +43,27 @@ class Chat extends React.Component{
 
         if(this.state.show){
             chat = (
-                <div className={classes.Chat}>
-                    <div className={classes.Chat__Info}>
-                        <p>Dulce Chat Room</p>
-                        <div onClick={this.handleChat} className={classes.Chat__Close}>X</div>
-                    </div>
-                    <div className={classes.Chat__Box}>
-                        <div className={classes.Chat__Online}>
-                            {
-                                this.props.users.slice(0, 6).map(user => {
-                                    return (
-                                        <div    className={classes.Chat__Avatar}
-                                                onClick={() => this.handleAvatarClick(user._id)}
-                                                style={{backgroundImage: `url(${user.avatarUrl})`}}
-                                                key={user._id}>
-                                            <div className={classes.Chat__Tooltip}>
-                                                {user.name} {user.surname}
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                            {this.props.users.length > 6 ? <p className={classes.LoadMore}>...</p> : null}
+                <Aux>
+                    <div className={classes.Chat}>
+                        <div className={classes.Chat__Info}>
+                            <p>Dulce Chat Room</p>
+                            <div onClick={this.handleChat} className={classes.Chat__Close}>X</div>
                         </div>
-                        <div className={classes.Chat__Written}>
+                        <div className={classes.Chat__Box}>
+                            <div className={classes.Chat__Online}>
+                                {this.props.users.slice(0, 6).map(user => {
+                                    return <ChatAvatar user={user} key={user._id} handleAvatarClick={this.handleAvatarClick}/>
+                                })}
+                                {this.props.users.length > 6 ? <p onClick={this.handleShowALl} className={classes.LoadMore}>+{this.props.users.length - 6}</p> : null}
+                            </div>
+                            <div className={classes.Chat__Written}>
+                            </div>
                         </div>
+                        <input placeholder="Say something..." className={classes.Chat__New}>
+                        </input>
                     </div>
-                    <input placeholder="Say something..." className={classes.Chat__New}>
-                    </input>
-                </div>
+                    {this.state.showAll ? <ChatShowOnlineAll handleAvatarClick={this.handleAvatarClick} users={this.props.users} handleClose={this.handleShowALl} handleClick={this.handleAvatarClick} /> : null}
+                </Aux>
             )
         }
 

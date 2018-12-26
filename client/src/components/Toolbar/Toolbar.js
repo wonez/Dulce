@@ -15,9 +15,8 @@ import { IconMagnifyingGlass, IconPlus, IconCake, IconCategories, IconChat } fro
 class Toolbar extends Component {
 
     state = {
-        search: ''
+        search: '',
     }
-
     textChangedHandler = (e) => {
         this.setState({
             search: e.target.value
