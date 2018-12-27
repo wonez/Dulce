@@ -9,6 +9,9 @@ module.exports = (server) => {
             const data = JSON.parse(msg);
             switch(data.type){
                 case 'REQ_ONLINE': return reqOnline(socket, data.data)
+                case 'MESSAGE': return forwardMessage(socket, data.data)
+                case 'IS_TYPING': return isTyping(socket)
+                case 'STOPPED_TYPING': return stoppedTyping(socket)
             }
         })
         socket.on('close', () => {
@@ -57,16 +60,17 @@ module.exports = (server) => {
                 }
             });
         }
-        User.find({}).then(res => {
-            socket.send(JSON.stringify({
-                type: 'RES_ONLINE',
-                data: res
-            }))
-        })
-        // socket.send(JSON.stringify({
-        //     type: 'RES_ONLINE', 
-        //     data: online.map(on => on[0])
-        // }))
+        //all users FOR TESTING ONLY!
+        // User.find({}).then(res => {
+        //     socket.send(JSON.stringify({
+        //         type: 'RES_ONLINE',
+        //         data: res
+        //     }))
+        // })
+        socket.send(JSON.stringify({
+            type: 'RES_ONLINE', 
+            data: online.map(on => on[0])
+        }))
     }
 
     const emitLeft = data => {
@@ -78,5 +82,38 @@ module.exports = (server) => {
         server.clients.forEach(sock => {
             sock.send(msg);
         });
+    }
+
+    const forwardMessage = (author, data) => {
+        const packet = { 
+            type: 'MESSAGE', 
+            data
+        }
+        const msg = JSON.stringify(packet)
+        server.clients.forEach(socket => {
+            if(socket != author){
+                socket.send(msg)
+            }
+        })
+    }
+
+    const isTyping = author => {
+        const packet = { type: 'IS_TYPING'}
+        const msg = JSON.stringify(packet)
+        server.clients.forEach(socket => {
+            if(socket != author){
+                socket.send(msg)
+            }
+        })
+    }
+
+    const stoppedTyping = author => {
+        const packet = { type: 'STOPPED_TYPING'}
+        const msg = JSON.stringify(packet)
+        server.clients.forEach(socket => {
+            if(socket != author){
+                socket.send(msg)
+            }
+        })
     }
 }

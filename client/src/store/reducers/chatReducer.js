@@ -1,7 +1,9 @@
-import { SET_ONLINE, ADD_ONLINE, REMOVE_ONLINE } from '../types/chatTypes'
+import { SET_ONLINE, ADD_ONLINE, REMOVE_ONLINE, APPEND_MESSAGE, IS_TYPING, STOPPED_TYPING } from '../types/chatTypes'
 
 const initialState = {
     online: [],
+    messages: [],
+    typing: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +21,18 @@ const reducer = (state = initialState, action) => {
             online: state.online.filter(user => {
                 return user._id != action.user._id
             }) 
+        }
+        case APPEND_MESSAGE: return {
+            ...state,
+            messages: state.messages.concat(action.message)
+        }
+        case IS_TYPING: return{
+            ...state,
+            typing: true
+        }
+        case STOPPED_TYPING: return{
+            ...state,
+            typing: false
         }
         default: 
             return state

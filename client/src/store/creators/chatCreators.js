@@ -1,4 +1,4 @@
-import { SET_ONLINE, ADD_ONLINE, REMOVE_ONLINE } from '../types/chatTypes'
+import { SET_ONLINE, ADD_ONLINE, REMOVE_ONLINE, APPEND_MESSAGE, IS_TYPING, STOPPED_TYPING } from '../types/chatTypes'
 
 import store from '../config'
 
@@ -21,6 +21,25 @@ const removeOnline = (user) => {
     }
 }
 
+const appendMessage = (message) => {
+    return{
+        type: APPEND_MESSAGE,
+        message,
+    }
+}
+
+const isTyping = () => {
+    return {
+        type: IS_TYPING
+    }
+}
+
+const stoppedTyping = () => {
+    return {
+        type: STOPPED_TYPING
+    }
+}
+
 const handleSocket = (socket) => {
     return dispatch => {
         socket.onopen = () => {
@@ -35,6 +54,12 @@ const handleSocket = (socket) => {
                 case 'RES_ONLINE_JOINED': dispatch(addOnline(res.data));
                     break;
                 case 'RES_ONLINE_LEFT': dispatch(removeOnline(res.data));
+                    break;
+                case 'MESSAGE': dispatch(appendMessage(res.data))
+                    break;
+                case 'IS_TYPING': dispatch(isTyping())
+                    break;
+                case 'STOPPED_TYPING': dispatch(stoppedTyping())
                     break;
             }
         }
@@ -52,6 +77,40 @@ const handleSocket = (socket) => {
             }
             socket.send(JSON.stringify(packet));
         }
+    }
+}
+
+export const sendMessage = (msg) => {
+    return dispatch => {
+        const { avatarUrl, name, surname, _id } = store.getState().auth.user;
+        const packet = {
+            type: 'MESSAGE',
+            data: {
+                author: {
+                    avatarUrl,
+                    name,
+                    surname,
+                    _id
+                },
+                time: Date.now(),
+                text: msg,
+            }
+        }
+        dispatch(appendMessage(packet.data))
+        document.socket.send(JSON.stringify(packet));
+    }
+} 
+
+export const emitIsTyping = () => {
+    return dispatch => {
+        const packet = { type: 'IS_TYPING'}
+        document.socket.send(JSON.stringify(packet));
+    }
+}
+export const emitStoppedTyping = () => {
+    return dispatch => {
+        const packet = { type: 'STOPPED_TYPING'}
+        document.socket.send(JSON.stringify(packet));
     }
 }
 

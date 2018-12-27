@@ -1,4 +1,5 @@
 .Chat{
+    z-index: 3000;
     position: fixed;
     bottom: 0;
     right: 5rem;
@@ -6,7 +7,7 @@
     width: 30rem;
     border-top-right-radius: 1rem;
     border-top-left-radius: 1rem;
-    // overflow: hidden;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     border: 1px solid $color-primary-dark;
@@ -15,6 +16,7 @@
         display: flex;
         flex: 1;
         border-bottom: 1px solid $color-primary-dark;
+        position: relative;        
     }
     &__Online{
         padding: 1rem;
@@ -24,12 +26,17 @@
     }
     &__Written{
         flex: 1;
+        color: $color-gray-dark;
+        text-transform: initial;
+        padding: 1.5rem 1rem 2rem 1rem;  
+        overflow: scroll;
     }
     &__New{
         outline: none;
         border: none;
         font-size: 1.3rem;
         padding: 1rem;
+        width: 100%;
         color: $color-gray-darker;
     }
     &__Info{
@@ -38,8 +45,6 @@
         padding: 1rem;
         justify-content: space-between;
         align-items: center;
-        border-top-right-radius: 1rem;
-        border-top-left-radius: 1rem;
         background: $color-primary-dark;
         p{
             flex: 1;
@@ -55,6 +60,24 @@
             color: $color-secondary-light;
         }
     }
+    &__Typing{
+        position: absolute;
+        bottom: 1rem;
+        left: 7rem;
+        display: inline-block;
+        color: white;
+        font-weight: bold;
+        padding: .5rem 1rem;
+        border-radius: 1rem;
+        letter-spacing: .3rem;
+        background: $color-gray-dark;
+        animation: pulse 2s linear infinite;
+    }
+}
+@keyframes pulse{
+    0%{ transform: scale(1) }
+    50%{ transform: scale(1.1) }
+    100%{ transform: scale(1) }
 }
 .LoadMore{
     color: $color-gray-dark;
@@ -62,6 +85,42 @@
     transition: .3s all;
     &:hover{
         transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+.MyMsgContainer{
+    display: flex;
+    padding: .5rem 0;
+    font-size: 1.3rem;
+    justify-content: flex-end;
+}
+.MyMsg{
+    border-radius: 1rem;
+    padding: 1rem;
+    background: $color-gray-light;
+    color: black;
+}
+.OthersMsg{
+    padding: 1rem;
+    font-size: 1.3rem;
+    color: white;
+    background: $color-primary-dark;
+    border-radius: 1rem;
+}
+.OthersMsgContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: .5rem 0;
+    font-size: 1rem;
+}
+.Author{
+    display: block;
+    font-size: 1rem;
+    color: $color-gray-dark;
+    margin: 0 !important;
+    padding-top: .5rem;
+    &:hover{
         cursor: pointer;
     }
 }
