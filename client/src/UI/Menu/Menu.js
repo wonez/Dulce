@@ -25,7 +25,7 @@ class MenuBtn extends Component {
                 <div onClick={this.uncheck} className={classes.MenuBg}>
                 </div>
                 <div className={classes.Menu}>
-                    <a onClick={() => {this.goTo(''); setTimeout(()=> this.goTo(`/profile/${this.props.user._id}`), 0)}} className={classes.Menu__Btn}>
+                    <a onClick={() => {this.goTo(''); setTimeout(()=> this.goTo(`/profile/${this.props.user.uri}`), 0)}} className={classes.Menu__Btn}>
                         My Profile
                     </a>
                     <a onClick={() => {this.goTo('/editProfile')}} className={classes.Menu__Btn}>

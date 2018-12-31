@@ -49,7 +49,7 @@ const getMoreUsers = async (req, res) => {
         for(let val of values){
             possible.push(new RegExp(val, "i"));
         }
-        const users = await User.find({ $or: [{name: { $in: possible }}, {surname: { $in: possible }}] }).limit(6);
+        const users = await User.find({ $or: [{name: { $in: possible }}, {surname: { $in: possible }}] }).skip(+start).limit(6);
         const usersCount = await User.find({ $or: [{name: { $in: possible }}, {surname: { $in: possible }}] }).countDocuments();
 
         res.status(200).json({ users, usersCount })

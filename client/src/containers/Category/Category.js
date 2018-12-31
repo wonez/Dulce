@@ -19,8 +19,8 @@ class Category extends Component {
     }
 
     componentDidMount(){
-        const id  = this.props.match.params.id;
-        axios.get(`/category/${id}`)
+        const uri  = this.props.match.params.uri;
+        axios.get(`/category/${uri}`)
             .then(res => {
                 if(res.status == 200){
                     this.setState({
@@ -29,19 +29,21 @@ class Category extends Component {
                         count: res.data.postsCount
                     })
                 }
+            }).catch(err => {
+                this.props.history.push('/categories')
             })
     }
 
-    clickHandler = (id) => {
-        this.props.history.push(`/post/${id}`);
+    clickHandler = (uri) => {
+        this.props.history.push(`/post/${uri}`);
     }
 
     loadItems = () => {
-        const id  = this.props.match.params.id;
+        const uri  = this.props.match.params.uri;
         this.setState({
             loading: true
         })
-        axios.get(`/category/${id}?start=${this.state.items.length}`)
+        axios.get(`/category/${uri}?start=${this.state.items.length}`)
             .then(res => {
                 if(res.status == 200){
                     this.setState(prevState => {
@@ -52,7 +54,7 @@ class Category extends Component {
                             loading: false
                         }
                     })
-                } 
+                }
             })
     }
 
@@ -70,7 +72,7 @@ class Category extends Component {
                 <div className={classes.Category__Items}>
                     {this.state.items.map(item => {
                         return <CardSmall   card={item} 
-                                            click={() => this.clickHandler(item._id)}
+                                            click={() => this.clickHandler(item.uri)}
                                             key={item._id} />
                     })}
                 </div>

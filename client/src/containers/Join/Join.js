@@ -235,7 +235,7 @@ class Join extends Component {
         let redirect = null;
 
         if(this.props.isLogged){
-            const to = this.props.location.state ? this.props.location.state.from.pathname : `/profile/${this.props.user._id}`;
+            const to = this.props.location.state ? this.props.location.state.from.pathname : `/profile/${this.props.user.uri}`;
             redirect = <Redirect to={to}/> 
         }
         

@@ -1,11 +1,19 @@
 .Btn{
-    width: 2em;
-    height: 2em;
     margin: 0 2rem;
-    @media only screen and (max-width: $bp-small){
+    @media only screen and (max-width: $bp-medium){
         margin: 0 .5rem;
-        height: 1.5em;
-        width: 1.5em;
+    }
+    // @media only screen and (max-width: $bp-small){
+    //     margin: 0 .5rem;
+    //     height: 1.5em;
+    //     width: 1.5em;
+    // }
+    // @media only screen and (max-width: $bp-medium){
+    //     padding: 1rem .5rem;
+    //     font-size: 1.3rem;
+    // }
+    @media only screen and (max-width: $bp-small){
+        font-size: 1rem;
     }
     
     .MenuBg{
@@ -48,6 +56,18 @@
 
 .Label{
     position: relative;
+    transition: .3s all;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    svg{
+        height: 2em;
+        width: 2em;
+        @media only screen and (max-width: $bp-medium){
+            height: 1.5em;
+            width: 1.5em;
+        }
+    }
     &:hover{
         fill: $color-secondary-light;
         cursor: pointer;

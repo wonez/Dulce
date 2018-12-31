@@ -205,7 +205,7 @@ class Create extends React.Component {
                                 >Cancel</FormButton>
                         </div>
                     </div>
-                    <Confirm confirmHandler={()=> this.props.history.push('/profile')}/>
+                    <Confirm confirmHandler={()=> this.props.history.push('/')}/>
                     <Loading />
                 </div>
             </Aux>

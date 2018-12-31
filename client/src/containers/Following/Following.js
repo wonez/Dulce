@@ -45,8 +45,8 @@ class Following extends Component{
             })
     }
 
-    goToUser = (id) => {
-        this.props.history.push(`/profile/${id}`)
+    goToUser = (uri) => {
+        this.props.history.push(`/profile/${uri}`)
     }
 
     render(){
@@ -63,7 +63,7 @@ class Following extends Component{
                     <h2 className={classes.Following__Heading}>Followers: {this.props.count}</h2>
                     <div className={classes.Following__Container}>
                         {this.state.people.map(person => (
-                            <Person click={() => this.goToUser(person._id)} data={person} key={person._id} />
+                            <Person click={() => this.goToUser(person.uri)} data={person} key={person._id} />
                             ))}
                     </div>
                     {this.state.people.length < this.props.count ? 

@@ -64,53 +64,74 @@ const handleSocket = (socket) => {
             }
         }
 
+        socket.onerror = (e) => {
+            console.log(e.err);
+        };
+
         const start = () => {
-            const { avatarUrl, name, surname, _id } = store.getState().auth.user;
-            const packet = { 
-                type: 'REQ_ONLINE',
-                data: {
-                    avatarUrl,
-                    name,
-                    surname,
-                    _id
+            try{
+                const { avatarUrl, name, surname, uri, _id } = store.getState().auth.user;
+                const packet = { 
+                    type: 'REQ_ONLINE',
+                    data: {
+                        avatarUrl,
+                        name,
+                        surname,
+                        uri,
+                        _id
+                    }
                 }
+                socket.send(JSON.stringify(packet));
+            }catch(err){
+                console.log('ERR ', err);
             }
-            socket.send(JSON.stringify(packet));
         }
     }
 }
 
 export const sendMessage = (msg) => {
     return dispatch => {
-        const { avatarUrl, name, surname, _id } = store.getState().auth.user;
-        const packet = {
-            type: 'MESSAGE',
-            data: {
-                author: {
-                    avatarUrl,
-                    name,
-                    surname,
-                    _id
-                },
-                time: Date.now(),
-                text: msg,
+        try{
+            const { avatarUrl, name, surname, _id } = store.getState().auth.user;
+            const packet = {
+                type: 'MESSAGE',
+                data: {
+                    author: {
+                        avatarUrl,
+                        name,
+                        surname,
+                        _id
+                    },
+                    time: Date.now(),
+                    text: msg,
+                }
             }
+            dispatch(appendMessage(packet.data))
+            document.socket.send(JSON.stringify(packet));
+        }catch(err){
+            console.log('ERR ', err);
         }
-        dispatch(appendMessage(packet.data))
-        document.socket.send(JSON.stringify(packet));
     }
 } 
 
 export const emitIsTyping = () => {
     return dispatch => {
-        const packet = { type: 'IS_TYPING'}
-        document.socket.send(JSON.stringify(packet));
+        try{
+            const packet = { type: 'IS_TYPING'}
+            document.socket.send(JSON.stringify(packet));
+        }catch(err){
+            console.log('ERR ', err);
+        }
     }
 }
 export const emitStoppedTyping = () => {
     return dispatch => {
-        const packet = { type: 'STOPPED_TYPING'}
-        document.socket.send(JSON.stringify(packet));
+        try{
+            const packet = { type: 'STOPPED_TYPING'}
+            document.socket.send(JSON.stringify(packet));
+        }catch(err){
+            console.log('ERR ', err);
+        }
     }
 }
 

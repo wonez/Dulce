@@ -55,7 +55,7 @@ class Toolbar extends Component {
             </div>
         )
 
-        if(this.props.user && this.props.user._id){
+        if(this.props.user && this.props.user.uri){
             content = (
                 <div className={classes.Toolbar}>
                     <IconButton click={this.handleHome}>

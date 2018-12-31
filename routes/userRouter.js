@@ -11,7 +11,9 @@ router.post('/facebook', passport.authenticate('facebook-token', { session: fals
 
 router.post('/google', passport.authenticate('google-plus-token', { session: false }), userController.googleAuth)
 
-router.get('/:id', userController.getUser);
+router.get('/uri/:uri', userController.getUserByUri);
+
+router.get('/:id', userController.getUserById);
 
 router.put('/:id', checkAuth, userController.editUser);
 

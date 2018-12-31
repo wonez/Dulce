@@ -4,7 +4,7 @@ const checkAuth = require('../utlity/checkAuth');
 
 router.post('/', checkAuth, postController.createPost);
 
-router.get('/:id', postController.getPost);
+router.get('/:uri', postController.getPost);
 
 router.get('/user/:userId', postController.getUserPosts)
 

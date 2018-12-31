@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const URLSlugs = require('mongoose-url-slugs');
 
 const postSchema = new Schema({
     title: String,
@@ -15,5 +16,7 @@ const postSchema = new Schema({
     likes: { type: [ { type: Schema.Types.ObjectId, ref: 'User' } ], default: [] },
     comments: { type: [ { type: Schema.Types.ObjectId, ref: 'Comment' } ], default: [] },
 })
+
+postSchema.plugin(URLSlugs('title', {field: 'uri'}));
 
 module.exports = mongoose.model('Post', postSchema)

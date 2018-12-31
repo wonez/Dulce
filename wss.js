@@ -37,83 +37,106 @@ module.exports = (server) => {
                 }
             }
         })
+        socket.on('error', err => {
+            console.log('Error: ' + err);
+        });
     })
 
     const reqOnline = (socket, data) => {
-        const item = online.find(item => {
-            return item[0]._id == data._id;
-        })
-        if(item){
-            //alredy joined anotehr connection
-            item[1].push(socket);
-        }else{
-            //new connection, new user
-            online.push([data, [socket]])
+        try{
+            const item = online.find(item => {
+                return item[0]._id == data._id;
+            })
+            if(item){
+                //alredy joined anotehr connection
+                item[1].push(socket);
+            }else{
+                //new connection, new user
+                online.push([data, [socket]])
+                const packet = { 
+                    type: 'RES_ONLINE_JOINED', 
+                    data
+                }
+                const msg = JSON.stringify(packet)
+                server.clients.forEach(sock => {
+                    if(sock != socket){
+                        sock.send(msg)
+                    }
+                });
+            }
+            //all users FOR TESTING ONLY!
+            // User.find({}).then(res => {
+            //     socket.send(JSON.stringify({
+            //         type: 'RES_ONLINE',
+            //         data: res
+            //     }))
+            // })
+            socket.send(JSON.stringify({
+                type: 'RES_ONLINE', 
+                data: online.map(on => on[0])
+            }))
+        }catch(err){
+            console.log(`Err: ${err}`);
+        }
+    }
+
+    const emitLeft = data => {
+        try{
             const packet = { 
-                type: 'RES_ONLINE_JOINED', 
+                type: 'RES_ONLINE_LEFT', 
                 data
             }
             const msg = JSON.stringify(packet)
             server.clients.forEach(sock => {
-                if(sock != socket){
-                    sock.send(msg)
-                }
+                sock.send(msg);
             });
+        }catch(err){
+            console.log(`Err: ${err}`);
         }
-        //all users FOR TESTING ONLY!
-        // User.find({}).then(res => {
-        //     socket.send(JSON.stringify({
-        //         type: 'RES_ONLINE',
-        //         data: res
-        //     }))
-        // })
-        socket.send(JSON.stringify({
-            type: 'RES_ONLINE', 
-            data: online.map(on => on[0])
-        }))
-    }
-
-    const emitLeft = data => {
-        const packet = { 
-            type: 'RES_ONLINE_LEFT', 
-            data
-        }
-        const msg = JSON.stringify(packet)
-        server.clients.forEach(sock => {
-            sock.send(msg);
-        });
     }
 
     const forwardMessage = (author, data) => {
-        const packet = { 
-            type: 'MESSAGE', 
-            data
-        }
-        const msg = JSON.stringify(packet)
-        server.clients.forEach(socket => {
-            if(socket != author){
-                socket.send(msg)
+        try{    
+           const packet = { 
+                type: 'MESSAGE', 
+                data
             }
-        })
+            const msg = JSON.stringify(packet)
+            server.clients.forEach(socket => {
+                if(socket != author){
+                    socket.send(msg)
+                }
+            })
+        }catch(err){
+            console.log(`Err: ${err}`);            
+        }
     }
 
     const isTyping = author => {
-        const packet = { type: 'IS_TYPING'}
-        const msg = JSON.stringify(packet)
-        server.clients.forEach(socket => {
-            if(socket != author){
-                socket.send(msg)
-            }
-        })
+        try{
+            const packet = { type: 'IS_TYPING'}
+            const msg = JSON.stringify(packet)
+            server.clients.forEach(socket => {
+                if(socket != author){
+                    socket.send(msg)
+                }
+            })
+        }catch(err){
+            console.log(`Err: ${err}`);            
+        }
     }
 
     const stoppedTyping = author => {
-        const packet = { type: 'STOPPED_TYPING'}
-        const msg = JSON.stringify(packet)
-        server.clients.forEach(socket => {
-            if(socket != author){
-                socket.send(msg)
-            }
-        })
+        try{
+            const packet = { type: 'STOPPED_TYPING'}
+            const msg = JSON.stringify(packet)
+            server.clients.forEach(socket => {
+                if(socket != author){
+                    socket.send(msg)
+                }
+            })
+        }catch(err){
+            console.log(`Err: ${err}`);            
+        }
     }
 }

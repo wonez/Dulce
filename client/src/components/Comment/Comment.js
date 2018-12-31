@@ -56,7 +56,7 @@ class Comment extends Component {
                     <div className={classes.InfoBox}>
                         <div className={classes.InfoBox__Info}>
                             <a  className={classes.InfoBox__Info__Name} 
-                                onClick={()=> this.props.handleUser(this.props.comment.author._id)}>{`${this.props.comment.author.name} ${this.props.comment.author.surname}`}</a>
+                                onClick={()=> this.props.handleUser(this.props.comment.author.uri)}>{`${this.props.comment.author.name} ${this.props.comment.author.surname}`}</a>
                         </div>
                         <textarea className={classes.InputArea} onChange={this.handleChange} value={this.state.value}>
                         </textarea>
@@ -85,7 +85,7 @@ class Comment extends Component {
                     <div className={classes.InfoBox}>
                         <div className={classes.InfoBox__Info}>
                             <a  className={classes.InfoBox__Info__Name} 
-                                onClick={()=> this.props.handleUser(this.props.comment.author._id)}>{`${this.props.comment.author.name} ${this.props.comment.author.surname}`}</a>
+                                onClick={()=> this.props.handleUser(this.props.comment.author.uri)}>{`${this.props.comment.author.name} ${this.props.comment.author.surname}`}</a>
                             <div className={classes.InfoBox__Info__Misc}>
                                 <p className={classes.InfoBox__Info__Date}>{date}</p>
                                 {this.props.user && this.props.user._id === this.props.comment.author._id ? 

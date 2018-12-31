@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import axios from '../../utility/axios'
+
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -24,15 +26,7 @@ class EditPost extends Component{
             {value: 'medium', display: 'Medium'},
             {value: 'hard', display: 'Hard'}
         ],
-        categories: [
-            {value: '<15min', display: 'Less than 15 minutes'},
-            {value: 'chocolate', display: 'Chocolate'},
-            {value: 'birthday', display: 'Birthday'},
-            {value: 'fruit', display: 'Fruit Made'},
-            {value: 'nobaking', display: 'No Baking needed'},
-            {value: 'grandmas', display: 'Grandmas Recipe'},
-            {value: 'wedding', display: 'Wedding'},
-        ],
+        categories: [],
         form: {
             title: '',
             description: '',
@@ -47,8 +41,19 @@ class EditPost extends Component{
 
     componentDidMount(){
         if(this.props.location.state){
+            axios.get('/category').then(res => {
+                if(res.status == 200){
+                    const categories = []
+                    for(let obj of res.data){
+                        categories.push({
+                            value: obj._id,
+                            display: obj.name
+                        })
+                    }
+                    this.setState({ categories })
+                }
+            })
             const postData = this.props.location.state;
-            // console.log(postData);
             const { title, description, prepTime, ingredients, directions, level, category, imgUrl } = postData;
             const post = { title, description, prepTime, ingredients, directions, level, category };
             this.setState({

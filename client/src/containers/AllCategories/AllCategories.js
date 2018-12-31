@@ -24,8 +24,8 @@ class AllCategories extends Component{
             })
     }
 
-    categoryHandler = (id) => {
-        this.props.history.push(`/category/${id}`)
+    categoryHandler = (uri) => {
+        this.props.history.push(`/category/${uri}`)
     }
 
     render(){
@@ -36,7 +36,7 @@ class AllCategories extends Component{
                     <div className={classes.Container}>
                         <h1 className={classes.Heading}>Categories</h1>
                         {this.state.categories.map(category => {
-                            return <a   onClick={() => this.categoryHandler(category._id)}
+                            return <a   onClick={() => this.categoryHandler(category.uri)}
                                         className={classes.Category} 
                                         key={category._id}>{category.name}</a>
                         })}

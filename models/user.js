@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
+const URLSlugs = require('mongoose-url-slugs');
 
 const userSchema = new Schema({
     email: { type: String, unique: true }, 
@@ -17,6 +18,8 @@ const userSchema = new Schema({
     coverUrl: {type: String, default: 'http://localhost:8000/images/cover.jpeg' },
     following: { type: [ { type: Schema.Types.ObjectId, ref: 'User' } ], default: [] }
 })
+
+userSchema.plugin(URLSlugs('name surname', {field: 'uri'}));
 
 userSchema.statics.hashPassword = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10));

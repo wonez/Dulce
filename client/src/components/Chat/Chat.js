@@ -14,7 +14,7 @@ import { sendMessage, emitIsTyping, emitStoppedTyping } from '../../store/creato
 class Chat extends React.Component{
 
     state = {
-        show: true,
+        show: false,
         showAll: false,
         message: '',
         timeout: null
@@ -36,8 +36,8 @@ class Chat extends React.Component{
         }))
     }
 
-    handleAvatarClick = (id) => {
-        this.props.history.push(`/profile/${id}`);
+    handleAvatarClick = (uri) => {
+        this.props.history.push(`/profile/${uri}`);
     }
 
     handleTextChanged = (e) => {
@@ -99,7 +99,7 @@ class Chat extends React.Component{
                                     return (
                                         <div key={msg.time} className={msg.author._id == this.props.user._id ? classes.MyMsgContainer : classes.OthersMsgContainer}>
                                             <p className={msg.author._id == this.props.user._id ? classes.MyMsg : classes.OthersMsg} >{msg.text}</p>
-                                            {msg.author._id != this.props.user._id ? <a onClick={() => this.handleAvatarClick(msg.author._id)} className={classes.Author}>{`${msg.author.name} ${msg.author.surname}`}</a> : null}
+                                            {msg.author._id != this.props.user._id ? <a onClick={() => this.handleAvatarClick(msg.author.uri)} className={classes.Author}>{`${msg.author.name} ${msg.author.surname}`}</a> : null}
                                         </div>
                                     )
                                 })}

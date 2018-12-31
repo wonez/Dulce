@@ -32,7 +32,7 @@ const followingUsers = async(req, res) => {
             _id: 1
         }).populate({
             path: 'following',
-            select: 'name surname dateCreated avatarUrl',
+            select: 'name surname dateCreated avatarUrl uri',
             options: { sort: {name: 1}, limit: 9, skip: start }
         })
         res.status(200).json({people: users.following})

@@ -19,14 +19,16 @@ import axios from '../../utility/axios'
 class Post extends Component {
 
     componentDidMount(){
-        const postId = this.props.match.params.postId;
-        axios.get(`/post/${postId}`)
+        const uri = this.props.match.params.uri;
+        axios.get(`/post/${uri}`)
             .then(res => {
                 if(res.status == 200){
                     this.setState({
                         item: res.data
                     })
                 }
+            }).catch(err => {
+                this.props.history.push('/')
             })
     }
 
@@ -45,8 +47,8 @@ class Post extends Component {
         })
     }
 
-    handleUser = (id) => {
-        this.props.history.push(`/profile/${id}`);
+    handleUser = (uri) => {
+        this.props.history.push(`/profile/${uri}`);
     }
 
     commentSubmit = () => {
@@ -148,7 +150,7 @@ class Post extends Component {
                 <div className={classes.Post__Container}>
                     <PostData 
                         handleLike={this.handleLike}
-                        handleUser={() => this.handleUser(this.state.item.author._id)}
+                        handleUser={() => this.handleUser(this.state.item.author.uri)}
                         item={this.state.item} />
                     <Comments 
                         selectComment={this.selectComment}

@@ -32,7 +32,7 @@ const withErrorModal = (OtherComponent, axios) => {
             return(
                 <Aux>
                     <ErrModal show={this.state.err} handleModal={this.handleModal}>
-                        {this.state.err ? this.state.err.message : null}
+                        {this.state.err &&  this.state.err.message ? this.state.err.message : "Couldn't proceed"}
                     </ErrModal>
                     <OtherComponent {...this.props}/>
                 </Aux>

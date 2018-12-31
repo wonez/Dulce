@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './CardSmall.scss';
 import typography from '../../_typography.scss'
 
-import { IconClock, IconLevel, IconHeart } from '../../UI/Icons/Icons';
 import Summary from '../Summary/Summary';
 
 const CardSmall = (props) => {

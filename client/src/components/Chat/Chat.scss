@@ -3,6 +3,9 @@
     position: fixed;
     bottom: 0;
     right: 5rem;
+    @media only screen and (max-width: $bp-medium){
+        right: 0;
+    }
     height: 40rem;
     width: 30rem;
     border-top-right-radius: 1rem;

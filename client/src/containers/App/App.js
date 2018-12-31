@@ -30,11 +30,11 @@ class App extends Component {
 				<Switch>
 					<Route path='/' exact component={Landing}/>
 					<Route path="/join" component={Join}/>
-					<Route path="/profile/:userId" component={Profile} />
-					<Route path="/post/:postId" component={Post}/>
+					<Route path="/profile/:uri" component={Profile} />
+					<Route path="/post/:uri" component={Post}/>
 					<Route path="/search" component={Search} />
 					<Route path="/categories" component={AllCategories}/>
-					<Route path="/category/:id" component={Category}/>
+					<Route path="/category/:uri" component={Category}/>
 					<Protected isLogged={this.props.isLogged} path="/create" component={Create}/>
 					<Protected isLogged={this.props.isLogged} path="/editProfile" component={EditProfile}/>
 					<Protected isLogged={this.props.isLogged} path="/editPost" component={EditPost}/>

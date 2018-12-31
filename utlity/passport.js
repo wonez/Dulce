@@ -29,7 +29,7 @@ passport.use(new LocalStrategy(
                         return cb(null, user, { message: 'Logged In Successfully' });
                     }
                 })
-                .catch(err => cb(err, null, { message: err.message }));
+                .catch(err => { console.log('eee'); console.log(err); cb(err, null, { message: err.message })});
         }
     ));
 
@@ -38,7 +38,7 @@ passport.use(new JWTStrategy({
         secretOrKey: localSecret
     },
     (jwtPayload, cb) => {
-        return User.findOneById(jwtPayload.id)
+        return User.findById(jwtPayload.id)
             .then(user => {
                 return cb(null, user);
             })

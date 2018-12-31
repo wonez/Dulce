@@ -11,11 +11,11 @@ import Popup from '../../UI/Popup/Popup'
 class Card extends React.Component {
 
     handleUser = () => {
-        this.props.history.push(`/profile/${this.props.data.author._id}`)
+        this.props.history.push(`/profile/${this.props.data.author.uri}`)
     }
 
-    singlePost = (id) => {
-        this.props.history.push(`/post/${id}`)
+    singlePost = () => {
+        this.props.history.push(`/post/${this.props.data.uri}`)
     }
 
     render() {
@@ -35,8 +35,7 @@ class Card extends React.Component {
                     {this.props.user && this.props.data.author._id == this.props.user._id ?
                          <Popup 
                             selectForDeletion={this.props.selectForDeletion}
-                            post={this.props
-                                .data}/>
+                            post={this.props.data}/>
                     : null}
                 </div>
                 <p className={classes.Card__Description} >
@@ -46,7 +45,7 @@ class Card extends React.Component {
                     style={{ backgroundImage: `url(${this.props.data.imgUrl})` }}>
                     {/* slika */}
                 </div>
-                <h2 onClick={() => this.singlePost(this.props.data._id)} className={classes.Card__Heading}>{this.props.data.title} &rarr;</h2>
+                <h2 onClick={this.singlePost} className={classes.Card__Heading}>{this.props.data.title} &rarr;</h2>
                 <div style={{ padding: '0 2rem' }}>
                     <Summary    
                         handleLike={this.props.handleLike}

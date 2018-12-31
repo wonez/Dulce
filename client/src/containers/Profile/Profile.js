@@ -32,17 +32,17 @@ class Profile extends Component{
     }
 
     onRouteChanged() {
-        const userId = this.props.match.params.userId;
-        if(userId){
-            axios.get(`/user/${userId}`)
-            .then(res => {
-                if(res.status == 200){
-                    this.setState({
-                        user: res.data
-                    })
-                }
-            })
-        }
+        const uri = this.props.match.params.uri;
+        axios.get(`/user/uri/${uri}`)
+        .then(res => {
+            if(res.status == 200){
+                this.setState({
+                    user: res.data
+                })
+            }
+        }).catch(err => {
+            this.props.history.push('/');
+        })
     }
 
     activeHandler = (active) => {
@@ -75,11 +75,11 @@ class Profile extends Component{
         
         if(this.state.active === 'timeline'){
             content = (
-                <Timeline userId={this.props.match.params.userId} />
+               this.state.user ? <Timeline userId={this.state.user._id} /> : null
             )
         } else if(this.state.active === 'following'){
             content = (
-                <Following count={this.state.user.following.length} userId={this.props.match.params.userId} />
+                <Following count={this.state.user.following.length} userId={this.state.user._id} />
             )
         } else if (this.state.active === 'about'){
             content = (

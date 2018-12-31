@@ -33,8 +33,9 @@ const editPost = async (req, res) => {
                     post[key] = data[key]
                 }
                 if(files.img){
+                    const imgPath = post.imgUrl.substring(post.imgUrl.indexOf('images'))
+                    fs.unlinkSync(`public/${imgPath}`);
                     post.imgUrl = transformPath(files.img.path)
-                    //remove old photo
                 }
                 post.save();
                 res.status(200).json(post);
@@ -59,7 +60,7 @@ const getUserPosts = async(req, res) => {
             .skip(start)
             .limit(10)
             .sort({ dateCreated: -1 })
-            .populate('author', { avatarUrl: 1, name: 1, surname: 1 });
+            .populate('author', { avatarUrl: 1, name: 1, surname: 1, uri: 1 });
         res.status(200).json({posts, count})
     } catch(err) {
         res.status(500).end(err.message)
@@ -84,12 +85,12 @@ const postComment = async(req, res) => {
                 select: 'text author dateCreated',
                 populate: {
                     path: 'author',
-                    select: 'avatarUrl name surname'
+                    select: 'avatarUrl name surname uri'
                 }
             })
             .populate({
                 path: 'author',
-                select: 'avatarUrl name surname'
+                select: 'avatarUrl name surname uri'
             });
         res.status(200).json({
             comments: post.comments
@@ -121,18 +122,18 @@ const postLike = async(req, res) => {
 const getPost = async (req, res) => {
     try{
         const post = await Post
-            .findById(req.params.id)
+            .findOne({ uri: req.params.uri})
             .populate({
                 path: 'comments',
                 select: 'text author dateCreated',
                 populate: {
                     path: 'author',
-                    select: 'avatarUrl name surname'
+                    select: 'avatarUrl name surname uri'
                 }
             })
             .populate({
                 path: 'author',
-                select: 'avatarUrl name surname'
+                select: 'avatarUrl name surname uri'
             });
         res.status(200).json(post);
     }catch(err){
@@ -175,7 +176,7 @@ const getNewsFeed = async (req, res) => {
         .skip(start)
         .limit(10)
         .sort({ dateCreated: -1 })
-        .populate('author', { avatarUrl: 1, name: 1, surname: 1 })
+        .populate('author', { avatarUrl: 1, name: 1, surname: 1, uri: 1 })
         const ret = {
             posts, 
             count: count[0] ? count[0].posts : 0

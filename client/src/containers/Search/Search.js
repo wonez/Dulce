@@ -129,13 +129,13 @@ class Search extends React.Component{
 
         const recipes = this.state.recipes.map(item => {
             return <CardSmall   card={item} 
-                                click={() => this.clickHandler('card', item._id)}
+                                click={() => this.clickHandler('card', item.uri)}
                                 key={item._id} />
         })
 
         const users = this.state.users.map(person => {
             return <Person  data={person} 
-                            click={() => this.clickHandler('person', person._id)}                
+                            click={() => this.clickHandler('person', person.uri)}                
                             key={person._id} />
         })
 

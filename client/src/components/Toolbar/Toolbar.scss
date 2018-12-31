@@ -20,6 +20,9 @@
         padding: 1rem .5rem;
         font-size: 1.3rem;
     }
+    @media only screen and (max-width: $bp-small){
+        font-size: 1rem;
+    }
 
     a{
         margin: 0 2rem;
@@ -38,7 +41,7 @@
             text-align: center;
             width: 50%;
             @media only screen and (max-width: $bp-medium){
-                min-width: 190px;
+                min-width: 180px;
             }
         }
         &__Input{
@@ -69,6 +72,9 @@
                 maring: 0 .5rem;
                 top: 7%;
                 right: 0;
+            }
+            @media only screen and (max-width: $bp-small){
+                top: 20%;
             }
         }
         &__Input:focus + div{

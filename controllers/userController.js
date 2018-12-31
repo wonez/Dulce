@@ -4,13 +4,31 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const config = require('../utlity/config');
 const saveProfilePhoto = require('../utlity/saveProfilePhoto');
+const fs = require('fs');
 
-const getUser = async (req, res) => {
+const getUserById = async (req, res) => {
     try{
         const user = await User.findById(req.params.id, {
             password: 0,
             email: 0
         })
+        if(!user){
+            throw {message: 'User does not exist'}
+        }
+        res.status(200).json(user);
+    }catch(err){
+        res.status(500).end(err.message)
+    }
+}
+const getUserByUri = async (req, res) => {
+    try{
+        const user = await User.findOne({uri: req.params.uri}, {
+            password: 0,
+            email: 0
+        })
+        if(!user){
+            throw {message: 'User does not exist'}
+        }
         res.status(200).json(user);
     }catch(err){
         res.status(500).end(err.message)
@@ -22,9 +40,8 @@ const registerUser = async (req, res) => {
         req.body.password = User.hashPassword(req.body.password);
         const user = await new User({ ...req.body })
             .save();
-        const expiresIn = 1000 * 60 * 60//1hour;
         const token = jwt.sign(user.toJSON(), config.secret);
-        res.status(200).json({user, token, expiresIn});
+        res.status(200).json({user, token});
     } catch(err) {
         let msg = err.message;
         if(err.code === 11000){
@@ -43,9 +60,22 @@ const loginUser = async (req, res) => {
                 if (err) {
                     res.send(err);
                 }
-                const expiresIn = 1000 * 60 * 60//1hour;
-                const token = jwt.sign(user.toJSON(), config.secret);
-                return res.status(200).json({user, token, expiresIn});
+                const retUser = {
+                    _id: user._id,
+                    email: user.email,
+                    dateCreated: user.dateCreated,
+                    name: user.name,
+                    surname: user.surname,
+                    city: user.city,
+                    country: user.country,
+                    biography: user.biography,
+                    avatarUrl: user.avatarUrl,
+                    coverUrl: user.coverUrl,
+                    following: user.following,
+                    uri: user.uri
+                }
+                const token = jwt.sign(JSON.stringify(retUser), config.secret);
+                return res.status(200).json({user: retUser, token});
             });
         })(req, res);
 }
@@ -58,6 +88,7 @@ const editUser = async (req, res) => {
     
     form.parse(req, async (err, fields, files) => {
         try{
+            const userCurrent = await User.findById(req.params.id);
             const updated = {...fields}
             if(updated.password){
                 updated.password = User.hashPassword(updated.password)
@@ -66,30 +97,34 @@ const editUser = async (req, res) => {
             }
             if(files.avatarUrlFile){
                 const paths = files.avatarUrlFile.path.split('/');
-                paths[0] = 'http://localhost:8000/';
+                paths[0] = 'http://localhost:8000';
                 updated.avatarUrl = paths.join('/');
+                //delete old avatar
+                const index = userCurrent.avatarUrl.indexOf('upload_');
+                if(index != -1){
+                    const path = `public/images/${userCurrent.avatarUrl.substring(index)}`
+                    fs.unlinkSync(path)
+                }
             }
             if(files.coverUrlFile){
                 const paths = files.coverUrlFile.path.split('/');
-                paths[0] = 'http://localhost:8000/';
+                paths[0] = 'http://localhost:8000';
                 updated.coverUrl = paths.join('/');
+                //delete old cover
+                const index = userCurrent.coverUrl.indexOf('upload_');
+                if(index != -1){
+                    const path = `public/images/${userCurrent.coverUrl.substring(index)}`
+                    fs.unlinkSync(path)
+                }
             }
             const user = await User.findOneAndUpdate({ _id: req.params.id },updated, {new: true})
             const token = jwt.sign(user.toJSON(), config.secret)
             res.status(200).json({user, token});
         } catch(err){
+            console.log(err.message)
             res.status(500).end(err.message)
         }
     })
-}
-
-const deleteUser = async (req, res) => {
-    try{
-        await User.findOneAndDelete(req.params.id)
-        res.status(200).end('User deleted');
-    }catch(err){
-        res.status(500).end(err.message)
-    }
 }
 
 const facebookAuth = async (req, res) => {
@@ -113,9 +148,8 @@ const facebookAuth = async (req, res) => {
                 avatarUrl: imgUrl
             }).save();
         }
-        const expiresIn = 1000 * 60 * 60//1hour;
         const token = jwt.sign(user.toJSON(), config.secret);
-        res.status(200).json({user, token, expiresIn});
+        res.status(200).json({user, token });
     }catch(err){
         console.log(err);
         res.status(500).end(err.message);
@@ -140,9 +174,8 @@ const googleAuth = async (req, res) => {
                 avatarUrl: [userData.image.url.split('sz')[0], 'sz=500'].join('')
             }).save();
         }
-        const expiresIn = 1000 * 60 * 60//1hour;
         const token = jwt.sign(user.toJSON(), config.secret);
-        res.status(200).json({user, token, expiresIn});
+        res.status(200).json({user, token});
     }catch(err){
         console.log(err);
         res.status(500).end(err.message);
@@ -150,11 +183,11 @@ const googleAuth = async (req, res) => {
 }
 
 module.exports = {
-    getUser,
+    getUserByUri,
+    getUserById,
     loginUser,
     registerUser,
     editUser,
-    deleteUser,
     facebookAuth,
     googleAuth
 }

@@ -45,7 +45,6 @@ export const googleAuth = (userData) => {
 export const checkCookies = () => {
     return dispatch => {
         const id = JSON.parse(localStorage.getItem('id'))
-        //check if expired and logout
         const token = JSON.parse(localStorage.getItem('token'))
         if(id){
             axios.get(`/user/${id}`)
@@ -89,17 +88,13 @@ const removeAuthData = () => {
 }
 
 const storeCookies = (userData) => {
-    // console.log(userData);
     localStorage.setItem('id', JSON.stringify(userData.user._id))
     localStorage.setItem('token', JSON.stringify(userData.token))
-    // localStorage.setItem('expirationDate', JSON.stringify(data))
 }
 
 const deleteCookies = () => {
-    // localStorage.removeItem('user')
     localStorage.removeItem('id')
     localStorage.removeItem('token')
-    // localStorage.removeItem('expirationDate')
 }
 
 const createWebSocket = () => {
