@@ -91,6 +91,7 @@ class Join extends Component {
     }
 
     responseGoogle = (data) => {
+        console.log(data);
         this.props.googleAuth({
             access_token: data.accessToken
         })
