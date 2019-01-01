@@ -8,6 +8,7 @@
     "server": "nodemon server.js",
     "client": "cd client && npm start",
     "dev": "killall -9 node || concurrently \"npm run server\" \"npm run client\"",
+    "heroku-prebuild": "npm install --dev && npm install --dev --prefix client ",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
