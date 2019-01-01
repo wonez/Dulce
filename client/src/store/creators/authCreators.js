@@ -17,7 +17,6 @@ const handleRequest = (url, userData) => {
                 if(res.status == 200) return res.data
                 else throw new Error(res.status)
             }).then(data => {
-                console.log(data);
                 dispatch(updateAuthData(data))
             }).catch(err => {
                 dispatch(endLoading());
@@ -99,7 +98,9 @@ const deleteCookies = () => {
 
 const createWebSocket = () => {
     return dispatch => {
-        const socket = new WebSocket('ws://localhost:8000')
+        // const socket = new WebSocket('ws://localhost:8000')
+        const HOST = location.origin.replace(/^http/, 'ws')
+        const socket = new WebSocket(HOST)
         document.socket = socket;
         dispatch(handleSocket(socket));
     }

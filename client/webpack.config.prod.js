@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -35,6 +35,7 @@ module.exports = {
                             modules: true,
                             localIdentName: '[name]__[local]--[hash:base64:5]',
                             importLoaders: 2,
+                            sourceMap: true
                         }
                     },
                     {
@@ -43,6 +44,7 @@ module.exports = {
                             plugins: () => [require('autoprefixer')({
                                 'browsers': ['> 1%', 'last 2 versions']
                             })],
+                            sourceMap: true
                         }
                     },
                     { 

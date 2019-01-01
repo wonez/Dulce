@@ -29,7 +29,7 @@ passport.use(new LocalStrategy(
                         return cb(null, user, { message: 'Logged In Successfully' });
                     }
                 })
-                .catch(err => { console.log('eee'); console.log(err); cb(err, null, { message: err.message })});
+                .catch(err => { cb(err, null, { message: err.message })});
         }
     ));
 

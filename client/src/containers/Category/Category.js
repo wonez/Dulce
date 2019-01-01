@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import axios from '../../utility/axios'
-import { withRouter } from 'react-router-dom'
 import classes from './Category.scss'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Aux from '../../hoc/Aux'
 import CardSmall from '../../components/CardSmall/CardSmall'
 import Toolbar from '../../components/Toolbar/Toolbar';
 import NothingToShow from '../../components/NothingToShow/NothingToShow';
 import LoadMore from '../../UI/LoadMore/LoadMore'
+import Loading from '../../UI/Loading/Loading'
+
+import { startLoading, endLoading } from '../../store'
 
 class Category extends Component {
 
@@ -15,23 +19,6 @@ class Category extends Component {
         items : [],
         name: '',
         count: 0,
-        loading: false
-    }
-
-    componentDidMount(){
-        const uri  = this.props.match.params.uri;
-        axios.get(`/category/${uri}`)
-            .then(res => {
-                if(res.status == 200){
-                    this.setState({
-                        items: res.data.posts,
-                        name: res.data.category.name,
-                        count: res.data.postsCount
-                    })
-                }
-            }).catch(err => {
-                this.props.history.push('/categories')
-            })
     }
 
     clickHandler = (uri) => {
@@ -39,10 +26,8 @@ class Category extends Component {
     }
 
     loadItems = () => {
+        this.props.load();
         const uri  = this.props.match.params.uri;
-        this.setState({
-            loading: true
-        })
         axios.get(`/category/${uri}?start=${this.state.items.length}`)
             .then(res => {
                 if(res.status == 200){
@@ -51,11 +36,15 @@ class Category extends Component {
                             items: prevState.items.concat(res.data.posts),
                             name: res.data.category.name,
                             count: res.data.postsCount,
-                            loading: false
                         }
                     })
+                    this.props.loaded();
                 }
             })
+    }
+
+    componentDidMount(){
+        this.loadItems();
     }
 
     render(){
@@ -79,13 +68,7 @@ class Category extends Component {
             )
         }
 
-        let loadMore = null;
-
-        if(this.state.loading){
-            loadMore = <h2>Loading...</h2>
-        }else{
-            loadMore = <LoadMore click={this.loadItems }/>
-        }
+        let loadMore = <LoadMore click={this.loadItems }/>
 
         return(
             <Aux>
@@ -98,9 +81,17 @@ class Category extends Component {
                         {this.state.items.length < this.state.count ? loadMore : null}
                     </div>
                 </div>
+                <Loading />
             </Aux>
         )
     }
 }
 
-export default withRouter(Category);
+const mapDispatchToProps = dispatch => {
+    return{
+        load: () => dispatch(startLoading()),
+        loaded: () => dispatch(endLoading())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Category));

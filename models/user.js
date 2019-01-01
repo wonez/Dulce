@@ -14,8 +14,10 @@ const userSchema = new Schema({
     city: { type: String, default: '' },
     country: { type: String, default: ''},
     biography: { type: String, default: ''},
-    avatarUrl: {type: String, default: 'http://localhost:8000/images/avatar.jpg' },
-    coverUrl: {type: String, default: 'http://localhost:8000/images/cover.jpeg' },
+    // avatarUrl: {type: String, default: 'http://localhost:8000/images/avatar.jpg' },
+    // coverUrl: {type: String, default: 'http://localhost:8000/images/cover.jpeg' },
+    avatarUrl: {type: String, default: '/images/avatar.jpg' },
+    coverUrl: {type: String, default: '/images/cover.jpeg' },
     following: { type: [ { type: Schema.Types.ObjectId, ref: 'User' } ], default: [] }
 })
 

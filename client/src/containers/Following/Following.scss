@@ -16,7 +16,7 @@
     }
     &__Container{
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(20rem,1fr));
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
         grid-gap: 3rem 0;
         @media only screen and (max-width: $bp-small){
             padding: 0 1.5rem;       

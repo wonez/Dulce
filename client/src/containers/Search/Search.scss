@@ -46,7 +46,7 @@
     &__Items{
         margin: 2rem 0;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(25rem,1fr));        
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 33rem));        
         grid-row-gap: 3rem;
         grid-column-gap: 3rem;
         @media only screen and (max-width: $bp-medium){

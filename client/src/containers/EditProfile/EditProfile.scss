@@ -33,16 +33,23 @@
 
 .Cover{
     width: 100%;
-    height: 30rem;
+    height: 50rem;
     background: $color-gray-light;;
     border-radius: 1rem;
     position: relative;
     background-position: center;
     background-size: cover;
+    @media screen and (max-width: $bp-medium){
+        height: 30rem;    
+    }
     .Avatar{
         overflow: hidden;
-        width: 15rem;
-        height: 15rem;
+        width: 20rem;
+        height: 20rem;
+        @media screen and (max-width: $bp-medium){
+            width: 15rem;
+            height: 15rem;
+        }
         border-radius: 100%;
         border: 1.5rem solid $color-white;
         position: absolute;
@@ -60,7 +67,10 @@
     }
 }
 .Data{
-    margin-top: 10rem;
+    margin-top: 15rem;
+    @media screen and (max-width: $bp-medium){
+        margin-top: 10rem;
+    }
     @media only screen and(max-width: $bp-small){
         margin-top: 2rem;
     }

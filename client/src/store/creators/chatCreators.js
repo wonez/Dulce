@@ -47,7 +47,6 @@ const handleSocket = (socket) => {
         };
         socket.onmessage = (e) => {
             const res = JSON.parse(e.data);
-            console.log(res);
             switch(res.type){
                 case 'RES_ONLINE': dispatch(setOnline(res.data));
                     break;
