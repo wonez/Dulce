@@ -97,7 +97,6 @@ const editUser = async (req, res) => {
             }
             if(files.avatarUrlFile){
                 const paths = files.avatarUrlFile.path.split('/');
-                // paths[0] = `http://localhost:8000`;
                 paths[0] = ''
                 updated.avatarUrl = paths.join('/');
                 //delete old avatar
@@ -109,7 +108,6 @@ const editUser = async (req, res) => {
             }
             if(files.coverUrlFile){
                 const paths = files.coverUrlFile.path.split('/');
-                // paths[0] = 'http://localhost:8000';
                 paths[0] = ''
                 updated.coverUrl = paths.join('/');
                 //delete old cover

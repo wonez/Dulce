@@ -1,7 +1,6 @@
 module.exports = () => {
     const mongoose = require('mongoose')
     
-    // mongoose.connect('mongodb://localhost:27017/dulce',{
     mongoose.connect('mongodb://admin:admin123@ds135384.mlab.com:35384/dulce',{
         useNewUrlParser: true, 
         useCreateIndex: true,

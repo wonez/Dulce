@@ -98,7 +98,6 @@ const deleteCookies = () => {
 
 const createWebSocket = () => {
     return dispatch => {
-        // const socket = new WebSocket('ws://localhost:8000')
         const HOST = location.origin.replace(/^http/, 'ws')
         const socket = new WebSocket(HOST)
         document.socket = socket;
