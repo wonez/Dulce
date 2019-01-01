@@ -3,7 +3,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const WebSocket = require('ws');
 const path = require('path')
-const https = require('https');
+// const https = require('https');
 
 const app = express()
 const port = process.env.PORT || 8000;
@@ -39,7 +39,5 @@ if(process.env.NODE_ENV === 'production'){
   })
 }
 
-const server = https.createServer({}, app);
-server.listen(port)
-// const server = app.listen(port, () => console.log(`Dulce listening on port ${port}!`))
+const server = app.listen(port, () => console.log(`Dulce listening on port ${port}!`))
 require('./wss')(new WebSocket.Server({ server }))
