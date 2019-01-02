@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import classes from './Join.scss';
-import typography from '../../_typography.scss';
 import { validateField, validateForm } from '../../utility/validate'
 
 import FormItem from '../../UI/FormItem/FormItem';
@@ -91,7 +90,6 @@ class Join extends Component {
     }
 
     responseGoogle = (data) => {
-        console.log(data);
         this.props.googleAuth({
             access_token: data.accessToken
         })
@@ -155,7 +153,7 @@ class Join extends Component {
                 <FlatLink validity={this.state.formSignIn.valid} kind='light' >Sign in</FlatLink>
                 <hr style={{margin: '2.5rem 0'}}/>
                 <FacebookLogin
-                    appId="499705663851006"
+                    appId="341618716423197"
                     fields="name,email"
                     callback={this.responseFb}
                     render={renderProps => (
@@ -204,7 +202,7 @@ class Join extends Component {
                     <FlatLink validity={this.state.formSignUp.valid} kind='light'>Sign up</FlatLink>
                     <hr style={{margin: '2.5rem 0'}}/>
                     <FacebookLogin
-                        appId="499705663851006"
+                        appId="341618716423197"
                         autoLoad
                         fields="name,email,picture"
                         callback={this.responseFb}
