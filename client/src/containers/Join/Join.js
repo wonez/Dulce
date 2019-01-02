@@ -154,7 +154,7 @@ class Join extends Component {
                 <hr style={{margin: '2.5rem 0'}}/>
                 <FacebookLogin
                     appId="341618716423197"
-                    fields="name,email"
+                    fields="name,email,picture"
                     callback={this.responseFb}
                     render={renderProps => (
                         <FlatLink click={renderProps.onClick} validity kind='primary' >Continue Using Facebook</FlatLink>
