@@ -12,10 +12,12 @@ const PostData = (props) => {
     let ingredients = ''
     let directions = ''
     let summary = ''
+    let imgUrl = ''
 
     if(props.item.title){
         date = new Date(props.item.dateCreated).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });   
         authorImg = props.item.author.avatarUrl;
+        imgUrl = props.item.imgUrl;
         authorName = props.item.author.name + ' ' + props.item.author.surname
 
         ingredients = props.item.ingredients.map((ing, i) => {
@@ -50,7 +52,7 @@ const PostData = (props) => {
         <div className={classes.Data}>
             <h2 className={classes.Data__Heading}>{props.item.title}</h2>
             <div className={classes.Data__Image}
-                style={{ backgroundImage: `url(${props.item.imgUrl})` }} >
+                style={{ backgroundImage: `url(${imgUrl})` }} >
                 {/* slika */}
             </div>
             <div className={classes.Data__AuthorContainer}>

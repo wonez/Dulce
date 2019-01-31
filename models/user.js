@@ -14,8 +14,8 @@ const userSchema = new Schema({
     city: { type: String, default: '' },
     country: { type: String, default: ''},
     biography: { type: String, default: ''},
-    avatarUrl: {type: String, default: '/images/avatar.jpg' },
-    coverUrl: {type: String, default: '/images/cover.jpeg' },
+    avatarUrl: {type: String, default: 'https://firebasestorage.googleapis.com/v0/b/dulce-226122.appspot.com/o/avatar.jpg?alt=media&token=fe03a2b1-5857-46bb-9e8c-c560c1c78e1c' },
+    coverUrl: {type: String, default: 'https://firebasestorage.googleapis.com/v0/b/dulce-226122.appspot.com/o/cover.jpeg?alt=media&token=eff9c77f-89cc-4659-ab68-fe56a8c10fe4' },
     following: { type: [ { type: Schema.Types.ObjectId, ref: 'User' } ], default: [] }
 })
 

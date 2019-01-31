@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const formidable = require('formidable');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const config = require('../utlity/config');
@@ -81,50 +80,24 @@ const loginUser = async (req, res) => {
 }
 
 const editUser = async (req, res) => {
-    const form = new formidable.IncomingForm();
-    form.multiples = true;
-    form.uploadDir = 'public/images'
-    form.keepExtensions = true;
-    
-    form.parse(req, async (err, fields, files) => {
-        try{
-            const userCurrent = await User.findById(req.params.id);
-            const updated = {...fields}
-            if(updated.password){
-                updated.password = User.hashPassword(updated.password)
-            } else {
-                delete updated.password;
-            }
-            if(files.avatarUrlFile){
-                const paths = files.avatarUrlFile.path.split('/');
-                paths[0] = ''
-                updated.avatarUrl = paths.join('/');
-                //delete old avatar
-                const index = userCurrent.avatarUrl.indexOf('upload_');
-                if(index != -1){
-                    const path = `public/images/${userCurrent.avatarUrl.substring(index)}`
-                    fs.unlinkSync(path)
-                }
-            }
-            if(files.coverUrlFile){
-                const paths = files.coverUrlFile.path.split('/');
-                paths[0] = ''
-                updated.coverUrl = paths.join('/');
-                //delete old cover
-                const index = userCurrent.coverUrl.indexOf('upload_');
-                if(index != -1){
-                    const path = `public/images/${userCurrent.coverUrl.substring(index)}`
-                    fs.unlinkSync(path)
-                }
-            }
-            const user = await User.findOneAndUpdate({ _id: req.params.id },updated, {new: true})
-            const token = jwt.sign(user.toJSON(), config.secret)
-            res.status(200).json({user, token});
-        } catch(err){
-            console.log(err.message)
-            res.status(500).end(err.message)
+    try{
+        const user = await User.findById(req.params.id);
+        const update = {...req.body}
+        if(update.password){
+            update.password = User.hashPassword(update.password)
+        } else {
+            delete update.password;
         }
-    })
+        for(let key in update){
+            user[key] = update[key]
+        }
+        await user.save();
+        const token = jwt.sign(user.toJSON(), config.secret)
+        res.status(200).json({user, token});
+    } catch(err){
+        console.log(err.message)
+        res.status(500).end(err.message)
+    }
 }
 
 const facebookAuth = async (req, res) => {

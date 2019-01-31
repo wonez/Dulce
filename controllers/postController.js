@@ -1,52 +1,38 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
-const { createForm, transformPath } = require('../utlity/form')
 const fs = require('fs');
 
 const createPost = async (req, res) => {
-    const form = createForm();
-    form.parse(req, async(err, fields, files) => {
-        try{
-            const postData = {
-                ...JSON.parse(fields.data),
-                imgUrl: transformPath(files.img.path),
-                author: req.user._id
-            }
-            const post = await new Post(postData).save();
-            res.status(200).json(post);
-        }catch(err){
-            console.log(err.message);
-            res.status(500).end(err.message)
+    try{
+        const postData = {
+            ...req.body,
+            author: req.user._id
         }
-    })
+        const post = await new Post(postData).save();
+        res.status(200).json(post);
+    }catch(err){
+        console.log(err.message);
+        res.status(500).end(err.message)
+    }
 }
 
 const editPost = async (req, res) => {
-    const form = createForm();
-    form.parse(req, async(err, fields, files) => {
-        try{
-            const postId = req.params.id
-            const post = await Post.findById(postId);
-            if(req.user._id.toString() == post.author){
-                const data = JSON.parse(fields.data);
-                for(let key in data){
-                    post[key] = data[key]
-                }
-                if(files.img){
-                    const imgPath = post.imgUrl.substring(post.imgUrl.indexOf('images'))
-                    fs.unlinkSync(`public/${imgPath}`);
-                    post.imgUrl = transformPath(files.img.path)
-                }
-                post.save();
-                res.status(200).json(post);
-            } else {
-                throw new Error('Unauthorized')
+    try{
+        const postId = req.params.id
+        const post = await Post.findById(postId);
+        if(req.user._id.toString() == post.author){
+            for(let key in req.body){
+                post[key] = req.body[key];
             }
-        }catch(err){
-            console.log(err.message);
-            res.status(500).end(err.message)
+            await post.save();
+            res.status(200).json(post);
+        } else {
+            throw new Error('Unauthorized')
         }
-    })
+    }catch(err){
+        console.log(err.message);
+        res.status(500).end(err.message)
+    }
 }
 
 const getUserPosts = async(req, res) => {
