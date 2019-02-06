@@ -6,8 +6,6 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
-        // host: '0.0.0.0',
-        // disableHostCheck: true,
         https: true,
         key: fs.readFileSync('/Users/wonez/SSLCert/server.key'),
         cert: fs.readFileSync('/Users/wonez/SSlCert/server.crt'),
