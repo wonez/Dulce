@@ -84,7 +84,6 @@ class Join extends Component {
     }
 
     responseFb = (data) => {
-        console.log(data);
         this.props.facebookAuth({
             access_token: data.accessToken
         })
@@ -207,7 +206,8 @@ class Join extends Component {
                     <hr style={{margin: '2.5rem 0'}}/>
                     <FacebookLogin
                         appId="341618716423197"
-                        autoLoad
+                        disableMobileRedirect
+                        autoLoad={false}
                         fields="name,email,picture"
                         callback={this.responseFb}
                         render={renderProps => (
@@ -215,6 +215,7 @@ class Join extends Component {
                         )}
                     />
                     <GoogleLogin
+                        autoLoad={false}
                         clientId="607501341620-s4su6rj3lns0025pggjbenkgcfctc9di.apps.googleusercontent.com"
                         render={renderProps => (
                             <FlatLink click={renderProps.onClick} validity kind='danger'>Continue Using Google+</FlatLink>

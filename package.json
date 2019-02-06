@@ -22,9 +22,11 @@
   },
   "homepage": "https://github.com/wonez/Dulce#readme",
   "dependencies": {
+    "@google-cloud/storage": "^2.4.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "firebase": "^5.8.2",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.4",
     "mongoose-url-slugs": "^1.0.2",
