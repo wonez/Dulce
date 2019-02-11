@@ -13,3 +13,11 @@ React Redux social media application for sharing sweet recepies. Includes featur
 <img src="https://i.ibb.co/8xBx3YZ/Screenshot-2019-02-11-at-22-23-08.png">
 <img src="https://i.ibb.co/B4VMqtr/Screenshot-2019-02-11-at-22-22-11.png">
 <img src="https://i.ibb.co/6y36x2q/Screenshot-2019-02-11-at-22-22-35.png">
+
+Image Woman: Photo by [Ana Tavares](https://unsplash.com/photos/4Lmzh6vVLJ8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/)
+
+
+Image Donuts: Photo by [Audrey Fretz](https://unsplash.com/search/photos/audrey-fretz-cake?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/)
+
+
+Designed and Developed by FARIS FAZLIC
